@@ -40,7 +40,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     ) : (
       groups.map((group) => (
         <section class="mt-12 border-t border-slate pt-8">
-          <h2 class={metaLabel}>{group.kind}</h2>
+          <h2 class={`section-label ${metaLabel}`}>{group.kind}</h2>
           <ul class="mt-5 space-y-5 text-[0.9375rem]">
             {group.rows.map((row) => (
               <li class="leading-relaxed">

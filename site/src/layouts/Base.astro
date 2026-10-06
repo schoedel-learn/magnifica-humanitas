@@ -42,9 +42,11 @@ const canonical = new URL(here, site).href;
 
 const p = (path: string) => `${root(lang)}${path}`;
 
-// Nav links share one treatment: #CFCFCF on the #252525 bar, lifting to white on hover.
+// Nav links share one treatment: #CFCFCF on the #252525 bar, lifting to the Vatican-yellow
+// accent on hover (#FFE100 on #252525 is ~12.6:1, so the accent is legible exactly where it
+// is used and nowhere it is not).
 const navLink =
-  'text-mist underline-offset-4 transition-colors duration-150 hover:text-canvas hover:underline';
+  'text-mist underline-offset-4 transition-colors duration-150 hover:text-vatican hover:underline';
 ---
 
 <!doctype html>
@@ -70,7 +72,9 @@ const navLink =
     <meta name="theme-color" content="#252525" />
   </head>
   <body class="flex min-h-dvh flex-col bg-canvas font-sans text-ink">
-    <header class="bg-ink">
+    <!-- The 3px Vatican-yellow band above the dark bar is the flag reference: the one
+         decorative use of the accent, and the only place it touches the white canvas. -->
+    <header class="border-t-[3px] border-vatican bg-ink">
       <nav
         class="mx-auto flex max-w-measure flex-wrap items-baseline gap-x-5 gap-y-2 px-5 py-4 font-sans text-xs uppercase tracking-[0.1em] sm:px-6"
       >

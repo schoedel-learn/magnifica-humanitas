@@ -29,7 +29,7 @@ const itemTitle =
   <p class="mt-4 max-w-[38rem] font-serif text-xl leading-relaxed text-meta">{s.tagline}</p>
 
   <section class="mt-12 border-t border-slate pt-8">
-    <h2 class={metaLabel}>{s.corpus}</h2>
+    <h2 class={`section-label ${metaLabel}`}>{s.corpus}</h2>
     {
       documents.length === 0 ? (
         <p class="mt-4 text-meta">{s.noDocuments}</p>
@@ -54,7 +54,7 @@ const itemTitle =
   </section>
 
   <section class="mt-12 border-t border-slate pt-8">
-    <h2 class={metaLabel}>{s.recentEssays}</h2>
+    <h2 class={`section-label ${metaLabel}`}>{s.recentEssays}</h2>
     {
       recent.length === 0 ? (
         <p class="mt-4 text-meta">{s.noPosts}</p>

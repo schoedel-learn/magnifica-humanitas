@@ -12,6 +12,18 @@
      #7D7D7D  slate    structural rules, and the spine of every quotation
      #545454  meta     dates, captions, section labels, secondary copy
      #FFFFFF  canvas   the page itself
+     #FFE100  vatican  the single accent — the gold band of the Vatican flag
+
+   The accent is deliberately SCARCE. A pure yellow is worthless as text on white
+   (contrast ~1.2:1), so it is used only where it sits against the dark ink surface or
+   as a non-textual mark: the flag band above the header, the hover/focus colour on the
+   nav, the short rule that opens each section label, and the selection highlight.
+   Never as body text, never as a link colour on the canvas.
+
+   Flag-yellow citations disagree (Pantone 803 C -> #FFF200, Pantone 116 C -> #FFCE00,
+   schemecolor #FFE100, and Wikipedia gives no specification); #FFE100 is the value most
+   commonly published for the flag's gold band. It is a single token — swap it in one
+   place if a different official sample is preferred.
 
    Type registers: Crimson Pro for headings and quoted text (a printed papal
    text), Inter for body and interface (the digital era). Both families are SIL
@@ -26,6 +38,7 @@
   --color-slate: #7d7d7d;
   --color-meta: #545454;
   --color-canvas: #ffffff;
+  --color-vatican: #ffe100;
 
   /* NOTE: @fontsource *variable* packages declare the family as "<Name> Variable", not
      "<Name>". Referencing the plain name here matches no @font-face at all and every glyph
@@ -81,14 +94,21 @@
   hr { border-color: var(--color-slate); }
 
   ::selection {
-    background-color: var(--color-ink);
-    color: var(--color-canvas);
+    background-color: var(--color-vatican);
+    color: var(--color-ink);
   }
 
   :focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 3px;
     border-radius: 1px;
+  }
+
+  /* On the dark framing surfaces an ink-coloured ring is invisible — the nav had no
+     usable focus indicator at all. The accent both fixes that and earns its place. */
+  header :focus-visible,
+  footer :focus-visible {
+    outline-color: var(--color-vatican);
   }
 
   /* The pull quote, everywhere it appears — including inside the Lexical-generated
@@ -110,6 +130,18 @@
 }
 
 @layer components {
+  /* Section labels. The accent opens each one with a short rule — the only place it
+     appears inside the reading surface, and the reason the palette still reads as
+     grayscale with an accent rather than as a coloured design. */
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 3px;
+    margin-bottom: 0.6rem;
+    background-color: var(--color-vatican);
+  }
+
   /* Rhythm for rendered rich text. Kept here as one block rather than as a chain of
      arbitrary-variant utilities on the element, so the essay body has a single
      source of truth. */

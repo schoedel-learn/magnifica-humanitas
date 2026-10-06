@@ -54,7 +54,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     {
       sources.length > 0 && (
         <section class="mt-16 border-t border-slate pt-6">
-          <h2 class={metaLabel}>{s.sourcesForEssay}</h2>
+          <h2 class={`section-label ${metaLabel}`}>{s.sourcesForEssay}</h2>
           <ul class="mt-5 space-y-5 text-[0.9375rem]">
             {sources.map((row) => (
               <li>
