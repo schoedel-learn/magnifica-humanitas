@@ -1,0 +1,13 @@
+---
+import PostDetail from '../../../components/PostDetail.astro';
+import { listPublishedPosts } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await listPublishedPosts('es');
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { slug: p.slug } }));
+}
+
+const { slug } = Astro.props;
+---
+
+<PostDetail slug={slug} lang="es" />
