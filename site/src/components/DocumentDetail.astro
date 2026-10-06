@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { getDocumentBySlug, listParagraphs } from '../lib/content';
 import { cite } from '../lib/citations';
+import { renderEmphasis } from '../lib/emphasis';
 import { UI, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
@@ -63,7 +64,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
         paragraphs.map((para) => (
           <li id={`p${para.number}`} class="scroll-mt-24 py-7 first:pt-4 last:pb-0">
             <p class={metaLabel}>{cite(doc.abbreviation, para.number)}</p>
-            {para.extract && <blockquote class="mt-3">{para.extract}</blockquote>}
+            {para.extract && <blockquote class="mt-3" set:html={renderEmphasis(para.extract)} />}
             {para.note && <p class="mt-3 leading-relaxed">{para.note}</p>}
           </li>
         ))

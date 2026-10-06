@@ -93,17 +93,21 @@ export type ParagraphRow = {
 };
 
 // Paragraphs of one document, ascending. `doc_paragraphs.number` is numeric in Postgres
-// and node-pg returns numeric as a STRING, so it is cast to int here (C3); `extract` is a
-// plain column while `note` is localized in `doc_paragraphs_locales` (C2).
+// and node-pg returns numeric as a STRING, so it is cast to int here (C3).
+//
+// Both `extract` and `note` are localized in `doc_paragraphs_locales`: the Spanish page
+// quotes the *Spanish* edition of the encyclical rather than a translation of the English,
+// so the two quotations have to coexist. `extract` is quoted because it collides with the
+// SQL EXTRACT() construct. The lateral join prefers the requested locale and falls back.
 export async function listParagraphs(
   documentId: number,
   locale = 'en',
 ): Promise<ParagraphRow[]> {
   return query<ParagraphRow>(
-    `select p.number::int as number, p.extract, l.note
+    `select p.number::int as number, l."extract", l.note
        from doc_paragraphs p
        left join lateral (
-         select note
+         select loc."extract", loc.note
            from doc_paragraphs_locales loc
           where loc._parent_id = p.id
           order by case loc._locale when $2 then 0 else 1 end, loc._locale

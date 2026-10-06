@@ -118,6 +118,12 @@ console.log(`document magnifica-humanitas: ${doc.action} (id=${doc.id})`)
 // ---------------------------------------------------------------- 3. Paragraphs
 
 // Short verbatim extracts only (D9). Each carries its paragraph number as the locator.
+//
+// Emphasis is part of a quotation, not decoration: wrap an emphasised span in single
+// asterisks and `renderEmphasis` (site/src/lib/emphasis.ts) turns it into <em>. MH 118 is the
+// case that matters — "not *despite* limitations, but often *through* them" — where the
+// emphasis IS the argument. Dropping it leaves a sentence that still reads but no longer says
+// what the author said. See docs/translation-standard.md §0 and §4.
 const paragraphs: Array<{ number: number; extract: string; note: string }> = [
   {
     number: 1,
@@ -163,7 +169,7 @@ const paragraphs: Array<{ number: number; extract: string; note: string }> = [
   },
   {
     number: 118,
-    extract: 'humanity flourishes not despite limitations, but often through them.',
+    extract: 'humanity flourishes not *despite* limitations, but often *through* them.',
     note: 'The answer to transhumanism and posthumanism: limitation is not a defect to be removed.',
   },
   {

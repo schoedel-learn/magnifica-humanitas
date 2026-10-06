@@ -166,7 +166,7 @@ export interface DocParagraph {
    */
   number: number;
   /**
-   * Short quoted extract only (<= 400 characters). Copyright: never paste a whole document.
+   * Short quoted extract only (<= 400 characters). Copyright: never paste a whole document. Reproduce the source VERBATIM, emphasis included: wrap an emphasised span in single asterisks — e.g. "not *despite* limitations, but often *through* them." (MH 118, where the emphasis is the argument). Write the Spanish entry from the official Spanish text, never by translating this one. See docs/translation-standard.md.
    */
   extract?: string | null;
   note?: string | null;
