@@ -6,6 +6,10 @@
 //
 // DATABASE_URI_TEST points at a dedicated `magnifica_humanitas_test` database on the dev
 // Postgres container, so the real dev schema the CMS uses is never dropped by the fixture.
+// Create it once:
+//   docker exec mh-dev-pg psql -U mh_admin -d postgres -c "create database magnifica_humanitas_test"
+// Then run:
+//   DATABASE_URI_TEST="postgres://mh_admin:devonly@127.0.0.1:55433/magnifica_humanitas_test" npm test
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { Pool } from 'pg';
