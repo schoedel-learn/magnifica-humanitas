@@ -423,3 +423,38 @@ humana*, *la Doctrina social de la Iglesia*, *la IA*, *el poshumanismo*.
 back to English, and the `lang="es"`-over-English problem persists on them. The sync layer
 (`translation_status` + `source_hash`, so an English edit marks the Spanish stale) is not
 built.
+
+### N10 — the Spanish site stops claiming to be Spanish where it is not (2026-10-06)
+Date: 2026-10-06
+
+Payload's locale fallback meant a `/es/` route with no translation served **English under
+`<html lang="es">`**. Four of the five Spanish routes did exactly that — only the encyclical
+page was genuinely translated. Screen readers switch voice on `lang`, so this was an
+accessibility defect as well as a search one.
+
+Fixed by making the fallback *visible rather than implicit*:
+
+- The data layer now reports which locale each lateral join actually **resolved**
+  (`resolved_locale`), not merely which was requested, so a fallback is detectable.
+- `Base.astro` takes `contentLang`. When it differs from the page language, the `<main>`
+  region is marked with its real language and a short notice states the mismatch in the
+  page's own language. Per-element `lang` is precisely what HTML provides for mixed-language
+  documents; the page chrome stays Spanish because the chrome genuinely is.
+- **Lists mark per item, not per page.** `/es/` shows a Spanish document beside an English
+  essay; an all-or-nothing page rule declared the whole thing Spanish, which was wrong for
+  half of it. Each `<li>` now carries its own resolved locale. The page-level notice still
+  fires when *every* row fell back, and an empty list is not a fallback.
+
+Verified against the production database through the publish worker's own read-only build
+path, then live.
+
+**Process lesson (cost an hour):** the first verification of the per-item change reported the
+item "NOT MARKED", which was wrong — the check script never rebuilt the site image, so it
+tested **stale code**. A build-container check must rebuild its image from the synced clone
+every run; `docker run` alone silently reuses the old one. Re-run after rebuilding, the
+result was correct.
+
+**Observed, not a defect:** the custom domain served the previous `/es/` for ~a minute after
+the deploy while the `*.pages.dev` deployment URL already had the new markup. Cloudflare edge
+propagation, settled on its own. Do not read a single mid-propagation fetch as a failed
+deploy — compare the deployment URL before concluding.
