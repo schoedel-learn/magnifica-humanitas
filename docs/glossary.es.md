@@ -1,4 +1,4 @@
-# Locked glossary — English → Spanish
+# Glossary — English and Spanish
 
 **Every Spanish form below is attested in the official Spanish edition of *Magnifica
 Humanitas*.** None was chosen by preference or recalled — each was checked against
@@ -6,13 +6,13 @@ Humanitas*.** None was chosen by preference or recalled — each was checked aga
 (2026-10-06). Where the Holy See has settled a term, that settlement is authoritative and we
 adopt it rather than inventing a better rendering.
 
-Companion to `translation-standard.md` §2.3. This table is a **review gate**, not a
-suggestion: a Spanish draft that renders a locked term some other way does not publish. That
-is what keeps twenty documents reading as one publication instead of twenty translations.
+Companion to §2.3 of the translation standard. Where the Holy See has settled a term in Spanish
+we adopt its rendering, and these are the terms settled so far. Holding to them is what keeps
+the pages reading as one publication rather than as a series of independent pieces.
 
 ## Core terms of the document
 
-| English | Spanish (locked) |
+| English | Spanish |
 |---|---|
 | human dignity | **dignidad humana** |
 | the human person | **la persona humana** |
@@ -31,7 +31,7 @@ is what keeps twenty documents reading as one publication instead of twenty tran
 
 ## Technology
 
-| English | Spanish (locked) |
+| English | Spanish |
 |---|---|
 | technology (as a human activity) | **la técnica** — the official text distinguishes this from *la tecnología* |
 | digital revolution | **la revolución digital** |
@@ -41,7 +41,7 @@ is what keeps twenty documents reading as one publication instead of twenty tran
 
 ## Church
 
-| English | Spanish (locked) |
+| English | Spanish |
 |---|---|
 | the Magisterium | **el Magisterio** |
 | encyclical letter | **la Carta Encíclica** |
@@ -52,7 +52,7 @@ is what keeps twenty documents reading as one publication instead of twenty tran
 
 ## Names and titles
 
-| English | Spanish (locked) |
+| English | Spanish |
 |---|---|
 | Pope Leo XIV | **el papa León XIV** / **León XIV** |
 | Pope Leo XIII | **León XIII** |
@@ -63,7 +63,7 @@ is what keeps twenty documents reading as one publication instead of twenty tran
 
 Spanish conventions differ from English in both abbreviation and punctuation:
 
-| English | Spanish (locked) |
+| English | Spanish |
 |---|---|
 | Mt 25:14-30 | **Mt 25,14-30** — comma, not colon |
 | Gn 11:1-9 | **Gn 11,1-9** |
@@ -73,6 +73,6 @@ Spanish conventions differ from English in both abbreviation and punctuation:
 
 ## Adding a term
 
-Only add a term once it has been checked against the official Spanish text — a glossary that
-contains invented renderings is worse than no glossary, because it launders them into
-authority. Record the source paragraph next to the new entry.
+A term is added only after it has been checked against the official Spanish text, with the
+source paragraph recorded beside it — an unchecked entry would carry more authority than it
+had earned.

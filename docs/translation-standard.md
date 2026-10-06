@@ -1,9 +1,9 @@
-# Translation standard — `es`
+# Translation standard — the Spanish edition
 
-Applies to every Spanish string on the publication. Read this before writing or approving
-any Spanish text.
+This sets out how Spanish is handled on the publication. It applies to every Spanish string on
+the site.
 
-## 0. The rule the whole standard hangs from
+## 0. The principle everything else follows from
 
 **The official texts are the reference point, and their choices are not altered — in
 representation or in interpretation.**
@@ -31,7 +31,7 @@ never machine-translated from ours.
 
 | | Quoted magisterial text | Our own prose |
 |---|---|---|
-| what | `doc_paragraphs.extract` — sentences of *Magnifica Humanitas* | essay bodies, abstracts, standfirsts, paragraph notes, topic descriptions, summaries |
+| what | sentences of *Magnifica Humanitas* | essay bodies, abstracts, standfirsts, paragraph notes, topic descriptions, summaries |
 | source | the official text, verbatim | written by us, in Spanish |
 | method | **lookup, never translation** | writing, in the register below |
 | latitude | none | full, within the register |
@@ -62,7 +62,7 @@ Lima should never be able to say the text was written for Chiclayo alone.
 
 ### 2.1 Person and address
 
-- **`usted` throughout.** Never `vosotros`, never `tú`. Formal address is native register
+- **`usted` throughout**, rather than `vosotros` or `tú`. Formal address is native register
   here, not stiffness.
 - The **first person plural** (`nosotros`) for the Church's own voice, as the official text
   does: *«debemos recordar»*, *«no podemos limitarnos»*.
@@ -78,13 +78,14 @@ Lima should never be able to say the text was written for Chiclayo alone.
 | vale (as assent) | **está bien**, **de acuerdo** |
 | vosotros | **ustedes** |
 
-Regionalism stops here. No diminutives in doctrinal prose, no regional idioms, no
+The regionalism stops at vocabulary: no diminutives in doctrinal prose, no regional idioms, no
 locally-specific slang.
 
 ### 2.3 Ecclesial vocabulary
 
-Locked to the Holy See's own Spanish, so our terms match the Church's rather than paraphrasing
-them. See `glossary.es.md` — every entry there is attested in the official Spanish text.
+Settled by the Holy See's own Spanish, so our terms match the Church's rather than paraphrasing
+them. See the glossary (`glossary.es.md`) — every entry there is attested in the official
+Spanish text.
 
 ### 2.4 Names and titles
 
@@ -104,10 +105,10 @@ These are **not** interchangeable and each language follows its own published co
 | paragraph of the encyclical | `MH 107` | **`MH, n. 107`** (`n.` for *número*) |
 | book abbreviations | Mt, Gn, Ne, Pr, Hch | Mt, Gn, Ne, Pr, **Hch** |
 
-The `/es/` routes must render the Spanish convention. A Spanish page citing "MH 107" is
-following no one's convention.
+The `/es/` routes render the Spanish convention. A Spanish page citing "MH 107" would be
+following the English one.
 
-## 4. Emphasis — the convention, and it is a fidelity rule
+## 4. Emphasis
 
 The official text emphasises words that carry its argument. MH 118:
 
@@ -118,11 +119,9 @@ The italics on ***a pesar*** and ***a través*** **are the argument** — the re
 "despite" to "through". Drop them and the sentence still reads; it no longer says what the
 author said.
 
-`doc_paragraphs.extract` is localized and carries inline emphasis as **single asterisks**
-(`*a pesar*` → `<em>a pesar</em>`). `site/src/lib/emphasis.ts` (`renderEmphasis`) escapes
-`& < > "` **first** and expands second, so an asterisk inside quoted text cannot inject markup
-and an unpaired `*` stays literal. Resolved 2026-10-06 (N10); the field is per-locale, so the
-English and Spanish extracts each carry their own emphasis.
+The extract field carries inline emphasis as **single asterisks** — `*a pesar*` renders as
+*a pesar* — and English and Spanish each carry their own, so the two editions cannot drift into
+one another.
 
 Emphasis in the official Spanish text falls in these quoted paragraphs:
 
@@ -133,8 +132,12 @@ Emphasis in the official Spanish text falls in these quoted paragraphs:
 | MH 89 | *Hch* |
 | MH 118 | ***a pesar***, ***a través*** |
 
-Emphasis is **reproduced, never added**. Putting italics into a quotation the Holy See did not
-italicise emphasises on the Pope's behalf — the same offence as dropping them.
+Emphasis is reproduced as the Holy See set it, and not added: italicising a quotation the Holy
+See did not italicise would emphasise on the Pope's behalf — the same error in reverse.
+
+*(For whoever maintains the site: `doc_paragraphs.extract` is localized, and
+`site/src/lib/emphasis.ts` escapes `& < > "` before expanding `*…*`, so quoted text cannot
+inject markup and an unpaired `*` stays literal. Resolved 2026-10-06.)*
 
 ## 5. Reviewing a Spanish draft
 
@@ -142,8 +145,8 @@ italicise emphasises on the Pope's behalf — the same offence as dropping them.
       emphasis included.
 - [ ] Every quotation traces to the **Spanish** source, not to a translation of our English.
 - [ ] No paraphrase appears inside quotation marks.
-- [ ] Locked terms follow `glossary.es.md`; no synonyms invented for locked terms.
-- [ ] `usted` throughout; no `vosotros`.
+- [ ] Terminology follows `glossary.es.md`.
+- [ ] `usted` throughout, not `vosotros`.
 - [ ] No Peninsular lexis from the table in §2.2.
 - [ ] Citations use the Spanish convention (§3).
 - [ ] *Magnifica Humanitas* untranslated and italic.

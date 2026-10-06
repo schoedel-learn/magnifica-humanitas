@@ -49,7 +49,7 @@ FACES = [
 DOCUMENTS = {
     "spanish-edition-brief.md": ("spanish-edition-brief", "A brief for a writer"),
     "translation-standard.md": ("translation-standard", "The Spanish translation standard"),
-    "glossary.es.md": ("glossary-es", "Locked terminology, English--Spanish"),
+    "glossary.es.md": ("glossary-es", "Terminology, English and Spanish"),
 }
 
 # The running footer per document. ASCII only, with LaTeX dashes (`---` = em dash): pdflatex's
@@ -57,7 +57,7 @@ DOCUMENTS = {
 FOOTERS = {
     "spanish-edition-brief": "Magnifica Humanitas --- a brief for a writer",
     "translation-standard": "Magnifica Humanitas --- Spanish translation standard",
-    "glossary-es": "Magnifica Humanitas --- locked glossary, English to Spanish",
+    "glossary-es": "Magnifica Humanitas --- glossary, English and Spanish",
 }
 
 
@@ -88,13 +88,13 @@ html{ font-size:10.2pt; }
 body{
   font-family:'Inter','DejaVu Sans',system-ui,sans-serif;
   color:var(--ink); background:var(--canvas);
-  line-height:1.45; margin:0; font-weight:380;
+  line-height:1.42; margin:0; font-weight:380;
   -webkit-font-smoothing:antialiased;
   hanging-punctuation:first;
 }
 /* Identity: the publication's 3px vatican band, exactly as it sits above the site header. */
 .band{ height:3px; background:var(--vatican); margin-bottom:14px; }
-.masthead{ margin-bottom:22px; }
+.masthead{ margin-bottom:18px; }
 .wordmark{
   font-family:'Crimson Pro',Georgia,serif; font-size:13pt; font-weight:600;
   letter-spacing:.02em; color:var(--ink);
@@ -107,10 +107,10 @@ h1,h2,h3,h4{ font-family:'Crimson Pro',Georgia,serif; font-weight:600; color:var
   line-height:1.2; margin:0; text-wrap:balance; }
 h1{ font-size:23pt; margin:0 0 6px; letter-spacing:-.005em; }
 h2{
-  font-size:13.5pt; margin:17px 0 6px; padding-top:8px;
+  font-size:13.5pt; margin:14px 0 6px; padding-top:8px;
   border-top:1px solid var(--slate); break-after:avoid; page-break-after:avoid;
 }
-h3{ font-size:11.5pt; margin:13px 0 5px; break-after:avoid; page-break-after:avoid; }
+h3{ font-size:11.5pt; margin:11px 0 5px; break-after:avoid; page-break-after:avoid; }
 h4{ font-size:10.5pt; margin:11px 0 4px; break-after:avoid; }
 p{ margin:0 0 7px; orphans:2; widows:2; }
 strong{ font-weight:620; }

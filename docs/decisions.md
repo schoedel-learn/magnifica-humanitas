@@ -495,3 +495,33 @@ if it does.
    so the refusal has to be written and **falsified** (prove it refuses), never assumed.
 3. Scope the role to whatever the first piece reveals: a *translator* needs drift tracking
    against the English; an *editor of the Spanish edition* does not.
+
+### N12 — who the guidelines speak to, and where their authority sits (2026-10-06)
+Date: 2026-10-06
+
+The brief and standard are addressed to contributors who may be ordained and who are already
+well formed in writing in communion with the Church and in citing her documents. The first
+draft was precise but read as dictatorial — it located authority in the publication ("this
+table is a gate, not a suggestion"; "does not publish"; "the checklist we run").
+
+**The rule: locate the authority in the Holy See's own settled texts, and say what WE do rather
+than what must be done.** Where the Holy See has settled a Spanish term, that settlement is
+what binds — not our preference. Stated that way the rule is unchanged in force and makes no
+claim of superiority. Prefer "we look a passage up rather than render it ourselves" over
+"quotations are never translated"; "terms settled by the Holy See's own Spanish" over
+"locked terms".
+
+**The division to state plainly:** editorial matters — which Spanish edition we cite, the
+punctuation of a scriptural reference, how emphasis is marked — are ours to decide and are
+house style, not doctrine. Matters of faith are the contributor's. Say both, once, early: the
+brief does this in *How to read the guidelines that follow*.
+
+**Do not explain to a priest what a priest knows.** State the reason for a practice as *why we
+adopted it*, never as a lesson in why it matters. The biography behind the register choice
+belongs there because it justifies our choice, not because a Peruvian priest needs telling.
+
+**Keep the technical record out of the contributor's way.** Implementation notes (column names,
+source paths, incident dates) move to a single clearly marked maintainer's note at the end of a
+section, or drop out of the contributed document entirely.
+
+The tone is not softer than the rules — it is the same rules without the assertion of rank.
