@@ -229,3 +229,51 @@ Proofs recorded at build time:
 assigned it the pages.dev hostname **`magnifica-humanitas-bm3.pages.dev`** (a suffix is now
 appended), not the bare `magnifica-humanitas.pages.dev` the plan assumed. The Phase 6 CNAME
 for `magnifica.catholic.work` must therefore target `magnifica-humanitas-bm3.pages.dev`.
+
+### N5 — "Ink Wash" design system (2026-10-06)
+Date: 2026-10-06
+
+A grayscale editorial system, mapped to Tailwind 4 `@theme` tokens in
+`site/src/styles/global.css`. Colour carries hierarchy, never decoration — there is
+deliberately no accent hue.
+
+| Token | Hex | Role |
+|---|---|---|
+| `ink` | `#252525` | primary text; the dark nav and footer framing surfaces |
+| `mist` | `#cfcfcf` | pull-quote panels; light text on ink |
+| `slate` | `#7d7d7d` | every structural rule, and the spine of each quotation |
+| `meta` | `#545454` | dates, captions, section labels, secondary copy |
+| `canvas` | `#ffffff` | the page |
+
+Type: **Crimson Pro Variable** for headings, standfirsts and quoted text (the printed papal
+register), **Inter Variable** for body and interface. Both SIL OFL 1.1 (verified against the
+`google/fonts` repo layout: `ofl/crimsonpro`, `ofl/inter`) and self-hosted through
+`@fontsource`, so there is no third-party request and the build is deterministic. Both ship as
+variable fonts, so one latin file per family (~48 KB each) covers the whole weight range.
+Layout is a 44 rem measure (~66 characters at a 17px body), a fluid `clamp()` scale, and 1px
+`#7d7d7d` rules between analytical blocks.
+
+**Two font traps, both of which fail silently:**
+1. `@fontsource` **variable** packages declare the family as `"<Name> Variable"`. Asking for
+   `"Crimson Pro"` matches no `@font-face` at all, and every glyph falls back to Georgia while
+   the computed `font-family` still reads back as the name you wrote. The theme now lists both
+   names. Caught by comparing rendered text widths, not by reading computed styles.
+2. `index.css` carries the **normal** faces only. The italic entry point is a separate import;
+   without it every blockquote renders a synthesised oblique instead of the drawn italic.
+
+### N6 — A destructive test fixture was pointed at a real database (2026-10-06)
+Date: 2026-10-06
+
+Running `npm test` with `DATABASE_URI_TEST` set to `magnifica_humanitas_dev` caused the
+fixtures to DROP that database's `posts_locales` and `doc_paragraphs_locales` tables. The
+fixture aborts on the first DROP that hits a foreign key, which is the only reason the damage
+stopped at two tables. Both were restored from production's schema (`pg_dump --schema-only -t`)
+and dev is back to exact table parity (30).
+
+The safety mechanism had been **a comment** in the test header. It is now a fail-closed guard
+(`site/tests/_guard.mjs`) that refuses any target whose database name does not end in `_test`,
+called from both fixtures before the first DROP. Verified by falsification: pointed at the dev
+database the suite aborts with the refusal and drops nothing.
+
+**Rule: a comment is not a guard.** When a script deletes anything, encode the refusal in code
+and then watch it refuse.
