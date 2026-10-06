@@ -1,0 +1,31 @@
+# Magnifica Humanitas CMS (Payload 3 / Next.js) — deployed to
+# /docker/magnifica-humanitas/docker-compose.yml on chroma-server.
+#
+# The build context is the server-side clone, so `docker compose build` works
+# without touching the workstation and without Node being installed on the host.
+# The Dockerfile lives INSIDE the context (cms/Dockerfile) because a compose
+# `dockerfile:` path is resolved relative to the build context.
+services:
+  cms:
+    build:
+      context: /opt/magnifica-humanitas/repo/cms
+      dockerfile: Dockerfile
+    image: magnifica-cms:latest
+    restart: unless-stopped
+    env_file: /opt/magnifica-humanitas/config.env
+    volumes:
+      - /srv/magnifica/media:/app/media
+    networks: [postgresql-db_default]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "postgresql-db_default"
+      traefik.http.routers.magnifica-cms.rule: "Host(`cms.magnifica.catholic.work`)"
+      traefik.http.routers.magnifica-cms.entrypoints: "websecure"
+      traefik.http.routers.magnifica-cms.tls.certresolver: "letsencrypt"
+      traefik.http.routers.magnifica-cms.middlewares: "noindex-magnifica-cms"
+      traefik.http.middlewares.noindex-magnifica-cms.headers.customresponseheaders.X-Robots-Tag: "noindex, nofollow"
+      traefik.http.services.magnifica-cms.loadbalancer.server.port: "3000"
+
+networks:
+  postgresql-db_default:
+    external: true
