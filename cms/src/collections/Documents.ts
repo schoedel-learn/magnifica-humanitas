@@ -5,7 +5,7 @@ export const Documents: CollectionConfig = {
   slug: 'documents',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'doc_type', 'published_date', 'status'],
+    defaultColumns: ['title', 'doc_type', 'published_date', '_status'],
     group: 'Corpus',
   },
   access: { read: publishedOnly },
@@ -39,13 +39,6 @@ export const Documents: CollectionConfig = {
       type: 'select',
       defaultValue: 'la',
       options: ['la', 'en', 'it', 'es'],
-    },
-    {
-      name: 'status',
-      type: 'select',
-      required: true,
-      defaultValue: 'draft',
-      options: ['draft', 'published'],
     },
   ],
 }

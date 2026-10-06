@@ -83,6 +83,24 @@ document. Enforce in the CMS field description and in code review; do not add au
 text policing (YAGNI).
 Evidence: n/a (policy decision, enforced in collection field `maxLength`).
 
+### D10 — One publish flag: Payload's native `_status`
+Date: 2026-10-06
+
+The content model originally carried TWO publish columns on `documents` and `posts`: a
+custom `status` field and Payload's own `_status` (added automatically by
+`versions: { drafts: true }`). They could diverge — an admin Publish-button press writes
+`_status` while a raw SQL/Mathesar edit could write `status` — so whichever flag the site
+ignored would silently fail to publish. Task 2.10b removed the custom `status` field
+(collection config + migration `20261006_071134_unify_publish_flag`) and repointed the
+access rules at `_status`. **The single publish flag is `_status`.** In the admin the
+Publish button writes `_status`; in Mathesar (or any SQL) publishing a document or post
+means setting `_status = 'published'`. The static site filters every content query with
+`_status = 'published'` (`ops/sql` and `site/src/lib/content.ts`).
+Evidence: `payload migrate:status` lists `20261006_065956_initial` and
+`20261006_071134_unify_publish_flag` both `Ran: Yes`; the leak test returns unauthenticated
+`totalDocs = 0` for children of a draft parent and `1` once the parent's `_status` is
+`published`, for BOTH `doc_paragraphs` and `post_sources`.
+
 ---
 
 ## Open Questions

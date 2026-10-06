@@ -150,7 +150,6 @@ export interface Document {
   vatican_url?: string | null;
   summary?: string | null;
   language_of_original?: ('la' | 'en' | 'it' | 'es') | null;
-  status: 'draft' | 'published';
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -215,7 +214,6 @@ export interface Post {
   hero?: (number | null) | Media;
   topics?: (number | Topic)[] | null;
   documents?: (number | Document)[] | null;
-  status: 'draft' | 'published';
   published_at?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -449,7 +447,6 @@ export interface DocumentsSelect<T extends boolean = true> {
   vatican_url?: T;
   summary?: T;
   language_of_original?: T;
-  status?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -480,7 +477,6 @@ export interface PostsSelect<T extends boolean = true> {
   hero?: T;
   topics?: T;
   documents?: T;
-  status?: T;
   published_at?: T;
   updatedAt?: T;
   createdAt?: T;

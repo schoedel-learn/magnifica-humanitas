@@ -5,7 +5,7 @@ export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'post_type', 'published_at', 'status'],
+    defaultColumns: ['title', 'post_type', 'published_at', '_status'],
     group: 'Publication',
   },
   access: { read: publishedOnly },
@@ -25,13 +25,6 @@ export const Posts: CollectionConfig = {
     { name: 'hero', type: 'upload', relationTo: 'media' },
     { name: 'topics', type: 'relationship', relationTo: 'topics', hasMany: true },
     { name: 'documents', type: 'relationship', relationTo: 'documents', hasMany: true },
-    {
-      name: 'status',
-      type: 'select',
-      required: true,
-      defaultValue: 'draft',
-      options: ['draft', 'published'],
-    },
     { name: 'published_at', type: 'date' },
   ],
 }
