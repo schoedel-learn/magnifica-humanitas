@@ -107,7 +107,7 @@ These are **not** interchangeable and each language follows its own published co
 The `/es/` routes must render the Spanish convention. A Spanish page citing "MH 107" is
 following no one's convention.
 
-## 4. Known defect — emphasis is being lost (open)
+## 4. Emphasis — the convention, and it is a fidelity rule
 
 The official text emphasises words that carry its argument. MH 118:
 
@@ -118,14 +118,13 @@ The italics on ***a pesar*** and ***a través*** **are the argument** — the re
 "despite" to "through". Drop them and the sentence still reads; it no longer says what the
 author said.
 
-`doc_paragraphs.extract` is a plain `textarea`, so it cannot carry emphasis, and our stored
-English extract for MH 118 reads "humanity flourishes not despite limitations, but often
-through them" — the emphasis already stripped. **This is a fidelity defect in the English
-edition today, before any Spanish work begins**, and it would be inherited silently.
+`doc_paragraphs.extract` is localized and carries inline emphasis as **single asterisks**
+(`*a pesar*` → `<em>a pesar</em>`). `site/src/lib/emphasis.ts` (`renderEmphasis`) escapes
+`& < > "` **first** and expands second, so an asterisk inside quoted text cannot inject markup
+and an unpaired `*` stays literal. Resolved 2026-10-06 (N10); the field is per-locale, so the
+English and Spanish extracts each carry their own emphasis.
 
-Fix: the extract field needs to hold inline emphasis (Lexical rich text, or agreed inline
-markup) plus a rendering path, and the nine existing extracts re-checked against both official
-texts. Emphasis in the official Spanish text currently falls in these quoted paragraphs:
+Emphasis in the official Spanish text falls in these quoted paragraphs:
 
 | paragraph | emphasised spans in the official Spanish |
 |---|---|
@@ -133,6 +132,9 @@ texts. Emphasis in the official Spanish text currently falls in these quoted par
 | MH 9 | *Mt* |
 | MH 89 | *Hch* |
 | MH 118 | ***a pesar***, ***a través*** |
+
+Emphasis is **reproduced, never added**. Putting italics into a quotation the Holy See did not
+italicise emphasises on the Pope's behalf — the same offence as dropping them.
 
 ## 5. Reviewing a Spanish draft
 
