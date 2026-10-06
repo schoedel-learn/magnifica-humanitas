@@ -1,0 +1,72 @@
+---
+// The single site shell: paper background, serif body, narrow measure, no decorative
+// chrome. This is an ACADEMIC surface — deliberately not Proset's dark product styling
+// and not devotional design.
+import '../styles/global.css';
+import { UI, root, type Lang } from '../lib/i18n';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+}
+
+const { title, description = '', lang = 'en' } = Astro.props;
+const s = UI[lang];
+const site = Astro.site ?? new URL('https://magnifica.catholic.work');
+
+// hreflang pair: strip a leading /es to get the English path, then re-add it for Spanish.
+// Both links are emitted on every page, including where Spanish only has English text
+// (Payload's fallback), which is what Q2 confirmed.
+const here = Astro.url.pathname;
+const withoutEs = here.replace(/^\/es/, '');
+const enHref = new URL(withoutEs || '/', site).href;
+const esHref = new URL(`/es${withoutEs || '/'}`, site).href;
+const canonical = new URL(here, site).href;
+
+const p = (path: string) => `${root(lang)}${path}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="es" href={esHref} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={s.siteName}
+      href={new URL('/rss.xml', site)}
+    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body class="bg-paper text-ink font-serif antialiased">
+    <header class="border-b border-ink/10">
+      <nav
+        class="mx-auto flex max-w-3xl flex-wrap items-baseline gap-x-6 gap-y-2 px-4 py-4 text-sm font-sans"
+      >
+        <a href={p('/')} class="font-semibold tracking-tight">{s.siteName}</a>
+        <a href={p('/documents/')}>{s.documents}</a>
+        <a href={p('/posts/')}>{s.essays}</a>
+        <a href={p('/sources/')}>{s.sources}</a>
+        <a href={lang === 'es' ? enHref : esHref} class="ml-auto" hreflang={s.switchHreflang}>
+          {s.switchLabel}
+        </a>
+      </nav>
+    </header>
+    <main class="mx-auto max-w-3xl px-4 py-10">
+      <slot />
+    </main>
+    <footer class="mx-auto max-w-3xl px-4 py-10 text-xs font-sans leading-relaxed text-ink/60">
+      <p>{s.footerNote}</p>
+    </footer>
+  </body>
+</html>
