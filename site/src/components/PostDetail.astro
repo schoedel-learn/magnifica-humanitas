@@ -7,7 +7,7 @@
 import Base from '../layouts/Base.astro';
 import { getPostBySlug, listSourcesForPost } from '../lib/content';
 import { formatApa } from '../lib/citations';
-import { UI, type Lang } from '../lib/i18n';
+import { UI, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 
@@ -33,6 +33,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
   title={`${post.title ?? post.slug} — ${s.siteName}`}
   description={post.abstract ?? ''}
   lang={lang}
+  contentLang={resolvedContentLang(lang, [post])}
 >
   <article>
     <h1>{post.title ?? post.slug}</h1>

@@ -28,6 +28,11 @@ const en = {
   noDocuments: 'No documents have been published yet.',
   noPosts: 'No essays have been published yet.',
   noSources: 'No sources have been recorded yet.',
+  // Shown when a /es/ page has no Spanish content and is serving the English fallback. The
+  // page must not claim to be Spanish while showing English: screen readers and search
+  // engines both trust <html lang>, so the mismatch is stated rather than hidden.
+  fallbackNotice:
+    'This page is not yet available in Spanish. It is shown in English for now.',
   switchLabel: 'ES',
   switchHreflang: 'es',
   footerNote:
@@ -58,6 +63,8 @@ const es: typeof en = {
   noDocuments: 'Aún no se ha publicado ningún documento.',
   noPosts: 'Aún no se ha publicado ningún ensayo.',
   noSources: 'Aún no se ha registrado ninguna fuente.',
+  fallbackNotice:
+    'Esta página aún no está disponible en español. Por el momento se ofrece en inglés.',
   switchLabel: 'EN',
   switchHreflang: 'en',
   footerNote:
@@ -68,6 +75,17 @@ export const UI: Record<Lang, typeof en> = { en, es };
 
 export function strings(lang: Lang) {
   return UI[lang];
+}
+
+// The language a LIST page is really showing. A /es/ index whose rows ALL resolved to the
+// English fallback is an English page wearing Spanish chrome, and must say so rather than
+// declare itself Spanish. An empty list is not a fallback — there is simply nothing to show.
+export function resolvedContentLang(
+  requested: Lang,
+  rows: Array<{ resolved_locale: string | null }>,
+): Lang {
+  if (rows.length === 0) return requested;
+  return rows.every((r) => r.resolved_locale !== requested) ? 'en' : requested;
 }
 
 // The URL prefix for a language: '' for English (unprefixed), '/es' for Spanish.

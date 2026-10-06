@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getTopicBySlug, listDocumentsForTopic, listPostsForTopic } from '../lib/content';
-import { UI, root, type Lang } from '../lib/i18n';
+import { UI, root, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -28,6 +28,7 @@ const itemLink =
   title={`${topic.name ?? topic.slug} — ${s.siteName}`}
   description={topic.description ?? ''}
   lang={lang}
+  contentLang={resolvedContentLang(lang, [topic])}
 >
   <h1>{topic.name ?? topic.slug}</h1>
   {topic.description && (

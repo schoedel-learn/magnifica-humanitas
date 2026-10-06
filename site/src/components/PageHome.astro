@@ -3,7 +3,7 @@
 // `lang`: it selects the UI strings and the content locale passed to the query helpers.
 import Base from '../layouts/Base.astro';
 import { listPublishedDocuments, listPublishedPosts } from '../lib/content';
-import { UI, root, type Lang } from '../lib/i18n';
+import { UI, root, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -24,7 +24,12 @@ const itemTitle =
   'font-serif text-2xl leading-snug underline decoration-slate underline-offset-4 transition-colors hover:decoration-ink';
 ---
 
-<Base title={s.siteName} description={s.tagline} lang={lang}>
+<Base
+  title={s.siteName}
+  description={s.tagline}
+  lang={lang}
+  contentLang={resolvedContentLang(lang, [...documents, ...posts])}
+>
   <h1>{s.siteName}</h1>
   <p class="mt-4 max-w-[38rem] font-serif text-xl leading-relaxed text-meta">{s.tagline}</p>
 

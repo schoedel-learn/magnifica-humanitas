@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { getDocumentBySlug, listParagraphs } from '../lib/content';
 import { cite } from '../lib/citations';
 import { renderEmphasis } from '../lib/emphasis';
-import { UI, type Lang } from '../lib/i18n';
+import { UI, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -24,6 +24,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
   title={`${doc.title ?? doc.abbreviation} — ${s.siteName}`}
   description={doc.summary ?? ''}
   lang={lang}
+  contentLang={resolvedContentLang(lang, [doc])}
 >
   <article>
     <h1>{doc.title ?? doc.abbreviation}</h1>

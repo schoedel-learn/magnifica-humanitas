@@ -25,11 +25,18 @@ interface Props {
   title: string;
   description?: string;
   lang?: Lang;
+  // The language the page BODY is actually in. Payload serves English wherever a Spanish
+  // translation does not exist yet, so a /es/ page can be Spanish chrome wrapped around
+  // English prose. When that happens the body is marked with its real language and the
+  // mismatch is stated — a page that declares <html lang="es"> over English text misleads
+  // screen readers (which switch voice on it) and search engines alike.
+  contentLang?: Lang;
 }
 
-const { title, description = '', lang = 'en' } = Astro.props;
+const { title, description = '', lang = 'en', contentLang } = Astro.props;
 const s = UI[lang];
 const site = Astro.site ?? new URL('https://magnifica.catholic.work');
+const fellBack = contentLang !== undefined && contentLang !== lang;
 
 // hreflang pair: strip a leading /es to get the English path, then re-add it for Spanish.
 // Both links are emitted on every page, including where Spanish only has English text
@@ -97,7 +104,17 @@ const navLink =
       </nav>
     </header>
 
-    <main class="mx-auto w-full max-w-measure grow px-5 py-12 sm:px-6 sm:py-16">
+    <main
+      class="mx-auto w-full max-w-measure grow px-5 py-12 sm:px-6 sm:py-16"
+      lang={fellBack ? contentLang : undefined}
+    >
+      {
+        fellBack && (
+          <p class="mb-10 border-l-2 border-slate bg-mist px-4 py-3 font-sans text-sm leading-relaxed text-meta">
+            {s.fallbackNotice}
+          </p>
+        )
+      }
       <slot />
     </main>
 

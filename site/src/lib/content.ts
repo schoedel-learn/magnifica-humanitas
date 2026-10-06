@@ -7,6 +7,10 @@ export type PostRow = {
   published_at: string | Date | null;
   title: string | null;
   abstract: string | null;
+  // Which locale the lateral join actually landed on. When this differs from the requested
+  // locale the page is showing fallback content, and the caller MUST say so rather than
+  // claim the page is in the requested language (see Base.astro's contentLang).
+  resolved_locale: string | null;
 };
 
 // Published posts, newest first, with localized text resolved for `locale`.
@@ -16,10 +20,10 @@ export type PostRow = {
 // back to whatever row exists (default 'en') — index 0 wins via the CASE ordering (C2).
 export async function listPublishedPosts(locale = 'en'): Promise<PostRow[]> {
   return query<PostRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract
+    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.resolved_locale
        from posts p
        join lateral (
-         select title, abstract
+         select title, abstract, loc._locale as resolved_locale
            from posts_locales loc
           where loc._parent_id = p.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
@@ -41,10 +45,11 @@ export type DocumentRow = {
   vatican_url: string | null;
   title: string | null;
   summary: string | null;
+  resolved_locale: string | null;
 };
 
 const DOCUMENT_COLUMNS = `d.id, d.abbreviation, d.slug, d.doc_type, d.signed_date,
-       d.published_date, d.vatican_url, l.title, l.summary`;
+       d.published_date, d.vatican_url, l.title, l.summary, l.resolved_locale`;
 
 // Published documents (the magisterial corpus), newest first, localized for `locale`.
 export async function listPublishedDocuments(locale = 'en'): Promise<DocumentRow[]> {
@@ -52,7 +57,7 @@ export async function listPublishedDocuments(locale = 'en'): Promise<DocumentRow
     `select ${DOCUMENT_COLUMNS}
        from documents d
        join lateral (
-         select title, summary
+         select title, summary, loc._locale as resolved_locale
            from documents_locales loc
           where loc._parent_id = d.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
@@ -73,7 +78,7 @@ export async function getDocumentBySlug(
     `select ${DOCUMENT_COLUMNS}
        from documents d
        join lateral (
-         select title, summary
+         select title, summary, loc._locale as resolved_locale
            from documents_locales loc
           where loc._parent_id = d.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
@@ -90,6 +95,7 @@ export type ParagraphRow = {
   number: number;
   extract: string | null;
   note: string | null;
+  resolved_locale: string | null;
 };
 
 // Paragraphs of one document, ascending. `doc_paragraphs.number` is numeric in Postgres
@@ -104,10 +110,10 @@ export async function listParagraphs(
   locale = 'en',
 ): Promise<ParagraphRow[]> {
   return query<ParagraphRow>(
-    `select p.number::int as number, l."extract", l.note
+    `select p.number::int as number, l."extract", l.note, l.resolved_locale
        from doc_paragraphs p
        left join lateral (
-         select loc."extract", loc.note
+         select loc."extract", loc.note, loc._locale as resolved_locale
            from doc_paragraphs_locales loc
           where loc._parent_id = p.id
           order by case loc._locale when $2 then 0 else 1 end, loc._locale
@@ -124,15 +130,16 @@ export type TopicRow = {
   slug: string;
   name: string | null;
   description: string | null;
+  resolved_locale: string | null;
 };
 
 // Topics are a taxonomic label; `name`/`description` are localized (C2).
 export async function listTopics(locale = 'en'): Promise<TopicRow[]> {
   return query<TopicRow>(
-    `select t.id, t.slug, l.name, l.description
+    `select t.id, t.slug, l.name, l.description, l.resolved_locale
        from topics t
        join lateral (
-         select name, description
+         select name, description, loc._locale as resolved_locale
            from topics_locales loc
           where loc._parent_id = t.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
@@ -178,6 +185,7 @@ export type PostDetailRow = {
   title: string | null;
   abstract: string | null;
   body: unknown;
+  resolved_locale: string | null;
 };
 
 // One published post by slug including its rich-text `body` (Payload Lexical JSON stored
@@ -187,10 +195,10 @@ export async function getPostBySlug(
   locale = 'en',
 ): Promise<PostDetailRow | undefined> {
   const rows = await query<PostDetailRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.body
+    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.body, l.resolved_locale
        from posts p
        join lateral (
-         select title, abstract, body
+         select title, abstract, body, loc._locale as resolved_locale
            from posts_locales loc
           where loc._parent_id = p.id
           order by case loc._locale when $2 then 0 else 1 end, loc._locale
@@ -237,10 +245,10 @@ export async function getTopicBySlug(
   locale = 'en',
 ): Promise<TopicRow | undefined> {
   const rows = await query<TopicRow>(
-    `select t.id, t.slug, l.name, l.description
+    `select t.id, t.slug, l.name, l.description, l.resolved_locale
        from topics t
        join lateral (
-         select name, description
+         select name, description, loc._locale as resolved_locale
            from topics_locales loc
           where loc._parent_id = t.id
           order by case loc._locale when $2 then 0 else 1 end, loc._locale
@@ -256,11 +264,11 @@ export async function getTopicBySlug(
 // Published posts carrying a topic (posts_rels path='topics'), newest first.
 export async function listPostsForTopic(topicId: number, locale = 'en'): Promise<PostRow[]> {
   return query<PostRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract
+    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.resolved_locale
        from posts p
        join posts_rels r on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
        join lateral (
-         select title, abstract
+         select title, abstract, loc._locale as resolved_locale
            from posts_locales loc
           where loc._parent_id = p.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
@@ -285,7 +293,7 @@ export async function listDocumentsForTopic(
        join doc_paragraphs_rels r
          on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
        join lateral (
-         select title, summary
+         select title, summary, loc._locale as resolved_locale
            from documents_locales loc
           where loc._parent_id = d.id
           order by case loc._locale when $1 then 0 else 1 end, loc._locale
