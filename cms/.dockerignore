@@ -1,0 +1,17 @@
+# Keep the build context small and deterministic: never ship host node_modules or a
+# stale Next build into the image, and never bake local secrets in.
+node_modules
+.next
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+media
+coverage
+test-results
+playwright-report
+blob-report
+playwright/.cache
+tsconfig.tsbuildinfo
+npm-debug.log*
