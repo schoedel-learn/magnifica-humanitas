@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { getDocumentBySlug, listParagraphs } from '../lib/content';
+import { cite } from '../lib/citations';
+import { UI, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  slug: string;
+  lang?: Lang;
+}
+const { slug, lang = 'en' } = Astro.props;
+const s = UI[lang];
+
+const doc = await getDocumentBySlug(slug, lang);
+if (!doc) throw new Error(`Document not found: ${slug}`);
+const paragraphs = await listParagraphs(doc.id, lang);
+---
+
+<Base
+  title={`${doc.title ?? doc.abbreviation} — ${s.siteName}`}
+  description={doc.summary ?? ''}
+  lang={lang}
+>
+  <article>
+    <h1 class="text-3xl font-semibold tracking-tight">{doc.title ?? doc.abbreviation}</h1>
+    <p class="mt-2 text-sm font-sans text-ink/60">
+      {doc.abbreviation} · {doc.doc_type}
+      {doc.published_date ? ` · ${s.publishedOn} ${formatDate(doc.published_date, lang)}` : ''}
+    </p>
+    <p class="mt-4 text-sm font-sans">
+      {
+        doc.vatican_url ? (
+          <a
+            class="underline decoration-ink/30 underline-offset-4"
+            href={doc.vatican_url}
+            rel="noopener"
+          >
+            {s.fullTextAtVatican}
+          </a>
+        ) : (
+          <span class="text-ink/50">{s.sourceLinkPending}</span>
+        )
+      }
+    </p>
+    {doc.summary && <p class="mt-6 text-lg leading-relaxed">{doc.summary}</p>}
+
+    <h2 class="mt-10 text-sm font-sans uppercase tracking-wide text-ink/50">
+      {s.paragraphsHeading}
+    </h2>
+    <ol class="mt-4 space-y-8">
+      {
+        paragraphs.map((para) => (
+          <li id={`p${para.number}`} class="scroll-mt-20">
+            <p class="text-sm font-sans text-ink/50">{cite(doc.abbreviation, para.number)}</p>
+            {para.extract && (
+              <blockquote class="mt-2 border-l-2 border-accent/40 pl-4 italic leading-relaxed">
+                {para.extract}
+              </blockquote>
+            )}
+            {para.note && <p class="mt-2 leading-relaxed">{para.note}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </article>
+</Base>

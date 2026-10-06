@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { listPublishedDocuments } from '../lib/content';
+import { UI, root, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+const documents = await listPublishedDocuments(lang);
+---
+
+<Base title={`${s.documents} — ${s.siteName}`} description={s.tagline} lang={lang}>
+  <h1 class="text-3xl font-semibold tracking-tight">{s.documents}</h1>
+  {
+    documents.length === 0 ? (
+      <p class="mt-6 text-ink/60">{s.noDocuments}</p>
+    ) : (
+      <ul class="mt-6 space-y-6">
+        {documents.map((d) => (
+          <li>
+            <a
+              href={p(`/documents/${d.slug}/`)}
+              class="text-xl underline decoration-ink/20 underline-offset-4"
+            >
+              {d.title ?? d.abbreviation}
+            </a>
+            <p class="mt-1 text-sm font-sans text-ink/60">
+              {d.abbreviation} · {d.doc_type}
+              {d.published_date
+                ? ` · ${s.publishedOn} ${formatDate(d.published_date, lang)}`
+                : ''}
+            </p>
+            {d.summary && <p class="mt-2 leading-relaxed text-ink/80">{d.summary}</p>}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Base>

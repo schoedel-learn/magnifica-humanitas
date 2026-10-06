@@ -1,0 +1,80 @@
+---
+// Home page body, shared by / and /es/. The only difference between the two routes is
+// `lang`: it selects the UI strings and the content locale passed to the query helpers.
+import Base from '../layouts/Base.astro';
+import { listPublishedDocuments, listPublishedPosts } from '../lib/content';
+import { UI, root, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+
+const [documents, posts] = await Promise.all([
+  listPublishedDocuments(lang),
+  listPublishedPosts(lang),
+]);
+const recent = posts.slice(0, 3);
+---
+
+<Base title={s.siteName} description={s.tagline} lang={lang}>
+  <h1 class="text-3xl font-semibold tracking-tight">{s.siteName}</h1>
+  <p class="mt-3 text-lg leading-relaxed text-ink/80">{s.tagline}</p>
+
+  <section class="mt-12">
+    <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{s.corpus}</h2>
+    {
+      documents.length === 0 ? (
+        <p class="mt-4 text-ink/60">{s.noDocuments}</p>
+      ) : (
+        <ul class="mt-4 space-y-5">
+          {documents.map((d) => (
+            <li>
+              <a
+                href={p(`/documents/${d.slug}/`)}
+                class="text-xl underline decoration-ink/20 underline-offset-4"
+              >
+                {d.title ?? d.abbreviation}
+              </a>
+              <p class="mt-1 text-sm font-sans text-ink/60">
+                {d.abbreviation} · {d.doc_type}
+                {d.published_date
+                  ? ` · ${s.publishedOn} ${formatDate(d.published_date, lang)}`
+                  : ''}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="mt-12">
+    <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{s.recentEssays}</h2>
+    {
+      recent.length === 0 ? (
+        <p class="mt-4 text-ink/60">{s.noPosts}</p>
+      ) : (
+        <ul class="mt-4 space-y-5">
+          {recent.map((post) => (
+            <li>
+              <a
+                href={p(`/posts/${post.slug}/`)}
+                class="text-xl underline decoration-ink/20 underline-offset-4"
+              >
+                {post.title ?? post.slug}
+              </a>
+              {post.abstract && <p class="mt-1 leading-relaxed text-ink/75">{post.abstract}</p>}
+              <p class="mt-1 text-sm font-sans text-ink/60">
+                {post.published_at ? formatDate(post.published_at, lang) : s.undated}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>
