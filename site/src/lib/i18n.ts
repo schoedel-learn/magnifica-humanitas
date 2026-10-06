@@ -88,6 +88,19 @@ export function resolvedContentLang(
   return rows.every((r) => r.resolved_locale !== requested) ? 'en' : requested;
 }
 
+// The `lang` attribute for ONE item inside a list, or undefined when it matches the page.
+//
+// Mixed lists are the normal state while the Spanish edition grows: the home page shows a
+// Spanish document beside an English essay. Marking the page as one language would be wrong
+// for half of it, so the item carries its own — which is what per-element lang is for.
+export function itemLang(
+  pageLang: Lang,
+  row: { resolved_locale: string | null },
+): Lang | undefined {
+  const r = row.resolved_locale;
+  return r && r !== pageLang ? (r as Lang) : undefined;
+}
+
 // The URL prefix for a language: '' for English (unprefixed), '/es' for Spanish.
 // Every internal link is built as `${root(lang)}/path/`.
 export function root(lang: Lang): string {

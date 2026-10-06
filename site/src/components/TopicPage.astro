@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getTopicBySlug, listDocumentsForTopic, listPostsForTopic } from '../lib/content';
-import { UI, root, resolvedContentLang, type Lang } from '../lib/i18n';
+import { UI, itemLang, root, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -43,7 +43,7 @@ const itemLink =
       ) : (
         <ul class="mt-5 divide-y divide-slate">
           {documents.map((d) => (
-            <li class="py-4 first:pt-0">
+            <li class="py-4 first:pt-0" lang={itemLang(lang, d)}>
               <a href={p(`/documents/${d.slug}/`)} class={itemLink}>
                 {d.title ?? d.abbreviation}
               </a>
@@ -63,7 +63,7 @@ const itemLink =
       ) : (
         <ul class="mt-5 divide-y divide-slate">
           {posts.map((post) => (
-            <li class="py-4 first:pt-0">
+            <li class="py-4 first:pt-0" lang={itemLang(lang, post)}>
               <a href={p(`/posts/${post.slug}/`)} class={itemLink}>
                 {post.title ?? post.slug}
               </a>
