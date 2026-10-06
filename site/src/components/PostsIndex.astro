@@ -11,30 +11,29 @@ const { lang = 'en' } = Astro.props;
 const s = UI[lang];
 const p = (path: string) => `${root(lang)}${path}`;
 const posts = await listPublishedPosts(lang);
+
+const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
+const itemTitle =
+  'font-serif text-2xl leading-snug underline decoration-slate underline-offset-4 transition-colors hover:decoration-ink';
 ---
 
 <Base title={`${s.essays} — ${s.siteName}`} description={s.tagline} lang={lang}>
-  <h1 class="text-3xl font-semibold tracking-tight">{s.essays}</h1>
+  <h1>{s.essays}</h1>
   {
     posts.length === 0 ? (
-      <p class="mt-6 text-ink/60">{s.noPosts}</p>
+      <p class="mt-6 text-meta">{s.noPosts}</p>
     ) : (
-      <ul class="mt-6 space-y-6">
+      <ul class="mt-8 divide-y divide-slate">
         {posts.map((post) => (
-          <li>
-            <a
-              href={p(`/posts/${post.slug}/`)}
-              class="text-xl underline decoration-ink/20 underline-offset-4"
-            >
+          <li class="py-7 first:pt-0">
+            <a href={p(`/posts/${post.slug}/`)} class={itemTitle}>
               {post.title ?? post.slug}
             </a>
-            <p class="mt-1 text-sm font-sans text-ink/60">
+            <p class={`mt-2 ${metaLabel}`}>
               {post.post_type}
-              {post.published_at
-                ? ` · ${s.publishedOn} ${formatDate(post.published_at, lang)}`
-                : ''}
+              {post.published_at ? ` · ${s.publishedOn} ${formatDate(post.published_at, lang)}` : ''}
             </p>
-            {post.abstract && <p class="mt-2 leading-relaxed text-ink/80">{post.abstract}</p>}
+            {post.abstract && <p class="mt-3 leading-relaxed">{post.abstract}</p>}
           </li>
         ))}
       </ul>

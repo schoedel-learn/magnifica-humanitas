@@ -28,23 +28,25 @@ const groups = KIND_ORDER.map((kind) => ({
   kind,
   rows: all.filter((r) => r.kind === kind),
 })).filter((g) => g.rows.length > 0);
+
+const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
 ---
 
 <Base title={`${s.sources} — ${s.siteName}`} description={s.bibliographyHeading} lang={lang}>
-  <h1 class="text-3xl font-semibold tracking-tight">{s.bibliographyHeading}</h1>
+  <h1>{s.bibliographyHeading}</h1>
   {
     groups.length === 0 ? (
-      <p class="mt-6 text-ink/60">{s.noSources}</p>
+      <p class="mt-6 text-meta">{s.noSources}</p>
     ) : (
       groups.map((group) => (
-        <section class="mt-10">
-          <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{group.kind}</h2>
-          <ul class="mt-4 space-y-4">
+        <section class="mt-12 border-t border-slate pt-8">
+          <h2 class={metaLabel}>{group.kind}</h2>
+          <ul class="mt-5 space-y-5 text-[0.9375rem]">
             {group.rows.map((row) => (
               <li class="leading-relaxed">
                 {row.doi || row.url ? (
                   <a
-                    class="underline decoration-ink/30 underline-offset-4 break-words"
+                    class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
                     href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
                     rel="noopener"
                   >
@@ -54,7 +56,7 @@ const groups = KIND_ORDER.map((kind) => ({
                   <span>{formatApa(row)}</span>
                 )}
                 {row.verified_on && (
-                  <span class="ml-2 whitespace-nowrap rounded-sm border border-ink/20 px-1.5 py-0.5 text-xs font-sans text-ink/60">
+                  <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>
                     {s.verified} {formatDate(row.verified_on, lang)}
                   </span>
                 )}

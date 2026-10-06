@@ -13,12 +13,13 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { Pool } from 'pg';
+import { assertScratchDatabase } from './_guard.mjs';
 
 const DSN = process.env.DATABASE_URI_TEST;
 let pool;
 
 before(async () => {
-  if (!DSN) throw new Error('DATABASE_URI_TEST is required for these tests');
+  assertScratchDatabase(DSN);
   // content.ts reads DATABASE_URI (its production variable). Point it at the same fixture
   // database so the library code under test queries the test tables.
   process.env.DATABASE_URI = DSN;

@@ -1,8 +1,24 @@
 ---
-// The single site shell: paper background, serif body, narrow measure, no decorative
-// chrome. This is an ACADEMIC surface — deliberately not Proset's dark product styling
-// and not devotional design.
+// The single site shell.
+//
+// Design: "Ink Wash" — a grayscale editorial surface (see src/styles/global.css).
+// The nav and footer are the only dark surfaces (#252525); everything between them
+// is white, with #7D7D7D carrying every structural rule inside the prose.
+//
+// Fonts are self-hosted through @fontsource. Both families are SIL OFL 1.1 (verified
+// against the google/fonts repo layout: ofl/crimsonpro, ofl/inter), so embedding is
+// permitted; self-hosting means no third-party request and a deterministic build.
+// Both ship as variable fonts. Two traps this import list exists to avoid:
+//  1. `index.css` carries the NORMAL faces only, so the italic entry point is imported
+//     separately — without it every blockquote would fall back to a synthesised oblique
+//     rather than the family's drawn italic.
+//  2. The variable packages declare the family as "<Name> Variable", so the CSS theme must
+//     reference that exact name; asking for "Crimson Pro" matches no @font-face and every
+//     glyph silently falls back to Georgia. See the --font-serif note in global.css.
 import '../styles/global.css';
+import '@fontsource-variable/inter/index.css';
+import '@fontsource-variable/crimson-pro/index.css';
+import '@fontsource-variable/crimson-pro/wght-italic.css';
 import { UI, root, type Lang } from '../lib/i18n';
 
 interface Props {
@@ -25,6 +41,10 @@ const esHref = new URL(`/es${withoutEs || '/'}`, site).href;
 const canonical = new URL(here, site).href;
 
 const p = (path: string) => `${root(lang)}${path}`;
+
+// Nav links share one treatment: #CFCFCF on the #252525 bar, lifting to white on hover.
+const navLink =
+  'text-mist underline-offset-4 transition-colors duration-150 hover:text-canvas hover:underline';
 ---
 
 <!doctype html>
@@ -47,26 +67,42 @@ const p = (path: string) => `${root(lang)}${path}`;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#252525" />
   </head>
-  <body class="bg-paper text-ink font-serif antialiased">
-    <header class="border-b border-ink/10">
+  <body class="flex min-h-dvh flex-col bg-canvas font-sans text-ink">
+    <header class="bg-ink">
       <nav
-        class="mx-auto flex max-w-3xl flex-wrap items-baseline gap-x-6 gap-y-2 px-4 py-4 text-sm font-sans"
+        class="mx-auto flex max-w-measure flex-wrap items-baseline gap-x-5 gap-y-2 px-5 py-4 font-sans text-xs uppercase tracking-[0.1em] sm:px-6"
       >
-        <a href={p('/')} class="font-semibold tracking-tight">{s.siteName}</a>
-        <a href={p('/documents/')}>{s.documents}</a>
-        <a href={p('/posts/')}>{s.essays}</a>
-        <a href={p('/sources/')}>{s.sources}</a>
-        <a href={lang === 'es' ? enHref : esHref} class="ml-auto" hreflang={s.switchHreflang}>
+        <a
+          href={p('/')}
+          class="w-full font-serif text-xl normal-case tracking-normal text-canvas no-underline sm:w-auto sm:mr-1"
+        >
+          {s.siteName}
+        </a>
+        <a href={p('/documents/')} class={navLink}>{s.documents}</a>
+        <a href={p('/posts/')} class={navLink}>{s.essays}</a>
+        <a href={p('/sources/')} class={navLink}>{s.sources}</a>
+        <a
+          href={lang === 'es' ? enHref : esHref}
+          class={`ml-auto ${navLink}`}
+          hreflang={s.switchHreflang}
+        >
           {s.switchLabel}
         </a>
       </nav>
     </header>
-    <main class="mx-auto max-w-3xl px-4 py-10">
+
+    <main class="mx-auto w-full max-w-measure grow px-5 py-12 sm:px-6 sm:py-16">
       <slot />
     </main>
-    <footer class="mx-auto max-w-3xl px-4 py-10 text-xs font-sans leading-relaxed text-ink/60">
-      <p>{s.footerNote}</p>
+
+    <footer class="bg-ink">
+      <div
+        class="mx-auto max-w-measure px-5 py-8 font-sans text-xs leading-relaxed tracking-wide text-mist sm:px-6"
+      >
+        <p>{s.footerNote}</p>
+      </div>
     </footer>
   </body>
 </html>
