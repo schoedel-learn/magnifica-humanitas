@@ -336,3 +336,40 @@ answer while both authoritative nameservers and all three public resolvers were 
 CNAME. Verify against the authoritative NS (or bypass the local cache with
 `curl --resolve <host>:443:<ip>`) — the workstation cache is the last thing to catch up, and reading
 it as "not propagated" wastes the window.
+
+### N8 — Spanish translation standard (2026-10-06)
+Date: 2026-10-06
+
+**Decision: the official texts are the reference point and their choices are not altered — in
+representation or in interpretation.** The Spanish edition is not a translation of our English
+edition but the same document issued in Spanish with its own settled wording; where the English
+page quotes the English edition, the Spanish page quotes the **Spanish** edition.
+
+The rule splits the work in two, and the split is not stylistic. `doc_paragraphs.extract` is
+**lookup, never translation** — translating a papal quotation and presenting it as one
+attributes wording to the Holy See that it did not write. Our own prose (essays, abstracts,
+standfirsts, notes, summaries) is written freely in the register below.
+
+**Register: the formal preferences of the Holy Father's pastoral region — northern Peru
+(Chulucanas, Piura; Chiclayo) — used in a general way.** Not popular register and not regional
+slang: the vocabulary a Peruvian bishop would preach in. Barry ranked the audience explicitly,
+the Holy Father first — since Prevost became a Peruvian national in 2015 and was Bishop of
+Chiclayo 2015–2023, northern Peruvian Spanish is the language of his episcopate, not a
+stylistic flourish.
+
+Artifacts: `docs/translation-standard.md` (register, fidelity rules, citation conventions,
+review checklist) and `docs/glossary.es.md` (27 locked terms, **every Spanish form checked
+against the official Spanish text** rather than recalled).
+
+**Fidelity defect found while writing the standard (open, English-side, pre-existing):**
+`doc_paragraphs.extract` is a plain `textarea`, so it cannot carry emphasis — and the official
+text uses emphasis to carry argument. MH 118's ***a pesar*** / ***a través*** is the whole
+point of the sentence (not *despite* limits but *through* them), and our stored English extract
+has already lost it. Under the rule above this is altering the text's choices, so the field
+needs to hold inline emphasis and the nine extracts need re-checking against both official
+texts. Recorded in §4 of the standard; not yet fixed.
+
+**Also noted:** the `/es/` routes declare `<html lang="es">` while serving English, because no
+Spanish content exists yet (every locale table holds one `en` row). That misinforms screen
+readers and search engines and should be resolved before translation work begins, by either
+gating the routes or marking the fallback honestly.
