@@ -15,10 +15,11 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@payloadcms/richtext-lexical": "^3.90.2",
-    "astro": "7.3.5"
+    "astro": "7.3.6"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "workerd": true
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -26,6 +27,7 @@
     "@types/pg": "^8.23.1",
     "pg": "^8.23.1",
     "tailwindcss": "^4.3.3",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "wrangler": "4.147.0"
   }
 }

@@ -1,0 +1,10 @@
+# Keep the build context small and deterministic: never ship host node_modules or a stale
+# build into the deploy image.
+node_modules
+dist
+.astro
+.git
+.gitignore
+.env
+.env.*
+!.env.example
