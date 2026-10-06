@@ -45,6 +45,19 @@ separate schema would require another grant round and Mathesar would not see the
 Evidence: `ops/sql/020_verify.sql` default-privileges query shows `magnifica_app` in `public`
 grants `magnifica_mathesar=arwd` on tables and `rU` on sequences.
 
+**Outcome recorded 2026-10-06 (task 2.11, production):** the two Payload migrations
+(`20261006_065956_initial`, `20261006_071134_unify_publish_flag`) were applied to the
+production database `magnifica_humanitas` on chroma-server. All **29** tables were created
+and are owned by `magnifica_app`, and **no grant was issued by hand** — the pre-existing
+default privileges did all of it. `information_schema.role_table_grants` shows
+`magnifica_mathesar` holds `SELECT,INSERT,UPDATE,DELETE` on every one of the 29 tables.
+Proved beyond the catalog with a real round-trip as the `magnifica_mathesar` role:
+INSERT into `topics` + `topics_locales`, UPDATE, SELECT, DELETE (probe row removed).
+Evidence commands: `docker exec postgresql-db-db-1 psql -U myadmin -d magnifica_humanitas -Atc
+"select tablename, tableowner from pg_tables where schemaname='public' order by 1"` (29 rows,
+owner `magnifica_app`); the same catalog query filtered on `grantee='magnifica_mathesar' and
+privilege_type='INSERT'` (29 public tables present).
+
 ### D5 — Media on a bind-mounted host directory `/srv/magnifica/media` on chroma-server
 Date: 2026-10-06
 
