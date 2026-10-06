@@ -297,3 +297,42 @@ database the suite aborts with the refusal and drops nothing.
 
 **Rule: a comment is not a guard.** When a script deletes anything, encode the refusal in code
 and then watch it refuse.
+
+### N7 — Phase 6: the publication is live at `magnifica.catholic.work` (2026-10-06)
+Date: 2026-10-06
+
+Completed with a **two-part** change, in this order — add the custom domain to the Pages
+project *first*, then point DNS at it:
+
+1. `POST /accounts/{id}/pages/projects/magnifica-humanitas/domains` with
+   `{"name": "magnifica.catholic.work"}`.
+2. GoDaddy `PUT /CNAME/magnifica` → `magnifica-humanitas-bm3.pages.dev` (TTL 600), via
+   `ops/dns/godaddy_magnifica.py`, whose allow-list is `{magnifica, cms.magnifica}`.
+
+The two-part order matters because Cloudflare validates ownership over HTTP-01 against the
+name: the project must already expect the hostname before the record appears. `verification_data`
+went `active` as soon as the CNAME resolved, and the certificate (Google Trust Services, ~90-day
+life) issued about 4 minutes later. **Until it issues, a TLS handshake for the new SNI fails with
+`SSLV3_ALERT_HANDSHAKE_FAILURE`** — that reads like a broken deployment and is simply "not issued
+yet". Prove it by handshaking the same IP with the `*.pages.dev` SNI: if that succeeds, the network
+path is fine and only the cert is outstanding.
+
+**Canonical URL:** `site/astro.config.mjs` already carried
+`site: 'https://magnifica.catholic.work'`, so the build emits the correct `<link rel="canonical">`,
+`og:url` and sitemap base. This was set in an earlier phase precisely so the cutover would not
+require a rebuild — worth doing at authoring time rather than at cutover time.
+
+**Proven blast radius — the whole point of the before/after diff:**
+
+| Check | Result |
+|---|---|
+| Zone records | **46 → 47**; exactly one ADDED (the CNAME), **zero removed** |
+| 14 sibling hostnames (`@`,`www`,`learn`,`make`,`ai`,`lms`,`pathways`,`diocese`,`staging`,`church`,`disciple`,`genesis`,`patriarchs`,`cms.magnifica`) | **byte-identical** to the pre-change baseline |
+| Apex `MX` | unchanged (`10 mail.schoedel.tech`) |
+| Apex `TXT` (6 records incl. the client's M365 `dc-` SPF include) | unchanged |
+
+**Pitfall confirmed:** after the write the workstation's own resolver still returned a negative
+answer while both authoritative nameservers and all three public resolvers were already serving the
+CNAME. Verify against the authoritative NS (or bypass the local cache with
+`curl --resolve <host>:443:<ip>`) — the workstation cache is the last thing to catch up, and reading
+it as "not propagated" wastes the window.
