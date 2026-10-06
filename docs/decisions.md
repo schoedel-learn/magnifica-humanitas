@@ -159,3 +159,43 @@ Date: 2026-10-06
 The nightly restic backup covers the workstation home directory. Confirm whether
 chroma-server has any backup of its own; if not, task 4.6 adds a local `pg_dump` + media
 archive and task 7.6 recommends an off-box target.
+
+---
+
+## Implementation notes
+
+### N1 — Publishing through the Payload Local API needs `_status`, not `draft: false`
+Date: 2026-10-06
+
+A seed script that creates `documents`/`posts` with `draft: false` still lands as
+`_status = 'draft'`, and the row is then invisible to the public API. Cause, read out of
+`payload/dist/collections/operations/create.js`: `versions: { drafts: true }` is a **boolean**,
+so `hasLocalizeStatusEnabled()` is false and `publishAllLocales` resolves via
+`!hasLocalizeStatusEnabled()` — which is true — but `getAllLocalesPublicationStatus()` returns
+`undefined` when `hasLocalizedStatus` is false, so nothing ever assigns `_status` and the
+column default `'draft'` (from `versions/baseFields.ts`) wins.
+
+**Rule: to publish from the Local API, send `_status: 'published'` in `data`** — exactly what
+the admin's Publish button does. `draft: false` is necessary but not sufficient.
+Evidence: `cms/src/seed.ts`; verified on the dev database first, then in production where both
+rows read `_status = 'published'` and `GET /api/posts` (unauthenticated) returns them.
+
+### N2 — `language_of_original` is NULL for Magnifica humanitas, deliberately
+Date: 2026-10-06
+
+The field's schema default is `la`. There is no official Latin text of this encyclical —
+it was first published in Arabic, English, French, German, Italian, Polish, Portuguese and
+Spanish, and as of July 2026 no Latin edition had appeared. Rather than let the record inherit
+a default that asserts something we cannot support, the seed writes an explicit NULL.
+**If a Latin text is later published, set the field then — not before.**
+
+### N3 — Initial content (2026-10-06)
+Date: 2026-10-06
+
+`cms/src/seed.ts` (idempotent, upsert by slug) created: topic `leo-xiv`; document
+`magnifica-humanitas` (MH, encyclical, signed 2026-05-15, published 2026-05-25); nine
+`doc_paragraphs` with short verbatim extracts (max 313 chars, cap is 400) each carrying a
+paragraph-number locator; five APA 7 `sources` (every URL fetched HTTP 200 before
+`verified_on` was set); one essay `introduction-to-magnifica-humanitas` with a 23-node Lexical
+body; and ten `post_sources` claim→source links. Copyright posture (D9) holds throughout:
+quotations only, full texts linked at vatican.va and never reproduced.
