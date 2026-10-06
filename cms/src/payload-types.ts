@@ -67,8 +67,14 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    documents: Document;
+    doc_paragraphs: DocParagraph;
+    posts: Post;
+    sources: Source;
+    post_sources: PostSource;
+    topics: Topic;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +82,14 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    doc_paragraphs: DocParagraphsSelect<false> | DocParagraphsSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    sources: SourcesSelect<false> | SourcesSelect<true>;
+    post_sources: PostSourcesSelect<false> | PostSourcesSelect<true>;
+    topics: TopicsSelect<false> | TopicsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -86,10 +98,10 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'es') | ('en' | 'es')[];
   globals: {};
   globalsSelect: {};
-  locale: null;
+  locale: 'en' | 'es';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -119,6 +131,188 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  title: string;
+  /**
+   * Citation abbreviation, e.g. MH.
+   */
+  abbreviation: string;
+  slug: string;
+  doc_type: 'encyclical' | 'apostolic-exhortation' | 'audience' | 'letter' | 'homily' | 'other';
+  signed_date?: string | null;
+  published_date?: string | null;
+  /**
+   * Canonical URL on vatican.va. Never republish the full text.
+   */
+  vatican_url?: string | null;
+  summary?: string | null;
+  language_of_original?: ('la' | 'en' | 'it' | 'es') | null;
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doc_paragraphs".
+ */
+export interface DocParagraph {
+  id: number;
+  document: number | Document;
+  /**
+   * Paragraph number in the source document.
+   */
+  number: number;
+  /**
+   * Short quoted extract only (<= 400 characters). Copyright: never paste a whole document.
+   */
+  extract?: string | null;
+  note?: string | null;
+  topics?: (number | Topic)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics".
+ */
+export interface Topic {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  post_type: 'essay' | 'note' | 'review' | 'analysis';
+  abstract?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  hero?: (number | null) | Media;
+  topics?: (number | Topic)[] | null;
+  documents?: (number | Document)[] | null;
+  status: 'draft' | 'published';
+  published_at?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  credit?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumb?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    wide?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sources".
+ */
+export interface Source {
+  id: number;
+  kind: 'magisterial' | 'book' | 'journal-article' | 'chapter' | 'web' | 'magazine' | 'thesis';
+  /**
+   * Free text for v1 (APA 7 order). A people collection is a later migration, not now.
+   */
+  authors: string;
+  title: string;
+  year?: number | null;
+  publisher?: string | null;
+  journal?: string | null;
+  volume?: string | null;
+  issue?: string | null;
+  pages?: string | null;
+  /**
+   * Bare DOI, no https://doi.org/ prefix.
+   */
+  doi?: string | null;
+  url?: string | null;
+  accessed_on?: string | null;
+  /**
+   * The date a human confirmed this citation resolves. Leave empty until verified — never guess.
+   */
+  verified_on?: string | null;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post_sources".
+ */
+export interface PostSource {
+  id: number;
+  post: number | Post;
+  source: number | Source;
+  /**
+   * Page, paragraph or section, e.g. "pp. 41-43" or "MH 12".
+   */
+  locator: string;
+  /**
+   * The claim in this post that the source supports.
+   */
+  claim?: string | null;
+  quoted_passage?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -145,25 +339,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -187,12 +362,36 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'documents';
+        value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'doc_paragraphs';
+        value: number | DocParagraph;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'sources';
+        value: number | Source;
+      } | null)
+    | ({
+        relationTo: 'post_sources';
+        value: number | PostSource;
+      } | null)
+    | ({
+        relationTo: 'topics';
+        value: number | Topic;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +437,146 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  abbreviation?: T;
+  slug?: T;
+  doc_type?: T;
+  signed_date?: T;
+  published_date?: T;
+  vatican_url?: T;
+  summary?: T;
+  language_of_original?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doc_paragraphs_select".
+ */
+export interface DocParagraphsSelect<T extends boolean = true> {
+  document?: T;
+  number?: T;
+  extract?: T;
+  note?: T;
+  topics?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  post_type?: T;
+  abstract?: T;
+  body?: T;
+  hero?: T;
+  topics?: T;
+  documents?: T;
+  status?: T;
+  published_at?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sources_select".
+ */
+export interface SourcesSelect<T extends boolean = true> {
+  kind?: T;
+  authors?: T;
+  title?: T;
+  year?: T;
+  publisher?: T;
+  journal?: T;
+  volume?: T;
+  issue?: T;
+  pages?: T;
+  doi?: T;
+  url?: T;
+  accessed_on?: T;
+  verified_on?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "post_sources_select".
+ */
+export interface PostSourcesSelect<T extends boolean = true> {
+  post?: T;
+  source?: T;
+  locator?: T;
+  claim?: T;
+  quoted_passage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics_select".
+ */
+export interface TopicsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  credit?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumb?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        wide?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -258,24 +597,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
