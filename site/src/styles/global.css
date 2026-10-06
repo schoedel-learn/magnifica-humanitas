@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-ink: #14161a;
+  --color-paper: #fdfcf9;
+  --color-accent: #6b1f2a;
+}
