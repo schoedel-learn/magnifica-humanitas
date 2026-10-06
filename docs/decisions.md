@@ -458,3 +458,40 @@ result was correct.
 the deploy while the `*.pages.dev` deployment URL already had the new markup. Cloudflare edge
 propagation, settled on its own. Do not read a single mid-propagation fetch as a failed
 deploy — compare the deployment URL before concluding.
+
+### N11 — We are not migrating to WordPress (2026-10-06)
+Date: 2026-10-06
+
+**Considered:** moving the CMS to WordPress, because an outside Spanish editor will need
+scoped access, and WordPress has a mature role system plus editor-role plugins.
+
+**Decided:** stay on Payload. No migration.
+
+**Why.** The premise was wrong. Payload 3.90.2 ships collection *and* field-level access
+(`FieldAccess` is in the installed types); our collections declare only
+`access: { read: … }`, so create/update/delete fall back to "any authenticated user". That
+is a **config gap, not a platform gap** — and it is not a reason to change platforms.
+
+WordPress would not have delivered the goal either: its built-in Editor role can edit and
+publish *all* posts, English included. "Spanish only" needs a custom role there too
+(Members / User Role Editor). Same work, different vocabulary. And WPML/Polylang model
+"two translations of one post", not "one document with two editions".
+
+The migration price: either rebuild headless on WPGraphQL (a weaker contract than the typed
+SQL layer) or lose the Astro site and the Ink Wash design outright. Backups, the publish
+loop, the DNS cutover and the migration discipline transfer to neither.
+
+**Where WordPress genuinely wins:** editors already know it. That is real hiring friction
+and the argument that would matter if this became a many-author publication. Revisit only
+if it does.
+
+**What we do instead:**
+1. The first commissioned piece goes through a **document workflow** — the editor receives
+   the brief and the locked glossary and returns a document; nothing is handed over. No
+   credentials, no attack surface, and it tests the writer before any infrastructure.
+2. If the relationship is real, build the Payload role: a `roles` field, access functions,
+   and — critically — a `beforeChange` hook that **refuses** changes to English values for a
+   non-admin role. Payload's field access cannot scope a single `localized` field by locale,
+   so the refusal has to be written and **falsified** (prove it refuses), never assumed.
+3. Scope the role to whatever the first piece reveals: a *translator* needs drift tracking
+   against the English; an *editor of the Spanish edition* does not.
