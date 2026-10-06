@@ -199,3 +199,33 @@ paragraph-number locator; five APA 7 `sources` (every URL fetched HTTP 200 befor
 `verified_on` was set); one essay `introduction-to-magnifica-humanitas` with a 23-node Lexical
 body; and ten `post_sources` claim→source links. Copyright posture (D9) holds throughout:
 quotations only, full texts linked at vatican.va and never reproduced.
+
+### N4 — The publish loop is live (phase 5, 2026-10-06)
+Date: 2026-10-06
+
+`ops/sql/010_events.sql` was applied to dev and then to production **as `magnifica_app`**.
+Rationale (this is the load-bearing detail): a trigger function executes with the privileges
+of the role that fired it, and it INSERTs into `content_events`. Creating that table as
+`magnifica_app` lets the pre-existing default privileges (D4) hand `magnifica_mathesar` INSERT
+on it with no hand-grant; created as `myadmin` instead, every Mathesar edit would have failed
+with `permission denied for table content_events`. Verified live: a write issued **as the
+`magnifica_mathesar` role** queued events and the site updated.
+
+Proofs recorded at build time:
+- 16 triggers installed; **zero** on version tables (`_documents_v`, `_posts_v`), which churn
+  on every draft save.
+- Statement-level semantics: one `UPDATE` touching **10** `doc_paragraphs` rows produced
+  **1** event, not 10 — so a bulk Mathesar save queues one rebuild.
+- End-to-end: a `documents_locales` edit made as the Mathesar role appeared at
+  `magnifica-humanitas-bm3.pages.dev/documents/magnifica-humanitas` **36 s** later, driven by
+  cron alone (an unforced tick, confirmed in `/var/log/magnifica-publish.log`).
+- Both directions: removing the marker took effect too, so the loop is not one-way.
+- **Failure path:** with a deliberately bogus `CLOUDFLARE_API_TOKEN` the worker exited **1**
+  and the pending count stayed at **1** — the publish was retried, not lost. Restoring the
+  token and forcing a run drained the queue to 0. The marker was then removed and the site
+  returned to its exact previous text.
+
+**Phase 6 note:** the Cloudflare project was created as `magnifica-humanitas`, but Cloudflare
+assigned it the pages.dev hostname **`magnifica-humanitas-bm3.pages.dev`** (a suffix is now
+appended), not the bare `magnifica-humanitas.pages.dev` the plan assumed. The Phase 6 CNAME
+for `magnifica.catholic.work` must therefore target `magnifica-humanitas-bm3.pages.dev`.
