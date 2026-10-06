@@ -244,6 +244,26 @@ deliberately no accent hue.
 | `slate` | `#7d7d7d` | every structural rule, and the spine of each quotation |
 | `meta` | `#545454` | dates, captions, section labels, secondary copy |
 | `canvas` | `#ffffff` | the page |
+| `vatican` | `#ffe100` | the single accent — the gold band of the Vatican flag |
+
+**The accent is scarce by design (added 2026-10-06).** A pure yellow is unusable as text on
+white — `#ffe100` on `#ffffff` measures **1.31:1** — so it appears only where it sits against
+the ink surface or is non-textual:
+
+- the 3px flag band above the ink header (its one appearance on the white canvas)
+- nav link hover, and the focus ring on the dark surfaces
+- a 22×3px rule opening each section label — note this marks the *editorial apparatus*
+  ("Paragraphs cited", "Sources for this essay", "The corpus"), never the author's own
+  headings inside an essay body
+- the `::selection` highlight
+
+On `#252525` it measures **11.69:1** (WCAG AAA), which is why every textual use sits there.
+Flag-yellow citations disagree (Pantone 803 C → `#FFF200`, Pantone 116 C → `#FFCE00`,
+schemecolor → `#FFE100`; Wikipedia publishes no specification). `#FFE100` is the most
+commonly cited value and is a single token, so a different official sample is a one-line swap.
+
+This also fixed a genuine accessibility defect: the focus ring was `outline-color: ink` on an
+ink-coloured nav, i.e. invisible. On the dark surfaces it is now the accent.
 
 Type: **Crimson Pro Variable** for headings, standfirsts and quoted text (the printed papal
 register), **Inter Variable** for body and interface. Both SIL OFL 1.1 (verified against the
