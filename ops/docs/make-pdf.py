@@ -26,6 +26,7 @@ import base64
 import pathlib
 import subprocess
 import sys
+import tempfile
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 DOCS = REPO / "docs"
@@ -287,6 +288,70 @@ def stamp_footer(raw_pdf: pathlib.Path, out_pdf: pathlib.Path, label: str) -> st
     return pages
 
 
+def _pgm_gray(path: pathlib.Path) -> tuple[int, int, bytes]:
+    """Read a binary PGM (P5). Chosen over PNG because it needs no image library: the grey
+    samples are directly indexable bytes."""
+    data = path.read_bytes()
+    pos = 0
+
+    def token() -> bytes:
+        nonlocal pos
+        while pos < len(data):
+            ch = data[pos:pos + 1]
+            if ch == b"#":                                   # comment to end of line
+                while pos < len(data) and data[pos:pos + 1] != b"\n":
+                    pos += 1
+            elif ch.isspace():
+                pos += 1
+            else:
+                break
+        start = pos
+        while pos < len(data) and not data[pos:pos + 1].isspace():
+            pos += 1
+        return data[start:pos]
+
+    if token() != b"P5":
+        raise ValueError(f"{path.name}: not a binary PGM")
+    w, h = int(token()), int(token())
+    int(token())                                             # maxval
+    pos += 1                                                 # byte closing the header
+    return w, h, data[pos:pos + w * h]
+
+
+def last_page_ink(pdf: pathlib.Path) -> float:
+    """Fraction of the LAST page's content area carrying ink.
+
+    A near-empty final page is the one layout defect a prose edit creates silently: the build
+    stays green, the page count looks plausible, and a two-line closing sheet reads as a
+    mistake. This happened twice while laying these documents out, so it is worth a check
+    rather than an eye.
+
+    Measured between 50% and 90% down the page, deliberately excluding the bottom band where
+    the running footer sits -- the footer is real ink, and inside the measured band an empty
+    sheet would still look marked.
+    """
+    total = int(_pages(pdf))
+    with tempfile.TemporaryDirectory() as td:
+        stem = pathlib.Path(td) / "last"
+        subprocess.run(
+            ["pdftoppm", "-gray", "-r", "50", "-f", str(total), "-l", str(total),
+             str(pdf), str(stem)],
+            check=True, capture_output=True,
+        )
+        pgm = next(p for p in sorted(pathlib.Path(td).iterdir()) if p.suffix == ".pgm")
+        w, h, px = _pgm_gray(pgm)
+
+    band = px[int(h * 0.50) * w:int(h * 0.90) * w]
+    if not band:
+        return 0.0
+    return sum(1 for b in band if b < 200) / len(band)
+
+
+# Below this, the closing sheet is near-empty rather than merely short. Set from measurement:
+# a properly closed page scores well above it, a two-line stub effectively at zero.
+MIN_LAST_PAGE_INK = 0.004
+
+
 def main() -> int:
     if subprocess.run(["which", "pdflatex"], capture_output=True).returncode != 0:
         sys.exit("pdflatex not found -- needed to stamp the page-number footer")
@@ -298,8 +363,13 @@ def main() -> int:
         html = md_to_html(md_name, stem, kicker, fcss)
         raw = BUILD / f"{stem}.raw.pdf"
         html_to_pdf(html, raw)
-        n = stamp_footer(raw, OUT / f"{stem}.pdf", FOOTERS[stem])
-        print(f"  {stem}.pdf  {n} pages")
+        out = OUT / f"{stem}.pdf"
+        n = stamp_footer(raw, out, FOOTERS[stem])
+
+        ink = last_page_ink(out)
+        flag = "  <-- NEARLY EMPTY LAST PAGE, tighten the layout or add content" \
+            if ink < MIN_LAST_PAGE_INK else ""
+        print(f"  {stem}.pdf  {n} pages   last page {ink * 100:5.2f}% ink{flag}")
 
     return 0
 

@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docs: rebuild the PDFs",
+      "detail": "The markdown in docs/ is the source of truth; this renders it. pandoc -> Chrome -> pdflatex, about three seconds, works from any directory. Ctrl+Shift+B runs this one.",
+      "type": "shell",
+      "command": "python3 '${workspaceFolder}/ops/docs/make-pdf.py'",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Docs: open the print preview",
+      "detail": "Opens the styled HTML left by the last build: the exact print layout with the real fonts, so a browser refresh shows an edit without regenerating the PDF. Ctrl+P in the browser gives true pagination.",
+      "type": "shell",
+      "command": "xdg-open '${workspaceFolder}/docs/pdf/.build/spanish-edition-brief.html'",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Docs: open the finished PDF",
+      "detail": "Opens the brief PDF as the reader receives it, with the running footer and page numbers.",
+      "type": "shell",
+      "command": "xdg-open '${workspaceFolder}/docs/pdf/spanish-edition-brief.pdf'",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}
