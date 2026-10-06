@@ -71,7 +71,10 @@ Date: 2026-10-06
 
 The CMS is served noindex (Traefik `X-Robots-Tag: noindex, nofollow`) and requires Payload
 authentication.
-Evidence: n/a (configuration decision, verified at deploy in phase 4).
+Evidence: **verified live 2026-10-06 (task 4.5).** `cms.magnifica.catholic.work` A →
+`31.97.65.164` (both authoritative NS agree). Let's Encrypt certificate issued with SAN
+`cms.magnifica.catholic.work`; `/admin` returns HTTP 200 with
+`x-robots-tag: noindex, nofollow`; port 80 returns `301 → https://…/admin`.
 
 ### D7 — The static site is deployed by direct upload (`wrangler pages deploy`)
 Date: 2026-10-06
