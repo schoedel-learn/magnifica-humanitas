@@ -76,6 +76,11 @@ Evidence: **verified live 2026-10-06 (task 4.5).** `cms.magnifica.catholic.work`
 `cms.magnifica.catholic.work`; `/admin` returns HTTP 200 with
 `x-robots-tag: noindex, nofollow`; port 80 returns `301 → https://…/admin`.
 
+**Production admin account (2026-10-06):** the first admin is **`schoedelb@gmail.com`**
+(users.id = 1, created 11:08:49Z) — NOT the `barry@schoedel.design` placeholder the plan
+and task 4.6 mention. It is the only row in `users`, so the open first-registration window
+was closed before anyone else could use it.
+
 ### D7 — The static site is deployed by direct upload (`wrangler pages deploy`)
 Date: 2026-10-06
 
