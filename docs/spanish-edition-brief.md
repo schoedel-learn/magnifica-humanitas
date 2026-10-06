@@ -183,7 +183,12 @@ arrives as a surprise later.
 - [ ] **The piece reads end to end as Spanish** — not as English in Spanish words. This is the
       one no checklist catches, and it is the one that matters.
 
-## 10. Two practical matters
+## 10. Credit, and two practical matters
+
+**By-line.** Every piece on the site carries a by-line, and the Spanish edition would carry
+its writer's. The work should be attributed to the person who wrote it — with a link to a
+parish, a school, an order or other work if that is useful. We would simply ask how the writer
+prefers to be named: full name, with a title, or with a religious name.
 
 **Copyright.** We quote the encyclical only in short passages and link to the full text at
 vatican.va. We do not reproduce papal documents, and any Spanish edition would keep to the same
@@ -201,8 +206,6 @@ We are not canonists and would not presume to advise. The canons are here so tha
 read them rather than take our word for it:
 
 https://www.vatican.va/archive/cod-iuris-canonici/eng/documents/cic_lib3-cann822-833_en.html
-
-We would also ask how the writer would like to be credited — by name, or not at all.
 
 ## 11. Next step
 
