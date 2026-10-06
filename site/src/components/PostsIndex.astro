@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { listPublishedPosts } from '../lib/content';
+import { UI, root, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+const posts = await listPublishedPosts(lang);
+---
+
+<Base title={`${s.essays} — ${s.siteName}`} description={s.tagline} lang={lang}>
+  <h1 class="text-3xl font-semibold tracking-tight">{s.essays}</h1>
+  {
+    posts.length === 0 ? (
+      <p class="mt-6 text-ink/60">{s.noPosts}</p>
+    ) : (
+      <ul class="mt-6 space-y-6">
+        {posts.map((post) => (
+          <li>
+            <a
+              href={p(`/posts/${post.slug}/`)}
+              class="text-xl underline decoration-ink/20 underline-offset-4"
+            >
+              {post.title ?? post.slug}
+            </a>
+            <p class="mt-1 text-sm font-sans text-ink/60">
+              {post.post_type}
+              {post.published_at
+                ? ` · ${s.publishedOn} ${formatDate(post.published_at, lang)}`
+                : ''}
+            </p>
+            {post.abstract && <p class="mt-2 leading-relaxed text-ink/80">{post.abstract}</p>}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Base>

@@ -1,0 +1,79 @@
+---
+// Post body is Payload's Lexical rich text stored as jsonb (hand-off fact). It is converted
+// with the official converter at the SAME Payload version (3.90.2) — never hand-parsed.
+import Base from '../layouts/Base.astro';
+import { getPostBySlug, listSourcesForPost } from '../lib/content';
+import { formatApa } from '../lib/citations';
+import { UI, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
+
+interface Props {
+  slug: string;
+  lang?: Lang;
+}
+const { slug, lang = 'en' } = Astro.props;
+const s = UI[lang];
+
+const post = await getPostBySlug(slug, lang);
+if (!post) throw new Error(`Post not found: ${slug}`);
+const sources = await listSourcesForPost(post.id);
+
+const bodyHtml = post.body
+  ? convertLexicalToHTML({ data: post.body as never, disableContainer: true })
+  : '';
+---
+
+<Base
+  title={`${post.title ?? post.slug} — ${s.siteName}`}
+  description={post.abstract ?? ''}
+  lang={lang}
+>
+  <article>
+    <h1 class="text-3xl font-semibold tracking-tight">{post.title ?? post.slug}</h1>
+    <p class="mt-2 text-sm font-sans text-ink/60">
+      {post.post_type}
+      {post.published_at ? ` · ${formatDate(post.published_at, lang)}` : ''}
+    </p>
+    {post.abstract && <p class="mt-6 text-lg leading-relaxed text-ink/80">{post.abstract}</p>}
+
+    {
+      bodyHtml && (
+        <div
+          class="mt-8 leading-relaxed [&_p]:mt-4 [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-semibold [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mt-1 [&_a]:underline [&_a]:underline-offset-4 [&_blockquote]:border-l-2 [&_blockquote]:border-accent/40 [&_blockquote]:pl-4 [&_blockquote]:italic"
+          set:html={bodyHtml}
+        />
+      )
+    }
+
+    {
+      sources.length > 0 && (
+        <section class="mt-12 border-t border-ink/10 pt-6">
+          <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">
+            {s.sourcesForEssay}
+          </h2>
+          <ul class="mt-4 space-y-4 text-sm">
+            {sources.map((row) => (
+              <li>
+                <p class="font-sans text-ink/50">{row.locator}</p>
+                <p class="mt-1 leading-relaxed">
+                  {row.doi || row.url ? (
+                    <a
+                      class="underline decoration-ink/30 underline-offset-4 break-words"
+                      href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
+                      rel="noopener"
+                    >
+                      {formatApa(row)}
+                    </a>
+                  ) : (
+                    <span>{formatApa(row)}</span>
+                  )}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>

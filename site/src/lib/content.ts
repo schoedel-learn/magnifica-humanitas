@@ -152,6 +152,7 @@ export type SourceRow = {
   pages: string | null;
   doi: string | null;
   url: string | null;
+  verified_on: string | Date | null;
 };
 
 // The bibliography. `sources` has no localized display columns used here, and `year` is
@@ -159,8 +160,135 @@ export type SourceRow = {
 export async function listSources(): Promise<SourceRow[]> {
   return query<SourceRow>(
     `select id, kind, authors, title, year::int as year, publisher, journal, volume,
-            issue, pages, doi, url
+            issue, pages, doi, url, verified_on
        from sources
       order by authors asc, year asc nulls last`,
+  );
+}
+
+export type PostDetailRow = {
+  id: number;
+  slug: string;
+  post_type: string;
+  published_at: string | Date | null;
+  title: string | null;
+  abstract: string | null;
+  body: unknown;
+};
+
+// One published post by slug including its rich-text `body` (Payload Lexical JSON stored
+// as jsonb), localized with the same lateral-join preference/fallback as the list query (C2).
+export async function getPostBySlug(
+  slug: string,
+  locale = 'en',
+): Promise<PostDetailRow | undefined> {
+  const rows = await query<PostDetailRow>(
+    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.body
+       from posts p
+       join lateral (
+         select title, abstract, body
+           from posts_locales loc
+          where loc._parent_id = p.id
+          order by case loc._locale when $2 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
+      where p.slug = $1 and p._status = 'published'
+      limit 1`,
+    [slug, locale],
+  );
+  return rows[0];
+}
+
+export type PostSourceRow = {
+  locator: string;
+  authors: string;
+  year: number | null;
+  title: string;
+  publisher: string | null;
+  journal: string | null;
+  volume: string | null;
+  issue: string | null;
+  pages: string | null;
+  doi: string | null;
+  url: string | null;
+};
+
+// The bibliography entries linked to one post (post_sources → sources) with the locator
+// that says where in the source the claim is supported. `year` is numeric → int (C3).
+export async function listSourcesForPost(postId: number): Promise<PostSourceRow[]> {
+  return query<PostSourceRow>(
+    `select ps.locator, s.authors, s.year::int as year, s.title, s.publisher, s.journal,
+            s.volume, s.issue, s.pages, s.doi, s.url
+       from post_sources ps
+       join sources s on s.id = ps.source_id
+      where ps.post_id = $1
+      order by ps.id asc`,
+    [postId],
+  );
+}
+
+// One topic by slug, localized (name/description live in topics_locales, C2).
+export async function getTopicBySlug(
+  slug: string,
+  locale = 'en',
+): Promise<TopicRow | undefined> {
+  const rows = await query<TopicRow>(
+    `select t.id, t.slug, l.name, l.description
+       from topics t
+       join lateral (
+         select name, description
+           from topics_locales loc
+          where loc._parent_id = t.id
+          order by case loc._locale when $2 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
+      where t.slug = $1
+      limit 1`,
+    [slug, locale],
+  );
+  return rows[0];
+}
+
+// Published posts carrying a topic (posts_rels path='topics'), newest first.
+export async function listPostsForTopic(topicId: number, locale = 'en'): Promise<PostRow[]> {
+  return query<PostRow>(
+    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract
+       from posts p
+       join posts_rels r on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
+       join lateral (
+         select title, abstract
+           from posts_locales loc
+          where loc._parent_id = p.id
+          order by case loc._locale when $1 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
+      where p._status = 'published'
+      order by p.published_at desc nulls last, p.id desc`,
+    [locale, topicId],
+  );
+}
+
+// Published documents carrying a topic. Topics attach to documents at the PARAGRAPH level
+// (doc_paragraphs_rels path='topics') — there is no documents_rels table (C4).
+export async function listDocumentsForTopic(
+  topicId: number,
+  locale = 'en',
+): Promise<DocumentRow[]> {
+  return query<DocumentRow>(
+    `select distinct on (d.id) ${DOCUMENT_COLUMNS}
+       from documents d
+       join doc_paragraphs p on p.document_id = d.id
+       join doc_paragraphs_rels r
+         on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
+       join lateral (
+         select title, summary
+           from documents_locales loc
+          where loc._parent_id = d.id
+          order by case loc._locale when $1 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
+      where d._status = 'published'
+      order by d.id, d.published_date desc nulls last`,
+    [locale, topicId],
   );
 }

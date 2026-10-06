@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import { getTopicBySlug, listDocumentsForTopic, listPostsForTopic } from '../lib/content';
+import { UI, root, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  slug: string;
+  lang?: Lang;
+}
+const { slug, lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+
+const topic = await getTopicBySlug(slug, lang);
+if (!topic) throw new Error(`Topic not found: ${slug}`);
+const [posts, documents] = await Promise.all([
+  listPostsForTopic(topic.id, lang),
+  listDocumentsForTopic(topic.id, lang),
+]);
+---
+
+<Base
+  title={`${topic.name ?? topic.slug} — ${s.siteName}`}
+  description={topic.description ?? ''}
+  lang={lang}
+>
+  <h1 class="text-3xl font-semibold tracking-tight">{topic.name ?? topic.slug}</h1>
+  {topic.description && <p class="mt-3 text-lg leading-relaxed text-ink/80">{topic.description}</p>}
+
+  <section class="mt-10">
+    <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{s.documents}</h2>
+    {
+      documents.length === 0 ? (
+        <p class="mt-3 text-ink/60">{s.noDocuments}</p>
+      ) : (
+        <ul class="mt-3 space-y-3">
+          {documents.map((d) => (
+            <li>
+              <a
+                href={p(`/documents/${d.slug}/`)}
+                class="underline decoration-ink/20 underline-offset-4"
+              >
+                {d.title ?? d.abbreviation}
+              </a>
+              <span class="text-sm font-sans text-ink/60"> — {d.abbreviation}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{s.essays}</h2>
+    {
+      posts.length === 0 ? (
+        <p class="mt-3 text-ink/60">{s.noPosts}</p>
+      ) : (
+        <ul class="mt-3 space-y-3">
+          {posts.map((post) => (
+            <li>
+              <a
+                href={p(`/posts/${post.slug}/`)}
+                class="underline decoration-ink/20 underline-offset-4"
+              >
+                {post.title ?? post.slug}
+              </a>
+              <span class="text-sm font-sans text-ink/60">
+                {' — '}
+                {post.published_at ? formatDate(post.published_at, lang) : s.undated}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

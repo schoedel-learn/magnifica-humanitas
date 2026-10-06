@@ -46,7 +46,7 @@ before(async () => {
     _locale text not null, name text, description text, unique (_locale, _parent_id))`);
   await pool.query(`create table sources (
     id serial primary key, kind text, authors text, title text, year numeric, publisher text,
-    journal text, volume text, issue text, pages text, doi text, url text)`);
+    journal text, volume text, issue text, pages text, doi text, url text, verified_on timestamptz)`);
 
   // Two published documents (one newer, one older) and one draft.
   await pool.query(`insert into documents (abbreviation, slug, doc_type, published_date, vatican_url, _status) values
@@ -78,9 +78,9 @@ before(async () => {
   await pool.query(`insert into topics_locales (_parent_id, _locale, name, description)
     select id, 'es', 'León XIV', 'el papa' from topics where slug='leo-xiv'`);
 
-  await pool.query(`insert into sources (kind, authors, title, year, publisher, doi) values
-    ('book','Doe, A.','A book',1999,'Publish Co',null),
-    ('journal-article','Smith, J.','A study',2021,null,'10.1000/xyz')`);
+  await pool.query(`insert into sources (kind, authors, title, year, publisher, doi, verified_on) values
+    ('book','Doe, A.','A book',1999,'Publish Co',null,null),
+    ('journal-article','Smith, J.','A study',2021,null,'10.1000/xyz', now())`);
 });
 
 after(async () => {
@@ -131,9 +131,11 @@ test('listTopics prefers the requested locale', async () => {
   assert.equal(es[0].name, 'León XIV');
 });
 
-test('listSources returns sources with an integer year', async () => {
+test('listSources returns sources with an integer year and the verified marker', async () => {
   const { listSources } = await import('../src/lib/content.ts');
   const rows = await listSources();
   assert.equal(rows.length, 2);
   assert.equal(typeof rows[0].year, 'number'); // numeric cast, same trap as C3
+  // The bibliography page renders a "verified" marker only when this is set.
+  assert.ok(rows.some((r) => r.verified_on), 'at least one source row exposes verified_on');
 });

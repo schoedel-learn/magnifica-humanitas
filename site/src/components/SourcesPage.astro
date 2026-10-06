@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import { listSources } from '../lib/content';
+import { formatApa } from '../lib/citations';
+import { UI, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+
+const all = await listSources();
+
+// Group by `kind` in a fixed, meaningful order rather than alphabetically so the
+// bibliography reads magisterial → book → journal → … the way a reading list does.
+const KIND_ORDER = [
+  'magisterial',
+  'book',
+  'journal-article',
+  'chapter',
+  'web',
+  'magazine',
+  'thesis',
+];
+const groups = KIND_ORDER.map((kind) => ({
+  kind,
+  rows: all.filter((r) => r.kind === kind),
+})).filter((g) => g.rows.length > 0);
+---
+
+<Base title={`${s.sources} — ${s.siteName}`} description={s.bibliographyHeading} lang={lang}>
+  <h1 class="text-3xl font-semibold tracking-tight">{s.bibliographyHeading}</h1>
+  {
+    groups.length === 0 ? (
+      <p class="mt-6 text-ink/60">{s.noSources}</p>
+    ) : (
+      groups.map((group) => (
+        <section class="mt-10">
+          <h2 class="text-sm font-sans uppercase tracking-wide text-ink/50">{group.kind}</h2>
+          <ul class="mt-4 space-y-4">
+            {group.rows.map((row) => (
+              <li class="leading-relaxed">
+                {row.doi || row.url ? (
+                  <a
+                    class="underline decoration-ink/30 underline-offset-4 break-words"
+                    href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
+                    rel="noopener"
+                  >
+                    {formatApa(row)}
+                  </a>
+                ) : (
+                  <span>{formatApa(row)}</span>
+                )}
+                {row.verified_on && (
+                  <span class="ml-2 whitespace-nowrap rounded-sm border border-ink/20 px-1.5 py-0.5 text-xs font-sans text-ink/60">
+                    {s.verified} {formatDate(row.verified_on, lang)}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    )
+  }
+</Base>
