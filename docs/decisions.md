@@ -373,3 +373,53 @@ texts. Recorded in §4 of the standard; not yet fixed.
 Spanish content exists yet (every locale table holds one `en` row). That misinforms screen
 readers and search engines and should be resolved before translation work begins, by either
 gating the routes or marking the fallback honestly.
+
+### N9 — extract localized; the encyclical's Spanish page is live (2026-10-06)
+Date: 2026-10-06
+
+Two pieces of work, both verified on dev before production.
+
+**1. `doc_paragraphs.extract` is now localized.** It was a single shared column, so a
+paragraph could hold only one language's quotation — and the Spanish page quotes the *Spanish*
+edition. The migration is **hand-written, not generated**: Payload's generator for a field
+changing from shared to localized adds the new column and drops the old one *without carrying
+the values across*, which would have destroyed all nine English extracts silently. The copy
+runs between the ADD and the DROP. Verified on dev against a pre-populated table, then on
+production: **9/9 English extracts carried, no loss.**
+
+**2. Emphasis.** The official text uses italics to carry argument and the field was a plain
+varchar, so quotations were losing them. MH 118 is the case that matters — *not \*despite\*
+limitations, but often \*through\* them* — where without the emphasis the sentence still reads
+but no longer says what the author said. Convention: a single asterisk pair marks an
+emphasised span; `site/src/lib/emphasis.ts` escapes first and expands second, so a quotation
+cannot inject markup and an unpaired asterisk stays literal. **This was a pre-existing defect
+in the English edition**, not a Spanish one. Exactly one quoted span of the nine carries
+emphasis in either language (MH 118).
+
+**3. The Spanish page is live** at `/es/documents/magnifica-humanitas/`: title, summary and all
+nine extracts taken from the official Spanish edition, with each extract **verified verbatim
+against that text before insertion** (9/9).
+
+Editorial notes (our own prose, since they are not quotations) are written in the register of
+`docs/translation-standard.md`, using the locked glossary terms — *la custodia de la persona
+humana*, *la Doctrina social de la Iglesia*, *la IA*, *el poshumanismo*.
+
+**Lessons encoded:**
+- **Key content migrations by slug, not by id.** The first attempt hardcoded `_parent_id = 1`;
+  the dev database assigns id 2 to the same document, so the insert hit the FK and aborted
+  instead of writing to the wrong row. `ops/sql/020_spanish_content.sql` joins on
+  `documents.slug`.
+- **Rollout order matters when a field moves.** The site build reads the new column, so the
+  code was committed and the server clone synced *before* the migration; the CMS image was
+  rebuilt and transferred *before* the container was recreated, so the admin never ran long
+  against the moved column. The old image would have queried `doc_paragraphs.extract` and
+  errored.
+- **Cross-language span selection was done by reading, not by alignment.** An automated
+  English↔Spanish sentence matcher produced garbage (it matched paragraph-number prefixes and
+  weak cognates); at this fidelity a bad alignment is a mistranslation, so the nine Spanish
+  spans were selected by reading the Spanish and then verified programmatically.
+
+**Still open:** the other `/es/` routes (`/es/posts/`, `/es/sources/`, `/es/topics/`) still fall
+back to English, and the `lang="es"`-over-English problem persists on them. The sync layer
+(`translation_status` + `source_hash`, so an English edit marks the Spanish stale) is not
+built.
