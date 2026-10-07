@@ -45,17 +45,21 @@
   --theme-input-bg: #ffffff;
 }
 
-/* The 3px vatican band, exactly as it sits above the site's header. `.app-header` is
-   position:relative, so this hangs off its top edge without touching layout or z-order. */
-.app-header::before {
+/* The 3px vatican band, exactly as it sits above the site's header.
+ *
+ * On `body` rather than `.app-header`, so it shows on the LOGIN page too — that is the first
+ * thing an editor ever sees, and the signed-in header is where it would otherwise be the only
+ * thing wearing the publication's colours. Fixed positioning keeps it clear of layout. */
+body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   height: 3px;
   background: #ffe100;
   pointer-events: none;
+  z-index: 9999;
 }
 
 /* Payload's default link colour inside rich text is its blue. The publication has no blue in
