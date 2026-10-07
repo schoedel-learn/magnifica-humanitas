@@ -51,6 +51,7 @@ DOCUMENTS = {
     "spanish-edition-brief.md": ("spanish-edition-brief", "A brief for a writer"),
     "translation-standard.md": ("translation-standard", "The Spanish translation standard"),
     "glossary.es.md": ("glossary-es", "Terminology, English and Spanish"),
+    "cms-training.md": ("cms-training", "A short course in five missions"),
 }
 
 # The running footer per document. ASCII only, with LaTeX dashes (`---` = em dash): pdflatex's
@@ -59,6 +60,7 @@ FOOTERS = {
     "spanish-edition-brief": "Magnifica Humanitas --- a brief for a writer",
     "translation-standard": "Magnifica Humanitas --- Spanish translation standard",
     "glossary-es": "Magnifica Humanitas --- glossary, English and Spanish",
+    "cms-training": "Magnifica Humanitas --- using the CMS",
 }
 
 

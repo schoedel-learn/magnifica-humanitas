@@ -1,0 +1,68 @@
+/* Branding for the Magnifica Humanitas admin.
+ *
+ * This is Payload's documented extension point for global admin styles — it is loaded into
+ * every admin page. The goal is that the desk an editor sits at looks like the publication
+ * it produces, rather than like a generic backend.
+ *
+ * Deliberately restrained, and here is why: Payload's stock grey ramp is ALREADY neutral, so
+ * repainting every elevation would be change for its own sake and risks producing text the
+ * same colour as its background. The real visible difference is the TYPEFACES — the admin
+ * ships with system-ui and Georgia, neither of which the publication uses.
+ *
+ * Colour overrides are scoped to the light theme so dark mode is untouched and cannot end up
+ * with unreadable contrast from these values.
+ */
+
+/* The publication's two faces, self-hosted. Latin subset only: it covers everything in
+ * English and Spanish admin text, including the accents and the inverted commas. */
+@font-face {
+  font-family: 'Crimson Pro';
+  src: url('/fonts/crimson-pro-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Payload reads these two variables everywhere, so setting them re-types the whole panel:
+   headings and post titles in the serif the publication prints in, everything else in Inter. */
+:root {
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+}
+
+/* The publication's greys. Scoped to light so dark mode keeps its own palette. */
+[data-theme='light'] {
+  --theme-bg: #ffffff;
+  --theme-text: #252525;
+  --theme-input-bg: #ffffff;
+}
+
+/* The 3px vatican band, exactly as it sits above the site's header. `.app-header` is
+   position:relative, so this hangs off its top edge without touching layout or z-order. */
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: #ffe100;
+  pointer-events: none;
+}
+
+/* Payload's default link colour inside rich text is its blue. The publication has no blue in
+   it — links are ink with a slate underline, so the editor's preview matches the site. */
+[data-theme='light'] .rich-text a,
+[data-theme='light'] .payload-richtext a {
+  color: #252525;
+  text-decoration-color: #7d7d7d;
+  text-underline-offset: 2px;
+}

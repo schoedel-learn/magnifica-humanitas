@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -17,11 +18,23 @@ import { Topics } from './collections/Topics'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// Email is wired up ONLY when credentials are actually present.
+//
+// Configuring the adapter with an empty password is worse than leaving it unconfigured: every
+// send would throw, so a password reset would fail loudly instead of falling back to Payload's
+// console adapter (which logs the attempt and keeps the request working). This way the code
+// ships safely and starts sending the moment the credentials land in the environment.
+const emailReady = Boolean(process.env.SMTP_PASS && process.env.EMAIL_FROM)
+
 export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+    meta: {
+      titleSuffix: ' — Magnifica Humanitas',
+      description: 'The editorial desk for the Magnifica Humanitas publication.',
     },
   },
   collections: [Documents, DocParagraphs, Posts, Sources, PostSources, Topics, Media, Users],
@@ -46,5 +59,27 @@ export default buildConfig({
     push: false,
   }),
   sharp,
+  // Transactional mail for password resets. SendGrid's SMTP relay, because the alternative —
+  // a Mailcow mailbox on the publication's domain — would tie password resets to a mailbox
+  // that routes into the helpdesk (support@catholic.work), which is the wrong place for a
+  // reset link to land.
+  ...(emailReady
+    ? {
+        email: nodemailerAdapter({
+          defaultFromAddress: process.env.EMAIL_FROM as string,
+          defaultFromName: 'Magnifica Humanitas',
+          transportOptions: {
+            host: process.env.SMTP_HOST || 'smtp.sendgrid.net',
+            port: Number(process.env.SMTP_PORT || 587),
+            // SendGrid's SMTP username is literally the string "apikey"; the password is the
+            // API key itself.
+            auth: {
+              user: process.env.SMTP_USER || 'apikey',
+              pass: process.env.SMTP_PASS as string,
+            },
+          },
+        }),
+      }
+    : {}),
   plugins: [],
 })
