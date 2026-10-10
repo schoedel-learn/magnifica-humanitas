@@ -27,6 +27,16 @@ export const Sources: CollectionConfig = {
     },
     { name: 'title', type: 'text', required: true },
     { name: 'year', type: 'number' },
+    {
+      name: 'published_on',
+      type: 'date',
+      admin: {
+        description:
+          'The exact publication date when the source publishes one (news, magazine and dated web pages). ' +
+          'APA 7 renders the most specific date available — full date here, otherwise the year. ' +
+          'Do not invent one: if the page carries no date, cite a dated equivalent instead.',
+      },
+    },
     { name: 'publisher', type: 'text' },
     { name: 'journal', type: 'text' },
     { name: 'volume', type: 'text' },

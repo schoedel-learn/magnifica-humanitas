@@ -12,7 +12,7 @@ export const GET: APIRoute = async (context) => {
     title: 'Magnifica Humanitas',
     description:
       'Essays with cited sources on the teaching of Pope Leo XIV.', 
-    site: context.site ?? 'https://magnifica.catholic.work',
+    site: context.site ?? 'https://magnifica.agentesfidei.org',
     items: posts.map((post) => ({
       title: post.title ?? post.slug,
       pubDate: post.published_at ? new Date(post.published_at) : new Date(),

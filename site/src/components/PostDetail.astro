@@ -67,10 +67,10 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
                       href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
                       rel="noopener"
                     >
-                      {formatApa(row)}
+                      <Fragment set:html={formatApa(row)} />
                     </a>
                   ) : (
-                    <span>{formatApa(row)}</span>
+                    <span><Fragment set:html={formatApa(row)} /></span>
                   )}
                 </p>
               </li>

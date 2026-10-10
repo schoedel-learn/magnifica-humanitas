@@ -35,7 +35,7 @@ interface Props {
 
 const { title, description = '', lang = 'en', contentLang } = Astro.props;
 const s = UI[lang];
-const site = Astro.site ?? new URL('https://magnifica.catholic.work');
+const site = Astro.site ?? new URL('https://magnifica.agentesfidei.org');
 const fellBack = contentLang !== undefined && contentLang !== lang;
 
 // hreflang pair: strip a leading /es to get the English path, then re-add it for Spanish.

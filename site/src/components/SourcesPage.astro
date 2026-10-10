@@ -50,10 +50,10 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
                     href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
                     rel="noopener"
                   >
-                    {formatApa(row)}
+                    <Fragment set:html={formatApa(row)} />
                   </a>
                 ) : (
-                  <span>{formatApa(row)}</span>
+                  <span><Fragment set:html={formatApa(row)} /></span>
                 )}
                 {row.verified_on && (
                   <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>

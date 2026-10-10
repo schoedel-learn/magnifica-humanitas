@@ -156,6 +156,7 @@ export type SourceRow = {
   authors: string;
   title: string;
   year: number | null;
+  publishedOn: string | Date | null;
   publisher: string | null;
   journal: string | null;
   volume: string | null;
@@ -168,10 +169,12 @@ export type SourceRow = {
 
 // The bibliography. `sources` has no localized display columns used here, and `year` is
 // numeric in Postgres → cast to int so the citation formatter gets a number (same trap as C3).
+// `published_on` is aliased to the formatter's camelCase field so the APA date element can use
+// the most specific date the source publishes (full date for news/web, else the year).
 export async function listSources(): Promise<SourceRow[]> {
   return query<SourceRow>(
-    `select id, kind, authors, title, year::int as year, publisher, journal, volume,
-            issue, pages, doi, url, verified_on
+    `select id, kind, authors, title, year::int as year, published_on as "publishedOn",
+            publisher, journal, volume, issue, pages, doi, url, verified_on
        from sources
       order by authors asc, year asc nulls last`,
   );
@@ -215,6 +218,8 @@ export type PostSourceRow = {
   locator: string;
   authors: string;
   year: number | null;
+  publishedOn: string | Date | null;
+  kind: string;
   title: string;
   publisher: string | null;
   journal: string | null;
@@ -229,8 +234,8 @@ export type PostSourceRow = {
 // that says where in the source the claim is supported. `year` is numeric → int (C3).
 export async function listSourcesForPost(postId: number): Promise<PostSourceRow[]> {
   return query<PostSourceRow>(
-    `select ps.locator, s.authors, s.year::int as year, s.title, s.publisher, s.journal,
-            s.volume, s.issue, s.pages, s.doi, s.url
+    `select ps.locator, s.authors, s.year::int as year, s.published_on as "publishedOn",
+            s.kind, s.title, s.publisher, s.journal, s.volume, s.issue, s.pages, s.doi, s.url
        from post_sources ps
        join sources s on s.id = ps.source_id
       where ps.post_id = $1
