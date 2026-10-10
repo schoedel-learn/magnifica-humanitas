@@ -277,6 +277,20 @@ const sourceDefs = [
     publisher: 'Libreria Editrice Vaticana',
     url: 'https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20240402_dignitas-infinita_en.html',
   },
+  {
+    // The page spells the exhortation "Dilexi te" throughout (title tag, description and
+    // heading) and closes "Given in Rome ... on 4 October ... in the year 2025". Note the
+    // International Theological Commission document renders it "Dilexit te"; the document's
+    // own page is the authority for the name.
+    key: 'Leo XIV (2025) Dilexi te',
+    kind: 'magisterial',
+    authors: 'Leo XIV',
+    title: 'Apostolic exhortation Dilexi te: On love for the poor',
+    year: 2025,
+    published_on: '2025-10-04',
+    publisher: 'Libreria Editrice Vaticana',
+    url: 'https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html',
+  },
 ] as const
 
 const sourceIds: Record<string, number | string> = {}
