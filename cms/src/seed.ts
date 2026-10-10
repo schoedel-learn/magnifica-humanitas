@@ -248,6 +248,21 @@ const sourceDefs = [
     publisher: 'United States Conference of Catholic Bishops',
     url: 'https://www.usccb.org/magnifica-humanitas',
   },
+  {
+    // Bibliography entry with no essay link yet: the International Theological Commission's
+    // study document on trans- and post-humanism. Publication 4 March 2026 (the page's
+    // eventDate; Leo XIV authorised publication on 9 February 2026) — the Commission's
+    // approval in 2025 is not the publication year.
+    key: 'International Theological Commission (2026) Quo vadis, humanitas?',
+    kind: 'magisterial',
+    authors: 'International Theological Commission',
+    title:
+      'Quo vadis, humanitas? Thinking through Christian anthropology in the face of certain scenarios for the future of humanity',
+    year: 2026,
+    published_on: '2026-03-04',
+    publisher: 'Libreria Editrice Vaticana',
+    url: 'https://www.vatican.va/roman_curia/congregations/cfaith/cti_documents/rc_cti_doc_20260304_quo-vadis-humanits_en.html',
+  },
 ] as const
 
 const sourceIds: Record<string, number | string> = {}
