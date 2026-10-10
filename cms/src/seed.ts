@@ -263,6 +263,20 @@ const sourceDefs = [
     publisher: 'Libreria Editrice Vaticana',
     url: 'https://www.vatican.va/roman_curia/congregations/cfaith/cti_documents/rc_cti_doc_20260304_quo-vadis-humanits_en.html',
   },
+  {
+    // Dated 2 April 2024 on the page (meta eventDate); the Holy Father approved it on
+    // 25 March 2024. The publisher's title is 'Declaration "Dignitas Infinita" on Human
+    // Dignity'; sentence case, and no quotation marks around the inner title, to match the
+    // encyclical entries.
+    key: 'Dicastery for the Doctrine of the Faith (2024) Dignitas infinita',
+    kind: 'magisterial',
+    authors: 'Dicastery for the Doctrine of the Faith',
+    title: 'Declaration Dignitas infinita on human dignity',
+    year: 2024,
+    published_on: '2024-04-02',
+    publisher: 'Libreria Editrice Vaticana',
+    url: 'https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20240402_dignitas-infinita_en.html',
+  },
 ] as const
 
 const sourceIds: Record<string, number | string> = {}
