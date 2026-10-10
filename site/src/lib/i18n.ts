@@ -9,7 +9,7 @@ export type Lang = 'en' | 'es';
 const en = {
   siteName: 'Magnifica Humanitas',
   tagline:
-    'A source-cited publication on the teaching of Pope Leo XIV, with short attributed extracts and a full bibliography.',
+    "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
   documents: 'Documents',
   essays: 'Essays',
   sources: 'Sources',
@@ -44,7 +44,7 @@ const en = {
 const es: typeof en = {
   siteName: 'Magnifica Humanitas',
   tagline:
-    'Una publicación con fuentes citadas sobre la enseñanza del Papa León XIV, con extractos breves atribuidos y una bibliografía completa.',
+    'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
   documents: 'Documentos',
   essays: 'Ensayos',
   sources: 'Fuentes',
