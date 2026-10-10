@@ -57,6 +57,16 @@ This is a house rule on top of APA 7, and it is absolute:
 - **Never infer a date.** A year taken from "the content looks like 2025" is a guess. If a
   year is genuinely the only thing the publisher states, cite the year and record *where*
   that year comes from.
+- **A page's date is not always the work's date — the document wins.** vatican.va carries an
+  `eventDate` that is sometimes the date the HTML version was posted (it matches the URL
+  slug). Worked example: the *Compendium of the Social Doctrine of the Church* page says
+  `2006-05-26`, but the work is **2004** — its approval decree is dated 2 April 2004 and its
+  presentation letter is headed "From the Vatican, 29 June 2004". Where the document's own
+  signing, approval or presentation date disagrees with the page's `eventDate`, cite the
+  document, and leave `published_on` empty rather than write a posting date into a
+  publication-date field. Same trap in reverse: a remembered year can be the *approval* year
+  while the publication year differs (the International Theological Commission's *Quo vadis,
+  humanitas?* was approved in 2025 and published 4 March 2026).
 
 ## 3. One entry per in-text citation, and the reverse
 
