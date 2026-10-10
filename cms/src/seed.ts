@@ -291,6 +291,21 @@ const sourceDefs = [
     publisher: 'Libreria Editrice Vaticana',
     url: 'https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html',
   },
+  {
+    // Year is 2004, not the page's eventDate: the approval decree is dated 2 April 2004
+    // (Memorial of Saint Francis of Paola) and the presentation letter is headed "From the
+    // Vatican, 29 June 2004". The page's own eventDate of 2006-05-26 — the same date as the
+    // URL slug — is when this HTML version was posted, so published_on is deliberately left
+    // empty rather than record a web-posting date as the work's publication date.
+    key: 'Pontifical Council for Justice and Peace (2004) Compendium',
+    kind: 'magisterial',
+    authors: 'Pontifical Council for Justice and Peace',
+    title: 'Compendium of the social doctrine of the Church',
+    year: 2004,
+    published_on: null,
+    publisher: 'Libreria Editrice Vaticana',
+    url: 'https://www.vatican.va/roman_curia/pontifical_councils/justpeace/documents/rc_pc_justpeace_doc_20060526_compendio-dott-soc_en.html',
+  },
 ] as const
 
 const sourceIds: Record<string, number | string> = {}
