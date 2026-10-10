@@ -6,7 +6,7 @@
 // a chain of arbitrary-variant utilities here, so the essay body has one source of truth.
 import Base from '../layouts/Base.astro';
 import { getPostBySlug, listSourcesForPost } from '../lib/content';
-import { formatApa } from '../lib/citations';
+import { apaLocator, formatApa } from '../lib/citations';
 import { UI, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
@@ -57,24 +57,29 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
         <section class="mt-16 border-t border-slate pt-6">
           <h2 class={`section-label ${metaLabel}`}>{s.sourcesForEssay}</h2>
           <ul class="mt-5 space-y-5 text-[0.9375rem]">
-            {sources.map((row) => (
+            {sources.map((row) => {
+              const loc = apaLocator(row);
+              return (
               <li>
                 <p class={metaLabel}>{row.locator}</p>
                 <p class="mt-1 leading-relaxed">
-                  {row.doi || row.url ? (
-                    <a
-                      class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
-                      href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
-                      rel="noopener"
-                    >
-                      <Fragment set:html={formatApa(row)} />
-                    </a>
-                  ) : (
-                    <span><Fragment set:html={formatApa(row)} /></span>
+                  <Fragment set:html={formatApa(row)} />
+                  {loc && (
+                    <>
+                      {' '}
+                      <a
+                        class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
+                        href={loc.href}
+                        rel="noopener"
+                      >
+                        {loc.label}
+                      </a>
+                    </>
                   )}
                 </p>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
       )

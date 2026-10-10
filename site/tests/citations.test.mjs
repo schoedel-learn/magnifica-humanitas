@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cite, formatApa } from '../src/lib/citations.ts';
+import { apaLocator, cite, formatApa } from '../src/lib/citations.ts';
 
 test('cite formats a paragraph citation', () => {
   assert.equal(cite('MH', 12), 'MH 12');
@@ -14,30 +14,38 @@ test('cite rejects a blank abbreviation', () => {
   assert.throws(() => cite('  ', 3), /abbreviation/);
 });
 
-// formatApa returns HTML, not plain text: <em> is how a standalone title is distinguished from
-// a periodical name, so every expectation below carries the tag. Asserting a bare title is what
-// made this file red against the implementation it was meant to guard.
+// formatApa returns the entry WITHOUT its locator: the URL or DOI comes back from apaLocator()
+// so the component can link just it. Wrapping the whole entry in the anchor underlined the
+// author, date and title too — see the tests at the bottom of this file.
 test('formatApa builds a journal citation with DOI', () => {
-  assert.equal(
-    formatApa({
-      authors: 'Smith, J.',
-      year: 2021,
-      title: 'A study',
-      journal: 'J. Things',
-      volume: '4',
-      issue: '2',
-      pages: '11-29',
-      doi: '10.1000/xyz',
-    }),
-    'Smith, J. (2021). A study. <em>J. Things, 4(2)</em>, 11-29. https://doi.org/10.1000/xyz',
-  );
+  const row = {
+    authors: 'Smith, J.',
+    year: 2021,
+    title: 'A study',
+    journal: 'J. Things',
+    volume: '4',
+    issue: '2',
+    pages: '11-29',
+    doi: '10.1000/xyz',
+  };
+  assert.equal(formatApa(row), 'Smith, J. (2021). A study. <em>J. Things, 4(2)</em>, 11-29.');
+  assert.deepEqual(apaLocator(row), {
+    href: 'https://doi.org/10.1000/xyz',
+    label: 'https://doi.org/10.1000/xyz',
+  });
 });
 
-test('formatApa italicises a standalone title and omits the DOI link when absent', () => {
-  assert.equal(
-    formatApa({ authors: 'Doe, A.', year: 1999, title: 'A book', publisher: 'Publish Co' }),
-    'Doe, A. (1999). <em>A book</em>. Publish Co.',
-  );
+test('formatApa italicises a standalone title and reports no locator when there is no URL', () => {
+  const row = { authors: 'Doe, A.', year: 1999, title: 'A book', publisher: 'Publish Co' };
+  assert.equal(formatApa(row), 'Doe, A. (1999). <em>A book</em>. Publish Co.');
+  assert.equal(apaLocator(row), null);
+});
+
+test('apaLocator prefers the DOI over the URL when a row somehow has both', () => {
+  assert.deepEqual(apaLocator({ authors: 'Doe, A.', title: 'A', doi: '10.1/x', url: 'https://e.com/a' }), {
+    href: 'https://doi.org/10.1/x',
+    label: 'https://doi.org/10.1/x',
+  });
 });
 
 test('formatApa prints an edition after the title, outside the italics', () => {
@@ -77,16 +85,21 @@ test('formatApa omits the publisher when it repeats the author', () => {
 // A work with no author — a Bible, a dictionary. APA 7 moves the title into the author position;
 // printing an empty author element, or the title twice, are both wrong.
 test('formatApa puts the title in the author position when there is no author', () => {
+  const row = {
+    authors: '',
+    year: 2011,
+    title: 'New American Bible, revised edition',
+    publisher: 'United States Conference of Catholic Bishops',
+    url: 'https://www.usccb.org/offices/new-american-bible/books-bible',
+  };
   assert.equal(
-    formatApa({
-      authors: '',
-      year: 2011,
-      title: 'New American Bible, revised edition',
-      publisher: 'United States Conference of Catholic Bishops',
-      url: 'https://www.usccb.org/offices/new-american-bible/books-bible',
-    }),
-    '<em>New American Bible, revised edition</em>. (2011). United States Conference of Catholic Bishops. https://www.usccb.org/offices/new-american-bible/books-bible',
+    formatApa(row),
+    '<em>New American Bible, revised edition</em>. (2011). United States Conference of Catholic Bishops.',
   );
+  assert.deepEqual(apaLocator(row), {
+    href: 'https://www.usccb.org/offices/new-american-bible/books-bible',
+    label: 'https://www.usccb.org/offices/new-american-bible/books-bible',
+  });
 });
 
 test('formatApa treats a null author the same as a blank one, and still prints the publisher', () => {

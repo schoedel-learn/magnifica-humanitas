@@ -78,10 +78,14 @@ export function apaDate(s: ApaSource): string {
 }
 
 /**
- * One bibliography entry, APA 7. Two shapes, chosen by whether the entry has a periodical:
+ * One bibliography entry, APA 7, WITHOUT its locator. Two shapes, chosen by whether the entry
+ * has a periodical:
  *
- *   periodical : Authors. (Year, Month Day). Article title. <em>Journal, vol</em>(iss), pages. URL
- *   standalone : Authors. (Date). <em>Title</em>. Publisher/Site. URL
+ *   periodical : Authors. (Year, Month Day). Article title. <em>Journal, vol</em>(iss), pages.
+ *   standalone : Authors. (Date). <em>Title</em>. Publisher/Site.
+ *
+ * The URL or DOI is not part of this string — call `apaLocator()` and render it as its own
+ * link, so that only the locator carries an underline.
  *
  * A work with no author — a Bible, a dictionary — prints its TITLE in the author position
  * instead of an empty author element (`<em>Title</em>. (Date). Publisher. URL`), which is why
@@ -106,12 +110,9 @@ export function formatApa(s: ApaSource): string {
     const iss = s.issue ? `(${s.issue})` : '';
     const locator = vol || iss ? `, ${vol}${iss}` : '';
     const pages = s.pages ? `, ${s.pages}` : '';
-    let out = authors
+    return authors
       ? `${authors} (${date}). ${title}${edition}. <em>${journal}${locator}</em>${pages}.`
       : `${title}${edition}. (${date}). <em>${journal}${locator}</em>${pages}.`;
-    if (s.doi) out += ` https://doi.org/${s.doi}`;
-    else if (s.url) out += ` ${s.url}`;
-    return out;
   }
 
   let out = authors
@@ -122,7 +123,23 @@ export function formatApa(s: ApaSource): string {
   if (publisher && publisher.toLowerCase() !== rawAuthors.toLowerCase()) {
     out += ` ${esc(trimPeriod(publisher))}.`;
   }
-  if (s.doi) out += ` https://doi.org/${s.doi}`;
-  else if (s.url) out += ` ${s.url}`;
   return out;
+}
+
+/**
+ * The APA 7 locator — the DOI in URL form when there is one, otherwise the URL — returned
+ * separately so the caller can link just it.
+ *
+ * This split is presentational and correctness at once. The entry text and the link are not the
+ * same element: the components used to wrap the whole formatted entry in an `<a>`, which
+ * underlined the author, the date and the title along with the URL. Only the URL is a link
+ * here, so only the URL is underlined.
+ */
+export function apaLocator(s: ApaSource): { href: string; label: string } | null {
+  if (s.doi) {
+    const href = `https://doi.org/${s.doi}`;
+    return { href, label: href };
+  }
+  if (s.url) return { href: s.url, label: s.url };
+  return null;
 }

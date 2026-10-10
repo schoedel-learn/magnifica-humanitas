@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { listSources } from '../lib/content';
-import { formatApa } from '../lib/citations';
+import { apaLocator, formatApa } from '../lib/citations';
 import { UI, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
@@ -42,18 +42,22 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
         <section class="mt-12 border-t border-slate pt-8">
           <h2 class={`section-label ${metaLabel}`}>{group.kind}</h2>
           <ul class="mt-5 space-y-5 text-[0.9375rem]">
-            {group.rows.map((row) => (
+            {group.rows.map((row) => {
+              const loc = apaLocator(row);
+              return (
               <li class="leading-relaxed">
-                {row.doi || row.url ? (
-                  <a
-                    class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
-                    href={row.doi ? `https://doi.org/${row.doi}` : row.url!}
-                    rel="noopener"
-                  >
-                    <Fragment set:html={formatApa(row)} />
-                  </a>
-                ) : (
-                  <span><Fragment set:html={formatApa(row)} /></span>
+                <Fragment set:html={formatApa(row)} />
+                {loc && (
+                  <>
+                    {' '}
+                    <a
+                      class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
+                      href={loc.href}
+                      rel="noopener"
+                    >
+                      {loc.label}
+                    </a>
+                  </>
                 )}
                 {row.verified_on && (
                   <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>
@@ -61,7 +65,8 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
                   </span>
                 )}
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
       ))

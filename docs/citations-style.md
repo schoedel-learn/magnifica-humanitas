@@ -42,6 +42,11 @@ Consequences that follow from this and are easy to get wrong:
 - **Italics are not decoration.** They distinguish a standalone work's title from a
   periodical's name. They are why `formatApa()` returns HTML (escaped, with `<em>` as the
   only tag it writes) and why the components render it with `set:html`.
+- **Only the URL is a link, so only the URL is underlined.** The entry text and its locator are
+  two different elements: `formatApa()` returns the entry *without* the locator and
+  `apaLocator()` returns the link, which is why no component wraps a whole entry in an `<a>`.
+  Underlining the author, the date and the title along with the URL is the tell that this split
+  has been undone.
 - **Never repeat the author as the publisher.** APA 7 omits the publisher/site when it is the
   same as the author. A USCCB page authored by the USCCB prints the body once.
 - **An edition is not part of the title.** APA 7 prints the edition statement in parentheses
