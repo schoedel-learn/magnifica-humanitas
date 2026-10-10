@@ -7,7 +7,11 @@ export function cite(abbreviation: string, paragraph: number): string {
 }
 
 export type ApaSource = {
-  authors: string;
+  /**
+   * Blank or absent for a work with no author (a Bible, a dictionary). APA 7 then moves the
+   * title into the author position rather than leaving an empty author element.
+   */
+  authors?: string | null;
   year?: number | null;
   /** Full publication date where the source publishes one; wins over `year`. */
   publishedOn?: string | Date | null;
@@ -79,11 +83,16 @@ export function apaDate(s: ApaSource): string {
  *   periodical : Authors. (Year, Month Day). Article title. <em>Journal, vol</em>(iss), pages. URL
  *   standalone : Authors. (Date). <em>Title</em>. Publisher/Site. URL
  *
+ * A work with no author — a Bible, a dictionary — prints its TITLE in the author position
+ * instead of an empty author element (`<em>Title</em>. (Date). Publisher. URL`), which is why
+ * a blank `authors` is meaningful here and not a missing value to be patched over.
+ *
  * APA 7 omits the publisher or site name when it is the same as the author, so a page whose
  * author IS the site prints once, not twice.
  */
 export function formatApa(s: ApaSource): string {
-  const authors = esc(s.authors.trim());
+  const rawAuthors = (s.authors ?? '').trim();
+  const authors = rawAuthors ? esc(rawAuthors) : '';
   const date = apaDate(s);
   const title = esc(trimPeriod(s.title));
   // No trimPeriod() here: the period in an abbreviation like "2nd ed." belongs to the
@@ -97,15 +106,20 @@ export function formatApa(s: ApaSource): string {
     const iss = s.issue ? `(${s.issue})` : '';
     const locator = vol || iss ? `, ${vol}${iss}` : '';
     const pages = s.pages ? `, ${s.pages}` : '';
-    let out = `${authors} (${date}). ${title}${edition}. <em>${journal}${locator}</em>${pages}.`;
+    let out = authors
+      ? `${authors} (${date}). ${title}${edition}. <em>${journal}${locator}</em>${pages}.`
+      : `${title}${edition}. (${date}). <em>${journal}${locator}</em>${pages}.`;
     if (s.doi) out += ` https://doi.org/${s.doi}`;
     else if (s.url) out += ` ${s.url}`;
     return out;
   }
 
-  let out = `${authors} (${date}). <em>${title}</em>${edition}.`;
+  let out = authors
+    ? `${authors} (${date}). <em>${title}</em>${edition}.`
+    : `<em>${title}</em>${edition}. (${date}).`;
   const publisher = s.publisher ? s.publisher.trim() : '';
-  if (publisher && publisher.toLowerCase() !== s.authors.trim().toLowerCase()) {
+  // rawAuthors, not `authors`: the escaped form would never match a raw publisher string.
+  if (publisher && publisher.toLowerCase() !== rawAuthors.toLowerCase()) {
     out += ` ${esc(trimPeriod(publisher))}.`;
   }
   if (s.doi) out += ` https://doi.org/${s.doi}`;

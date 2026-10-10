@@ -331,6 +331,23 @@ const sourceDefs = [
     publisher: 'Libreria Editrice Vaticana',
     url: 'https://www.vatican.va/archive/ENG0015/_INDEX.HTM',
   },
+  {
+    // The translation, not the URL it arrived under. USCCB's "Books of the Bible" page is a
+    // table of contents — 1,403 links to chapter pages — and its only date is the site-wide
+    // ©2026 footer, which cannot date the work. The 2011 year is USCCB's own: its "Revised
+    // Edition Information" page opens "Releasing in March 2011:" and lists the 2011 printings.
+    // Left with no author on purpose: APA 7 moves the title into the author position, so the
+    // entry reads "New American Bible, revised edition. (2011)." rather than inventing one.
+    key: 'New American Bible (2011) NABRE',
+    kind: 'book',
+    authors: '',
+    title: 'New American Bible, revised edition',
+    year: 2011,
+    published_on: null,
+    edition: null,
+    publisher: 'United States Conference of Catholic Bishops',
+    url: 'https://www.usccb.org/offices/new-american-bible/books-bible',
+  },
 ] as const
 
 const sourceIds: Record<string, number | string> = {}

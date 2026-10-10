@@ -25,6 +25,18 @@ Authors. (Date). Title in italics. Publisher or site name. URL
 Authors. (Date). Article title in plain text. Journal in italics, volume(issue), pages. URL
 ```
 
+**Work with no author** (a Bible, a dictionary) — the title takes the author position
+
+```
+Title in italics (ed.). (Year). Publisher or site name. URL
+```
+
+A blank `authors` is the switch for the third shape, and it is meaningful, not missing data:
+printing an empty author element, or printing the title twice (once where the author goes and
+once where the title goes), are both wrong. Worked example: the New American Bible, revised
+edition is cited `<em>New American Bible, revised edition</em>. (2011). United States
+Conference of Catholic Bishops. URL`.
+
 Consequences that follow from this and are easy to get wrong:
 
 - **Italics are not decoration.** They distinguish a standalone work's title from a
@@ -61,7 +73,10 @@ This is a house rule on top of APA 7, and it is absolute:
   null is correct for a document cited by year; it is not a gap to fill with a guess.
 - **If a page genuinely carries no date, change the source rather than the style.** Cite a
   dated equivalent from the same publisher (a news release instead of a landing page, a
-  dated bulletin instead of an index). Say so in the change note.
+  dated bulletin instead of an index). Say so in the change note. The corollary, learned from
+  the New American Bible: a contents or index page can still serve as the **locator** when the
+  work itself is dated from the publisher's own page — what it must never be is the thing that
+  supplies the date.
 - **Never infer a date.** A year taken from "the content looks like 2025" is a guess. If a
   year is genuinely the only thing the publisher states, cite the year and record *where*
   that year comes from.
@@ -93,7 +108,7 @@ confirmed the citation resolves and the metadata matches. Leave it empty until t
 
 | Field | Feeds | Notes |
 | --- | --- | --- |
-| `authors` | entry start | APA 7 order. `Piro, I.`; a body as author: `United States Conference of Catholic Bishops`. Free text for v1. |
+| `authors` | entry start | APA 7 order. `Piro, I.`; a body as author: `United States Conference of Catholic Bishops`. Free text for v1. **Blank means the work has no author**, which moves the title into the author position (a Bible, a dictionary). |
 | `year` | Date element | The year, whenever known. Required in practice. |
 | `published_on` | Date element for dated article/web kinds | Full date; only when the publisher states one. |
 | `kind` | Grouping on `/sources/`, date rule | `magisterial`, `book`, `journal-article`, `chapter`, `web`, `magazine`, `thesis`. |

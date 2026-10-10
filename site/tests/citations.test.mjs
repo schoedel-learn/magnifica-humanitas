@@ -73,3 +73,25 @@ test('formatApa omits the publisher when it repeats the author', () => {
     'United States Conference of Catholic Bishops (2026). <em>Magnifica Humanitas</em>.',
   );
 });
+
+// A work with no author — a Bible, a dictionary. APA 7 moves the title into the author position;
+// printing an empty author element, or the title twice, are both wrong.
+test('formatApa puts the title in the author position when there is no author', () => {
+  assert.equal(
+    formatApa({
+      authors: '',
+      year: 2011,
+      title: 'New American Bible, revised edition',
+      publisher: 'United States Conference of Catholic Bishops',
+      url: 'https://www.usccb.org/offices/new-american-bible/books-bible',
+    }),
+    '<em>New American Bible, revised edition</em>. (2011). United States Conference of Catholic Bishops. https://www.usccb.org/offices/new-american-bible/books-bible',
+  );
+});
+
+test('formatApa treats a null author the same as a blank one, and still prints the publisher', () => {
+  assert.equal(
+    formatApa({ authors: null, year: 2004, title: 'The Qur\u2019an', publisher: 'Oxford University Press' }),
+    '<em>The Qur\u2019an</em>. (2004). Oxford University Press.',
+  );
+});
