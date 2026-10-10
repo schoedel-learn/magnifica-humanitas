@@ -36,7 +36,7 @@ const en = {
   switchLabel: 'ES',
   switchHreflang: 'es',
   footerNote:
-    'A publication of Agentes Fidei. Agentes Fidei, in the biblical image of the Book of Nehemiah, is dedicated to a rejection of the Babylonian temptation in ours and every age and, in the image of the Book of Nehemiah the building of the New Jerusalem.',
+    'A publication of Agentes Fidei. Agentes Fidei, in the biblical image of the Book of Nehemiah, is dedicated to a rejection of the Babylonian temptation in ours and every age and the building of the New Jerusalem.',
 };
 
 // `typeof en` keeps the two languages structurally identical: adding a string to one
@@ -68,7 +68,7 @@ const es: typeof en = {
   switchLabel: 'EN',
   switchHreflang: 'en',
   footerNote:
-    'Una publicación de Agentes Fidei. Agentes Fidei, en la imagen bíblica del Libro de Nehemías, se dedica al rechazo de la tentación babilónica en la nuestra y en toda época y, a imagen del Libro de Nehemías, a la edificación de la Nueva Jerusalén.',
+    'Una publicación de Agentes Fidei. Agentes Fidei, en la imagen bíblica del Libro de Nehemías, se dedica al rechazo de la tentación babilónica en la nuestra y en toda época y a la edificación de la Nueva Jerusalén.',
 };
 
 export const UI: Record<Lang, typeof en> = { en, es };
