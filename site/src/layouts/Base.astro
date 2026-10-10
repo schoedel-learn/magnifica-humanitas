@@ -72,6 +72,13 @@ const navLink =
       title={s.siteName}
       href={new URL('/rss.xml', site)}
     />
+    <!-- Icons, generated from ops/brand/agentes-fidei-icon.png by scripts/build-favicons.mjs.
+         The .ico carries 16/32/48; the PNG is declared for browsers that prefer it over the
+         container. There is deliberately no SVG: the master is raster, so an SVG would be a
+         trace, not the design. -->
+    <link rel="icon" href={new URL('/favicon.ico', site)} sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" href={new URL('/favicon-32.png', site)} sizes="32x32" />
+    <link rel="apple-touch-icon" href={new URL('/apple-touch-icon.png', site)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
