@@ -157,6 +157,7 @@ export type SourceRow = {
   title: string;
   year: number | null;
   publishedOn: string | Date | null;
+  edition: string | null;
   publisher: string | null;
   journal: string | null;
   volume: string | null;
@@ -173,7 +174,7 @@ export type SourceRow = {
 // the most specific date the source publishes (full date for news/web, else the year).
 export async function listSources(): Promise<SourceRow[]> {
   return query<SourceRow>(
-    `select id, kind, authors, title, year::int as year, published_on as "publishedOn",
+    `select id, kind, authors, title, year::int as year, published_on as "publishedOn", edition,
             publisher, journal, volume, issue, pages, doi, url, verified_on
        from sources
       order by authors asc, year asc nulls last`,
@@ -221,6 +222,7 @@ export type PostSourceRow = {
   publishedOn: string | Date | null;
   kind: string;
   title: string;
+  edition: string | null;
   publisher: string | null;
   journal: string | null;
   volume: string | null;
@@ -235,7 +237,7 @@ export type PostSourceRow = {
 export async function listSourcesForPost(postId: number): Promise<PostSourceRow[]> {
   return query<PostSourceRow>(
     `select ps.locator, s.authors, s.year::int as year, s.published_on as "publishedOn",
-            s.kind, s.title, s.publisher, s.journal, s.volume, s.issue, s.pages, s.doi, s.url
+            s.kind, s.title, s.edition, s.publisher, s.journal, s.volume, s.issue, s.pages, s.doi, s.url
        from post_sources ps
        join sources s on s.id = ps.source_id
       where ps.post_id = $1

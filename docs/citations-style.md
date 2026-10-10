@@ -32,6 +32,14 @@ Consequences that follow from this and are easy to get wrong:
   only tag it writes) and why the components render it with `set:html`.
 - **Never repeat the author as the publisher.** APA 7 omits the publisher/site when it is the
   same as the author. A USCCB page authored by the USCCB prints the body once.
+- **An edition is not part of the title.** APA 7 prints the edition statement in parentheses
+  straight after the title and *outside* the italics — `Catechism of the Catholic Church
+  (2nd ed.).` It therefore lives in its own `edition` column; folding it into `title` would
+  drag it into the italic span, which is exactly where a bibliography stops looking precise.
+- **Cite the edition actually being cited, and name it in the change note.** The Catechism of
+  the Catholic Church is the worked example: the first English edition is 1994 and the revised
+  second edition is 1997, and the two read differently at points where the doctrine itself
+  developed — so a bare "Catechism of the Catholic Church" is not a complete reference.
 - **Sentence case for titles**, as the publisher wrote them. Proper nouns, document names and
   titles of works inside a title keep their capitals.
 - **No trailing period after a URL or DOI**, and a period after the publisher/container.
@@ -89,7 +97,8 @@ confirmed the citation resolves and the metadata matches. Leave it empty until t
 | `year` | Date element | The year, whenever known. Required in practice. |
 | `published_on` | Date element for dated article/web kinds | Full date; only when the publisher states one. |
 | `kind` | Grouping on `/sources/`, date rule | `magisterial`, `book`, `journal-article`, `chapter`, `web`, `magazine`, `thesis`. |
-| `title` | Italic span (standalone) or plain span (periodical) | Sentence case. No trailing date — the date is the Date element. |
+| `title` | Italic span (standalone) or plain span (periodical) | Sentence case. No trailing date — the date is the Date element. No edition statement — that is `edition`. |
+| `edition` | Straight after the title, outside the italics | No parentheses in the stored value: store `2nd ed.`, APA 7 adds the brackets. |
 | `publisher` | Standalone entries | Omitted automatically when identical to `authors`. |
 | `journal`/`volume`/`issue`/`pages` | Periodical entries | Presence of `journal` selects the periodical shape. |
 | `doi` | Preferred locator | Bare DOI, no `https://doi.org/` prefix. Rendered as the full https URL. |
@@ -101,7 +110,8 @@ confirmed the citation resolves and the metadata matches. Leave it empty until t
 1. The URL resolves, and the entry is built from the page itself, not from memory.
 2. The date is the publisher's own, and it is the most specific one the page states.
 3. `n.d.` appears nowhere in the rendered bibliography.
-4. The title has no trailing date and is in sentence case.
+4. The title has no trailing date and is in sentence case, and any edition statement is in
+   `edition`, not in the title.
 5. The publisher is not a repeat of the author.
 6. Every in-text citation for this source uses the same year.
 7. `verified_on` is set only if step 1 actually happened today.

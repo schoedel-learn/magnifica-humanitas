@@ -26,6 +26,14 @@ export const Sources: CollectionConfig = {
       },
     },
     { name: 'title', type: 'text', required: true },
+    {
+      name: 'edition',
+      type: 'text',
+      admin: {
+        description:
+          "Edition statement without parentheses, e.g. 2nd ed. Printed after the title and outside the italics, per APA 7.",
+      },
+    },
     { name: 'year', type: 'number' },
     {
       name: 'published_on',

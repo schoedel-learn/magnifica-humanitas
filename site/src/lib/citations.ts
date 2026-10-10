@@ -14,6 +14,12 @@ export type ApaSource = {
   /** Source kind, so the date element follows the APA 7 rule for that type. */
   kind?: string | null;
   title: string;
+  /**
+   * Edition statement without the parentheses, e.g. `2nd ed.`. APA 7 prints it straight
+   * after the title and *outside* the italics, which is why it is its own field rather than
+   * being folded into `title` — folding it in would italicise it.
+   */
+  edition?: string | null;
   publisher?: string | null;
   journal?: string | null;
   volume?: string | null;
@@ -80,6 +86,10 @@ export function formatApa(s: ApaSource): string {
   const authors = esc(s.authors.trim());
   const date = apaDate(s);
   const title = esc(trimPeriod(s.title));
+  // No trimPeriod() here: the period in an abbreviation like "2nd ed." belongs to the
+  // abbreviation, and stripping it prints "(2nd ed)" — the sentence period is added after the
+  // closing bracket by the templates below.
+  const edition = s.edition ? ` (${esc(s.edition.trim())})` : '';
 
   const journal = s.journal ? esc(s.journal.trim()) : '';
   if (journal) {
@@ -87,13 +97,13 @@ export function formatApa(s: ApaSource): string {
     const iss = s.issue ? `(${s.issue})` : '';
     const locator = vol || iss ? `, ${vol}${iss}` : '';
     const pages = s.pages ? `, ${s.pages}` : '';
-    let out = `${authors} (${date}). ${title}. <em>${journal}${locator}</em>${pages}.`;
+    let out = `${authors} (${date}). ${title}${edition}. <em>${journal}${locator}</em>${pages}.`;
     if (s.doi) out += ` https://doi.org/${s.doi}`;
     else if (s.url) out += ` ${s.url}`;
     return out;
   }
 
-  let out = `${authors} (${date}). <em>${title}</em>.`;
+  let out = `${authors} (${date}). <em>${title}</em>${edition}.`;
   const publisher = s.publisher ? s.publisher.trim() : '';
   if (publisher && publisher.toLowerCase() !== s.authors.trim().toLowerCase()) {
     out += ` ${esc(trimPeriod(publisher))}.`;
