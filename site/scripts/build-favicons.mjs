@@ -5,18 +5,27 @@
  *   cd site && node scripts/build-favicons.mjs
  *
  * Why a script rather than a one-off conversion: the master is a single raster PNG and the set
- * has to stay consistent with it. Re-run this after replacing the master (bump SRC's file if the
- * name changes) and every size is rebuilt from the same source with the same sampling.
+ * has to stay consistent with it. Re-run this after replacing the master and every size is
+ * rebuilt from the same source with the same geometry.
+ *
+ * WHY THE MARK IS CROPPED. The master's artwork is portrait — 36x50 inside a 50x50 canvas, its
+ * rays reaching the top edge and a thin stem leaving the bottom. Scaled to fit inside a SQUARE
+ * favicon it therefore filled the full height but only 72% of the width, which is what made it
+ * read as a small smudge in a browser tab. So the art is trimmed to its own bounding box and
+ * scaled until its WIDTH fills FILL of the canvas, then cropped to a square around the centre:
+ * the chalice, the host and the body of the rays now fill the icon, and what leaves the frame is
+ * the ends of the extremities — the tall thin centre ray above and the stem below, both of which
+ * the master already bleeds off its own edges. Lower FILL to bring the extremities back.
  *
  * The .ico is assembled here by hand because sharp cannot write the ICO container. The format
  * allows PNG payloads (valid in every browser that ran after Vista), so each size is resized
  * once and embedded as-is.
  *
- * SIZE CEILING: the master is 50x50 — the largest that exists. 16/32/48 are downscales and stay
- * crisp. apple-touch-icon at 180 is a 3.6x upscale and reads soft on a phone home screen; supply
- * a master of 512px or more and re-run to fix it.
+ * SIZE CEILING: the master is 50x50 — the largest that exists. After the crop its artwork is
+ * 36px wide, so 16/32 stay crisp and 48 and the 180px touch icon are upscales that read soft.
+ * A master of 512px or more would fix that; nothing else in this file would change.
  *
- * GROUND: the icon is drawn for a dark background — its rays are cream, so on a white tab bar
+ * GROUND: the mark is drawn for a dark background — its rays are cream, so on a white tab bar
  * they nearly disappear. iOS renders a transparent home-screen icon on black, so the touch icon
  * is flattened onto the site's own theme colour instead, the same #252525 Base.astro declares.
  */
@@ -30,21 +39,68 @@ const SRC = path.resolve(here, '../../ops/brand/agentes-fidei-icon.png');
 const OUT = path.resolve(here, '../public');
 const TOUCH_BG = '#252525';
 const ICO_SIZES = [16, 32, 48];
+const ALPHA_FLOOR = 8; // ignore the near-invisible edge pixels when finding the art
+const FILL = 0.96; // share of the canvas width the artwork occupies after cropping
 
 const master = await readFile(SRC);
 await mkdir(OUT, { recursive: true });
 
-function png(size, flattenTo) {
-  let img = sharp(master).resize(size, size, { fit: 'contain' });
-  if (flattenTo) img = img.flatten({ background: flattenTo });
-  return img.png({ compressionLevel: 9 }).toBuffer();
+// Locate the artwork ourselves rather than with sharp's trim(): trim keys off the corner pixel
+// and is unreliable for an alpha-only border, and this also lets FILL be reasoned about exactly.
+async function artBox(buf) {
+  const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width: w, height: h, channels: c } = info;
+  let minX = w, minY = h, maxX = -1, maxY = -1;
+  for (let y = 0; y < h; y += 1) {
+    for (let x = 0; x < w; x += 1) {
+      if (data[(y * w + x) * c + 3] > ALPHA_FLOOR) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  if (maxX < 0) throw new Error(`${SRC} appears to be fully transparent`);
+  return { left: minX, top: minY, width: maxX - minX + 1, height: maxY - minY + 1 };
 }
 
-await writeFile(path.join(OUT, 'favicon-32.png'), await png(32));
-await writeFile(path.join(OUT, 'apple-touch-icon.png'), await png(180, TOUCH_BG));
+const box = await artBox(master);
+const trimmed = await sharp(master).extract(box).png().toBuffer();
+
+async function render(size, flattenTo) {
+  // 1. scale the trimmed art so its width is FILL of the canvas
+  const targetW = Math.max(1, Math.round(size * FILL));
+  const scaled = await sharp(trimmed).resize({ width: targetW }).png().toBuffer();
+  const { height: scaledH } = await sharp(scaled).metadata();
+
+  // 2. crop the overflow to a square of targetW, centred: the extremities leave the frame evenly
+  const side = Math.min(targetW, scaledH);
+  const top = Math.max(0, Math.round((scaledH - side) / 2));
+  const cropped = await sharp(scaled)
+    .extract({ left: 0, top, width: side, height: side })
+    .png()
+    .toBuffer();
+
+  // 3. pad back to the exact canvas (transparent), then optionally flatten for the touch icon
+  const pad = Math.max(0, Math.round((size - side) / 2));
+  const right = Math.max(0, size - side - pad);
+  let out = sharp(cropped).extend({
+    top: pad,
+    bottom: right,
+    left: pad,
+    right,
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
+  });
+  if (flattenTo) out = out.flatten({ background: flattenTo });
+  return out.png({ compressionLevel: 9 }).toBuffer();
+}
+
+await writeFile(path.join(OUT, 'favicon-32.png'), await render(32));
+await writeFile(path.join(OUT, 'apple-touch-icon.png'), await render(180, TOUCH_BG));
 
 const entries = [];
-for (const size of ICO_SIZES) entries.push({ size, buf: await png(size) });
+for (const size of ICO_SIZES) entries.push({ size, buf: await render(size) });
 
 const header = Buffer.alloc(6);
 header.writeUInt16LE(0, 0); // reserved
@@ -72,4 +128,7 @@ await writeFile(
   Buffer.concat([header, ...dir, ...entries.map((e) => e.buf)]),
 );
 
-console.log(`wrote favicon.ico (${ICO_SIZES.join(', ')}), favicon-32.png, apple-touch-icon.png on ${TOUCH_BG}`);
+console.log(
+  `art ${box.width}x${box.height} in ${box.left},${box.top} · fill ${FILL} · ` +
+    `wrote favicon.ico (${ICO_SIZES.join(', ')}), favicon-32.png, apple-touch-icon.png on ${TOUCH_BG}`,
+);
