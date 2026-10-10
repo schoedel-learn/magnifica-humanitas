@@ -98,8 +98,10 @@ const navLink =
         >
           {s.siteName}
         </a>
-        <a href={p('/documents/')} class={navLink}>{s.documents}</a>
+        <!-- Essays lead the menu: the Documents section is not writing of our own but a
+             selection of quoted passages with a note on each, so the essays come first. -->
         <a href={p('/posts/')} class={navLink}>{s.essays}</a>
+        <a href={p('/documents/')} class={navLink}>{s.documents}</a>
         <a href={p('/sources/')} class={navLink}>{s.sources}</a>
         <a
           href={lang === 'es' ? enHref : esHref}
