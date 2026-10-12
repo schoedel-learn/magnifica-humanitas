@@ -1,0 +1,19 @@
+# Reference 58 of the addiction-and-dignity essay's list.
+id: "powell-2007-wrestling-satan-conquering"
+kind: "journal-article"
+authors: "Powell, T."
+title: "Wrestling Satan and Conquering Dopamine: Addiction and Free Will"
+journal: "The American Journal of Bioethics"
+year: 2007
+volume: "7"
+issue: "1"
+pages: "14–15"
+doi: "10.1080/15265160601064017"
+tags: ["addiction"]
+tags_inferred: ["agency", "bioethics"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Addiction and free will in the bioethics literature."
+to_verify:
+  - "volume, issue and page range as printed"

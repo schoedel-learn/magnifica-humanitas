@@ -1,0 +1,15 @@
+# Kateb — Human dignity. Reference 9.
+id: "kateb-2011-human-dignity"
+kind: "book"
+authors: "Kateb, G."
+title: "Human dignity"
+year: 2011
+publisher: "Belknap Press of Harvard University Press"
+isbn: "9780674059429"
+tags: ["human-dignity"]
+tags_inferred: ["worth", "human-person"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Dignity as the equal standing of every human being, argued from the moral worth of the individual rather than from capacities."
+discrepancy: "The list carries a stray series number — \"Human dignity. 10.\" — between title and publisher."

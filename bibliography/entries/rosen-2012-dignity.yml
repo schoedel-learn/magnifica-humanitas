@@ -1,0 +1,14 @@
+# Rosen — Dignity. Reference 15.
+id: "rosen-2012-dignity"
+kind: "book"
+authors: "Rosen, M."
+title: "Dignity: Its history and meaning"
+year: 2012
+publisher: "Harvard University Press"
+tags: ["human-dignity"]
+tags_inferred: ["history"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Dignity as a placeholder whose meaning has changed; the article cites it for the fragmentation thesis."
+discrepancy: "The list reads \"Rosen, M., and Dignity. 2012. Its history and meaning. 3.\" — the subtitle and a stray number were parsed into the author field."

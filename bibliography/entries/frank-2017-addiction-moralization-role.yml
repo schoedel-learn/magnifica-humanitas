@@ -1,0 +1,22 @@
+# Reference 16 of the addiction-and-dignity essay's list.
+id: "frank-2017-addiction-moralization-role"
+kind: "journal-article"
+authors: "Frank, L. E., & Nagel, S. K."
+creators:
+  - "Frank, L. E."
+  - "Nagel, S. K."
+title: "Addiction and Moralization: The Role of the Underlying Model of Addiction"
+journal: "Neuroethics"
+year: 2017
+volume: "10"
+issue: "1"
+pages: "129–139"
+doi: "10.1007/s12152-017-9307-x"
+tags: ["addiction"]
+tags_inferred: ["responsibility"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "What changes when addiction is modelled as a disorder rather than a vice."
+to_verify:
+  - "volume, issue and page range as printed"

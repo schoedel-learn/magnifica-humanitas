@@ -1,0 +1,19 @@
+# Reference 10 of the addiction-and-dignity essay's list.
+id: "cuthbert-2015-research-domain-criteria"
+kind: "journal-article"
+authors: "Cuthbert, B. N."
+title: "Research Domain Criteria: Toward future psychiatric nosologies"
+journal: "Dialogues in Clinical Neuroscience"
+year: 2015
+volume: "17"
+issue: "1"
+pages: "89–97"
+doi: "10.31887/dcns.2015.17.1/bcuthbert"
+tags: []
+tags_inferred: ["neuroscience", "disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "The Research Domain Criteria: the psychiatric-nosology reform the essay's `dignity disorder` proposal answers."
+to_verify:
+  - "volume, issue and page range as printed"

@@ -1,0 +1,19 @@
+# Reference 70 of the addiction-and-dignity essay's list.
+id: "wakefield-1992-disorder-harmful-dysfunction"
+kind: "journal-article"
+authors: "Wakefield, J. C."
+title: "Disorder as harmful dysfunction: A conceptual critique of DSM-III-R's definition of mental disorder."
+journal: "Psychological Review"
+year: 1992
+volume: "99"
+issue: "2"
+pages: "232–247"
+doi: "10.1037/0033-295x.99.2.232"
+tags: []
+tags_inferred: ["disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Wakefield's harmful-dysfunction analysis — the tool for calling addiction a disorder at all."
+to_verify:
+  - "volume, issue and page range as printed"

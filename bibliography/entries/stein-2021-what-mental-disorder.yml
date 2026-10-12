@@ -1,0 +1,22 @@
+# Reference 64 of the addiction-and-dignity essay's list.
+id: "stein-2021-what-mental-disorder"
+kind: "journal-article"
+authors: "Stein, D. J., Palk, A. C., & Kendler, K. S."
+creators:
+  - "Stein, D. J."
+  - "Palk, A. C."
+  - "Kendler, K. S."
+title: "What is a mental disorder? An exemplar-focused approach"
+journal: "Psychological Medicine"
+year: 2021
+volume: "51"
+issue: "6"
+pages: "894–901"
+doi: "10.1017/s0033291721001185"
+tags: []
+tags_inferred: ["disease-model", "neuroscience"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

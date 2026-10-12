@@ -1,0 +1,15 @@
+# Meilaender — Body, soul, and bioethics. Reference 12.
+id: "meilaender-1995-body-soul-and-bioethics"
+kind: "book"
+authors: "Meilaender, G."
+title: "Body, soul, and bioethics"
+year: 1995
+publisher: "University of Notre Dame Press"
+isbn: "0268006989"
+tags: ["body", "soul", "bioethics"]
+tags_inferred: ["virtue"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Body and soul as the two terms bioethics keeps trying to split; the source of the list's `body` and `soul` tags."
+discrepancy: "The list gives 2009. The book is 1995 (University of Notre Dame Press); the 1998 printing is a later paperback of the same text."

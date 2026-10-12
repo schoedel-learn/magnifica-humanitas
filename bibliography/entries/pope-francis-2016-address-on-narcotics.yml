@@ -1,0 +1,14 @@
+# Reference 45 of the addiction-and-dignity essay's list.
+id: "pope-francis-2016-address-on-narcotics"
+kind: "magisterial"
+authors: "Pope Francis"
+title: "Address to participants in the meeting sponsored by the Pontifical Academy of Sciences on narcotics: Problems and solutions to this global issue"
+year: 2016
+tags: []
+tags_inferred: ["addiction", "responsibility"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "in-article-list"
+verified_on: "2026-10-12"
+to_verify:
+  - "URL"
+  - "the address's own date (the list gives 24 November 2016)"

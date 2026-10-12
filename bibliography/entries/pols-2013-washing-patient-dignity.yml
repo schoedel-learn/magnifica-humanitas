@@ -1,0 +1,18 @@
+# Reference 40 of the addiction-and-dignity essay's list.
+id: "pols-2013-washing-patient-dignity"
+kind: "journal-article"
+authors: "Pols, J."
+title: "Washing the patient: Dignity and aesthetic values in nursing care"
+journal: "Nursing Philosophy"
+year: 2013
+volume: "14"
+issue: "3"
+pages: "186–200"
+doi: "10.1111/nup.12014"
+tags: ["human-dignity"]
+tags_inferred: ["healthcare-ethics", "recognition"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

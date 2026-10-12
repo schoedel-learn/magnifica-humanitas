@@ -1,0 +1,15 @@
+# Sen — Development as freedom. Reference 16.
+id: "sen-1999-development-as-freedom"
+kind: "book"
+authors: "Sen, A."
+title: "Development as freedom"
+year: 1999
+publisher: "Knopf"
+tags: ["development"]
+tags_inferred: ["capabilities", "justice", "human-rights"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Development as the expansion of freedoms; the capabilities strand before Nussbaum's extension of it."
+to_verify:
+  - "which publisher is being cited — Knopf (New York, 1999) or Oxford University Press (Oxford, 1999)"

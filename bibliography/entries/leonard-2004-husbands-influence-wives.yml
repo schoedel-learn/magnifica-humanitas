@@ -1,0 +1,21 @@
+# Reference 30 of the addiction-and-dignity essay's list.
+id: "leonard-2004-husbands-influence-wives"
+kind: "journal-article"
+authors: "Leonard, K. E., & Mudar, P."
+creators:
+  - "Leonard, K. E."
+  - "Mudar, P."
+title: "Husbands' Influence on Wives' Drinking: Testing a Relationship Motivation Model in the Early Years of Marriage."
+journal: "Psychology of Addictive Behaviors"
+year: 2004
+volume: "18"
+issue: "4"
+pages: "340–349"
+doi: "10.1037/0893-164x.18.4.340"
+tags: ["addiction"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

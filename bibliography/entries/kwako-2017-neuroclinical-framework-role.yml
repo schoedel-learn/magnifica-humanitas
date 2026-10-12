@@ -1,0 +1,19 @@
+# Reference 28 of the addiction-and-dignity essay's list.
+id: "kwako-2017-neuroclinical-framework-role"
+kind: "journal-article"
+authors: "Kwako, L. E., & Koob, G. F."
+creators:
+  - "Kwako, L. E."
+  - "Koob, G. F."
+title: "Neuroclinical Framework for the Role of Stress in Addiction"
+journal: "Chronic Stress"
+year: 2017
+volume: "1"
+doi: "10.1177/2470547017698140"
+tags: ["addiction"]
+tags_inferred: ["neuroscience"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

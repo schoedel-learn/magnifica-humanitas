@@ -1,0 +1,2513 @@
+[
+  {
+    "id": "agamben-1998-homo-sacer",
+    "type": "book",
+    "title": "Homo sacer: Sovereign power and bare life",
+    "author": [
+      {
+        "family": "Agamben",
+        "given": "G."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1998
+        ]
+      ]
+    },
+    "publisher": "Stanford University Press",
+    "translator": [
+      {
+        "literal": "Heller-Roazen, D."
+      }
+    ],
+    "keyword": [
+      "sacred",
+      "bare-life?",
+      "sovereignty?"
+    ],
+    "note": "Bare life — the life that can be killed without sacrifice — set against the sacred. The article's `sacred` tag enters here and at Dupuy."
+  },
+  {
+    "id": "aquinas-commentary-on-the-sentences",
+    "type": "book",
+    "title": "Commentary on the Sentences",
+    "author": [
+      {
+        "family": "Aquinas",
+        "given": "T."
+      }
+    ],
+    "keyword": [
+      "soul?",
+      "human-person?"
+    ]
+  },
+  {
+    "id": "aquinas-quaestiones-disputatae-de-veritate",
+    "type": "book",
+    "title": "Quaestiones disputatae de veritate",
+    "author": [
+      {
+        "family": "Aquinas",
+        "given": "T."
+      }
+    ],
+    "keyword": [
+      "rational?",
+      "soul?"
+    ]
+  },
+  {
+    "id": "aquinas-summa-theologiae",
+    "type": "book",
+    "title": "Summa theologiae",
+    "author": [
+      {
+        "family": "Aquinas",
+        "given": "T."
+      }
+    ],
+    "keyword": [
+      "human-person?",
+      "rational?"
+    ]
+  },
+  {
+    "id": "bielecki-2017-proposal-philosophical-basis",
+    "type": "article-journal",
+    "title": "The proposal of philosophical basis of the health care system",
+    "author": [
+      {
+        "family": "Bielecki",
+        "given": "A."
+      },
+      {
+        "family": "Nieszporska",
+        "given": "S."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "container-title": "Medicine, Health Care and Philosophy",
+    "volume": "20",
+    "issue": "1",
+    "page": "23–35",
+    "DOI": "10.1007/s11019-016-9717-2",
+    "keyword": [
+      "human-dignity?",
+      "healthcare-ethics?"
+    ],
+    "note": "A philosophical basis for health-care systems — the essay's premise that dignity talk in medicine is under-theorised."
+  },
+  {
+    "id": "brady-2021-evolution-human-dignity-in-catholic-morality",
+    "type": "article-journal",
+    "title": "The evolution of human dignity in Catholic morality",
+    "author": [
+      {
+        "family": "Brady",
+        "given": "B."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "container-title": "Journal of Moral Theology",
+    "volume": "10",
+    "issue": "1",
+    "page": "1–25",
+    "keyword": [
+      "human-dignity",
+      "history?"
+    ]
+  },
+  {
+    "id": "butler-2004-undoing-gender",
+    "type": "book",
+    "title": "Undoing gender",
+    "author": [
+      {
+        "family": "Butler",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "publisher": "Routledge",
+    "keyword": [
+      "recognition",
+      "body?"
+    ],
+    "note": "Gender as a recognition-relation: who counts as a person, and by whose norms. The article's recognition critique reaches this strand."
+  },
+  {
+    "id": "cassian-conferences",
+    "type": "book",
+    "title": "Conferences",
+    "author": [
+      {
+        "family": "Cassian",
+        "given": "J."
+      }
+    ],
+    "keyword": [
+      "virtue?"
+    ]
+  },
+  {
+    "id": "catechism-of-the-catholic-church-1995",
+    "type": "book",
+    "title": "Catechism of the Catholic Church",
+    "author": [],
+    "issued": {
+      "date-parts": [
+        [
+          1995
+        ]
+      ]
+    },
+    "publisher": "Doubleday",
+    "keyword": [
+      "human-person?",
+      "human-dignity?"
+    ],
+    "note": "The printing the essay cites. The site's own style notes that the first English edition (1994) and the revised second edition (1997) read differently where the doctrine developed, so which printing is cited matters."
+  },
+  {
+    "id": "cdf-2008-dignitas-personae",
+    "type": "document",
+    "title": "Instruction Dignitas personae on certain bioethical questions",
+    "author": [
+      {
+        "literal": "Congregation for the Doctrine of the Faith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_con_cfaith_doc_20081208_dignitas-personae_en.html",
+    "keyword": [
+      "human-dignity?",
+      "bioethics?"
+    ],
+    "note": "Signed 8 September 2008 (the date appears on the Holy See's own page for the instruction)."
+  },
+  {
+    "id": "cooper-2004-disorders-are-different-from-diseases",
+    "type": "article-journal",
+    "title": "Disorders are different from diseases",
+    "author": [
+      {
+        "family": "Cooper",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "container-title": "World Psychiatry",
+    "volume": "3",
+    "issue": "1",
+    "page": "24",
+    "URL": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1414656/",
+    "keyword": [
+      "disease-model?"
+    ],
+    "note": "The disorder/disease distinction the essay's dignity disorder has to respect. The list cited the PMC PDF; this entry uses the article page, which is the stable locator."
+  },
+  {
+    "id": "crosby-1996-selfhood-of-the-human-person",
+    "type": "book",
+    "title": "The selfhood of the human person",
+    "author": [
+      {
+        "family": "Crosby",
+        "given": "J. F."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1996
+        ]
+      ]
+    },
+    "publisher": "Catholic University of America Press",
+    "keyword": [
+      "human-person",
+      "soul",
+      "rational?",
+      "substance?"
+    ],
+    "note": "Personalist account of selfhood; the closest thing in the seed list to the article's own position."
+  },
+  {
+    "id": "cuthbert-2015-research-domain-criteria",
+    "type": "article-journal",
+    "title": "Research Domain Criteria: Toward future psychiatric nosologies",
+    "author": [
+      {
+        "family": "Cuthbert",
+        "given": "B. N."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "container-title": "Dialogues in Clinical Neuroscience",
+    "volume": "17",
+    "issue": "1",
+    "page": "89–97",
+    "DOI": "10.31887/dcns.2015.17.1/bcuthbert",
+    "keyword": [
+      "neuroscience?",
+      "disease-model?"
+    ],
+    "note": "The Research Domain Criteria: the psychiatric-nosology reform the essay's `dignity disorder` proposal answers."
+  },
+  {
+    "id": "daley-2013-family-social-aspects",
+    "type": "article-journal",
+    "title": "Family and social aspects of substance use disorders and treatment",
+    "author": [
+      {
+        "family": "Daley",
+        "given": "D. C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Journal of Food and Drug Analysis",
+    "volume": "21",
+    "issue": "4",
+    "page": "S73–S76",
+    "DOI": "10.1016/j.jfda.2013.09.038",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "dernbach-2024-infinite-dignity-human",
+    "type": "article-journal",
+    "title": "Infinite Dignity of the Human Person: Implications for Health Systems",
+    "author": [
+      {
+        "family": "Dernbach",
+        "given": "M. R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "container-title": "The Linacre Quarterly",
+    "volume": "91",
+    "issue": "3",
+    "page": "233–235",
+    "DOI": "10.1177/00243639241255565",
+    "keyword": [
+      "human-dignity",
+      "human-person",
+      "the-linacre-quarterly",
+      "healthcare-ethics?"
+    ]
+  },
+  {
+    "id": "dernbach-2025-addiction-is-a-dignity-disorder",
+    "type": "article-journal",
+    "title": "Addiction is a Dignity Disorder",
+    "author": [
+      {
+        "family": "Dernbach",
+        "given": "M. R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "container-title": "The Linacre Quarterly",
+    "volume": "92",
+    "issue": "3",
+    "page": "321–335",
+    "DOI": "10.1177/00243639241290849",
+    "keyword": [
+      "human-dignity",
+      "dignity-disorder",
+      "addiction",
+      "the-linacre-quarterly",
+      "akrasia?",
+      "love?",
+      "agency?",
+      "responsibility?",
+      "personalism?",
+      "human-person?",
+      "rational?",
+      "body?",
+      "soul?",
+      "bioethics?",
+      "healthcare-ethics?",
+      "neuroscience?",
+      "disease-model?"
+    ],
+    "note": "The seed for this batch. Published online 18 October 2024; this is the August 2025 issue. Its 72 references are entered here and carry seen in: dernbach-2025-addiction-is-a-dignity-disorder. Full text: PMC11559534. Distinguishes ontological dignity (never lost) from existential, moral and social dignity (impairable), and calls the impaired state a dignity disorder."
+  },
+  {
+    "id": "dernbach-2024-source-control-model",
+    "type": "article-journal",
+    "title": "A Source Control Model for Treatment-Resistant Substance Use Disorder",
+    "author": [
+      {
+        "family": "Dernbach",
+        "given": "M. R."
+      },
+      {
+        "family": "Drexler",
+        "given": "K."
+      },
+      {
+        "family": "McCord",
+        "given": "E."
+      },
+      {
+        "family": "Carpenter",
+        "given": "J. E."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "container-title": "Journal of Addiction Medicine",
+    "volume": "18",
+    "issue": "5",
+    "page": "483–485",
+    "DOI": "10.1097/adm.0000000000001344",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "ddf-2024-dignitas-infinita",
+    "type": "document",
+    "title": "Declaration Dignitas infinita on human dignity",
+    "author": [
+      {
+        "literal": "Dicastery for the Doctrine of the Faith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20240402_dignitas-infinita_en.html",
+    "keyword": [
+      "human-dignity?",
+      "human-person?",
+      "bioethics?"
+    ],
+    "note": "Signed 2 April 2024 (verified on the Holy See's page). The declaration the essay's dignity distinctions respond to."
+  },
+  {
+    "id": "dupuy-2013-mark-of-the-sacred",
+    "type": "book",
+    "title": "The mark of the sacred",
+    "author": [
+      {
+        "family": "Dupuy",
+        "given": "J.-P."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "publisher": "Stanford University Press",
+    "translator": [
+      {
+        "literal": "DeBevoise, M. B."
+      }
+    ],
+    "keyword": [
+      "sacred"
+    ],
+    "note": "The sacred as what a society cannot instrumentalise; the second of the list's two `sacred` entries."
+  },
+  {
+    "id": "dworkin-1993-lifes-dominion",
+    "type": "book",
+    "title": "Life's dominion: An argument about abortion, euthanasia, and individual freedom",
+    "author": [
+      {
+        "family": "Dworkin",
+        "given": "R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    },
+    "publisher": "Knopf",
+    "keyword": [
+      "abortion",
+      "euthanasia",
+      "autonomy?",
+      "human-rights?"
+    ],
+    "note": "The list's single entry for abortion and euthanasia together; dignity argued from individual freedom."
+  },
+  {
+    "id": "emanuel-1992-four-models-physician",
+    "type": "article-journal",
+    "title": "Four Models of the Physician-Patient Relationship",
+    "author": [
+      {
+        "family": "Emanuel",
+        "given": "E. J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "container-title": "JAMA: The Journal of the American Medical Association",
+    "volume": "267",
+    "issue": "16",
+    "page": "2221",
+    "DOI": "10.1001/jama.1992.03480160079038",
+    "keyword": [
+      "healthcare-ethics?",
+      "agency?",
+      "autonomy?"
+    ],
+    "note": "Emanuel and Emanuel's four models of the physician-patient relationship; the deliberative model the essay works from."
+  },
+  {
+    "id": "frank-2017-addiction-moralization-role",
+    "type": "article-journal",
+    "title": "Addiction and Moralization: The Role of the Underlying Model of Addiction",
+    "author": [
+      {
+        "family": "Frank",
+        "given": "L. E."
+      },
+      {
+        "family": "Nagel",
+        "given": "S. K."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "container-title": "Neuroethics",
+    "volume": "10",
+    "issue": "1",
+    "page": "129–139",
+    "DOI": "10.1007/s12152-017-9307-x",
+    "keyword": [
+      "addiction",
+      "responsibility?"
+    ],
+    "note": "What changes when addiction is modelled as a disorder rather than a vice."
+  },
+  {
+    "id": "frantz-2025-reclaiming-human-dignity",
+    "type": "article-journal",
+    "title": "Reclaiming human dignity: A critical review of contemporary theories in light of ontological foundations",
+    "author": [
+      {
+        "family": "Frantz",
+        "given": "P."
+      },
+      {
+        "family": "Rego",
+        "given": "F."
+      },
+      {
+        "family": "Barbas",
+        "given": "S."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "container-title": "Medicine, Health Care and Philosophy",
+    "volume": "28",
+    "issue": "4",
+    "page": "791–797",
+    "DOI": "10.1007/s11019-025-10290-7",
+    "keyword": [
+      "human-dignity",
+      "human-person",
+      "embodiment",
+      "capabilities",
+      "postmodern",
+      "deconstructivist",
+      "relationality",
+      "rational",
+      "substance",
+      "recognition",
+      "procedural",
+      "bioethics",
+      "healthcare-ethics",
+      "medicine-health-care-and-philosophy",
+      "autonomy?",
+      "ontology?"
+    ],
+    "note": "The seed. Open access (CC BY). Published online 2 August 2025; this is the December 2025 issue. Its reference list is the first batch of this bibliography: the 19 works above carry seen in: frantz-2025-reclaiming-human-dignity. Tags reflect the subjects the article introduces in relation to its own grounding of dignity."
+  },
+  {
+    "id": "galea-2002-social-determinants-and-the-health-of-drug-users",
+    "type": "article-journal",
+    "title": "Social determinants and the health of drug users: Socioeconomic status, homelessness, and incarceration",
+    "author": [
+      {
+        "family": "Galea",
+        "given": "S."
+      },
+      {
+        "family": "Vlahov",
+        "given": "D."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    },
+    "container-title": "Public Health Reports",
+    "volume": "117",
+    "issue": "Suppl 1",
+    "page": "S135–45",
+    "URL": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1913691/",
+    "keyword": [
+      "addiction?",
+      "responsibility?"
+    ],
+    "note": "The social determinants the essay counts under societal responsibility; page range as the journal prints it (S135–45)."
+  },
+  {
+    "id": "gelernter-2008-the-irreducibly-religious-character-of-human-dignity",
+    "type": "chapter",
+    "title": "The irreducibly religious character of human dignity",
+    "author": [
+      {
+        "family": "Gelernter",
+        "given": "D."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "container-title": "Human dignity and bioethics: Essays commissioned by the President's Council on Bioethics",
+    "publisher": "The President's Council on Bioethics",
+    "page": "387–405",
+    "keyword": [
+      "human-dignity",
+      "sacred?",
+      "bioethics?"
+    ]
+  },
+  {
+    "id": "goldstern-2021-a-deep-math-dive-into-why-some-infinities-are-bigger-than-others",
+    "type": "article-magazine",
+    "title": "A deep math dive into why some infinities are bigger than others",
+    "author": [
+      {
+        "family": "Goldstern",
+        "given": "M."
+      },
+      {
+        "family": "Kellner",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "publisher": "Scientific American",
+    "URL": "https://www.scientificamerican.com/article/a-deep-math-dive-into-why-some-infinities-are-bigger-than-others/",
+    "keyword": [
+      "ontology?"
+    ],
+    "note": "Cited for the mathematics of infinity in the argument about the infinite value of the person."
+  },
+  {
+    "id": "goodman-1990-addiction-definition-implications",
+    "type": "article-journal",
+    "title": "Addiction: Definition and implications",
+    "author": [
+      {
+        "family": "Goodman",
+        "given": "A."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1990
+        ]
+      ]
+    },
+    "container-title": "British Journal of Addiction",
+    "volume": "85",
+    "issue": "11",
+    "page": "1403–1408",
+    "DOI": "10.1111/j.1360-0443.1990.tb01620.x",
+    "keyword": [
+      "addiction",
+      "disease-model?"
+    ],
+    "note": "The definitional argument about addiction that the essay intervenes in."
+  },
+  {
+    "id": "griffiths-1996-nicotine-tobacco-addiction",
+    "type": "article-journal",
+    "title": "Nicotine, tobacco and addiction",
+    "author": [
+      {
+        "family": "Griffiths",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1996
+        ]
+      ]
+    },
+    "container-title": "Nature",
+    "volume": "384",
+    "issue": "6604",
+    "page": "18–18",
+    "DOI": "10.1038/384018a0",
+    "keyword": [
+      "addiction",
+      "neuroscience?"
+    ]
+  },
+  {
+    "id": "habermas-1996-between-facts-and-norms",
+    "type": "book",
+    "title": "Between facts and norms: Contributions to a discourse theory of law and democracy",
+    "author": [
+      {
+        "family": "Habermas",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1996
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "translator": [
+      {
+        "literal": "Rehg, W."
+      }
+    ],
+    "keyword": [
+      "discourse-theory",
+      "procedural?",
+      "human-rights?",
+      "law?"
+    ],
+    "note": "The article's target when it rejects procedural groundings of dignity: legitimacy from the procedure of discourse."
+  },
+  {
+    "id": "heather-2020-concept-akrasia-foundation",
+    "type": "article-journal",
+    "title": "The concept of akrasia as the foundation for a dual systems theory of addiction",
+    "author": [
+      {
+        "family": "Heather",
+        "given": "N."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "container-title": "Behavioural Brain Research",
+    "volume": "390",
+    "page": "112666",
+    "DOI": "10.1016/j.bbr.2020.112666",
+    "keyword": [
+      "addiction",
+      "akrasia",
+      "neuroscience?",
+      "agency?"
+    ],
+    "note": "Akrasia as the foundation for a dual-systems account of addiction — the essay's impaired will."
+  },
+  {
+    "id": "homish-2009-longitudinal-association-multiple",
+    "type": "article-journal",
+    "title": "The longitudinal association between multiple substance use discrepancies and marital satisfaction",
+    "author": [
+      {
+        "family": "Homish",
+        "given": "G. G."
+      },
+      {
+        "family": "Leonard",
+        "given": "K. E."
+      },
+      {
+        "family": "Kozlowski",
+        "given": "L. T."
+      },
+      {
+        "family": "Cornelius",
+        "given": "J. R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "container-title": "Addiction",
+    "volume": "104",
+    "issue": "7",
+    "page": "1201–1209",
+    "DOI": "10.1111/j.1360-0443.2009.02614.x",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "honneth-1995-struggle-for-recognition",
+    "type": "book",
+    "title": "The struggle for recognition: The moral grammar of social conflicts",
+    "author": [
+      {
+        "family": "Honneth",
+        "given": "A."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1995
+        ]
+      ]
+    },
+    "publisher": "Polity Press",
+    "translator": [
+      {
+        "literal": "Anderson, J."
+      }
+    ],
+    "keyword": [
+      "recognition",
+      "human-person?"
+    ],
+    "note": "Recognition in three spheres — love, rights, solidarity. With Taylor, the recognition strand the article sets against an ontological grounding."
+  },
+  {
+    "id": "hyman-2010-diagnosis-mental-disorders",
+    "type": "article-journal",
+    "title": "The Diagnosis of Mental Disorders: The Problem of Reification",
+    "author": [
+      {
+        "family": "Hyman",
+        "given": "S. E."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "container-title": "Annual Review of Clinical Psychology",
+    "volume": "6",
+    "issue": "1",
+    "page": "155–179",
+    "DOI": "10.1146/annurev.clinpsy.3.022806.091532",
+    "keyword": [
+      "neuroscience?",
+      "disease-model?"
+    ],
+    "note": "The reification problem in psychiatric diagnosis: naming a disorder is not yet explaining it."
+  },
+  {
+    "id": "international-theological-commission-1983-propositions-on-the-dignity-and-rights-of-the-human-person",
+    "type": "document",
+    "title": "Propositions on the dignity and rights of the human person",
+    "author": [
+      {
+        "literal": "International Theological Commission"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1983
+        ]
+      ]
+    },
+    "keyword": [
+      "human-dignity",
+      "human-rights"
+    ]
+  },
+  {
+    "id": "international-theological-commission-2004-communion-and-stewardship",
+    "type": "document",
+    "title": "Communion and stewardship: Human persons created in the image of God",
+    "author": [
+      {
+        "literal": "International Theological Commission"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/roman_curia/congregations/cfaith/cti_documents/rc_con_cfaith_doc_20040723_communion-stewardship_en.html",
+    "keyword": [
+      "human-person",
+      "human-dignity?"
+    ]
+  },
+  {
+    "id": "kateb-2011-human-dignity",
+    "type": "book",
+    "title": "Human dignity",
+    "author": [
+      {
+        "family": "Kateb",
+        "given": "G."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "publisher": "Belknap Press of Harvard University Press",
+    "ISBN": "9780674059429",
+    "keyword": [
+      "human-dignity",
+      "worth?",
+      "human-person?"
+    ],
+    "note": "Dignity as the equal standing of every human being, argued from the moral worth of the individual rather than from capacities."
+  },
+  {
+    "id": "kierkegaard-1948-purity-of-heart-is-to-will-one-thing",
+    "type": "book",
+    "title": "Purity of heart is to will one thing",
+    "author": [
+      {
+        "family": "Kierkegaard",
+        "given": "S."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "publisher": "Harper & Brothers",
+    "translator": [
+      {
+        "literal": "Steere, D. V."
+      }
+    ],
+    "keyword": [
+      "akrasia?",
+      "virtue?"
+    ]
+  },
+  {
+    "id": "kwako-2017-neuroclinical-framework-role",
+    "type": "article-journal",
+    "title": "Neuroclinical Framework for the Role of Stress in Addiction",
+    "author": [
+      {
+        "family": "Kwako",
+        "given": "L. E."
+      },
+      {
+        "family": "Koob",
+        "given": "G. F."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "container-title": "Chronic Stress",
+    "volume": "1",
+    "DOI": "10.1177/2470547017698140",
+    "keyword": [
+      "addiction",
+      "neuroscience?"
+    ]
+  },
+  {
+    "id": "lander-2013-impact-substance-use",
+    "type": "article-journal",
+    "title": "The Impact of Substance Use Disorders on Families and Children: From Theory to Practice",
+    "author": [
+      {
+        "family": "Lander",
+        "given": "L."
+      },
+      {
+        "family": "Howsare",
+        "given": "J."
+      },
+      {
+        "family": "Byrne",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Social Work in Public Health",
+    "volume": "28",
+    "issue": "3-4",
+    "page": "194–205",
+    "DOI": "10.1080/19371918.2013.759005",
+    "keyword": [
+      "addiction",
+      "responsibility?"
+    ]
+  },
+  {
+    "id": "leonard-2004-husbands-influence-wives",
+    "type": "article-journal",
+    "title": "Husbands' Influence on Wives' Drinking: Testing a Relationship Motivation Model in the Early Years of Marriage.",
+    "author": [
+      {
+        "family": "Leonard",
+        "given": "K. E."
+      },
+      {
+        "family": "Mudar",
+        "given": "P."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "container-title": "Psychology of Addictive Behaviors",
+    "volume": "18",
+    "issue": "4",
+    "page": "340–349",
+    "DOI": "10.1037/0893-164x.18.4.340",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "lewis-2018-brain-change-addiction",
+    "type": "article-journal",
+    "title": "Brain Change in Addiction as Learning, Not Disease",
+    "author": [
+      {
+        "family": "Lewis",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "container-title": "New England Journal of Medicine",
+    "volume": "379",
+    "issue": "16",
+    "page": "1551–1560",
+    "DOI": "10.1056/nejmra1602872",
+    "keyword": [
+      "addiction",
+      "disease-model?",
+      "neuroscience?"
+    ],
+    "note": "Addiction as learning, not disease — the clearest statement of the position the essay calls a false dichotomy."
+  },
+  {
+    "id": "macintyre-1999-dependent-rational-animals",
+    "type": "book",
+    "title": "Dependent rational animals: Why human beings need the virtues",
+    "author": [
+      {
+        "family": "MacIntyre",
+        "given": "A."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1999
+        ]
+      ]
+    },
+    "publisher": "Open Court",
+    "keyword": [
+      "rational",
+      "virtue",
+      "disability?",
+      "dependence?"
+    ],
+    "note": "Rationality as animal and dependent — the argument that vulnerability and disability are normal conditions, not exceptions."
+  },
+  {
+    "id": "macklin-2003-dignity-useless-concept",
+    "type": "article-journal",
+    "title": "Dignity is a useless concept",
+    "author": [
+      {
+        "family": "Macklin",
+        "given": "R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2003
+        ]
+      ]
+    },
+    "container-title": "BMJ",
+    "volume": "327",
+    "issue": "7429",
+    "page": "1419–1420",
+    "DOI": "10.1136/bmj.327.7429.1419",
+    "keyword": [
+      "human-dignity"
+    ],
+    "note": "Macklin's `dignity is a useless concept` — the objection the essay has to answer."
+  },
+  {
+    "id": "mccrudden-2008-human-dignity-and-judicial-interpretation",
+    "type": "article-journal",
+    "title": "Human dignity and judicial interpretation of human rights",
+    "author": [
+      {
+        "family": "McCrudden",
+        "given": "C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "container-title": "European Journal of International Law",
+    "volume": "19",
+    "issue": "4",
+    "page": "655–724",
+    "DOI": "10.1093/ejil/chn043",
+    "keyword": [
+      "human-rights",
+      "human-dignity",
+      "european-journal-of-international-law",
+      "law?"
+    ],
+    "note": "How courts actually use dignity: the minimum-content reading, and the reason dignity is a contested legal term."
+  },
+  {
+    "id": "meilaender-1995-body-soul-and-bioethics",
+    "type": "book",
+    "title": "Body, soul, and bioethics",
+    "author": [
+      {
+        "family": "Meilaender",
+        "given": "G."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1995
+        ]
+      ]
+    },
+    "publisher": "University of Notre Dame Press",
+    "ISBN": "0268006989",
+    "keyword": [
+      "body",
+      "soul",
+      "bioethics",
+      "virtue?"
+    ],
+    "note": "Body and soul as the two terms bioethics keeps trying to split; the source of the list's `body` and `soul` tags."
+  },
+  {
+    "id": "nakken-1996-the-addictive-personality",
+    "type": "book",
+    "title": "The addictive personality: Understanding the addictive process and compulsive behavior",
+    "author": [
+      {
+        "family": "Nakken",
+        "given": "C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1996
+        ]
+      ]
+    },
+    "publisher": "Hazelden",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "nordenfelt-2004-varieties-dignity",
+    "type": "article-journal",
+    "title": "The Varieties of Dignity",
+    "author": [
+      {
+        "family": "Nordenfelt",
+        "given": "L."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "container-title": "Health Care Analysis",
+    "volume": "12",
+    "issue": "2",
+    "page": "69–81",
+    "DOI": "10.1023/b:hcan.0000041183.78435.4b",
+    "keyword": [
+      "human-dignity"
+    ],
+    "note": "Nordenfelt's varieties of dignity: the closest precedent for splitting dignity into kinds."
+  },
+  {
+    "id": "nussbaum-2006-frontiers-of-justice",
+    "type": "book",
+    "title": "Frontiers of justice: Disability, nationality, species membership",
+    "author": [
+      {
+        "family": "Nussbaum",
+        "given": "M. C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2006
+        ]
+      ]
+    },
+    "publisher": "Belknap Press of Harvard University Press",
+    "keyword": [
+      "disability",
+      "capabilities?",
+      "human-rights?",
+      "justice?"
+    ],
+    "note": "The capabilities threshold extended to those who cannot contract — the article's main rival to an ontological grounding."
+  },
+  {
+    "id": "oconnor-1990-wise-blood",
+    "type": "book",
+    "title": "Wise blood",
+    "author": [
+      {
+        "family": "O'Connor",
+        "given": "F."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1990
+        ]
+      ]
+    },
+    "publisher": "Farrar, Straus and Giroux",
+    "keyword": [
+      "literature?"
+    ]
+  },
+  {
+    "id": "ovid-metamorphoses",
+    "type": "book",
+    "title": "Metamorphoses",
+    "author": [
+      {
+        "literal": "Ovid"
+      }
+    ],
+    "keyword": [
+      "literature?",
+      "body?"
+    ]
+  },
+  {
+    "id": "pellegrino-2008-the-lived-experience-of-human-dignity",
+    "type": "chapter",
+    "title": "The lived experience of human dignity",
+    "author": [
+      {
+        "family": "Pellegrino",
+        "given": "E. D."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "container-title": "Human dignity and bioethics: Essays commissioned by the President's Council on Bioethics",
+    "publisher": "The President's Council on Bioethics",
+    "page": "513–539",
+    "keyword": [
+      "human-dignity",
+      "bioethics?",
+      "virtue?"
+    ],
+    "note": "Pellegrino also appears in the first batch (The virtues in medical practice, 1993) — the two entries are different works."
+  },
+  {
+    "id": "pellegrino-thomasma-1993-virtues-in-medical-practice",
+    "type": "book",
+    "title": "The virtues in medical practice",
+    "author": [
+      {
+        "family": "Pellegrino",
+        "given": "E. D."
+      },
+      {
+        "family": "Thomasma",
+        "given": "D. C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    },
+    "publisher": "Oxford University Press",
+    "keyword": [
+      "virtue",
+      "bioethics?",
+      "healthcare-ethics?"
+    ],
+    "note": "Virtue as the clinician's formation rather than a rule set; the list's medical-virtue entry."
+  },
+  {
+    "id": "pols-2013-through-looking-glass",
+    "type": "article-journal",
+    "title": "Through the looking glass: Good looks and dignity in care",
+    "author": [
+      {
+        "family": "Pols",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Medicine, Health Care and Philosophy",
+    "volume": "16",
+    "issue": "4",
+    "page": "953–966",
+    "DOI": "10.1007/s11019-013-9483-3",
+    "keyword": [
+      "human-dignity",
+      "healthcare-ethics?",
+      "recognition?"
+    ]
+  },
+  {
+    "id": "pols-2013-washing-patient-dignity",
+    "type": "article-journal",
+    "title": "Washing the patient: Dignity and aesthetic values in nursing care",
+    "author": [
+      {
+        "family": "Pols",
+        "given": "J."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Nursing Philosophy",
+    "volume": "14",
+    "issue": "3",
+    "page": "186–200",
+    "DOI": "10.1111/nup.12014",
+    "keyword": [
+      "human-dignity",
+      "healthcare-ethics?",
+      "recognition?"
+    ]
+  },
+  {
+    "id": "pontifical-council-for-health-pastoral-care-2002-church-drugs-and-drug-addiction",
+    "type": "book",
+    "title": "Church: Drugs and drug addiction",
+    "author": [
+      {
+        "literal": "Pontifical Council for Health Pastoral Care"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    },
+    "publisher": "Libreria Editrice Vaticana",
+    "keyword": [
+      "addiction?",
+      "healthcare-ethics?"
+    ]
+  },
+  {
+    "id": "pope-benedict-xvi-2005-deus-caritas-est",
+    "type": "document",
+    "title": "Encyclical letter Deus caritas est",
+    "author": [
+      {
+        "literal": "Pope Benedict XVI"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/benedict-xvi/en/encyclicals/documents/hf_ben-xvi_enc_20051225_deus-caritas-est.html",
+    "keyword": [
+      "love?",
+      "human-person?"
+    ],
+    "note": "Signed 25 December 2005; the Holy See's page carries a 2005 Libreria Editrice Vaticana copyright."
+  },
+  {
+    "id": "pope-benedict-xvi-2009-caritas-in-veritate",
+    "type": "document",
+    "title": "Encyclical letter Caritas in veritate",
+    "author": [
+      {
+        "literal": "Pope Benedict XVI"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/benedict-xvi/en/encyclicals/documents/hf_ben-xvi_enc_20090629_caritas-in-veritate.html",
+    "keyword": [
+      "love?",
+      "development?"
+    ],
+    "note": "Signed 29 June 2009; the page carries a 2009 copyright and the encyclical is dated 29 June 2009."
+  },
+  {
+    "id": "pope-francis-2013-evangelii-gaudium",
+    "type": "document",
+    "title": "Apostolic exhortation Evangelii gaudium",
+    "author": [
+      {
+        "literal": "Pope Francis"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/francesco/en/apost_exhortations/documents/papa-francesco_esortazione-ap_20131124_evangelii-gaudium.html",
+    "keyword": [
+      "responsibility?",
+      "love?"
+    ],
+    "note": "Signed 24 November 2013 (the date appears on the Holy See's page)."
+  },
+  {
+    "id": "pope-francis-2016-address-on-narcotics",
+    "type": "document",
+    "title": "Address to participants in the meeting sponsored by the Pontifical Academy of Sciences on narcotics: Problems and solutions to this global issue",
+    "author": [
+      {
+        "literal": "Pope Francis"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "keyword": [
+      "addiction?",
+      "responsibility?"
+    ]
+  },
+  {
+    "id": "pope-francis-2020-fratelli-tutti",
+    "type": "document",
+    "title": "Encyclical letter Fratelli tutti",
+    "author": [
+      {
+        "literal": "Pope Francis"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/francesco/en/encyclicals/documents/papa-francesco_20201003_enciclica-fratelli-tutti.html",
+    "keyword": [
+      "human-person?",
+      "responsibility?"
+    ],
+    "note": "Signed 3 October 2020 (the date appears on the Holy See's page)."
+  },
+  {
+    "id": "pope-francis-2023-message-to-forensic-toxicologists",
+    "type": "document",
+    "title": "Message to the participants in the 60th International Congress of Forensic Toxicologists",
+    "author": [
+      {
+        "literal": "Pope Francis"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "keyword": [
+      "addiction?"
+    ]
+  },
+  {
+    "id": "pope-francis-2024-general-audience",
+    "type": "document",
+    "title": "General audience: Saint Peter's Square",
+    "author": [
+      {
+        "literal": "Pope Francis"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "keyword": [
+      "human-dignity?"
+    ]
+  },
+  {
+    "id": "pope-john-paul-ii-1987-address-on-drug-abuse",
+    "type": "document",
+    "title": "Address to the representatives of the International Conference on Drug Abuse and Illicit Trafficking",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "keyword": [
+      "addiction?"
+    ]
+  },
+  {
+    "id": "pope-john-paul-ii-1987-meeting-with-the-bishops-of-the-united-states",
+    "type": "document",
+    "title": "Apostolic journey to the United States of America and Canada: Meeting with the bishops of the United States of America, Minor Seminary of Our Lady of the Angels, Los Angeles",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "keyword": [
+      "addiction?"
+    ]
+  },
+  {
+    "id": "pope-john-paul-ii-1987-sollicitudo-rei-socialis",
+    "type": "document",
+    "title": "Encyclical letter Sollicitudo rei socialis",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_30121987_sollicitudo-rei-socialis.html",
+    "keyword": [
+      "development?",
+      "human-person?"
+    ],
+    "note": "Signed 30 December 1987 (the date appears on the Holy See's page)."
+  },
+  {
+    "id": "pope-john-paul-ii-1991-address-on-drug-addiction-and-alcoholism",
+    "type": "article-journal",
+    "title": "The address of His Holiness John Paul II to participants in the Sixth International Conference: Drug addiction and alcoholism frustrate the person's very capacity for community and self-giving",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1991
+        ]
+      ]
+    },
+    "container-title": "Dolentium Hominum",
+    "volume": "19",
+    "issue": "1",
+    "page": "7–9",
+    "keyword": [
+      "addiction?",
+      "human-person?"
+    ]
+  },
+  {
+    "id": "pope-john-paul-ii-1993-veritatis-splendor",
+    "type": "document",
+    "title": "Encyclical letter Veritatis splendor",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_06081993_veritatis-splendor.html",
+    "keyword": [
+      "rational?",
+      "virtue?"
+    ],
+    "note": "Signed 6 August 1993 (the date appears on the Holy See's page)."
+  },
+  {
+    "id": "pope-john-paul-ii-1998-fides-et-ratio",
+    "type": "document",
+    "title": "Encyclical letter Fides et ratio",
+    "author": [
+      {
+        "literal": "Pope John Paul II"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1998
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_14091998_fides-et-ratio.html",
+    "keyword": [
+      "rational?",
+      "human-person?"
+    ],
+    "note": "Signed 14 September 1998 (the date appears on the Holy See's page)."
+  },
+  {
+    "id": "pope-john-xxiii-1961-mater-et-magistra",
+    "type": "document",
+    "title": "Encyclical letter Mater et magistra",
+    "author": [
+      {
+        "literal": "Pope John XXIII"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1961
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/content/john-xxiii/en/encyclicals/documents/hf_j-xxiii_enc_15051961_mater.html",
+    "keyword": [
+      "development?",
+      "human-rights?"
+    ],
+    "note": "Promulgated 15 May 1961; the Holy See's page for the encyclical was checked and answers, but its text carries no modern date line."
+  },
+  {
+    "id": "powell-2007-wrestling-satan-conquering",
+    "type": "article-journal",
+    "title": "Wrestling Satan and Conquering Dopamine: Addiction and Free Will",
+    "author": [
+      {
+        "family": "Powell",
+        "given": "T."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "container-title": "The American Journal of Bioethics",
+    "volume": "7",
+    "issue": "1",
+    "page": "14–15",
+    "DOI": "10.1080/15265160601064017",
+    "keyword": [
+      "addiction",
+      "agency?",
+      "bioethics?"
+    ],
+    "note": "Addiction and free will in the bioethics literature."
+  },
+  {
+    "id": "robinson-2016-classification-substance-use",
+    "type": "article-journal",
+    "title": "The Classification of Substance Use Disorders: Historical, Contextual, and Conceptual Considerations",
+    "author": [
+      {
+        "family": "Robinson",
+        "given": "S."
+      },
+      {
+        "family": "Adinoff",
+        "given": "B."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "container-title": "Behavioral Sciences",
+    "volume": "6",
+    "issue": "3",
+    "page": "18",
+    "DOI": "10.3390/bs6030018",
+    "keyword": [
+      "addiction",
+      "disease-model?"
+    ]
+  },
+  {
+    "id": "rosen-2012-dignity",
+    "type": "book",
+    "title": "Dignity: Its history and meaning",
+    "author": [
+      {
+        "family": "Rosen",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2012
+        ]
+      ]
+    },
+    "publisher": "Harvard University Press",
+    "keyword": [
+      "human-dignity",
+      "history?"
+    ],
+    "note": "Dignity as a placeholder whose meaning has changed; the article cites it for the fragmentation thesis."
+  },
+  {
+    "id": "rosenthal-2019-etymology-early-history",
+    "type": "article-journal",
+    "title": "The etymology and early history of ‘addiction’",
+    "author": [
+      {
+        "family": "Rosenthal",
+        "given": "R. J."
+      },
+      {
+        "family": "Faris",
+        "given": "S. B."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "container-title": "Addiction Research &amp; Theory",
+    "volume": "27",
+    "issue": "5",
+    "page": "437–449",
+    "DOI": "10.1080/16066359.2018.1543412",
+    "keyword": [
+      "addiction",
+      "history?"
+    ]
+  },
+  {
+    "id": "schulte-2013-substance-use-associated",
+    "type": "article-journal",
+    "title": "Substance Use and Associated Health Conditions throughout the Lifespan",
+    "author": [
+      {
+        "family": "Schulte",
+        "given": "M. T."
+      },
+      {
+        "family": "Hser",
+        "given": "Y. I."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Public Health Reviews",
+    "volume": "35",
+    "issue": "2",
+    "DOI": "10.1007/bf03391702",
+    "keyword": [
+      "addiction"
+    ]
+  },
+  {
+    "id": "second-vatican-council-1965-dignitatis-humanae",
+    "type": "document",
+    "title": "Declaration Dignitatis humanae",
+    "author": [
+      {
+        "literal": "Second Vatican Council"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1965
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_decl_19651207_dignitatis-humanae_en.html",
+    "keyword": [
+      "human-rights?",
+      "human-dignity?"
+    ],
+    "note": "Promulgated 7 December 1965."
+  },
+  {
+    "id": "second-vatican-council-1965-gaudium-et-spes",
+    "type": "document",
+    "title": "Pastoral constitution Gaudium et spes",
+    "author": [
+      {
+        "literal": "Second Vatican Council"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1965
+        ]
+      ]
+    },
+    "URL": "https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651207_gaudium-et-spes_en.html",
+    "keyword": [
+      "human-person?",
+      "human-dignity?"
+    ],
+    "note": "Promulgated 7 December 1965."
+  },
+  {
+    "id": "sen-1999-development-as-freedom",
+    "type": "book",
+    "title": "Development as freedom",
+    "author": [
+      {
+        "family": "Sen",
+        "given": "A."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1999
+        ]
+      ]
+    },
+    "publisher": "Knopf",
+    "keyword": [
+      "development",
+      "capabilities?",
+      "justice?",
+      "human-rights?"
+    ],
+    "note": "Development as the expansion of freedoms; the capabilities strand before Nussbaum's extension of it."
+  },
+  {
+    "id": "shaffer-2004-toward-syndrome-model",
+    "type": "article-journal",
+    "title": "Toward a Syndrome Model of Addiction: Multiple Expressions, Common Etiology",
+    "author": [
+      {
+        "family": "Shaffer",
+        "given": "H. J."
+      },
+      {
+        "family": "LaPlante",
+        "given": "D. A."
+      },
+      {
+        "family": "LaBrie",
+        "given": "R. A."
+      },
+      {
+        "family": "Kidman",
+        "given": "R. C."
+      },
+      {
+        "family": "Donato",
+        "given": "A. N."
+      },
+      {
+        "family": "Stanton",
+        "given": "M. V."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "container-title": "Harvard Review of Psychiatry",
+    "volume": "12",
+    "issue": "6",
+    "page": "367–374",
+    "DOI": "10.1080/10673220490905705",
+    "keyword": [
+      "addiction",
+      "disease-model?"
+    ],
+    "note": "Toward a syndrome model of addiction: one etiology, many expressions."
+  },
+  {
+    "id": "solberg-2020-it-just-that",
+    "type": "article-journal",
+    "title": "It is just that people treat you like a human being: The meaning of dignity for patients with substance use disorders",
+    "author": [
+      {
+        "family": "Solberg",
+        "given": "H."
+      },
+      {
+        "family": "Nåden",
+        "given": "D."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "container-title": "Journal of Clinical Nursing",
+    "volume": "29",
+    "issue": "3-4",
+    "page": "480–491",
+    "DOI": "10.1111/jocn.15108",
+    "keyword": [
+      "human-dignity",
+      "recognition?",
+      "healthcare-ethics?"
+    ],
+    "note": "Dignity as patients describe it — being treated like a human being."
+  },
+  {
+    "id": "spaemann-2006-persons",
+    "type": "book",
+    "title": "Persons: The difference between \"someone\" and \"something\"",
+    "author": [
+      {
+        "family": "Spaemann",
+        "given": "R."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2006
+        ]
+      ]
+    },
+    "publisher": "Oxford University Press",
+    "translator": [
+      {
+        "literal": "O'Donovan, O."
+      }
+    ],
+    "keyword": [
+      "someone-and-something",
+      "human-person",
+      "rational?",
+      "substance?"
+    ],
+    "note": "Being a someone is not a property a something can gain or lose — the source of the list's `someone and something` tag."
+  },
+  {
+    "id": "stein-2021-what-mental-disorder",
+    "type": "article-journal",
+    "title": "What is a mental disorder? An exemplar-focused approach",
+    "author": [
+      {
+        "family": "Stein",
+        "given": "D. J."
+      },
+      {
+        "family": "Palk",
+        "given": "A. C."
+      },
+      {
+        "family": "Kendler",
+        "given": "K. S."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "container-title": "Psychological Medicine",
+    "volume": "51",
+    "issue": "6",
+    "page": "894–901",
+    "DOI": "10.1017/s0033291721001185",
+    "keyword": [
+      "disease-model?",
+      "neuroscience?"
+    ]
+  },
+  {
+    "id": "stepinova-2011-aquinas-solution-aristotle",
+    "type": "article-journal",
+    "title": "Aquinas’ Solution of Aristotle's Incontinent Man and Augustine's Two Wills",
+    "author": [
+      {
+        "family": "Stepinova",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "container-title": "New Blackfriars",
+    "volume": "92",
+    "issue": "1039",
+    "page": "322–340",
+    "DOI": "10.1111/j.1741-2005.2009.01328.x",
+    "keyword": [
+      "akrasia",
+      "virtue?"
+    ]
+  },
+  {
+    "id": "sulmasy-2007-human-dignity-and-human-worth",
+    "type": "chapter",
+    "title": "Human dignity and human worth",
+    "author": [
+      {
+        "family": "Sulmasy",
+        "given": "D. P."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "container-title": "Perspectives on Human Dignity: A Conversation",
+    "publisher": "Springer",
+    "page": "9–18",
+    "DOI": "10.1007/978-1-4020-6281-0_2",
+    "keyword": [
+      "human-dignity",
+      "bioethics?",
+      "worth?",
+      "human-person?"
+    ],
+    "note": "Intrinsic, attributed and inflorescent dignity distinguished — the closest precedent in the list for grounding dignity in what a being is."
+  },
+  {
+    "id": "sulmasy-2008-what-conscience-respect",
+    "type": "article-journal",
+    "title": "What is conscience and why is respect for it so important?",
+    "author": [
+      {
+        "family": "Sulmasy",
+        "given": "D. P."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "container-title": "Theoretical Medicine and Bioethics",
+    "volume": "29",
+    "issue": "3",
+    "page": "135–149",
+    "DOI": "10.1007/s11017-008-9072-2",
+    "keyword": [
+      "human-person?",
+      "recognition?",
+      "healthcare-ethics?"
+    ],
+    "note": "Conscience and why respect for it matters: a dignity argument inside clinical ethics."
+  },
+  {
+    "id": "sulmasy-2013-varieties-human-dignity",
+    "type": "article-journal",
+    "title": "The varieties of human dignity: A logical and conceptual analysis",
+    "author": [
+      {
+        "family": "Sulmasy",
+        "given": "D. P."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Medicine, Health Care and Philosophy",
+    "volume": "16",
+    "issue": "4",
+    "page": "937–944",
+    "DOI": "10.1007/s11019-012-9400-1",
+    "keyword": [
+      "human-dignity"
+    ],
+    "note": "Sulmasy's logical analysis of dignity's varieties — the essay's nearest ancestor in the seed bibliography's own first batch."
+  },
+  {
+    "id": "sussman-2011-considering-definition-addiction",
+    "type": "article-journal",
+    "title": "Considering the Definition of Addiction",
+    "author": [
+      {
+        "family": "Sussman",
+        "given": "S."
+      },
+      {
+        "family": "Sussman",
+        "given": "A. N."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "container-title": "International Journal of Environmental Research and Public Health",
+    "volume": "8",
+    "issue": "10",
+    "page": "4025–4038",
+    "DOI": "10.3390/ijerph8104025",
+    "keyword": [
+      "addiction",
+      "disease-model?"
+    ]
+  },
+  {
+    "id": "taylor-1994-politics-of-recognition",
+    "type": "chapter",
+    "title": "The politics of recognition",
+    "author": [
+      {
+        "family": "Taylor",
+        "given": "C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "container-title": "Multiculturalism: Examining the politics of recognition",
+    "publisher": "Princeton University Press",
+    "page": "25–73",
+    "keyword": [
+      "recognition",
+      "human-person?",
+      "multiculturalism?"
+    ],
+    "note": "Recognition as a human need, and equal recognition as a modern demand; with Honneth, the recognition strand."
+  },
+  {
+    "id": "turkson-2018-message-of-the-prefect-on-drug-abuse",
+    "type": "document",
+    "title": "Message of the prefect of the Dicastery for Promoting Integral Human Development for the International Day against Drug Abuse and Illicit Trafficking",
+    "author": [
+      {
+        "family": "Turkson",
+        "given": "P. K. A."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "keyword": [
+      "addiction?",
+      "responsibility?"
+    ]
+  },
+  {
+    "id": "united-nations-1948-udhr",
+    "type": "webpage",
+    "title": "Universal Declaration of Human Rights",
+    "author": [
+      {
+        "literal": "United Nations General Assembly"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "publisher": "United Nations",
+    "URL": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+    "keyword": [
+      "human-rights",
+      "law?",
+      "human-dignity?"
+    ],
+    "note": "Proclaimed in Paris on 10 December 1948 as General Assembly resolution 217 A. The article's court of appeal for dignity as a legal ground."
+  },
+  {
+    "id": "volkow-2016-neurobiologic-advances-brain",
+    "type": "article-journal",
+    "title": "Neurobiologic Advances from the Brain Disease Model of Addiction",
+    "author": [
+      {
+        "family": "Volkow",
+        "given": "N. D."
+      },
+      {
+        "family": "Koob",
+        "given": "G. F."
+      },
+      {
+        "family": "McLellan",
+        "given": "A. T."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "container-title": "New England Journal of Medicine",
+    "volume": "374",
+    "issue": "4",
+    "page": "363–371",
+    "DOI": "10.1056/nejmra1511480",
+    "keyword": [
+      "addiction",
+      "neuroscience?",
+      "disease-model?"
+    ],
+    "note": "Neurobiologic advances from the brain disease model of addiction."
+  },
+  {
+    "id": "wakefield-1992-disorder-harmful-dysfunction",
+    "type": "article-journal",
+    "title": "Disorder as harmful dysfunction: A conceptual critique of DSM-III-R's definition of mental disorder.",
+    "author": [
+      {
+        "family": "Wakefield",
+        "given": "J. C."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "container-title": "Psychological Review",
+    "volume": "99",
+    "issue": "2",
+    "page": "232–247",
+    "DOI": "10.1037/0033-295x.99.2.232",
+    "keyword": [
+      "disease-model?"
+    ],
+    "note": "Wakefield's harmful-dysfunction analysis — the tool for calling addiction a disorder at all."
+  },
+  {
+    "id": "wei-2017-similarities-differences-diagnostic",
+    "type": "chapter",
+    "title": "Similarities and Differences in Diagnostic Criterion",
+    "author": [
+      {
+        "family": "Wei",
+        "given": "Z."
+      },
+      {
+        "family": "Zhang",
+        "given": "X."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "container-title": "Advances in Experimental Medicine and Biology",
+    "page": "105–132",
+    "DOI": "10.1007/978-981-10-5562-1_7",
+    "keyword": [
+      "disease-model?",
+      "neuroscience?"
+    ]
+  },
+  {
+    "id": "whitesell-2013-familial-social-individual",
+    "type": "article-journal",
+    "title": "Familial, Social, and Individual Factors Contributing to Risk for Adolescent Substance Use",
+    "author": [
+      {
+        "family": "Whitesell",
+        "given": "M."
+      },
+      {
+        "family": "Bachand",
+        "given": "A."
+      },
+      {
+        "family": "Peel",
+        "given": "J."
+      },
+      {
+        "family": "Brown",
+        "given": "M."
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "container-title": "Journal of Addiction",
+    "volume": "2013",
+    "page": "1–9",
+    "DOI": "10.1155/2013/579310",
+    "keyword": [
+      "addiction",
+      "responsibility?"
+    ]
+  }
+]

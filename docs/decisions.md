@@ -122,6 +122,29 @@ Evidence: `payload migrate:status` lists `20261006_065956_initial` and
 `totalDocs = 0` for children of a draft parent and `1` once the parent's `_status` is
 `published`, for BOTH `doc_paragraphs` and `post_sources`.
 
+### D11 — The Exhaustive Bibliography lives in the repo, not in the database and not in Zotero
+Date: 2026-10-12
+
+Research references are gathered ahead of the essays that will cite them, so they cannot live in
+`sources`: **every write to `sources` queues a `content_events` row, the publish worker on
+chroma-server rebuilds within two minutes, and the entry would be public before anyone reviewed it.**
+They do not live only in Zotero either: Zotero's library is SQLite, so it has no reviewable history, its
+tag pane is not a publishable artifact, and the site will eventually need these works as `sources` rows.
+So the bibliography is repo-native — one YAML file per work under `bibliography/entries/`, a controlled
+tag vocabulary in `bibliography/vocabulary.yml`, and a generator (`bibliography/scripts/build.mjs`) that
+renders `exhaustive-bibliography.md`, `tag-index.md`, `index.json` and CSL-JSON/RIS/BibTeX exports.
+Field names are the `sources` collection's own, so a promotion to a live row is a 1:1 mapping — and a
+promotion happens only when an essay actually cites the work (D9's posture: nothing is republished here).
+
+Two consequences worth stating: the entry schema is authoritative for research and may carry fields the
+CMS lacks (`translator`, `original_title`, `isbn`, `seen_in`, `discrepancy`, `to_verify`), which are
+dropped on promotion; and Zotero is a one-way reading mirror, refreshed by re-importing
+`bibliography/exports/references.ris`, never edited as a source.
+Evidence: `bibliography/` (20 seeded works, 36 tags), `cd bibliography && npm test` → 23 tests pass,
+`node scripts/build.mjs --check` → all generated files current; the seed article's own published
+reference list was verified against Crossref/Open Library/UN and 11 differences are recorded in
+Appendix A of `bibliography/exhaustive-bibliography.md` rather than silently corrected.
+
 ---
 
 ## Open Questions

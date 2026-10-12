@@ -1,0 +1,26 @@
+# Reference 62 of the addiction-and-dignity essay's list.
+id: "shaffer-2004-toward-syndrome-model"
+kind: "journal-article"
+authors: "Shaffer, H. J., LaPlante, D. A., LaBrie, R. A., Kidman, R. C., Donato, A. N., & Stanton, M. V."
+creators:
+  - "Shaffer, H. J."
+  - "LaPlante, D. A."
+  - "LaBrie, R. A."
+  - "Kidman, R. C."
+  - "Donato, A. N."
+  - "Stanton, M. V."
+title: "Toward a Syndrome Model of Addiction: Multiple Expressions, Common Etiology"
+journal: "Harvard Review of Psychiatry"
+year: 2004
+volume: "12"
+issue: "6"
+pages: "367–374"
+doi: "10.1080/10673220490905705"
+tags: ["addiction"]
+tags_inferred: ["disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Toward a syndrome model of addiction: one etiology, many expressions."
+to_verify:
+  - "volume, issue and page range as printed"

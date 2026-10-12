@@ -1,0 +1,20 @@
+# Agamben — Homo sacer. Reference 1 of the seed article's list.
+id: "agamben-1998-homo-sacer"
+kind: "book"
+authors: "Agamben, G."
+title: "Homo sacer: Sovereign power and bare life"
+translator: "Heller-Roazen, D."
+original_title: "Homo sacer: Il potere sovrano e la nuda vita"
+original_year: 1995
+year: 1998
+publisher: "Stanford University Press"
+tags: ["sacred"]
+tags_inferred: ["bare-life", "sovereignty"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Bare life — the life that can be killed without sacrifice — set against the sacred. The article's `sacred` tag enters here and at Dupuy."
+discrepancy: "The list prints the author as \"Angabem\" and gives a place of publication alongside the publisher. Verified: Agamben, G. (1998), Stanford University Press; Italian original 1995 (Einaudi)."
+to_verify:
+  - "translator as printed on the copyright page"
+  - "Italian original title and year as printed in the Einaudi edition"

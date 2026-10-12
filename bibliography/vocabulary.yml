@@ -1,0 +1,406 @@
+# Controlled tag vocabulary for the Exhaustive Bibliography.
+#
+# One id per concept. An entry may only carry tag ids listed here, and `build.mjs`
+# refuses to render anything if it does not. Aliases are the strings an author might
+# write instead of the id; they exist so a concept cannot split into two tags
+# (`virtue` vs `virtue/s`, `postmodern` vs `post-modern`).
+#
+# origin records where the tag came from, so no tag is invented silently:
+#   barry-ref-list      the tag Barry extracted from the seed article's reference list
+#   barry-article-note  the tag Barry attached to the seed article itself
+#   from-title          the tag is drawn from a work's own title
+#   agent-proposed      proposed by an agent, awaiting Barry's decision (status: proposed)
+#
+# status: approved = Barry has ruled on it; proposed = awaiting his yes/no. An entry puts
+# approved tags in `tags` and unapproved ones in `tags_proposed`; build.mjs checks the two agree.
+
+version: 1
+
+axes:
+  concept: A theme or idea a work bears on.
+  venue: A journal or publication venue.
+  field: A discipline or field of practice.
+  person: A thinker whose position a work represents.
+  method: A method or approach.
+
+tags:
+  # ---- Barry's tags from the reference list (barry-ref-list) -------------------
+  - id: human-person
+    label: Human person
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [the human person, personhood, human being]
+    note: The person as bearer of intrinsic worth; the subject dignity is predicated of.
+
+  - id: sacred
+    label: Sacred
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [the sacred]
+    note: The sacred as a category set against the merely biological or the merely social.
+
+  - id: abortion
+    label: Abortion
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: []
+
+  - id: euthanasia
+    label: Euthanasia
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: []
+
+  - id: human-rights
+    label: Human Rights
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [human rights, rights]
+    note: Rights discourse, including dignity as a legal ground of rights.
+
+  - id: discourse-theory
+    label: Discourse theory
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [Diskurstheorie, discourse theory of law]
+    note: Habermas's discourse theory of law and democracy; not discourse ethics generally.
+
+  - id: recognition
+    label: Recognition
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [politics of recognition, Anerkennung]
+    note: Dignity as something conferred or won in social relations (Honneth, Taylor).
+
+  - id: soul
+    label: Soul
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: []
+
+  - id: body
+    label: Body
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: []
+    note: >-
+      The body as a theme. Distinct from `embodiment`, which is the claim that the person IS
+      bodily — Barry listed both, so they stay separate.
+
+  - id: rational
+    label: Rational
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [rationality, reason]
+    note: >-
+      Rationality as a mark of the person — and the point at which capacity-based theories of
+      dignity exclude the non-rational.
+
+  - id: virtue
+    label: Virtue/s
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [virtues, virtue ethics, virtue/s]
+    note: Virtue as the locus of the moral life; virtue ethics in medicine.
+
+  - id: disability
+    label: Disability
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [disabled]
+    note: >-
+      Disability and severe cognitive impairment as the test case for any capacity-based
+      account of dignity.
+
+  - id: development
+    label: Development
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [development as freedom]
+    note: Development in Sen's sense — freedom as both the end and the means of development.
+
+  - id: someone-and-something
+    label: Someone and something
+    axis: concept
+    status: approved
+    origin: barry-ref-list
+    aliases: [the difference between someone and something, someone vs something]
+    note: "Spaemann's distinction: a person is a someone, never a something."
+
+  # ---- tags Barry attached to the seed article (barry-article-note) -----------
+  - id: embodiment
+    label: Embodiment
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [embodied]
+    note: The person as bodily rather than a mind inhabiting a body. See `body`.
+
+  - id: capabilities
+    label: Capabilities
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [capability approach, capabilities approach]
+    note: Dignity grounded in a threshold of capabilities (Nussbaum, Sen).
+
+  - id: postmodern
+    label: Postmodern
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [post-modern, postmodernism, postmodern critique]
+
+  - id: deconstructivist
+    label: Deconstructivist
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [deconstruction, deconstructivism]
+
+  - id: relationality
+    label: Relationality
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [relational, relational ontology]
+    note: Dignity as constituted by relations rather than by what the being is.
+
+  - id: substance
+    label: Substance
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [substantial form]
+    note: The Aristotelian-Thomistic substance claim the seed article defends.
+
+  - id: procedural
+    label: Procedural
+    axis: concept
+    status: approved
+    origin: barry-article-note
+    aliases: [proceduralism, procedural pragmatism]
+    note: Dignity secured by fair procedure rather than by a claim about what the person is.
+
+  - id: bioethics
+    label: Bioethics
+    axis: field
+    status: approved
+    origin: barry-article-note
+    aliases: [biomedical ethics]
+
+  - id: healthcare-ethics
+    label: Healthcare ethics
+    axis: field
+    status: approved
+    origin: barry-article-note
+    aliases: [health care ethics, medical ethics]
+
+  # ---- drawn from a work's own title (from-title) -----------------------------
+  - id: human-dignity
+    label: Human dignity
+    axis: concept
+    status: approved
+    origin: from-title
+    aliases: [dignity]
+    note: >-
+      Added by Barry's decision on 2026-10-12. The subject of the seed article and of three
+      works in the seed list; without it the index could not answer its own question.
+
+  - id: medicine-health-care-and-philosophy
+    label: Medicine, Health Care and Philosophy
+    axis: venue
+    status: approved
+    origin: from-title
+    aliases: []
+    note: The seed article's venue.
+
+  - id: european-journal-of-international-law
+    label: European Journal of International Law
+    axis: venue
+    status: approved
+    origin: from-title
+    aliases: [EJIL]
+
+  - id: the-linacre-quarterly
+    label: The Linacre Quarterly
+    axis: venue
+    status: approved
+    origin: from-title
+    aliases: [Linacre Q]
+    note: Journal of the Catholic Medical Association; the venue of the addiction-and-dignity essay.
+
+  # ---- proposed by an agent, awaiting Barry's decision (agent-proposed) -------
+  - id: autonomy
+    label: Autonomy
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [self-determination]
+    note: The rival grounding the seed article rejects — dignity as self-rule.
+
+  - id: bare-life
+    label: Bare life
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [bare life, nuda vita]
+
+  - id: sovereignty
+    label: Sovereignty
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [sovereign power]
+
+  - id: dependence
+    label: Dependence
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [dependency]
+    note: MacIntyre's dependent rational animal — dependence as normal, not as deficiency.
+
+  - id: justice
+    label: Justice
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: []
+
+  - id: law
+    label: Law
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [legal]
+    note: Dignity in legal and constitutional reasoning.
+
+  - id: worth
+    label: Worth
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [human worth]
+    note: Worth as distinct from dignity in Sulmasy's and Kateb's usage.
+
+  - id: multiculturalism
+    label: Multiculturalism
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [multi-culturalism]
+
+  - id: ontology
+    label: Ontology
+    axis: method
+    status: proposed
+    origin: agent-proposed
+    aliases: [ontological, ontological foundations]
+    note: Grounding an ethic in what the human being is, rather than in procedure or agreement.
+
+  - id: history
+    label: History
+    axis: method
+    status: proposed
+    origin: agent-proposed
+    aliases: [historical]
+    note: A history-of-ideas treatment of a concept.
+
+  # ---- batch 2: concepts the addiction/dignity essay introduces --------------
+  - id: addiction
+    label: Addiction
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [substance use disorder, substance abuse, substance dependence, addictive]
+    note: Impaired use of a substance or behaviour, argued here to be a dignity disorder.
+
+  - id: dignity-disorder
+    label: Dignity disorder
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: []
+    note: >-
+      The seed essay's coinage for impaired existential, moral or social dignity: impaired
+      rationality, will, capacity to love, and body.
+
+  - id: akrasia
+    label: Akrasia
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [weakness of will, incontinence]
+    note: Acting against one's own better judgement; the essay's internal conflict of the addict.
+
+  - id: love
+    label: Love
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [charity, caritas, disinterested love]
+    note: The capacity to love as a criterion of dignity, and its impairment as a harm.
+
+  - id: agency
+    label: Agency
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [self-efficacy, free will, freedom of choice]
+    note: The capacity to act and choose; what treatment aims to restore.
+
+  - id: responsibility
+    label: Responsibility
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [accountability, personal and societal responsibility]
+    note: Who answers for the impairment — the person, the family, or the society.
+
+  - id: disease-model
+    label: Disease model
+    axis: concept
+    status: proposed
+    origin: agent-proposed
+    aliases: [brain disease model, medical model, disorder vs disease]
+    note: >-
+      The claim that addiction is a brain disease; the essay's target when it calls choice
+      versus disease a false dichotomy.
+
+  - id: neuroscience
+    label: Neuroscience
+    axis: field
+    status: proposed
+    origin: agent-proposed
+    aliases: [neurobiology, neuroadaptation]
+    note: The clinical and neurobiological literature the essay reads dignity through.
+
+  - id: personalism
+    label: Personalism
+    axis: method
+    status: proposed
+    origin: agent-proposed
+    aliases: [personalist, personalistic]
+    note: Reasoning from the person as the irreducible unit of value; the essay's method.
+
+  - id: literature
+    label: Literature
+    axis: field
+    status: proposed
+    origin: agent-proposed
+    aliases: [fiction, novel, poetry]
+    note: Works of imagination cited for an image of the person rather than for an argument.

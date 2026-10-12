@@ -1,0 +1,22 @@
+# Reference 72 of the addiction-and-dignity essay's list.
+id: "whitesell-2013-familial-social-individual"
+kind: "journal-article"
+authors: "Whitesell, M., Bachand, A., Peel, J., & Brown, M."
+creators:
+  - "Whitesell, M."
+  - "Bachand, A."
+  - "Peel, J."
+  - "Brown, M."
+title: "Familial, Social, and Individual Factors Contributing to Risk for Adolescent Substance Use"
+journal: "Journal of Addiction"
+year: 2013
+volume: "2013"
+pages: "1–9"
+doi: "10.1155/2013/579310"
+tags: ["addiction"]
+tags_inferred: ["responsibility"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

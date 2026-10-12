@@ -1,0 +1,19 @@
+# Reference 31 of the addiction-and-dignity essay's list.
+id: "lewis-2018-brain-change-addiction"
+kind: "journal-article"
+authors: "Lewis, M."
+title: "Brain Change in Addiction as Learning, Not Disease"
+journal: "New England Journal of Medicine"
+year: 2018
+volume: "379"
+issue: "16"
+pages: "1551–1560"
+doi: "10.1056/nejmra1602872"
+tags: ["addiction"]
+tags_inferred: ["disease-model", "neuroscience"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Addiction as learning, not disease — the clearest statement of the position the essay calls a false dichotomy."
+to_verify:
+  - "volume, issue and page range as printed"

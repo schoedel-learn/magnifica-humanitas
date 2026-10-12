@@ -1,0 +1,20 @@
+# Reference 20 of the addiction-and-dignity essay's list.
+id: "goodman-1990-addiction-definition-implications"
+kind: "journal-article"
+authors: "Goodman, A."
+title: "Addiction: Definition and implications"
+journal: "British Journal of Addiction"
+year: 1990
+volume: "85"
+issue: "11"
+pages: "1403–1408"
+doi: "10.1111/j.1360-0443.1990.tb01620.x"
+tags: ["addiction"]
+tags_inferred: ["disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "The definitional argument about addiction that the essay intervenes in."
+to_verify:
+  - "volume, issue and page range as printed"
+discrepancy: "Crossref deposits the surname in capitals (GOODMAN); recorded in normal form."

@@ -1,0 +1,18 @@
+# Reference 65 of the addiction-and-dignity essay's list.
+id: "stepinova-2011-aquinas-solution-aristotle"
+kind: "journal-article"
+authors: "Stepinova, M."
+title: "Aquinas’ Solution of Aristotle's Incontinent Man and Augustine's Two Wills"
+journal: "New Blackfriars"
+year: 2011
+volume: "92"
+issue: "1039"
+pages: "322–340"
+doi: "10.1111/j.1741-2005.2009.01328.x"
+tags: ["akrasia"]
+tags_inferred: ["virtue"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

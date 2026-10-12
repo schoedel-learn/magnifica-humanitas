@@ -1,0 +1,16 @@
+# Dworkin — Life's dominion. Reference 5.
+id: "dworkin-1993-lifes-dominion"
+kind: "book"
+authors: "Dworkin, R."
+title: "Life's dominion: An argument about abortion, euthanasia, and individual freedom"
+year: 1993
+publisher: "Knopf"
+tags: ["abortion", "euthanasia"]
+tags_inferred: ["autonomy", "human-rights"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "The list's single entry for abortion and euthanasia together; dignity argued from individual freedom."
+discrepancy: "The list pairs \"New York: Vintage\" with 1993. Knopf published the first edition in 1993; Vintage is the 1994 paperback. The entry cites the first edition."
+to_verify:
+  - "which printing is being cited — Knopf 1993 or the Vintage 1994 paperback"

@@ -1,0 +1,18 @@
+# Reference 52 of the addiction-and-dignity essay's list.
+id: "pope-john-paul-ii-1991-address-on-drug-addiction-and-alcoholism"
+kind: "journal-article"
+authors: "Pope John Paul II"
+title: "The address of His Holiness John Paul II to participants in the Sixth International Conference: Drug addiction and alcoholism frustrate the person's very capacity for community and self-giving"
+year: 1991
+journal: "Dolentium Hominum"
+volume: "19"
+issue: "1"
+pages: "7–9"
+tags: []
+tags_inferred: ["addiction", "human-person"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "in-article-list"
+verified_on: "2026-10-12"
+discrepancy: "The list gives volume 19 (1) for a 1991 address; Dolentium Hominum began in 1986, so the volume number does not fit the year."
+to_verify:
+  - "volume, issue and pages at the publisher"

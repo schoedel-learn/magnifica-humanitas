@@ -1,0 +1,19 @@
+# Spaemann — Persons. Reference 17.
+id: "spaemann-2006-persons"
+kind: "book"
+authors: "Spaemann, R."
+title: "Persons: The difference between \"someone\" and \"something\""
+translator: "O'Donovan, O."
+original_title: "Personen: Versuch über den Unterschied zwischen \"etwas\" und \"jemand\""
+original_year: 1996
+year: 2006
+publisher: "Oxford University Press"
+tags: ["someone-and-something", "human-person"]
+tags_inferred: ["rational", "substance"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Being a someone is not a property a something can gain or lose — the source of the list's `someone and something` tag."
+discrepancy: "The list reads \"Spaemann, R., and Persons. 2006. The difference between someone and something.\" — the title was parsed into the author field."
+to_verify:
+  - "German original title and year as printed in the C. H. Beck edition"

@@ -1,0 +1,22 @@
+# Reference 4 of the addiction-and-dignity essay's list.
+id: "bielecki-2017-proposal-philosophical-basis"
+kind: "journal-article"
+authors: "Bielecki, A., & Nieszporska, S."
+creators:
+  - "Bielecki, A."
+  - "Nieszporska, S."
+title: "The proposal of philosophical basis of the health care system"
+journal: "Medicine, Health Care and Philosophy"
+year: 2017
+volume: "20"
+issue: "1"
+pages: "23–35"
+doi: "10.1007/s11019-016-9717-2"
+tags: []
+tags_inferred: ["human-dignity", "healthcare-ethics"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "A philosophical basis for health-care systems — the essay's premise that dignity talk in medicine is under-theorised."
+to_verify:
+  - "volume, issue and page range as printed"

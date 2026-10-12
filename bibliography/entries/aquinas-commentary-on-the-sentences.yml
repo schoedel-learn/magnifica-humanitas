@@ -1,0 +1,13 @@
+# Reference 1 of the addiction-and-dignity essay's list.
+id: "aquinas-commentary-on-the-sentences"
+kind: "book"
+authors: "Aquinas, T."
+title: "Commentary on the Sentences"
+tags: []
+tags_inferred: ["soul", "human-person"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "in-article-list"
+verified_on: "2026-10-12"
+to_verify:
+  - "which edition or translation is being cited — the source list names none"
+  - "the year of the edition"

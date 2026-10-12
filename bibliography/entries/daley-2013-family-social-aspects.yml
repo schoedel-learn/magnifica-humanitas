@@ -1,0 +1,18 @@
+# Reference 11 of the addiction-and-dignity essay's list.
+id: "daley-2013-family-social-aspects"
+kind: "journal-article"
+authors: "Daley, D. C."
+title: "Family and social aspects of substance use disorders and treatment"
+journal: "Journal of Food and Drug Analysis"
+year: 2013
+volume: "21"
+issue: "4"
+pages: "S73–S76"
+doi: "10.1016/j.jfda.2013.09.038"
+tags: ["addiction"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

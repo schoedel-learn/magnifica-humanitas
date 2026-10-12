@@ -1,0 +1,22 @@
+# Reference 29 of the addiction-and-dignity essay's list.
+id: "lander-2013-impact-substance-use"
+kind: "journal-article"
+authors: "Lander, L., Howsare, J., & Byrne, M."
+creators:
+  - "Lander, L."
+  - "Howsare, J."
+  - "Byrne, M."
+title: "The Impact of Substance Use Disorders on Families and Children: From Theory to Practice"
+journal: "Social Work in Public Health"
+year: 2013
+volume: "28"
+issue: "3-4"
+pages: "194–205"
+doi: "10.1080/19371918.2013.759005"
+tags: ["addiction"]
+tags_inferred: ["responsibility"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

@@ -1,0 +1,18 @@
+# Taylor — The politics of recognition. Reference 19.
+id: "taylor-1994-politics-of-recognition"
+kind: "chapter"
+authors: "Taylor, C."
+title: "The politics of recognition"
+container_title: "Multiculturalism: Examining the politics of recognition"
+editors: "A. Gutmann"
+year: 1994
+publisher: "Princeton University Press"
+pages: "25–73"
+tags: ["recognition"]
+tags_inferred: ["human-person", "multiculturalism"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "mixed"
+verified_on: "2026-10-12"
+note: "Recognition as a human need, and equal recognition as a modern demand; with Honneth, the recognition strand."
+to_verify:
+  - "page range 25–73 is carried by the article's list and matches the 1994 Princeton edition (ERIC ED381605); confirm against the book's own contents page"

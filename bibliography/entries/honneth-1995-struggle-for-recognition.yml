@@ -1,0 +1,17 @@
+# Honneth — The struggle for recognition. Reference 8.
+id: "honneth-1995-struggle-for-recognition"
+kind: "book"
+authors: "Honneth, A."
+title: "The struggle for recognition: The moral grammar of social conflicts"
+translator: "Anderson, J."
+year: 1995
+publisher: "Polity Press"
+tags: ["recognition"]
+tags_inferred: ["human-person"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "mixed"
+verified_on: "2026-10-12"
+note: "Recognition in three spheres — love, rights, solidarity. With Taylor, the recognition strand the article sets against an ontological grounding."
+discrepancy: "The list prints \"Cambridge: MIT Press\" with 1995. The translation (Joel Anderson) was published by Polity Press, Cambridge UK, in 1995; the MIT Press edition is 1996. As printed, publisher and year do not go together."
+to_verify:
+  - "translator as printed on the copyright page"

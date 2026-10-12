@@ -1,0 +1,14 @@
+# Reference 48 of the addiction-and-dignity essay's list.
+id: "pope-francis-2024-general-audience"
+kind: "magisterial"
+authors: "Pope Francis"
+title: "General audience: Saint Peter's Square"
+year: 2024
+tags: []
+tags_inferred: ["human-dignity"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "in-article-list"
+verified_on: "2026-10-12"
+to_verify:
+  - "URL"
+  - "the audience's own date (the list gives 26 June 2024)"

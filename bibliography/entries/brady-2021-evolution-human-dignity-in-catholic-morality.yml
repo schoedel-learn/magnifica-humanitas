@@ -1,0 +1,18 @@
+# Reference 5 of the addiction-and-dignity essay's list.
+id: "brady-2021-evolution-human-dignity-in-catholic-morality"
+kind: "journal-article"
+authors: "Brady, B."
+title: "The evolution of human dignity in Catholic morality"
+year: 2021
+journal: "Journal of Moral Theology"
+volume: "10"
+issue: "1"
+pages: "1–25"
+tags: ["human-dignity"]
+tags_inferred: ["history"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "in-article-list"
+verified_on: "2026-10-12"
+to_verify:
+  - "a locator — the source list gives none (the journal is open access)"
+  - "page range as printed"

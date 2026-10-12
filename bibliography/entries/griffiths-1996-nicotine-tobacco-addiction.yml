@@ -1,0 +1,18 @@
+# Reference 21 of the addiction-and-dignity essay's list.
+id: "griffiths-1996-nicotine-tobacco-addiction"
+kind: "journal-article"
+authors: "Griffiths, M."
+title: "Nicotine, tobacco and addiction"
+journal: "Nature"
+year: 1996
+volume: "384"
+issue: "6604"
+pages: "18–18"
+doi: "10.1038/384018a0"
+tags: ["addiction"]
+tags_inferred: ["neuroscience"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

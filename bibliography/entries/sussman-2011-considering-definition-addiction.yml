@@ -1,0 +1,21 @@
+# Reference 68 of the addiction-and-dignity essay's list.
+id: "sussman-2011-considering-definition-addiction"
+kind: "journal-article"
+authors: "Sussman, S., & Sussman, A. N."
+creators:
+  - "Sussman, S."
+  - "Sussman, A. N."
+title: "Considering the Definition of Addiction"
+journal: "International Journal of Environmental Research and Public Health"
+year: 2011
+volume: "8"
+issue: "10"
+pages: "4025–4038"
+doi: "10.3390/ijerph8104025"
+tags: ["addiction"]
+tags_inferred: ["disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

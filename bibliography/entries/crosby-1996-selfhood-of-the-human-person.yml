@@ -1,0 +1,15 @@
+# Crosby — The selfhood of the human person. Reference 3.
+id: "crosby-1996-selfhood-of-the-human-person"
+kind: "book"
+authors: "Crosby, J. F."
+title: "The selfhood of the human person"
+year: 1996
+publisher: "Catholic University of America Press"
+tags: ["human-person", "soul"]
+tags_inferred: ["rational", "substance"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Personalist account of selfhood; the closest thing in the seed list to the article's own position."
+to_verify:
+  - "middle initial as printed on the title page"

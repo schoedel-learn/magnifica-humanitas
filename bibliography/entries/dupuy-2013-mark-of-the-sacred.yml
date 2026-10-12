@@ -1,0 +1,16 @@
+# Dupuy — The mark of the sacred. Reference 4.
+id: "dupuy-2013-mark-of-the-sacred"
+kind: "book"
+authors: "Dupuy, J.-P."
+title: "The mark of the sacred"
+translator: "DeBevoise, M. B."
+year: 2013
+publisher: "Stanford University Press"
+tags: ["sacred"]
+tags_inferred: []
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "The sacred as what a society cannot instrumentalise; the second of the list's two `sacred` entries."
+to_verify:
+  - "French original title and year, if the original is to be recorded"

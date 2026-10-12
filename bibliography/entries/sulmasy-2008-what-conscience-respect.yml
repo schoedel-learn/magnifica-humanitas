@@ -1,0 +1,19 @@
+# Reference 66 of the addiction-and-dignity essay's list.
+id: "sulmasy-2008-what-conscience-respect"
+kind: "journal-article"
+authors: "Sulmasy, D. P."
+title: "What is conscience and why is respect for it so important?"
+journal: "Theoretical Medicine and Bioethics"
+year: 2008
+volume: "29"
+issue: "3"
+pages: "135–149"
+doi: "10.1007/s11017-008-9072-2"
+tags: []
+tags_inferred: ["human-person", "recognition", "healthcare-ethics"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Conscience and why respect for it matters: a dignity argument inside clinical ethics."
+to_verify:
+  - "volume, issue and page range as printed"

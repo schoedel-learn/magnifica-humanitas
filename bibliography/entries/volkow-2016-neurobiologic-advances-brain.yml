@@ -1,0 +1,23 @@
+# Reference 69 of the addiction-and-dignity essay's list.
+id: "volkow-2016-neurobiologic-advances-brain"
+kind: "journal-article"
+authors: "Volkow, N. D., Koob, G. F., & McLellan, A. T."
+creators:
+  - "Volkow, N. D."
+  - "Koob, G. F."
+  - "McLellan, A. T."
+title: "Neurobiologic Advances from the Brain Disease Model of Addiction"
+journal: "New England Journal of Medicine"
+year: 2016
+volume: "374"
+issue: "4"
+pages: "363–371"
+doi: "10.1056/nejmra1511480"
+tags: ["addiction"]
+tags_inferred: ["neuroscience", "disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Neurobiologic advances from the brain disease model of addiction."
+to_verify:
+  - "volume, issue and page range as printed"

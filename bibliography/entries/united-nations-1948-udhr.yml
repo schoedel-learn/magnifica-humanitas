@@ -1,0 +1,16 @@
+# United Nations — Universal Declaration of Human Rights. Reference 6.
+id: "united-nations-1948-udhr"
+kind: "web"
+authors: "United Nations General Assembly"
+title: "Universal Declaration of Human Rights"
+year: 1948
+published_on: "1948-12-10"
+publisher: "United Nations"
+url: "https://www.un.org/en/about-us/universal-declaration-of-human-rights"
+tags: ["human-rights"]
+tags_inferred: ["law", "human-dignity"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "publisher-page"
+verified_on: "2026-10-12"
+note: "Proclaimed in Paris on 10 December 1948 as General Assembly resolution 217 A. The article's court of appeal for dignity as a legal ground."
+discrepancy: "The list prints \"General Assembly of United Nations. 1993. ... In Paris.\" The Declaration was proclaimed in Paris in 1948, not 1993; Paris is where it was adopted, not a publisher place. Verified against the UN's own page."

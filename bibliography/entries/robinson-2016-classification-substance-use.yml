@@ -1,0 +1,21 @@
+# Reference 59 of the addiction-and-dignity essay's list.
+id: "robinson-2016-classification-substance-use"
+kind: "journal-article"
+authors: "Robinson, S., & Adinoff, B."
+creators:
+  - "Robinson, S."
+  - "Adinoff, B."
+title: "The Classification of Substance Use Disorders: Historical, Contextual, and Conceptual Considerations"
+journal: "Behavioral Sciences"
+year: 2016
+volume: "6"
+issue: "3"
+pages: "18"
+doi: "10.3390/bs6030018"
+tags: ["addiction"]
+tags_inferred: ["disease-model"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

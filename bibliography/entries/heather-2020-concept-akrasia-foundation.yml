@@ -1,0 +1,18 @@
+# Reference 22 of the addiction-and-dignity essay's list.
+id: "heather-2020-concept-akrasia-foundation"
+kind: "journal-article"
+authors: "Heather, N."
+title: "The concept of akrasia as the foundation for a dual systems theory of addiction"
+journal: "Behavioural Brain Research"
+year: 2020
+volume: "390"
+pages: "112666"
+doi: "10.1016/j.bbr.2020.112666"
+tags: ["addiction", "akrasia"]
+tags_inferred: ["neuroscience", "agency"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Akrasia as the foundation for a dual-systems account of addiction — the essay's impaired will."
+to_verify:
+  - "volume, issue and page range as printed"

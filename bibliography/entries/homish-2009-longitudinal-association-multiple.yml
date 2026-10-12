@@ -1,0 +1,23 @@
+# Reference 23 of the addiction-and-dignity essay's list.
+id: "homish-2009-longitudinal-association-multiple"
+kind: "journal-article"
+authors: "Homish, G. G., Leonard, K. E., Kozlowski, L. T., & Cornelius, J. R."
+creators:
+  - "Homish, G. G."
+  - "Leonard, K. E."
+  - "Kozlowski, L. T."
+  - "Cornelius, J. R."
+title: "The longitudinal association between multiple substance use discrepancies and marital satisfaction"
+journal: "Addiction"
+year: 2009
+volume: "104"
+issue: "7"
+pages: "1201–1209"
+doi: "10.1111/j.1360-0443.2009.02614.x"
+tags: ["addiction"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

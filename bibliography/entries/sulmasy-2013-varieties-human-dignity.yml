@@ -1,0 +1,19 @@
+# Reference 67 of the addiction-and-dignity essay's list.
+id: "sulmasy-2013-varieties-human-dignity"
+kind: "journal-article"
+authors: "Sulmasy, D. P."
+title: "The varieties of human dignity: A logical and conceptual analysis"
+journal: "Medicine, Health Care and Philosophy"
+year: 2013
+volume: "16"
+issue: "4"
+pages: "937–944"
+doi: "10.1007/s11019-012-9400-1"
+tags: ["human-dignity"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Sulmasy's logical analysis of dignity's varieties — the essay's nearest ancestor in the seed bibliography's own first batch."
+to_verify:
+  - "volume, issue and page range as printed"

@@ -1,0 +1,23 @@
+# Reference 13 of the addiction-and-dignity essay's list.
+id: "dernbach-2024-source-control-model"
+kind: "journal-article"
+authors: "Dernbach, M. R., Drexler, K., McCord, E., & Carpenter, J. E."
+creators:
+  - "Dernbach, M. R."
+  - "Drexler, K."
+  - "McCord, E."
+  - "Carpenter, J. E."
+title: "A Source Control Model for Treatment-Resistant Substance Use Disorder"
+journal: "Journal of Addiction Medicine"
+year: 2024
+volume: "18"
+issue: "5"
+pages: "483–485"
+doi: "10.1097/adm.0000000000001344"
+tags: ["addiction"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

@@ -1,0 +1,16 @@
+# Habermas — Between facts and norms. Reference 7.
+id: "habermas-1996-between-facts-and-norms"
+kind: "book"
+authors: "Habermas, J."
+title: "Between facts and norms: Contributions to a discourse theory of law and democracy"
+translator: "Rehg, W."
+year: 1996
+publisher: "MIT Press"
+tags: ["discourse-theory"]
+tags_inferred: ["procedural", "human-rights", "law"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "The article's target when it rejects procedural groundings of dignity: legitimacy from the procedure of discourse."
+to_verify:
+  - "German original (Faktizität und Geltung) year and publisher, if the original is to be recorded"

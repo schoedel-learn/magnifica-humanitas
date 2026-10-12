@@ -1,0 +1,16 @@
+# Pellegrino & Thomasma — The virtues in medical practice. Reference 14.
+id: "pellegrino-thomasma-1993-virtues-in-medical-practice"
+kind: "book"
+authors: "Pellegrino, E. D., & Thomasma, D. C."
+creators:
+  - "Pellegrino, E. D."
+  - "Thomasma, D. C."
+title: "The virtues in medical practice"
+year: 1993
+publisher: "Oxford University Press"
+tags: ["virtue"]
+tags_inferred: ["bioethics", "healthcare-ethics"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Virtue as the clinician's formation rather than a rule set; the list's medical-virtue entry."

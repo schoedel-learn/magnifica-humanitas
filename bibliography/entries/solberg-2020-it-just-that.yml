@@ -1,0 +1,22 @@
+# Reference 63 of the addiction-and-dignity essay's list.
+id: "solberg-2020-it-just-that"
+kind: "journal-article"
+authors: "Solberg, H., & Nåden, D."
+creators:
+  - "Solberg, H."
+  - "Nåden, D."
+title: "It is just that people treat you like a human being: The meaning of dignity for patients with substance use disorders"
+journal: "Journal of Clinical Nursing"
+year: 2020
+volume: "29"
+issue: "3-4"
+pages: "480–491"
+doi: "10.1111/jocn.15108"
+tags: ["human-dignity"]
+tags_inferred: ["recognition", "healthcare-ethics"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+note: "Dignity as patients describe it — being treated like a human being."
+to_verify:
+  - "volume, issue and page range as printed"

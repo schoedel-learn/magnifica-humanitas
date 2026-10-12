@@ -18,11 +18,13 @@ the same tables.
 ## Layout
 
 ```
-cms/    Payload 3 admin + API (Next.js app)
-site/   Astro static site
-ops/    chroma-server compose/build files, SQL, DNS script
-docs/   architecture decisions
+cms/           Payload 3 admin + API (Next.js app)
+site/          Astro static site
+bibliography/  Exhaustive Bibliography — research references + tag index (repo-canonical YAML;
+               nothing here is published until an essay cites it)
+ops/           chroma-server compose/build files, SQL, DNS script
+docs/          architecture decisions
 ```
 
-Architecture decisions D1–D9 and open questions Q1–Q5 are recorded in
+Architecture decisions D1–D11 and open questions Q1–Q5 are recorded in
 [`docs/decisions.md`](docs/decisions.md).

@@ -1,0 +1,13 @@
+# Butler — Undoing gender. Reference 2.
+id: "butler-2004-undoing-gender"
+kind: "book"
+authors: "Butler, J."
+title: "Undoing gender"
+year: 2004
+publisher: "Routledge"
+tags: ["recognition"]
+tags_inferred: ["body"]
+seen_in: ["frantz-2025-reclaiming-human-dignity"]
+metadata_source: "openlibrary"
+verified_on: "2026-10-12"
+note: "Gender as a recognition-relation: who counts as a person, and by whose norms. The article's recognition critique reaches this strand."

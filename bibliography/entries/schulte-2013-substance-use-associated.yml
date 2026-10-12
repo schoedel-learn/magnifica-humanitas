@@ -1,0 +1,20 @@
+# Reference 61 of the addiction-and-dignity essay's list.
+id: "schulte-2013-substance-use-associated"
+kind: "journal-article"
+authors: "Schulte, M. T., & Hser, Y. I."
+creators:
+  - "Schulte, M. T."
+  - "Hser, Y. I."
+title: "Substance Use and Associated Health Conditions throughout the Lifespan"
+journal: "Public Health Reviews"
+year: 2013
+volume: "35"
+issue: "2"
+doi: "10.1007/bf03391702"
+tags: ["addiction"]
+tags_inferred: []
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"

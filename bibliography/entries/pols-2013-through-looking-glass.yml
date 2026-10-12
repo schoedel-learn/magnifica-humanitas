@@ -1,0 +1,18 @@
+# Reference 39 of the addiction-and-dignity essay's list.
+id: "pols-2013-through-looking-glass"
+kind: "journal-article"
+authors: "Pols, J."
+title: "Through the looking glass: Good looks and dignity in care"
+journal: "Medicine, Health Care and Philosophy"
+year: 2013
+volume: "16"
+issue: "4"
+pages: "953–966"
+doi: "10.1007/s11019-013-9483-3"
+tags: ["human-dignity"]
+tags_inferred: ["healthcare-ethics", "recognition"]
+seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
+metadata_source: "crossref"
+verified_on: "2026-10-12"
+to_verify:
+  - "volume, issue and page range as printed"
