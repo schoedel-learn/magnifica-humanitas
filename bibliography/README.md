@@ -90,6 +90,34 @@ Extra, so an item traces back to its entry, and the entry's `note` arrives as a 
 Tag naming carries over: `recognition` is borne by the work's own title, `recognition?` is an inferred
 assignment awaiting confirmation. Zotero's tag pane is not the index — `tag-index.md` is.
 
+## The file collection (the works' own PDFs)
+
+The PDFs live **outside** this repo, because the repo deploys and the publication's posture is quoted
+extracts only, never a full text (D9). The default folder is
+`~/Documents/Research/Exhaustive Bibliography/`:
+
+```
+pdf/<citekey>.pdf   one file per work, named by its citekey (stable, greppable, no collisions)
+MANIFEST.md         what is held, and for everything else where to get it
+fetch-list.csv      every work with doi/url/link, laid out for a library session
+state.json          provenance: the URL fetched, size, sha256, date
+```
+
+```sh
+node scripts/collect-pdfs.mjs --dir "$HOME/Documents/Research/Exhaustive Bibliography"
+node scripts/collect-pdfs.mjs --dir "…" --manifest-only     # refresh; also registers PDFs you filed yourself
+```
+
+The collector downloads what is legitimately reachable over the open web — publisher OA (Springer,
+Cambridge, MDPI where it answers), and PMC/repository copies located through Unpaywall. It refuses any
+`--dir` inside the repo, and it validates what it saves (`%PDF-`, minimum size). The folder is the truth:
+any PDF you drop in `pdf/<citekey>.pdf` counts as held on the next run.
+
+Automated fetching stops at several publishers' bot walls — Wiley, OUP, T&F, SAGE, NEJM, Hindawi and
+Europe PMC all answer 403 to a scripted request, and a browser session only gets Springer, PMC's
+open-access subset, Cambridge and some repositories. Those works need a library session; `fetch-list.csv`
+carries a clickable link for each, and everything still missing is written up in `MANIFEST.md`.
+
 ## Commands
 
 ```sh
