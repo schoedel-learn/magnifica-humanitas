@@ -64,14 +64,28 @@ That writes a stub from Crossref (articles) or Open Library (books, the edition 
 
 ## Zotero (the mirror)
 
-`exports/references.ris` imports into Zotero; `exports/csl.json` is the archival interchange copy.
+One-way: import this folder into Zotero to read, annotate and keep PDFs. **Never edit metadata there** —
+edit the entry and re-export. A collection named **Magnifica Humanitas — Exhaustive Bibliography** holds
+the mirror (created 2026-10-12); the rest of Barry's library is unrelated and untouched.
 
-1. Make a collection, e.g. **Magnifica Humanitas — Exhaustive Bibliography**, and select it.
-2. Zotero → **File → Import** → `exports/references.ris`.
-3. Read, annotate, store PDFs there. To refresh after edits here, delete the collection and re-import.
+Two ways to refresh it:
 
-Tag names carry the same convention into Zotero: `recognition` is approved, `reality?`-style names with a
-trailing `?` are inferred. Zotero's tag pane is not the index — `tag-index.md` is.
+1. **In the UI:** select the collection, then Zotero → File → Import → `exports/references.ris`.
+2. **Programmatically:** `exports/zotero-items.json` is Zotero item JSON (generated). With Zotero running,
+   POST it to the connector in batches:
+
+```sh
+curl -s -X POST http://127.0.0.1:23119/connector/saveItems \
+  -H 'Content-Type: application/json' -d '{"items": [ ... ]}'   # 201 on success, empty body
+```
+
+Items land in **whatever collection Zotero has selected** — the connector ignores any target sent in the
+payload (verified in Zotero 10's `server_connector.js`) — so select the target first, and re-link the
+items afterwards if you had something else selected. Every mirrored item carries `Citekey: <id>` in
+Extra, so an item traces back to its entry, and the entry's `note` arrives as a child note.
+
+Tag naming carries over: `recognition` is borne by the work's own title, `recognition?` is an inferred
+assignment awaiting confirmation. Zotero's tag pane is not the index — `tag-index.md` is.
 
 ## Commands
 

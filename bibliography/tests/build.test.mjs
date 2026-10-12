@@ -16,7 +16,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
-import { load, validate, render, build, apaEntry, shortLabel, renderIndexJson } from '../scripts/build.mjs'
+import { load, validate, render, build, apaEntry, shortLabel, renderIndexJson, renderZoteroItems } from '../scripts/build.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const REAL_ROOT = path.resolve(HERE, '..')
@@ -280,6 +280,27 @@ test('the tag index marks a proposed tag and lists it for a decision', () => {
   assert.match(md, /### Proposed tags — should the concept exist at all\?/)
   assert.match(md, /### Inferred assignments/)
   assert.match(md, /## Concepts/)
+})
+
+test('Zotero mirror items: type mapping, corporate authors, and the citekey in extra', () => {
+  const items = JSON.parse(
+    renderZoteroItems([
+      { id: 'a', kind: 'chapter', authors: 'Taylor, C.', title: 'T', year: 1994, container_title: 'B', pages: '1–2', publisher: 'P', tags: ['x'], tags_inferred: ['y'] },
+      { id: 'b', kind: 'magisterial', authors: 'Second Vatican Council', title: 'D', year: 1965, url: 'https://example.org', tags: [], tags_inferred: [] },
+    ])
+  )
+  const byKey = Object.fromEntries(items.map((i) => [i.extra.split(': ')[1], i]))
+  const chapter = byKey.a
+  assert.equal(chapter.itemType, 'bookSection')
+  assert.deepEqual(chapter.creators, [{ lastName: 'Taylor', firstName: 'C.', creatorType: 'author' }])
+  assert.equal(chapter.bookTitle, 'B')
+  assert.deepEqual(chapter.tags, [{ tag: 'x' }, { tag: 'y?' }])
+  assert.equal(chapter.extra, 'Citekey: a')
+  // a corporate author is one field, not a surname with no given name
+  const doc = byKey.b
+  assert.equal(doc.creators[0].fieldMode, 1)
+  assert.equal(doc.creators[0].lastName, 'Second Vatican Council')
+  assert.equal(doc.itemType, 'document')
 })
 
 test('integration: the real bibliography validates and its generated files are current', () => {

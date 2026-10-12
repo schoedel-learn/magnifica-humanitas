@@ -665,6 +665,57 @@ export function renderBib(entries) {
   return out.join('\n')
 }
 
+
+/** Zotero item JSON, for the one-way reading mirror. POSTed to Zotero's connector
+ *  (/connector/saveItems) or re-importable as a file; `extra` carries our citekey so an item can be
+ *  traced back to its entry. */
+const ZOTERO_TYPE = {
+  book: 'book',
+  chapter: 'bookSection',
+  'journal-article': 'journalArticle',
+  magisterial: 'document',
+  web: 'webpage',
+  magazine: 'magazineArticle',
+  thesis: 'thesis',
+}
+
+export function renderZoteroItems(entries) {
+  const items = sortEntries(entries).map((e) => {
+    const creators = (e.creators?.length ? e.creators : (e.authors ?? '').trim() ? [e.authors.trim()] : []).map(
+      (a) => {
+        const raw = String(a).trim()
+        if (!raw.includes(',')) return { lastName: raw, creatorType: 'author', fieldMode: 1 }
+        return { lastName: raw.split(',')[0].trim(), firstName: raw.split(',').slice(1).join(',').trim(), creatorType: 'author' }
+      }
+    )
+    const item = {
+      itemType: ZOTERO_TYPE[e.kind] ?? 'document',
+      title: e.title,
+      creators,
+      date: e.published_on ?? (e.year ? String(e.year) : ''),
+      DOI: e.doi ?? '',
+      url: e.url ?? (e.doi ? `https://doi.org/${e.doi}` : ''),
+      extra: `Citekey: ${e.id}`,
+      tags: [...(e.tags ?? []), ...(e.tags_inferred ?? []).map((t) => `${t}?`)].map((t) => ({ tag: t })),
+      notes: e.note ? [{ note: String(e.note).trim().replace(/\n/g, ' ') }] : [],
+    }
+    if (e.journal) item.publicationTitle = e.journal
+    if (e.container_title) item.bookTitle = e.container_title
+    if (e.kind === 'web' && e.publisher) item.websiteTitle = e.publisher
+    if (e.kind === 'magazine' && e.publisher) item.publicationTitle = e.publisher
+    if (e.publisher && !item.publicationTitle && e.kind !== 'web') item.publisher = e.publisher
+    if (e.volume) item.volume = e.volume
+    if (e.issue) item.issue = e.issue
+    if (e.pages) item.pages = e.pages
+    if (e.edition) item.edition = e.edition
+    if (e.isbn) item.ISBN = e.isbn
+    if (e.translator && e.kind === 'book')
+      item.creators.push({ lastName: e.translator.split(',')[0].trim(), firstName: e.translator.split(',').slice(1).join(',').trim(), creatorType: 'translator' })
+    return item
+  })
+  return `${JSON.stringify(items, null, 2)}\n`
+}
+
 export function render(entries, vocab, opts = {}) {
   const { used } = tagIndexRows(entries, vocab)
   return {
@@ -674,6 +725,7 @@ export function render(entries, vocab, opts = {}) {
     'exports/csl.json': renderCsl(entries),
     'exports/references.ris': renderRis(entries),
     'exports/references.bib': renderBib(entries),
+    'exports/zotero-items.json': renderZoteroItems(entries),
     _tagsUsed: used,
   }
 }
