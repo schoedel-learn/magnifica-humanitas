@@ -155,6 +155,31 @@ export function validate(entries, vocab) {
     }
   }
 
+  // ref_no: the position a work holds in the seed list it came from. For a seed that declares
+  // reference_count, the numbers of the works carrying it must be exactly 1..reference_count —
+  // so a skipped or duplicated reference cannot pass unnoticed.
+  for (const e of entries) {
+    if (e.ref_no === undefined) continue
+    if (!Number.isInteger(e.ref_no) || e.ref_no < 1) errors.push(`entries/${e.__file}: ref_no must be a positive integer`)
+    if ((e.seen_in ?? []).length !== 1)
+      errors.push(`entries/${e.__file}: ref_no only makes sense with exactly one seen_in`)
+  }
+  for (const seed of entries.filter((e) => e.reference_count)) {
+    const carried = entries.filter((e) => (e.seen_in ?? []).includes(seed.id))
+    const numbers = carried.map((e) => e.ref_no).filter((n) => Number.isInteger(n)).sort((a, b) => a - b)
+    const expected = Array.from({ length: seed.reference_count }, (_, i) => i + 1)
+    if (JSON.stringify(numbers) !== JSON.stringify(expected)) {
+      const missing = expected.filter((n) => !numbers.includes(n))
+      const extra = numbers.filter((n) => !expected.includes(n))
+      errors.push(
+        `${seed.id}: declares ${seed.reference_count} references but the carried ref_no values are wrong` +
+          (missing.length ? `; missing ${missing.join(', ')}` : '') +
+          (extra.length ? `; out of range ${extra.join(', ')}` : '') +
+          (numbers.length !== expected.length && !missing.length ? `; found ${numbers.length} works` : '')
+      )
+    }
+  }
+
   // vocabulary lint (warnings: a tag with no work is a prune candidate, not an error)
   const used = new Set()
   for (const e of entries) for (const t of [...(e.tags ?? []), ...(e.tags_inferred ?? [])]) used.add(t)
@@ -716,9 +741,55 @@ export function renderZoteroItems(entries) {
   return `${JSON.stringify(items, null, 2)}\n`
 }
 
+
+/** One file per seed essay: every work its reference list cites, in the list's own order. */
+export function renderEssay(seed, entries) {
+  const carried = entries
+    .filter((e) => (e.seen_in ?? []).includes(seed.id))
+    .sort((a, b) => (a.ref_no ?? 999) - (b.ref_no ?? 999))
+  const out = []
+  out.push(`# ${shortLabel(seed)} — the reference list of "${seed.title}"`)
+  out.push('')
+  out.push('*Generated file — edit the entries, not this.*')
+  out.push('')
+  out.push(apaEntry(seed))
+  if (seed.url) out.push('')
+  out.push('')
+  out.push(
+    `All **${carried.length}** works this essay cites${seed.reference_count ? ` (of ${seed.reference_count} declared)` : ''}, in the order the list prints them. ` +
+      'The APA entry is the verified record; `?` marks a tag assignment an agent inferred rather than one the work\'s own title states.'
+  )
+  out.push('')
+  for (const e of carried) {
+    const tags = [...(e.tags ?? []), ...(e.tags_inferred ?? []).map((t) => `${t}?`)].map((t) => `\`${t}\``).join(' ')
+    out.push(`**${e.ref_no ?? '—'}.** ${apaEntry(e)}`)
+    out.push('')
+    out.push(`${tags} · \`${e.id}\`${e.metadata_source ? ` · ${e.metadata_source}, verified ${e.verified_on ?? '—'}` : ''}`)
+    if (e.note) out.push('')
+    if (e.note) out.push(`> ${String(e.note).trim().replace(/\n/g, ' ')}`)
+    if (e.discrepancy) out.push('')
+    if (e.discrepancy) out.push(`**Repair recorded:** ${String(e.discrepancy).trim().replace(/\n/g, ' ')}`)
+    if (e.to_verify) out.push('')
+    if (e.to_verify) out.push(`**Still to verify:** ${[].concat(e.to_verify).join('; ')}`)
+    out.push('')
+  }
+  const repairs = carried.filter((e) => e.discrepancy).length
+  const open = carried.filter((e) => e.to_verify).length
+  out.push('## State of this list')
+  out.push('')
+  out.push(`- ${carried.length} works entered, numbered 1–${carried.length} with no gaps (checked by \`build.mjs\`).`)
+  out.push(`- ${repairs} carr${repairs === 1 ? 'ies' : 'y'} a recorded repair to the list as printed in the article.`)
+  out.push(`- ${open} carr${open === 1 ? 'ies' : 'y'} a \`to_verify\` naming what is still open.`)
+  out.push('')
+  return `${out.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`
+}
+
 export function render(entries, vocab, opts = {}) {
   const { used } = tagIndexRows(entries, vocab)
+  const essays = {}
+  for (const seed of entries.filter((e) => e.reference_count)) essays[`essays/${seed.id}.md`] = renderEssay(seed, entries)
   return {
+    ...essays,
     'exhaustive-bibliography.md': renderBibliography(entries, vocab, opts),
     'tag-index.md': renderTagIndex(entries, vocab),
     'index.json': renderIndexJson(entries, vocab),
@@ -742,6 +813,8 @@ export function build({ root, check = false, stats = false, log = console } = {}
   }
   const files = render(entries, vocab, { sourceArticleId: 'frantz-2025-reclaiming-human-dignity' })
   delete files._tagsUsed
+  // one place to guarantee no generated file ships trailing whitespace (and --check sees the same text)
+  for (const [k, v] of Object.entries(files)) files[k] = v.replace(/[ \t]+$/gm, '')
 
   if (stats) {
     const approved = new Set()

@@ -15,6 +15,7 @@ field in Zotero — the edit would be invisible here and would be lost on the ne
 | `entries/<citekey>.yml` | **You** (or `scripts/capture.mjs`) — one work per file |
 | `vocabulary.yml` | **You** — the controlled tag list |
 | `exhaustive-bibliography.md` | generated — the list, APA 7, grouped by kind |
+| `essays/<seed-id>.md` | generated — **one seed essay's reference list**, in the order the article prints it |
 | `tag-index.md` | generated — **the index of tags** |
 | `index.json`, `exports/*` | generated — CSL-JSON, RIS, BibTeX |
 
@@ -38,7 +39,9 @@ That writes a stub from Crossref (articles) or Open Library (books, the edition 
 2. Check the fields against **the publisher's own page**, not a catalogue, and set `metadata_source`
    and `verified_on` to say what you actually looked at.
 3. Add tags. Anything you are asserting goes in `tags`; anything an agent inferred goes in
-   `tags_inferred` (it renders with a `?`).
+   `tags_inferred` (it renders with a `?`). Set `ref_no` to the work's **position in the source list**
+   you took it from — the build requires a seed essay's `ref_no` values to be exactly 1..`reference_count`,
+   so a skipped or duplicated reference cannot pass unnoticed.
 4. Record what you could not confirm in `to_verify`, and any difference from the source list you took
    the reference from in `discrepancy`. Both are rendered in appendices — nothing is silently repaired.
    A field you genuinely cannot fill (a classical text whose edition the source list never names) may be
@@ -110,11 +113,17 @@ rebuilds the site, so a work is promoted only when an essay actually cites it
 
 ## Batches
 
-A batch is one source essay plus the works its reference list cites. The seed essay records
-`reference_count`, and each work it cites records `seen_in: [<essay id>]`; `npm test` fails if the two
-disagree, so a half-entered list cannot pass unnoticed. Two batches so far:
+A batch is one seed essay plus the works its reference list cites. The seed records `reference_count`;
+each work it cites records `seen_in: [<essay id>]` and its `ref_no` in that list. `build.mjs` fails unless
+the numbers are exactly 1..`reference_count`, and `essays/<seed-id>.md` renders the list in the article's
+own order — the file to open when you want one essay's papers rather than the whole bibliography.
 
-| Seed | References | Entered |
-| --- | --- | --- |
-| Frantz, Rego & Barbas (2025), *Reclaiming human dignity* | 19 | 19 |
-| Dernbach (2025), *Addiction is a Dignity Disorder* | 72 | 72 |
+| Seed | References | Entered | Its file |
+| --- | --- | --- | --- |
+| Frantz, Rego & Barbas (2025), *Reclaiming human dignity* | 19 | 19 | `essays/frantz-2025-reclaiming-human-dignity.md` |
+| Dernbach (2025), *Addiction is a Dignity Disorder* | 72 | 72 | `essays/dernbach-2025-addiction-is-a-dignity-disorder.md` |
+
+A seed list is not always right, and the entries are the record: the Dernbach list's DOI for Goodman 1990
+resolves to a different work entirely, its Stepinova page range disagrees with the publisher's deposit,
+and it gives a page range for Schulte & Hser that the deposit lacks. Each is recorded in the entry's
+`discrepancy` field and printed under the entry in the essay file.

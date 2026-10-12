@@ -16,7 +16,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
-import { load, validate, render, build, apaEntry, shortLabel, renderIndexJson, renderZoteroItems } from '../scripts/build.mjs'
+import { load, validate, render, build, apaEntry, shortLabel, renderIndexJson, renderZoteroItems, renderEssay } from '../scripts/build.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const REAL_ROOT = path.resolve(HERE, '..')
@@ -280,6 +280,33 @@ test('the tag index marks a proposed tag and lists it for a decision', () => {
   assert.match(md, /### Proposed tags — should the concept exist at all\?/)
   assert.match(md, /### Inferred assignments/)
   assert.match(md, /## Concepts/)
+})
+
+test('a seed list with a gap in its numbering fails the build', () => {
+  const seed = { id: 'seed-2020-essay', kind: 'journal-article', authors: 'Seed, A.', title: 'E', year: 2020,
+                 journal: 'J', volume: '1', issue: '1', pages: '1–2', doi: '10.1/x', tags: ['soul'],
+                 tags_inferred: [], seen_in: [], reference_count: 3, metadata_source: 'crossref', verified_on: '2026-10-12' }
+  const ref = (n) => ({ ...BOOK, id: `work-${n}`, ref_no: n, seen_in: ['seed-2020-essay'] })
+  const ok = fixture({ entries: [seed, ref(1), ref(2), ref(3)] })
+  assert.deepEqual(validateRoot(ok).errors, [])
+  // the same list with reference 2 never entered must fail, naming the gap
+  const gap = fixture({ entries: [seed, ref(1), ref(3)] })
+  const errs = validateRoot(gap).errors
+  assert.ok(errs.some((e) => e.includes('missing 2')), errs.join('\n'))
+})
+
+test('a seed essay renders its own file, listing the works in the list order', () => {
+  const seed = { id: 'seed-2020-essay', kind: 'journal-article', authors: 'Seed, A.', title: 'An essay', year: 2020,
+                 journal: 'J', volume: '1', issue: '1', pages: '1–2', doi: '10.1/x', tags: ['soul'], tags_inferred: [],
+                 seen_in: [], reference_count: 2, metadata_source: 'crossref', verified_on: '2026-10-12' }
+  const entries = [seed,
+    { ...BOOK, id: 'b-1999-second', authors: 'Zed, B.', title: 'Second', year: 1999, ref_no: 2, seen_in: ['seed-2020-essay'] },
+    { ...BOOK, id: 'a-1995-first', authors: 'Able, A.', title: 'First', year: 1995, ref_no: 1, seen_in: ['seed-2020-essay'] }]
+  const md = renderEssay(seed, entries)
+  assert.match(md, /\*\*1\.\*\* Able, A\. \(1995\)/)
+  assert.match(md, /\*\*2\.\*\* Zed, B\. \(1999\)/)
+  assert.ok(md.indexOf('Able, A.') < md.indexOf('Zed, B.'), 'the list order, not alphabetical')
+  assert.match(md, /2 works entered, numbered 1–2 with no gaps/)
 })
 
 test('Zotero mirror items: type mapping, corporate authors, and the citekey in extra', () => {

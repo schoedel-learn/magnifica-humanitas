@@ -11,10 +11,15 @@ pages: "1403–1408"
 doi: "10.1111/j.1360-0443.1990.tb01620.x"
 tags: ["addiction"]
 tags_inferred: ["disease-model"]
+ref_no: 20
 seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
 metadata_source: "crossref"
 verified_on: "2026-10-12"
 note: "The definitional argument about addiction that the essay intervenes in."
 to_verify:
   - "volume, issue and page range as printed"
-discrepancy: "Crossref deposits the surname in capitals (GOODMAN); recorded in normal form."
+discrepancy: >-
+  Two repairs. Crossref deposits the surname in capitals (GOODMAN) — recorded in normal form. And the
+  DOI the article prints, 10.1111/j.1360-0443.1989.tb00737.x, resolves to a different work entirely
+  ("Assessment of alcohol withdrawal", Sullivan et al., British Journal of Addiction 84(11), 1989); the
+  DOI for this article is 10.1111/j.1360-0443.1990.tb01620.x, which is what the entry carries.

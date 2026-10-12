@@ -11,8 +11,12 @@ pages: "322–340"
 doi: "10.1111/j.1741-2005.2009.01328.x"
 tags: ["akrasia"]
 tags_inferred: ["virtue"]
+ref_no: 65
 seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
 metadata_source: "crossref"
 verified_on: "2026-10-12"
 to_verify:
   - "volume, issue and page range as printed"
+discrepancy: >-
+  The article prints the page range as 265–390; the publisher's deposit gives 322–340, which is what the
+  entry carries. A 125-page article in a quarterly is the less likely of the two.

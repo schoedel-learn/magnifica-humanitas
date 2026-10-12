@@ -24,19 +24,19 @@ Originally published as *Homo sacer: Il potere sovrano e la nuda vita* (1995).
 
 ### aquinas-commentary-on-the-sentences
 
-Aquinas, T. (no date recorded). *Commentary on the Sentences*. 
+Aquinas, T. (no date recorded). *Commentary on the Sentences*.
 
 inferred: `soul?` `human-person?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
 ### aquinas-quaestiones-disputatae-de-veritate
 
-Aquinas, T. (no date recorded). *Quaestiones disputatae de veritate*. 
+Aquinas, T. (no date recorded). *Quaestiones disputatae de veritate*.
 
 inferred: `rational?` `soul?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
 ### aquinas-summa-theologiae
 
-Aquinas, T. (no date recorded). *Summa theologiae*. 
+Aquinas, T. (no date recorded). *Summa theologiae*.
 
 inferred: `human-person?` `rational?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -50,7 +50,7 @@ Butler, J. (2004). *Undoing gender*. Routledge.
 
 ### cassian-conferences
 
-Cassian, J. (no date recorded). *Conferences*. 
+Cassian, J. (no date recorded). *Conferences*.
 
 inferred: `virtue?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -158,7 +158,7 @@ inferred: `literature?` · seen in: `dernbach-2025-addiction-is-a-dignity-disord
 
 ### ovid-metamorphoses
 
-Ovid. (no date recorded). *Metamorphoses*. 
+Ovid. (no date recorded). *Metamorphoses*.
 
 inferred: `literature?` `body?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -456,9 +456,9 @@ Rosenthal, R. J., & Faris, S. B. (2019). The etymology and early history of ‘a
 
 ### schulte-2013-substance-use-associated
 
-Schulte, M. T., & Hser, Y. I. (2013). Substance Use and Associated Health Conditions throughout the Lifespan. *Public Health Reviews*, 35(2). https://doi.org/10.1007/bf03391702
+Schulte, M. T., & Hser, Y. I. (2013). Substance Use and Associated Health Conditions throughout the Lifespan. *Public Health Reviews*, 35(2), 1–27. https://doi.org/10.1007/bf03391702
 
-`addiction` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · crossref, verified 2026-10-12
+`addiction` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · mixed, verified 2026-10-12
 
 ### shaffer-2004-toward-syndrome-model
 
@@ -552,7 +552,7 @@ inferred: `human-dignity?` `human-person?` `bioethics?` · seen in: `dernbach-20
 
 ### international-theological-commission-1983-propositions-on-the-dignity-and-rights-of-the-human-person
 
-International Theological Commission. (1983). *Propositions on the dignity and rights of the human person*. 
+International Theological Commission. (1983). *Propositions on the dignity and rights of the human person*.
 
 `human-dignity` `human-rights` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -588,7 +588,7 @@ inferred: `responsibility?` `love?` · seen in: `dernbach-2025-addiction-is-a-di
 
 ### pope-francis-2016-address-on-narcotics
 
-Pope Francis. (2016). *Address to participants in the meeting sponsored by the Pontifical Academy of Sciences on narcotics: Problems and solutions to this global issue*. 
+Pope Francis. (2016). *Address to participants in the meeting sponsored by the Pontifical Academy of Sciences on narcotics: Problems and solutions to this global issue*.
 
 inferred: `addiction?` `responsibility?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -602,25 +602,25 @@ inferred: `human-person?` `responsibility?` · seen in: `dernbach-2025-addiction
 
 ### pope-francis-2023-message-to-forensic-toxicologists
 
-Pope Francis. (2023). *Message to the participants in the 60th International Congress of Forensic Toxicologists*. 
+Pope Francis. (2023). *Message to the participants in the 60th International Congress of Forensic Toxicologists*.
 
 inferred: `addiction?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
 ### pope-francis-2024-general-audience
 
-Pope Francis. (2024). *General audience: Saint Peter's Square*. 
+Pope Francis. (2024). *General audience: Saint Peter's Square*.
 
 inferred: `human-dignity?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
 ### pope-john-paul-ii-1987-address-on-drug-abuse
 
-Pope John Paul II. (1987). *Address to the representatives of the International Conference on Drug Abuse and Illicit Trafficking*. 
+Pope John Paul II. (1987). *Address to the representatives of the International Conference on Drug Abuse and Illicit Trafficking*.
 
 inferred: `addiction?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
 ### pope-john-paul-ii-1987-meeting-with-the-bishops-of-the-united-states
 
-Pope John Paul II. (1987). *Apostolic journey to the United States of America and Canada: Meeting with the bishops of the United States of America, Minor Seminary of Our Lady of the Angels, Los Angeles*. 
+Pope John Paul II. (1987). *Apostolic journey to the United States of America and Canada: Meeting with the bishops of the United States of America, Minor Seminary of Our Lady of the Angels, Los Angeles*.
 
 inferred: `addiction?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -674,7 +674,7 @@ inferred: `human-person?` `human-dignity?` · seen in: `dernbach-2025-addiction-
 
 ### turkson-2018-message-of-the-prefect-on-drug-abuse
 
-Turkson, P. K. A. (2018). *Message of the prefect of the Dicastery for Promoting Integral Human Development for the International Day against Drug Abuse and Illicit Trafficking*. 
+Turkson, P. K. A. (2018). *Message of the prefect of the Dicastery for Promoting Integral Human Development for the International Day against Drug Abuse and Illicit Trafficking*.
 
 inferred: `addiction?` `responsibility?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · in-article-list, verified 2026-10-12
 
@@ -718,7 +718,7 @@ rather than silently corrected.
 
 **goodman-1990-addiction-definition-implications**
 
-> Crossref deposits the surname in capitals (GOODMAN); recorded in normal form.
+> Two repairs. Crossref deposits the surname in capitals (GOODMAN) — recorded in normal form. And the DOI the article prints, 10.1111/j.1360-0443.1989.tb00737.x, resolves to a different work entirely ("Assessment of alcohol withdrawal", Sullivan et al., British Journal of Addiction 84(11), 1989); the DOI for this article is 10.1111/j.1360-0443.1990.tb01620.x, which is what the entry carries.
 
 **honneth-1995-struggle-for-recognition**
 
@@ -759,6 +759,10 @@ rather than silently corrected.
 **spaemann-2006-persons**
 
 > The list reads "Spaemann, R., and Persons. 2006. The difference between someone and something." — the title was parsed into the author field.
+
+**stepinova-2011-aquinas-solution-aristotle**
+
+> The article prints the page range as 265–390; the publisher's deposit gives 322–340, which is what the entry carries. A 125-page article in a quarterly is the less likely of the two.
 
 **sulmasy-2007-human-dignity-and-human-worth**
 
@@ -817,7 +821,7 @@ rather than silently corrected.
 - **powell-2007-wrestling-satan-conquering** — volume, issue and page range as printed
 - **robinson-2016-classification-substance-use** — volume, issue and page range as printed
 - **rosenthal-2019-etymology-early-history** — volume, issue and page range as printed
-- **schulte-2013-substance-use-associated** — volume, issue and page range as printed
+- **schulte-2013-substance-use-associated** — issue (the publisher deposits 2; the article prints none) and the page range 1–27, taken from the article's own list
 - **sen-1999-development-as-freedom** — which publisher is being cited — Knopf (New York, 1999) or Oxford University Press (Oxford, 1999)
 - **shaffer-2004-toward-syndrome-model** — volume, issue and page range as printed
 - **solberg-2020-it-just-that** — volume, issue and page range as printed
@@ -836,5 +840,5 @@ rather than silently corrected.
 
 ## Appendix C — coverage of the seed reference list
 
-frantz-2025-reclaiming-human-dignity prints **19** references; **19** of them 
+frantz-2025-reclaiming-human-dignity prints **19** references; **19** of them
 are entered here.

@@ -9,6 +9,7 @@ publisher: "United Nations"
 url: "https://www.un.org/en/about-us/universal-declaration-of-human-rights"
 tags: ["human-rights"]
 tags_inferred: ["law", "human-dignity"]
+ref_no: 6
 seen_in: ["frantz-2025-reclaiming-human-dignity"]
 metadata_source: "publisher-page"
 verified_on: "2026-10-12"

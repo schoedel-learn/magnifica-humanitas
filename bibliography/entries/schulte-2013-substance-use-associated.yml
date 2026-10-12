@@ -7,14 +7,16 @@ creators:
   - "Hser, Y. I."
 title: "Substance Use and Associated Health Conditions throughout the Lifespan"
 journal: "Public Health Reviews"
+pages: "1–27"
 year: 2013
 volume: "35"
 issue: "2"
 doi: "10.1007/bf03391702"
 tags: ["addiction"]
 tags_inferred: []
+ref_no: 61
 seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
-metadata_source: "crossref"
+metadata_source: "mixed"
 verified_on: "2026-10-12"
 to_verify:
-  - "volume, issue and page range as printed"
+  - "issue (the publisher deposits 2; the article prints none) and the page range 1–27, taken from the article's own list"

@@ -11,6 +11,7 @@ pages: "24"
 url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1414656/"
 tags: []
 tags_inferred: ["disease-model"]
+ref_no: 9
 seen_in: ["dernbach-2025-addiction-is-a-dignity-disorder"]
 metadata_source: "mixed"
 verified_on: "2026-10-12"
