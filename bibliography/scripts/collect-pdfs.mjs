@@ -98,7 +98,12 @@ function manifest(dir, entries, state) {
   out.push('')
   out.push('| # | Work | Where | Route |')
   out.push('| --- | --- | --- | --- |')
-  const route = routeOf
+  const route = (e) => {
+    const h = state.holdings?.[e.id]
+    const base = routeOf(e)
+    if (!h || !/^library session/.test(base)) return base
+    return `${base} — the library ${h.fullText ? `has it: ${h.databases.slice(0, 2).join(', ')}` : 'has no copy — Interlibrary Loan'}`
+  }
   const seedOf = (e) => entries.find((s) => s.id === (e.seen_in ?? [])[0])
   const inList = (e) => {
     const seed = seedOf(e)
@@ -190,7 +195,7 @@ export function renderSession(entries, state) {
   out.push('h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.6rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}')
   out.push('table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:.3rem .5rem;border-bottom:1px solid #eee;vertical-align:top}')
   out.push('code{background:#f4f4f4;padding:.05rem .25rem;border-radius:3px;font-size:.9em}a{color:#0645ad}')
-  out.push('.n{color:#666;font-size:.85em}</style></head><body>')
+  out.push('.n{color:#666;font-size:.85em}.ok{color:#17652a;font-weight:600}.no{color:#a12a1f;font-weight:600}</style></head><body>')
   out.push('<h1>Library session — the gated works</h1>')
   out.push(`<p><strong>${gated.length} works</strong> need your institutional access. This is the manifest's own ` +
     `"library session" and "the publisher's own page" routes and nothing else, so the two never disagree. ` +
@@ -204,12 +209,20 @@ export function renderSession(entries, state) {
     '<code>pdf/&lt;citekey&gt;.pdf</code>, and <code>attach-pdfs.mjs</code> puts it on the Zotero item so it syncs to Nextcloud.</li></ol>')
   out.push('<p class="n">Not licensed at UTEP? Request it through Interlibrary Loan (utep.edu/library → Interlibrary Loan) — free, usually a day or two, arrives as a PDF.</p>')
   for (const [pub, list] of [...groups.entries()].sort((a, b) => b[1].length - a[1].length)) {
-    out.push(`<h2>${pub} — ${list.length}</h2><table><tr><th>#</th><th>Work</th><th>Get it</th><th>Save as</th></tr>`)
+    out.push(`<h2>${pub} — ${list.length}</h2><table><tr><th>#</th><th>Work</th><th>Get it</th><th>UTEP holds</th><th>Save as</th></tr>`)
     for (const e of list.sort((a, b) => shortLabel(a).localeCompare(shortLabel(b)))) {
       const href = e.url ?? `https://doi.org/${e.doi}`
+      const h = state.holdings?.[e.id]
+      const holdings = !h
+        ? '<span class="n">not checked</span>'
+        : h.fullText
+          ? `<span class="ok">yes</span><br><span class="n">${h.databases.slice(0, 2).join(' · ')}</span>` +
+            `<br><a class="n" href="${h.resolver}">holdings</a>`
+          : `<span class="no">no</span><br><span class="n">request it:</span> <a class="n" href="${h.resolver}">Interlibrary Loan</a>`
       out.push(`<tr><td class="n">${e.ref_no ?? ''}</td><td>${shortLabel(e)} — ${e.title}</td>` +
         `<td><a href="${PROXY_PREFIX}${encodeURIComponent(href)}" title="through the library proxy — it authenticates you and the publisher sees the institution">` +
         `library copy</a><br><a class="n" href="${href}">direct</a></td>` +
+        `<td>${holdings}</td>` +
         `<td><code>pdf/${e.id}.pdf</code></td></tr>`)
     }
     out.push('</table>')
