@@ -98,12 +98,7 @@ function manifest(dir, entries, state) {
   out.push('')
   out.push('| # | Work | Where | Route |')
   out.push('| --- | --- | --- | --- |')
-  const route = (e) => {
-    if (e.kind === 'book') return 'print only — not obtainable as a file here'
-    if (e.doi) return `library session (DOI ${e.doi})`
-    if (e.url) return 'the publisher’s own page'
-    return 'no locator recorded — see the entry’s to_verify'
-  }
+  const route = routeOf
   const seedOf = (e) => entries.find((s) => s.id === (e.seen_in ?? [])[0])
   const inList = (e) => {
     const seed = seedOf(e)
@@ -130,6 +125,43 @@ function manifest(dir, entries, state) {
  */
 export const PROXY_PREFIX = 'https://utep.idm.oclc.org/login?url='
 
+/**
+ * The folder is the truth: whatever PDFs are in it are held, however they arrived (this script, a library
+ * session, a browser download, Barry's own filing). state.json only adds provenance — it must never claim a
+ * file that is not there, so this prunes as well as adds. A manifest that only ever added kept counting a
+ * PDF that had been deleted.
+ */
+export function scanFolder(pdfDir, state) {
+  const onDisk = new Set()
+  for (const f of fs.readdirSync(pdfDir).filter((f) => f.endsWith('.pdf'))) {
+    const id = f.slice(0, -4)
+    const buf = fs.readFileSync(path.join(pdfDir, f))
+    if (!buf.subarray(0, 5).equals(Buffer.from('%PDF-'))) continue
+    onDisk.add(id)
+    state.files[id] = { bytes: buf.length, sha256: sha(buf), ...(state.files[id] ?? {}) }
+    state.files[id].why ??= 'in the folder (source not recorded)'
+    delete state.failed[id]
+  }
+  for (const id of Object.keys(state.files)) if (!onDisk.has(id)) delete state.files[id]
+  return onDisk
+}
+
+/**
+ * How a work can be obtained at all — the single classification both the manifest and the session page use,
+ * so the two cannot report different counts for the same question.
+ */
+export function routeOf(e) {
+  if (e.kind === 'book') return 'print only — not obtainable as a file here'
+  if (e.doi) return `library session (DOI ${e.doi})`
+  if (e.url) return 'the publisher’s own page'
+  return 'no locator recorded — see the entry’s to_verify'
+}
+
+/** Works a library session can actually deliver: a locator exists and it is not a print-only book. */
+export function needsLibrarySession(e) {
+  return !e.kind && !e.doi && !e.url ? false : /^(library session|the publisher)/.test(routeOf(e))
+}
+
 /** The publisher a gated work sits behind, so a session can be done one login at a time. */
 export function publisherOf(entry) {
   const prefix = (entry.doi ?? '').split('/')[0]
@@ -145,7 +177,7 @@ export function publisherOf(entry) {
 
 /** A page to work through during a library session: one click per work, grouped by publisher. */
 export function renderSession(entries, state) {
-  const gated = entries.filter((e) => !state.files[e.id] && e.kind !== 'book' && (e.doi || e.url))
+  const gated = entries.filter((e) => !state.files[e.id] && needsLibrarySession(e))
   const groups = new Map()
   for (const e of gated) {
     const p = publisherOf(e)
@@ -160,7 +192,9 @@ export function renderSession(entries, state) {
   out.push('code{background:#f4f4f4;padding:.05rem .25rem;border-radius:3px;font-size:.9em}a{color:#0645ad}')
   out.push('.n{color:#666;font-size:.85em}</style></head><body>')
   out.push('<h1>Library session — the gated works</h1>')
-  out.push(`<p><strong>${gated.length} works</strong> need your institutional access. Grouped by publisher so you sign in once per site.</p>`)
+  out.push(`<p><strong>${gated.length} works</strong> need your institutional access. This is the manifest's own ` +
+    `"library session" and "the publisher's own page" routes and nothing else, so the two never disagree. ` +
+    `Grouped by publisher so you sign in once per site.</p>`)
   out.push('<ol><li><strong>Sign in once:</strong> click any <em>library copy</em> link — the proxy sends you to UTEP Shibboleth ' +
     '(username, password, Duo push) and then straight to the article. Nothing to install. Sessions expire, so you may sign in again later.</li>')
   out.push('<li><strong>Click a link</strong> and download the PDF. If a publisher refuses the proxy, use the <em>direct</em> link ' +
@@ -202,20 +236,7 @@ async function main() {
   state.failed ??= {}
   state.unpaywall ??= {}
 
-  // The folder is the truth: whatever PDFs are in it are held, however they arrived (this script, a
-  // library session, a browser download, Barry's own filing). state.json only adds provenance.
-  const onDisk = new Set()
-  for (const f of fs.readdirSync(pdfDir).filter((f) => f.endsWith('.pdf'))) {
-    const id = f.slice(0, -4)
-    const buf = fs.readFileSync(path.join(pdfDir, f))
-    if (!buf.subarray(0, 5).equals(Buffer.from('%PDF-'))) continue
-    onDisk.add(id)
-    state.files[id] = { bytes: buf.length, sha256: sha(buf), ...(state.files[id] ?? {}) }
-    state.files[id].why ??= 'in the folder (source not recorded)'
-    delete state.failed[id]
-  }
-  // a file removed from the folder is no longer held — otherwise a manifest drifts into claiming it
-  for (const id of Object.keys(state.files)) if (!onDisk.has(id)) delete state.files[id]
+  scanFolder(pdfDir, state)
 
   if (!has('--manifest-only')) {
     for (const e of entries) {
