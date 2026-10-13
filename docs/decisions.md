@@ -147,6 +147,43 @@ Appendix A of `bibliography/exhaustive-bibliography.md` rather than silently cor
 
 ---
 
+### D12 — Site copy lives in the CMS, and a global joins the publish loop
+
+Date: 2026-10-12
+
+The footer sentence was compiled into `site/src/lib/i18n.ts`. That made one line of publication copy
+behave unlike every other line: re-wording it meant editing TypeScript, committing, and forcing a
+publish, while a `sources` row republishes itself. Copy that belongs to the publication should be
+edited by the publication.
+
+A Payload **global** (`site-settings`) now holds the footer note, localized, so English and Spanish are
+edited side by side. Three parts make it work rather than merely exist:
+
+- **The global's tables join the same trigger** as every other content table (`ops/sql/010_events.sql`).
+  Without that, a save would write to the database and the static site would never notice — the failure
+  would look like a broken editor. `010` is idempotent by design, so re-running it as `magnifica_app`
+  is how the new trigger reaches production; the file now sets that role itself rather than trusting
+  the caller to have read its header.
+- **The site falls back to the compiled copy.** The build asks the database first and keeps the
+  in-repo sentence as the fallback, so an empty global, a half-filled one, or a database that cannot
+  answer degrades to the previous wording instead of an empty footer. All three states were built
+  against the dev database and checked in the output HTML.
+- **The migration is hand-trimmed.** Payload's generator emitted, alongside the two new tables, four
+  statements from earlier work — `sources.edition`, `sources.published_on`, localizing
+  `doc_paragraphs.extract` — because production's `payload_migrations` never recorded the two
+  migrations that added those columns; they were applied by hand at the time. Shipping the generated
+  form would have aborted on the first duplicate column and, had it reached the `DROP`, taken the
+  localized extracts with it. The two unrecorded migrations were then logged as batch 3 — matching
+  reality — so the next `payload migrate` applies only what is genuinely outstanding.
+
+Evidence: the trimmed migration ran clean on a fresh Postgres and again on the dev database; the site
+build produced the CMS sentence in both locales with the global seeded, and the compiled sentence in
+both locales with the global empty and with the row absent; `payload-types.ts` regenerated with the
+global; the fixtures file (`ops/sql/dev-fixtures.sql`) was found stale — it still wrote
+`doc_paragraphs.extract` — and fixed in the same pass.
+
+---
+
 ## Open Questions
 
 ### Q1 — Media storage

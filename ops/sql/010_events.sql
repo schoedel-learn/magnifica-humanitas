@@ -15,6 +15,11 @@
 --
 -- Wrap in a single transaction: a half-applied trigger set would publish some tables and
 -- not others.
+-- Self-elevating: the instruction above is easy to miss when the file is piped in from a
+-- workstation as `psql -U myadmin ... -f -`. Setting the role here makes the file do what its
+-- header says, and it is a no-op when it is already run as magnifica_app.
+set role magnifica_app;
+
 begin;
 
 create table if not exists content_events (
