@@ -311,3 +311,38 @@ export async function listDocumentsForTopic(
     [locale, topicId],
   );
 }
+
+/**
+ * The footer note, if the desk has set one in the CMS.
+ *
+ * The sentence lives in the `site-settings` global now, in a localized side table like every
+ * other editable string. Same lateral join as the rest of this module: the requested locale
+ * wins, and a missing Spanish row falls back to English rather than to nothing.
+ *
+ * Returns `null` when the global has not been filled in — or when the table is not there yet,
+ * which is the state before the migration runs. A blank footer is a worse failure than a
+ * stale one, so the caller keeps its own built-in text as the fallback and this never throws
+ * for that reason.
+ */
+export async function getFooterNote(locale = 'en'): Promise<string | null> {
+  try {
+    const rows = await query<{ footer_note: string | null }>(
+      `select l.footer_note
+         from site_settings s
+         join lateral (
+           select footer_note
+             from site_settings_locales loc
+            where loc._parent_id = s.id
+            order by case loc._locale when $1 then 0 else 1 end, loc._locale
+            limit 1
+         ) l on true
+        order by s.id
+        limit 1`,
+      [locale],
+    );
+    const note = rows[0]?.footer_note?.trim();
+    return note ? note : null;
+  } catch {
+    return null;
+  }
+}

@@ -53,6 +53,10 @@ declare
     'sources',          'sources_locales',
     'topics',           'topics_locales',
     'media',            'media_locales',
+    -- the site_settings global: the footer note lives in its side table, so a footer edit must
+    -- queue a rebuild like any other content change. Added 2026-10-12 with the global itself;
+    -- re-running this file is how the trigger reached production.
+    'site_settings',    'site_settings_locales',
     -- relationship tables: a hasMany link can change on its own
     'posts_rels',       'doc_paragraphs_rels'
   ];

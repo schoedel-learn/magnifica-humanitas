@@ -31,4 +31,8 @@ docker run -d --name mh-dev-pg \
 ## Files
 
 - `001_web_role.sql` — create the read-only `magnifica_web` role used by the Astro build.
+- `010_events.sql` — `content_events` plus the statement-level triggers that queue a rebuild.
+  Run as **`magnifica_app`**, because the trigger inserts as the role that fires it. It is
+  idempotent (tables `if not exists`, triggers dropped and recreated), so re-running it is how a
+  newly added content table — e.g. the `site_settings` global — gets its trigger in production.
 - `020_verify.sql` — foundation verification queries (databases, roles, default ACLs).

@@ -60,18 +60,31 @@ from documents d where d.slug = 'magnifica-humanitas'
 on conflict (_locale, _parent_id) do nothing;
 
 -- Two paragraphs, short extracts only.
-insert into doc_paragraphs (document_id, number, extract)
-select d.id, v.pn, v.txt
+--
+-- The extract is a LOCALIZED field, so English goes in the side table below rather than on the
+-- parent row (migration 20261006_160000 moved it). Writing it as a parent column — as this file
+-- did until 2026-10-12 — fails with `column "extract" of relation "doc_paragraphs" does not
+-- exist`, which is how the staleness surfaced.
+insert into doc_paragraphs (document_id, number)
+select d.id, v.pn
 from documents d
-cross join (values
-  (1,  'The Church enters this conversation with a word of hope, not of fear.'),
-  (12, 'Human dignity is not a concession granted by technology, but a gift that precedes it.')
-) as v(pn, txt)
+cross join (values (1), (12)) as v(pn)
 where d.slug = 'magnifica-humanitas'
   and not exists (
     select 1 from doc_paragraphs p
      where p.document_id = d.id and p.number = v.pn
   );
+
+insert into doc_paragraphs_locales (extract, _locale, _parent_id)
+select v.txt, 'en', p.id
+from doc_paragraphs p
+join documents d on d.id = p.document_id
+cross join (values
+  (1,  'The Church enters this conversation with a word of hope, not of fear.'),
+  (12, 'Human dignity is not a concession granted by technology, but a gift that precedes it.')
+) as v(pn, txt)
+where d.slug = 'magnifica-humanitas' and p.number = v.pn
+on conflict (_locale, _parent_id) do nothing;
 
 insert into doc_paragraphs_locales (note, _locale, _parent_id)
 select 'Opening paragraph.', 'en', p.id

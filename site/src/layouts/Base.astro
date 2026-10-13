@@ -20,6 +20,7 @@ import '@fontsource-variable/inter/index.css';
 import '@fontsource-variable/crimson-pro/index.css';
 import '@fontsource-variable/crimson-pro/wght-italic.css';
 import { UI, root, type Lang } from '../lib/i18n';
+import { getFooterNote } from '../lib/content';
 
 interface Props {
   title: string;
@@ -35,6 +36,10 @@ interface Props {
 
 const { title, description = '', lang = 'en', contentLang } = Astro.props;
 const s = UI[lang];
+// The footer sentence is editable in the CMS (the `site-settings` global). Falling back to the
+// copy compiled in here means an empty or unreachable global degrades to the previous wording
+// instead of an empty footer.
+const footerNote = (await getFooterNote(lang)) ?? s.footerNote;
 const site = Astro.site ?? new URL('https://magnifica.agentesfidei.org');
 const fellBack = contentLang !== undefined && contentLang !== lang;
 
@@ -131,7 +136,7 @@ const navLink =
       <div
         class="mx-auto max-w-measure px-5 py-8 font-sans text-xs leading-relaxed tracking-wide text-mist sm:px-6"
       >
-        <p>{s.footerNote}</p>
+        <p>{footerNote}</p>
       </div>
     </footer>
   </body>

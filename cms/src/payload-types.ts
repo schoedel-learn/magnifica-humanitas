@@ -99,8 +99,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'es') | ('en' | 'es')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: 'en' | 'es';
   widgets: {
     collections: CollectionsWidget;
@@ -175,13 +179,24 @@ export interface DocParagraph {
   createdAt: string;
 }
 /**
+ * The subjects the publication is about. Every topic gets a page listing the essays and documents filed under it.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "topics".
  */
 export interface Topic {
   id: number;
+  /**
+   * The subject as a reader would see it, e.g. Pope Leo XIV. In Spanish, the name as Spanish would render it — León XIV.
+   */
   name: string;
+  /**
+   * The web address, e.g. pope-leo-xiv. Lowercase, hyphens, no spaces. Set it once — changing it breaks existing links.
+   */
   slug: string;
+  /**
+   * A sentence or two, shown at the top of the topic page. Written in the language of the field you are editing.
+   */
   description?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -192,10 +207,25 @@ export interface Topic {
  */
 export interface Post {
   id: number;
+  /**
+   * The headline as a reader sees it. Appears in the essay list and in search results.
+   */
   title: string;
+  /**
+   * The web address, e.g. introduction-to-magnifica-humanitas. Lowercase, hyphens, no spaces. Changing this breaks every existing link to the piece, so set it once.
+   */
   slug: string;
+  /**
+   * Essay is the main form. Note, review and analysis are shorter pieces.
+   */
   post_type: 'essay' | 'note' | 'review' | 'analysis';
+  /**
+   * One or two sentences. Shown in the essay list, and used as the description search engines display.
+   */
   abstract?: string | null;
+  /**
+   * The piece itself. Quote the encyclical rather than paraphrasing it — the wording in a quotation is not ours to change.
+   */
   body?: {
     root: {
       type: string;
@@ -211,9 +241,21 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Optional image at the top. Upload the file under Media first, then choose it here.
+   */
   hero?: (number | null) | Media;
+  /**
+   * Which subjects this touches. Each one has its own page listing everything filed under it.
+   */
   topics?: (number | Topic)[] | null;
+  /**
+   * Which magisterial documents this piece discusses. This is what links an essay to the encyclical.
+   */
   documents?: (number | Document)[] | null;
+  /**
+   * The date shown on the piece. Leave empty to use today.
+   */
   published_at?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -265,11 +307,19 @@ export interface Source {
   id: number;
   kind: 'magisterial' | 'book' | 'journal-article' | 'chapter' | 'web' | 'magazine' | 'thesis';
   /**
-   * Free text for v1 (APA 7 order). A people collection is a later migration, not now.
+   * Free text for v1 (APA 7 order). A people collection is a later migration, not now. Leave blank when the work has no author (a Bible, a dictionary): APA 7 then moves the title into the author position, so blank is meaningful and not missing data.
    */
-  authors: string;
+  authors?: string | null;
   title: string;
+  /**
+   * Edition statement without parentheses, e.g. 2nd ed. Printed after the title and outside the italics, per APA 7.
+   */
+  edition?: string | null;
   year?: number | null;
+  /**
+   * The exact publication date when the source publishes one (news, magazine and dated web pages). APA 7 renders the most specific date available — full date here, otherwise the year. Do not invent one: if the page carries no date, cite a dated equivalent instead.
+   */
+  published_on?: string | null;
   publisher?: string | null;
   journal?: string | null;
   volume?: string | null;
@@ -490,7 +540,9 @@ export interface SourcesSelect<T extends boolean = true> {
   kind?: T;
   authors?: T;
   title?: T;
+  edition?: T;
   year?: T;
+  published_on?: T;
   publisher?: T;
   journal?: T;
   volume?: T;
@@ -633,6 +685,31 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Lines that appear on every page. Saving here republishes the site on its own within about two minutes — no deploy needed.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  /**
+   * The line in the dark footer at the foot of every page. Edit both languages: in Spanish write the sentence as Spanish, not as a translation of the English field. Empty means the built-in fallback text is used.
+   */
+  footerNote?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  footerNote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

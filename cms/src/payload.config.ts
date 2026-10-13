@@ -14,6 +14,7 @@ import { Posts } from './collections/Posts'
 import { Sources } from './collections/Sources'
 import { PostSources } from './collections/PostSources'
 import { Topics } from './collections/Topics'
+import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,6 +39,7 @@ export default buildConfig({
     },
   },
   collections: [Documents, DocParagraphs, Posts, Sources, PostSources, Topics, Media, Users],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
