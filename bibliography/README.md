@@ -118,6 +118,35 @@ Europe PMC all answer 403 to a scripted request, and a browser session only gets
 open-access subset, Cambridge and some repositories. Those works need a library session; `fetch-list.csv`
 carries a clickable link for each, and everything still missing is written up in `MANIFEST.md`.
 
+### File sync: this collection goes to Nextcloud, not Zotero's cloud
+
+Attachments sync over **WebDAV to Barry's own Nextcloud**, because Zotero's free file storage is 300 MB and
+this collection is built to grow. Configured 2026-10-12:
+
+| Setting | Value |
+| --- | --- |
+| Zotero → Settings → Sync → File Syncing | **WebDAV** |
+| URL | `cloud.schoedel.tech/remote.php/dav/files/admin/` (Zotero appends `/zotero` itself) |
+| Username | `admin` |
+| Password | the app password named *Zotero WebDAV*, recorded in the vault's `Secrets.md` |
+
+The app password was minted server-side (`occ user:add-app-password admin --name="Zotero WebDAV"`), so no
+account password is ever handled, and the server side was verified before Barry typed anything: PROPFIND
+207 on the DAV root, plus a write/read/delete round trip inside `.../files/admin/zotero/`.
+
+Two rules worth knowing, both from Zotero's own documentation:
+
+- **Linked files are never synced.** To get a PDF into Nextcloud it must be a *stored* attachment (Zotero
+  copies it into its data directory and uploads it). So the folder in `~/Documents/Research` is the
+  collector's staging area — what syncs is Zotero's copy of it.
+- WebDAV works for the personal library only; group libraries require Zotero Storage.
+
+Stored attachments are created through the local API rather than by hand:
+`POST /api/users/0/items` (an `imported_file` attachment under the parent) → `POST …/items/<key>/file`
+with `If-None-Match: *` to authorize → POST the bytes to the returned `/api/local/uploads/<key>` →
+register with `upload=<uploadKey>`. It needs one user approval: `POST /api/local/authorize` shows Zotero's
+dialog, and **Always Allow** returns a persistent key.
+
 ## Commands
 
 ```sh
