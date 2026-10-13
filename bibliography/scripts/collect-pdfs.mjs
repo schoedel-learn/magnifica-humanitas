@@ -121,6 +121,59 @@ function manifest(dir, entries, state) {
   return out.join('\n')
 }
 
+
+/** The publisher a gated work sits behind, so a session can be done one login at a time. */
+export function publisherOf(entry) {
+  const prefix = (entry.doi ?? '').split('/')[0]
+  const map = {
+    '10.1111': 'Wiley', '10.1002': 'Wiley', '10.1016': 'Elsevier', '10.1007': 'Springer', '10.1023': 'Springer',
+    '10.1186': 'Springer / BMC', '10.1177': 'SAGE', '10.1056': 'NEJM (Mass Medical Society)', '10.1093': 'Oxford',
+    '10.1080': 'Taylor & Francis', '10.1136': 'BMJ', '10.1001': 'JAMA / AMA', '10.3390': 'MDPI', '10.1155': 'Hindawi / Wiley',
+    '10.1146': 'Annual Reviews', '10.1017': 'Cambridge', '10.1097': 'Wolters Kluwer', '10.1037': 'APA',
+    '10.31887': 'Dialogues in Clinical Neuroscience (free)', '10.1016/j.jfda': 'Elsevier',
+  }
+  return map[prefix] ?? (entry.url ? new URL(entry.url).hostname.replace(/^www\./, '') : 'no DOI — publisher page')
+}
+
+/** A page to work through during a library session: one click per work, grouped by publisher. */
+export function renderSession(entries, state) {
+  const gated = entries.filter((e) => !state.files[e.id] && e.kind !== 'book' && (e.doi || e.url))
+  const groups = new Map()
+  for (const e of gated) {
+    const p = publisherOf(e)
+    if (!groups.has(p)) groups.set(p, [])
+    groups.get(p).push(e)
+  }
+  const out = []
+  out.push('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Library session — gated works</title>')
+  out.push('<style>body{font:15px/1.5 system-ui,sans-serif;max-width:60rem;margin:2rem auto;padding:0 1rem;color:#111}')
+  out.push('h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.6rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}')
+  out.push('table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:.3rem .5rem;border-bottom:1px solid #eee;vertical-align:top}')
+  out.push('code{background:#f4f4f4;padding:.05rem .25rem;border-radius:3px;font-size:.9em}a{color:#0645ad}')
+  out.push('.n{color:#666;font-size:.85em}</style></head><body>')
+  out.push('<h1>Library session — the gated works</h1>')
+  out.push(`<p><strong>${gated.length} works</strong> need your institutional access. Grouped by publisher so you sign in once per site.</p>`)
+  out.push('<ol><li><strong>Connect first:</strong> UTEP GlobalProtect VPN (set up Duo 2FA once, then GlobalProtect — ' +
+    'utep.edu/library → Research → Remote Access). The VPN gives your machine a UTEP IP, so publishers treat it as on-campus; ' +
+    'the library proxy works too but expires sessions quickly and covers fewer databases.</li>')
+  out.push('<li><strong>Click a link</strong> and download the PDF.</li>')
+  out.push('<li><strong>Save it into</strong> <code>inbox/</code> (any filename — the DOI or title inside the PDF identifies it).</li>')
+  out.push('<li><strong>Then run</strong> <code>node scripts/file-downloads.mjs --dir &quot;…&quot;</code> — it files each PDF as ' +
+    '<code>pdf/&lt;citekey&gt;.pdf</code>, and <code>attach-pdfs.mjs</code> puts it on the Zotero item so it syncs to Nextcloud.</li></ol>')
+  out.push('<p class="n">Not licensed at UTEP? Request it through Interlibrary Loan (utep.edu/library → Interlibrary Loan) — free, usually a day or two, arrives as a PDF.</p>')
+  for (const [pub, list] of [...groups.entries()].sort((a, b) => b[1].length - a[1].length)) {
+    out.push(`<h2>${pub} — ${list.length}</h2><table><tr><th>#</th><th>Work</th><th>Link</th><th>Save as</th></tr>`)
+    for (const e of list.sort((a, b) => shortLabel(a).localeCompare(shortLabel(b)))) {
+      const href = e.url ?? `https://doi.org/${e.doi}`
+      out.push(`<tr><td class="n">${e.ref_no ?? ''}</td><td>${shortLabel(e)} — ${e.title}</td>` +
+        `<td><a href="${href}">${e.doi ?? href}</a></td><td><code>pdf/${e.id}.pdf</code></td></tr>`)
+    }
+    out.push('</table>')
+  }
+  out.push('</body></html>')
+  return out.join('\n')
+}
+
 async function main() {
   const dir = arg('--dir', path.join(process.env.HOME, 'Documents/Research/Exhaustive Bibliography'))
   const email = arg('--email', 'bschoedel@miners.utep.edu')
@@ -141,14 +194,18 @@ async function main() {
 
   // The folder is the truth: whatever PDFs are in it are held, however they arrived (this script, a
   // library session, a browser download, Barry's own filing). state.json only adds provenance.
+  const onDisk = new Set()
   for (const f of fs.readdirSync(pdfDir).filter((f) => f.endsWith('.pdf'))) {
     const id = f.slice(0, -4)
     const buf = fs.readFileSync(path.join(pdfDir, f))
     if (!buf.subarray(0, 5).equals(Buffer.from('%PDF-'))) continue
+    onDisk.add(id)
     state.files[id] = { bytes: buf.length, sha256: sha(buf), ...(state.files[id] ?? {}) }
     state.files[id].why ??= 'in the folder (source not recorded)'
     delete state.failed[id]
   }
+  // a file removed from the folder is no longer held — otherwise a manifest drifts into claiming it
+  for (const id of Object.keys(state.files)) if (!onDisk.has(id)) delete state.files[id]
 
   if (!has('--manifest-only')) {
     for (const e of entries) {
@@ -214,6 +271,7 @@ async function main() {
       state.files[e.id] ? 'held' : e.kind === 'book' ? 'print only' : 'library session',
     ])
   }
+  fs.writeFileSync(path.join(resolvedDir, 'library-session.html'), renderSession(entries, state))
   fs.writeFileSync(path.join(resolvedDir, 'fetch-list.csv'), rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n') + '\n')
   const held = Object.keys(state.files).length
   console.log(`\n${held} of ${entries.length} works held in ${pdfDir}`)

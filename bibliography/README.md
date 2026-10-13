@@ -147,6 +147,29 @@ with `If-None-Match: *` to authorize → POST the bytes to the returned `/api/lo
 register with `upload=<uploadKey>`. It needs one user approval: `POST /api/local/authorize` shows Zotero's
 dialog, and **Always Allow** returns a persistent key.
 
+### Getting the gated works (a library session)
+
+Most of a real collection sits behind publisher walls that refuse both scripts and browsers — Unpaywall
+found an open copy for 18 of 39 DOIs, and the rest are gated. `MANIFEST.md` names each one and its route.
+They arrive through institutional access, so the folder is set up to make that session mechanical:
+
+1. **`library-session.html`** (in the collection folder) — every gated work, grouped by the publisher it
+   sits behind, one row per work: the link, and the filename to save it as. Grouping means one sign-in per
+   publisher instead of one per article.
+2. **Connect the institution's VPN first.** UTEP's route is Duo 2FA once, then GlobalProtect
+   (`utep.edu/library` → Research → Remote Access); the VPN gives the machine a UTEP IP so publishers treat
+   it as on-campus. The library proxy also works but expires sessions quickly and covers fewer databases.
+3. **Download into `inbox/`** — filenames do not matter.
+4. `node scripts/file-downloads.mjs --dir "<collection>"` — identifies each file by the **DOI printed inside
+   it**, falls back to a title match in page 1, files it as `pdf/<citekey>.pdf`, and lists anything it could
+   not identify rather than guessing. A work already held is left as `duplicate-*` in the inbox.
+5. `node scripts/attach-pdfs.mjs --dir "<collection>"` — attaches anything not yet attached to its Zotero
+   item as a stored copy (so it syncs to Nextcloud), matching on the citekey in Extra, never on titles. It
+   needs the local-API key at `~/.config/zotero/local-api-key`; `--dry-run` says what it would do.
+6. Not licensed? **Interlibrary Loan** (`utep.edu/library` → Interlibrary Loan) delivers as a PDF, usually
+   within a day or two. Books are print-only here by design — a scan of a different edition is not the work
+   the source list cited.
+
 ## Commands
 
 ```sh
