@@ -154,21 +154,26 @@ found an open copy for 18 of 39 DOIs, and the rest are gated. `MANIFEST.md` name
 They arrive through institutional access, so the folder is set up to make that session mechanical:
 
 1. **`library-session.html`** (in the collection folder) — every gated work, grouped by the publisher it
-   sits behind, one row per work: the link, and the filename to save it as. Grouping means one sign-in per
-   publisher instead of one per article.
-2. **Connect the institution's VPN first.** UTEP's route is Duo 2FA once, then GlobalProtect
-   (`utep.edu/library` → Research → Remote Access); the VPN gives the machine a UTEP IP so publishers treat
-   it as on-campus. The library proxy also works but expires sessions quickly and covers fewer databases.
-3. **Download into `inbox/`** — filenames do not matter.
-4. `node scripts/file-downloads.mjs --dir "<collection>"` — identifies each file by the **DOI printed inside
+   sits behind, with two links per work: **library copy** (through the institution's EZproxy) and direct.
+   Grouping means one sign-in per publisher instead of one per article.
+2. **Sign in once, install nothing.** The proxy prefix is `https://utep.idm.oclc.org/login?url=<article url>`
+   — it hands off to UTEP's Shibboleth login (username, password, Duo push) and passes the paywall on your
+   behalf. Verified 2026-10-12: EZproxy answers and returns "Shibboleth Authentication Request".
+   Sessions expire, so expect to sign in again during a long session.
+3. **VPN only when a publisher refuses the proxy** — the institution's own guidance says the proxy "doesn't
+   get you into all databases (some require IP authentication via VPN)". UTEP's portal serves Windows and
+   macOS clients only, so on Linux the route is `sudo apt install openconnect` then
+   `openconnect --protocol=gp myvpn.utep.edu`; the portal is `myvpn.utep.edu` (it answers on
+   `/global-protect/getconfig.esp`, and `vpn.utep.edu` does not). Duo must be registered first.
+4. **Download into `inbox/`** — filenames do not matter.
+5. `node scripts/file-downloads.mjs --dir "<collection>"` — identifies each file by the **DOI printed inside
    it**, falls back to a title match in page 1, files it as `pdf/<citekey>.pdf`, and lists anything it could
    not identify rather than guessing. A work already held is left as `duplicate-*` in the inbox.
-5. `node scripts/attach-pdfs.mjs --dir "<collection>"` — attaches anything not yet attached to its Zotero
+6. `node scripts/attach-pdfs.mjs --dir "<collection>"` — attaches anything not yet attached to its Zotero
    item as a stored copy (so it syncs to Nextcloud), matching on the citekey in Extra, never on titles. It
    needs the local-API key at `~/.config/zotero/local-api-key`; `--dry-run` says what it would do.
-6. Not licensed? **Interlibrary Loan** (`utep.edu/library` → Interlibrary Loan) delivers as a PDF, usually
-   within a day or two. Books are print-only here by design — a scan of a different edition is not the work
-   the source list cited.
+7. Not licensed at all? **Interlibrary Loan** delivers as a PDF, usually within a day or two. Books are
+   print-only here by design — a scan of a different edition is not the work the source list cited.
 
 ## Commands
 

@@ -122,6 +122,14 @@ function manifest(dir, entries, state) {
 }
 
 
+/**
+ * The institution's EZproxy prefix: prefix any article URL with this and the proxy authenticates you once
+ * (UTEP Shibboleth SSO, then Duo) and passes the publisher's paywall on your behalf. Verified 2026-10-12:
+ * EZproxy answers and hands off to "Shibboleth Authentication Request". The institution's own guidance is
+ * that the proxy does not cover every database — some demand IP authentication, which means the VPN.
+ */
+export const PROXY_PREFIX = 'https://utep.idm.oclc.org/login?url='
+
 /** The publisher a gated work sits behind, so a session can be done one login at a time. */
 export function publisherOf(entry) {
   const prefix = (entry.doi ?? '').split('/')[0]
@@ -153,20 +161,22 @@ export function renderSession(entries, state) {
   out.push('.n{color:#666;font-size:.85em}</style></head><body>')
   out.push('<h1>Library session — the gated works</h1>')
   out.push(`<p><strong>${gated.length} works</strong> need your institutional access. Grouped by publisher so you sign in once per site.</p>`)
-  out.push('<ol><li><strong>Connect first:</strong> UTEP GlobalProtect VPN (set up Duo 2FA once, then GlobalProtect — ' +
-    'utep.edu/library → Research → Remote Access). The VPN gives your machine a UTEP IP, so publishers treat it as on-campus; ' +
-    'the library proxy works too but expires sessions quickly and covers fewer databases.</li>')
-  out.push('<li><strong>Click a link</strong> and download the PDF.</li>')
+  out.push('<ol><li><strong>Sign in once:</strong> click any <em>library copy</em> link — the proxy sends you to UTEP Shibboleth ' +
+    '(username, password, Duo push) and then straight to the article. Nothing to install. Sessions expire, so you may sign in again later.</li>')
+  out.push('<li><strong>Click a link</strong> and download the PDF. If a publisher refuses the proxy, use the <em>direct</em> link ' +
+    'with GlobalProtect VPN connected — some databases only accept a UTEP IP address.</li>')
   out.push('<li><strong>Save it into</strong> <code>inbox/</code> (any filename — the DOI or title inside the PDF identifies it).</li>')
   out.push('<li><strong>Then run</strong> <code>node scripts/file-downloads.mjs --dir &quot;…&quot;</code> — it files each PDF as ' +
     '<code>pdf/&lt;citekey&gt;.pdf</code>, and <code>attach-pdfs.mjs</code> puts it on the Zotero item so it syncs to Nextcloud.</li></ol>')
   out.push('<p class="n">Not licensed at UTEP? Request it through Interlibrary Loan (utep.edu/library → Interlibrary Loan) — free, usually a day or two, arrives as a PDF.</p>')
   for (const [pub, list] of [...groups.entries()].sort((a, b) => b[1].length - a[1].length)) {
-    out.push(`<h2>${pub} — ${list.length}</h2><table><tr><th>#</th><th>Work</th><th>Link</th><th>Save as</th></tr>`)
+    out.push(`<h2>${pub} — ${list.length}</h2><table><tr><th>#</th><th>Work</th><th>Get it</th><th>Save as</th></tr>`)
     for (const e of list.sort((a, b) => shortLabel(a).localeCompare(shortLabel(b)))) {
       const href = e.url ?? `https://doi.org/${e.doi}`
       out.push(`<tr><td class="n">${e.ref_no ?? ''}</td><td>${shortLabel(e)} — ${e.title}</td>` +
-        `<td><a href="${href}">${e.doi ?? href}</a></td><td><code>pdf/${e.id}.pdf</code></td></tr>`)
+        `<td><a href="${PROXY_PREFIX}${encodeURIComponent(href)}" title="through the library proxy — it authenticates you and the publisher sees the institution">` +
+        `library copy</a><br><a class="n" href="${href}">direct</a></td>` +
+        `<td><code>pdf/${e.id}.pdf</code></td></tr>`)
     }
     out.push('</table>')
   }
