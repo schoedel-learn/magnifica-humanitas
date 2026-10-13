@@ -8,3 +8,7 @@ dist/
 __pycache__/
 *.log
 .DS_Store
+
+# The collection’s PDFs live outside the repo by design (D9): what is published is
+# quoted extracts, never a full text. A guard, so a stray file can never be committed.
+bibliography/**/*.pdf
