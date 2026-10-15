@@ -54,6 +54,10 @@ interface StepCopy {
 }
 
 const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
+const scripturePendingNote =
+  lang === 'es'
+    ? 'El texto de las citas bíblicas en castellano está pendiente de la revisión de Barry.'
+    : 'Spanish lectionary wording for Scripture pending Barry’s review.';
 const scripturePending = lang === 'es';
 
 const en: StepCopy[] = [
@@ -165,9 +169,7 @@ const metaDescription =
       <figcaption class={`mt-3 ${metaLabel}`}>{epigraph.ref}</figcaption>
       {
         scripturePending && (
-          <p class={`mt-3 text-meta ${metaLabel}`}>
-            Spanish lectionary wording for Scripture pending Barry’s review.
-          </p>
+          <p class={`mt-3 text-meta ${metaLabel}`}>{scripturePendingNote}</p>
         )
       }
     </figure>
