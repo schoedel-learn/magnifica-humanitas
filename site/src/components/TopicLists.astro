@@ -1,0 +1,74 @@
+---
+// The Documents and Essays list sections every topic page shows, extracted from
+// TopicPage.astro so the bespoke Veritas landing page renders exactly the same
+// sections rather than a diverging copy (the citation-formatting rationale, applied
+// to markup: one place, many pages).
+import {
+  listDocumentsForTopic,
+  listPostsForTopic,
+} from '../lib/content';
+import { UI, itemLang, resolvedContentLang, root, type Lang } from '../lib/i18n';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  topicId: number;
+  lang?: Lang;
+}
+const { topicId, lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+
+const [posts, documents] = await Promise.all([
+  listPostsForTopic(topicId, lang),
+  listDocumentsForTopic(topicId, lang),
+]);
+
+const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
+const itemLink =
+  'font-serif text-lg underline decoration-slate underline-offset-4 transition-colors hover:decoration-ink';
+// Used by the CALLER for its contentLang decision, so a /es/ topic page whose only
+// rows are still English keeps the same fallback honesty as every other page.
+const contentLang = resolvedContentLang(lang, [...posts, ...documents]);
+---
+
+<section class="mt-12 border-t border-slate pt-8">
+  <h2 class={`section-label ${metaLabel}`}>{s.documents}</h2>
+  {
+    documents.length === 0 ? (
+      <p class="mt-4 text-meta">{s.noDocuments}</p>
+    ) : (
+      <ul class="mt-5 divide-y divide-slate">
+        {documents.map((d) => (
+          <li class="py-4 first:pt-0" lang={itemLang(lang, d)}>
+            <a href={p(`/documents/${d.slug}/`)} class={itemLink}>
+              {d.title ?? d.abbreviation}
+            </a>
+            <span class={`ml-2 ${metaLabel}`}>{d.abbreviation}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
+
+<section class="mt-12 border-t border-slate pt-8">
+  <h2 class={`section-label ${metaLabel}`}>{s.essays}</h2>
+  {
+    posts.length === 0 ? (
+      <p class="mt-4 text-meta">{s.noPosts}</p>
+    ) : (
+      <ul class="mt-5 divide-y divide-slate">
+        {posts.map((post) => (
+          <li class="py-4 first:pt-0" lang={itemLang(lang, post)}>
+            <a href={p(`/posts/${post.slug}/`)} class={itemLink}>
+              {post.title ?? post.slug}
+            </a>
+            <span class={`ml-2 ${metaLabel}`}>
+              {post.published_at ? formatDate(post.published_at, lang) : s.undated}
+            </span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
