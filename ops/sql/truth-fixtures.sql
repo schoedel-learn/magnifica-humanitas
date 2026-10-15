@@ -16,7 +16,7 @@ insert into topics (slug) values ('truth')
 on conflict (slug) do nothing;
 
 insert into topics_locales (name, description, _locale, _parent_id)
-select 'Veritas',
+select 'Agentes Veritatis',
        'A path of three steps in the Sacred Scriptures for becoming disciples of the Truth, who is God.',
        'en', t.id
 from topics t where t.slug = 'truth'
@@ -24,7 +24,7 @@ on conflict (_locale, _parent_id) do nothing;
 
 -- ES description is an agent translation flagged for Barry's review (site convention).
 insert into topics_locales (name, description, _locale, _parent_id)
-select 'Verdad',
+select 'Agentes Veritatis',
        'Un camino de tres pasos en las Sagradas Escrituras para ser discípulos de la Verdad, que es Dios.',
        'es', t.id
 from topics t where t.slug = 'truth'

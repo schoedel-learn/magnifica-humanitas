@@ -11,7 +11,7 @@ import { listPublishedPosts } from '../lib/content';
 export const prerender = true;
 
 const VERITAS_ITEM = {
-  title: 'Veritas — a guide to becoming disciples of the Truth',
+  title: 'Agentes Veritatis — a guide to becoming disciples of the Truth',
   pubDate: new Date('2026-10-15'),
   description:
     'A three-step Scriptural guide to becoming a disciple of the Truth: awakening, commitment, sacrifice — integrity first, then truthful witness with AI.',

@@ -14,7 +14,9 @@ const en = {
   essays: 'Essays',
   sources: 'Sources',
   topics: 'Topics',
-  veritas: 'Veritas',
+  // The section's name is Latin in BOTH locales (Barry, 2026-10-15): shortened title
+  // "Agentes Veritatis" (Agents of Truth); the full form sits on the page as its standfirst.
+  veritas: 'Agentes Veritatis',
   publishedOn: 'Published',
   signedOn: 'Signed',
   undated: 'Undated',
@@ -51,7 +53,7 @@ const es: typeof en = {
   essays: 'Ensayos',
   sources: 'Fuentes',
   topics: 'Temas',
-  veritas: 'Verdad',
+  veritas: 'Agentes Veritatis',
   publishedOn: 'Publicado',
   signedOn: 'Firmado',
   undated: 'Sin fecha',
