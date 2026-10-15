@@ -1,5 +1,6 @@
 ---
 import TopicPage from '../../components/TopicPage.astro';
+import TopicVeritasPage from '../../components/TopicVeritasPage.astro';
 import { listTopics } from '../../lib/content';
 
 export async function getStaticPaths() {
@@ -10,4 +11,4 @@ export async function getStaticPaths() {
 const { slug } = Astro.props;
 ---
 
-<TopicPage slug={slug} lang="en" />
+{slug === 'truth' ? <TopicVeritasPage lang="en" /> : <TopicPage slug={slug} lang="en" />}

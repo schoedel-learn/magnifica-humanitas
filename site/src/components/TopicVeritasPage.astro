@@ -1,0 +1,239 @@
+---
+// The Veritas landing page — the bespoke "disciples of the truth" guide.
+//
+// Design decisions live in the plan this ships under (.hermes/plans/2026-10-15_151332-
+// magnifica-truth-section.md): one long page, three anchored steps, guide copy hardcoded
+// here (redeploy on the worker to change it — it is NOT a CMS global), the MH extracts
+// rendered from doc_paragraphs so the CMS remains the only home of the quotations, and
+// the Documents/Essays sections shared with every other topic page via TopicLists.
+//
+// Scripture: the EN page quotes the New American Bible Revised Edition verbatim (fetched
+// from biblegateway.com 2026-10-15). The ES page quotes the *official Spanish edition of
+// the encyclical* for MH extracts (the edition text, never a translation) but carries the
+// Scripture references only: no official Spanish Catholic lectionary text is reachable for
+// verification, and mislabeling another translation as the lectionary is worse than a
+// pending note. The scriptureQuotesPending flag says so in the rendered page.
+import Base from '../layouts/Base.astro';
+import TopicLists from './TopicLists.astro';
+import { getTopicBySlug, getDocumentBySlug, listParagraphsForTopic } from '../lib/content';
+import { cite } from '../lib/citations';
+import { renderEmphasis } from '../lib/emphasis';
+import { UI, resolvedContentLang, root, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+const p = (path: string) => `${root(lang)}${path}`;
+
+// The topic row carries the name/description in the CMS; the guide copy around it is ours.
+const topic = await getTopicBySlug('truth', lang);
+if (!topic) throw new Error(`Topic not found in CMS: truth (lang=${lang})`);
+const paragraphs = await listParagraphsForTopic(topic.id, lang);
+const byNumber = new Map(paragraphs.map((row) => [row.number, row]));
+
+const docSlug = 'magnifica-humanitas';
+// The MH document is the one carrying these paragraphs; its page is where every citation
+// label links (the same /documents/<slug>/#pNNN anchors the document page has). The
+// abbreviation and slug come from the CMS row rather than constants, matching how
+// DocumentDetail labels its paragraphs.
+const doc = await getDocumentBySlug(docSlug, lang);
+if (!doc) throw new Error(`Document not found in CMS: ${docSlug} (lang=${lang})`);
+const citeLabel = (num: number) => cite(doc.abbreviation, num);
+
+// Per-step data: `extracts` are the CMS paragraph numbers rendered from doc_paragraphs;
+// everything else is the approved guide copy (plan answers 1-8, 2026-10-15).
+interface StepCopy {
+  name: string;
+  aim: string;
+  scripture: string[]; // rendered verbatim NAB-RE (EN) or reference-only (ES, pending)
+  scriptureRefs: string[];
+  extracts: number[];
+  guidance: string;
+}
+
+const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
+const scripturePending = lang === 'es';
+
+const en: StepCopy[] = [
+  {
+    name: 'Awakening',
+    aim: 'See the truth about yourself: name and renounce self-deception, the lie each of us tells himself.',
+    scripture: [
+      '“If we say, ‘We are without sin,’ we deceive ourselves, and the truth is not in us. If we acknowledge our sins, he is faithful and just and will forgive our sins and cleanse us from every wrongdoing.”',
+    ],
+    scriptureRefs: ['1 Jn 1:8-9', 'cf. Ps 51:5-7'],
+    extracts: [133],
+    guidance:
+      'Becoming a disciple of the truth begins with an admission, not an argument. Ask the Holy Spirit to show you one thing you have refused to know about yourself — a habit of mind, a flattering story, a small dishonesty you have made comfortable — and lay it before God in the sacrament of penance. The aim is integrity without duplicity: one honest self before God, the people you love, and the people you meet.',
+  },
+  {
+    name: 'Commitment',
+    aim: 'Once conversion begins, choose truth daily — in speech, records, promises and work — through repentance and fidelity in ordinary life.',
+    scripture: [
+      '“I am the way and the truth and the life.”',
+      '“Let your ‘Yes’ mean ‘Yes,’ and your ‘No’ mean ‘No.’”',
+    ],
+    scriptureRefs: ['Jn 14:6', 'Mt 5:37'],
+    extracts: [137, 140],
+    guidance:
+      'Truth dwells in the small print of a day: what you say, what you record, what you promise and what you deliver. Make a nightly examen in truth — where did I bend the truth for comfort today? What did a tool or a platform lead me to assert without verifying? Whom do I owe a correction? Stay in relationship with Christ, who is the Truth, in prayer and the Eucharist: a life of honesty is sustained by him, not by willpower.',
+  },
+  {
+    name: 'Sacrifice',
+    aim: 'Renounce falsity at its costly points; the truth liberates and sends — witness begins in a life of integrity, then guides AI use, social media, communications and public commitments.',
+    scripture: [
+      '“If you remain in my word, you will truly be my disciples, and you will know the truth, and the truth will set you free.”',
+    ],
+    scriptureRefs: ['Jn 8:31-32'],
+    extracts: [132, 138],
+    guidance:
+      'Liberation has a price: sometimes a correction of the record, sometimes a refusal to publish what flatters you, sometimes bearing the cost of an uncomfortable truth about yourself. Before you post, share or sign anything, apply the rule of Nehemiah: does this build the city or the tower? An agent of faith is expected to be countable for truth first in his personal life, and then in every use of AI, every social channel, and every public commitment.',
+  },
+];
+
+// The Spanish page’s guide copy is a translation DRAFT awaiting Barry’s review per the
+// site convention; its extracts are the official Spanish-edition text from the CMS. The
+// Scripture quotations are deliberately absent (scripturePending) — see the header note.
+const es: StepCopy[] = [
+  {
+    name: 'Despertar',
+    aim: 'Ver la verdad sobre uno mismo: reconocer y renunciar al autoengaño, la mentira que cada uno se dice a sí mismo.',
+    scripture: [],
+    scriptureRefs: ['1 Jn 1, 8-9', 'cf. Sal 51, 5-7'],
+    extracts: [133],
+    guidance:
+      'Ser discípulo de la verdad empieza con una admisión, no con un argumento. Pide al Espíritu Santo que te muestre una cosa que te hayas negado a saber de ti mismo —una costumbre, una historia que te halaga, una pequeña deshonestidad que ya te resulta cómoda— y ponla ante Dios en el sacramento de la penitencia. Se busca una integridad sin doblez: un solo yo veraz ante Dios y ante los demás.',
+  },
+  {
+    name: 'Compromiso',
+    aim: 'Empezada la conversión, elige la verdad cada día —en el hablar, los registros, las promesas y el trabajo— con arrepentimiento y fidelidad en lo ordinario.',
+    scripture: [],
+    scriptureRefs: ['Jn 14, 6', 'Mt 5, 37'],
+    extracts: [137, 140],
+    guidance:
+      'La verdad vive en la letra pequeña de cada día: lo que dices, lo que registras, lo que prometes y lo que cumples. Haz un examen nocturno en la verdad: ¿dónde doblegué hoy la verdad por comodidad? ¿Qué me llevó una herramienta o una plataforma a afirmar sin verificar? ¿A quién debo una corrección? Permanece en relación con Cristo, que es la Verdad, en la oración y la Eucaristía: la vida de honestidad la sostiene él, no la sola fuerza de voluntad.',
+  },
+  {
+    name: 'Sacrificio',
+    aim: 'Renuncia a la falsedad en sus puntos costosos; la verdad liberta y envía: el testimonio empieza en una vida íntegra y guía después el uso de la IA, las redes, las comunicaciones y los compromisos públicos.',
+    scripture: [],
+    scriptureRefs: ['Jn 8, 31-32'],
+    extracts: [132, 138],
+    guidance:
+      'La liberación tiene precio: a veces corregir un registro, a veces no publicar lo que te halaga, a veces cargar con una verdad incómoda sobre ti mismo. Antes de publicar o firmar nada, aplica la regla de Nehemías: ¿esto construye la ciudad o la torre? El agente de la fe debe poder fiarse primero en su vida personal, y después en cada uso de la IA, en cada red y en cada compromiso público.',
+  },
+];
+
+const steps: StepCopy[] = lang === 'es' ? es : en;
+
+// Approved copy (plan, answers 6-8): epigraph, intro, meta descriptions.
+const epigraph = {
+  text:
+    lang === 'es'
+      ? '«No darás falso testimonio contra tu prójimo»' // ES wording pending official lectionary text — flagged below
+      : '“You shall not bear false witness against your neighbor.”',
+  ref: 'Ex 20:16',
+};
+
+const intro =
+  lang === 'es'
+    ? 'La verdad es un bien común (MH 131). El primer deber del discípulo no es público sino interior: la verdad del propio corazón, en la relación con Cristo, que es la Verdad. Esta guía es un camino de tres pasos en las Sagradas Escrituras: despertar a la verdad sobre uno mismo, elegir la verdad cada día, y el sacrificio que me libra para dar testimonio, primero en la propia vida y después en el uso de la IA, las redes sociales y todo compromiso público.'
+    : 'Truth is a common good (MH 131). The disciple’s first duty of truth is not public but interior: the truth of one’s own heart, in relationship with Christ, who is the Truth. This guide is a path of three steps in the Sacred Scriptures — awakening to the truth about myself, choosing truth each day, and the sacrifice that sets me free to bear witness, first in my own life, then in my use of AI, social media and every public commitment.';
+
+const metaDescription =
+  lang === 'es'
+    ? 'Guía en tres pasos para ser discípulo de la Verdad: despertar, compromiso, sacrificio. Primero la integridad de vida, luego el testimonio con la IA.'
+    : 'A three-step Scriptural guide to becoming a disciple of the Truth: awakening, commitment, sacrifice — integrity first, then truthful witness with AI.';
+---
+
+<Base
+  title={`${topic.name ?? s.veritas} — ${s.siteName}`}
+  description={metaDescription}
+  lang={lang}
+  contentLang={resolvedContentLang(lang, [topic, ...paragraphs])}
+>
+  <article>
+    <h1>{topic.name ?? s.veritas}</h1>
+    {topic.description && (
+      <p class="mt-4 font-serif text-xl leading-relaxed text-meta">{topic.description}</p>
+    )}
+
+    <figure class="mt-10 border-b border-slate pb-10">
+      <blockquote class="font-serif text-2xl italic">{epigraph.text}</blockquote>
+      <figcaption class={`mt-3 ${metaLabel}`}>{epigraph.ref}</figcaption>
+      {
+        scripturePending && (
+          <p class={`mt-3 text-meta ${metaLabel}`}>
+            Spanish lectionary wording for Scripture pending Barry’s review.
+          </p>
+        )
+      }
+    </figure>
+
+    <p
+      class="mt-8 font-serif text-xl leading-relaxed"
+      set:html={renderEmphasis(intro).replace(
+        'MH 131',
+        `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
+      )}
+    />
+
+    {
+      steps.map((step, i) => {
+        const n = i + 1;
+        return (
+          <section id={`step-${n}`} class="mt-14 scroll-mt-24 border-t border-slate pt-8">
+            <h2 class={`section-label ${metaLabel}`}>
+              {`${s.step} ${n}`} — {step.name}
+            </h2>
+            <p class="mt-4 font-serif text-xl italic leading-relaxed">{step.aim}</p>
+
+            {step.scripture.map((quote) => (
+              <blockquote class="mt-5 font-serif text-lg leading-relaxed">{quote}</blockquote>
+            ))}
+            {step.scriptureRefs.length > 0 && (
+              <p class={`mt-3 ${metaLabel}`}>{step.scriptureRefs.join(' · ')}</p>
+            )}
+            {
+              scripturePending && step.scripture.length === 0 && (
+                <p class={`mt-3 text-meta ${metaLabel}`}>
+                  Citas bíblicas en castellano pendientes de la aprobación de Barry.
+                </p>
+              )
+            }
+
+            {
+              step.extracts.map((num) => {
+                const row = byNumber.get(num);
+                return (
+                  <div class="mt-5">
+                    <p class={`${metaLabel}`}>
+                      <a
+                        href={p(`/documents/${doc.slug}/#p${num}`)}
+                        class="underline decoration-slate underline-offset-4 hover:decoration-ink"
+                      >
+                        {citeLabel(num)}
+                      </a>
+                    </p>
+                    {row?.extract && (
+                      <blockquote
+                        class="mt-2 font-serif text-lg leading-relaxed"
+                        set:html={renderEmphasis(row.extract)}
+                      />
+                    )}
+                  </div>
+                );
+              })
+            }
+
+            <p class="mt-5 leading-relaxed">{step.guidance}</p>
+          </section>
+        );
+      })
+    }
+
+    <TopicLists topicId={topic.id} lang={lang} />
+  </article>
+</Base>

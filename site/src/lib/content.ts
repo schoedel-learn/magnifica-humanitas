@@ -323,17 +323,17 @@ export async function listParagraphsForTopic(
 ): Promise<ParagraphRow[]> {
   return query<ParagraphRow>(
     `select p.number::int as number, l."extract", l.note, l.resolved_locale
-       from doc_paragraphs p
-       join doc_paragraphs_rels r
-         on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
-       left join lateral (
-         select loc."extract", loc.note, loc._locale as resolved_locale
-           from doc_paragraphs_locales loc
-          where loc._parent_id = p.id
-          order by case loc._locale when $2 then 0 else 1 end, loc._locale
-          limit 1
-       ) l on true
-      order by p.number asc`,
+     from doc_paragraphs p
+     join doc_paragraphs_rels r
+       on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
+     left join lateral (
+       select loc."extract", loc.note, loc._locale as resolved_locale
+         from doc_paragraphs_locales loc
+        where loc._parent_id = p.id
+        order by case loc._locale when $1 then 0 else 1 end, loc._locale
+        limit 1
+     ) l on true
+    order by p.number asc`,
     [locale, topicId],
   );
 }
