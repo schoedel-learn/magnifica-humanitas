@@ -148,10 +148,38 @@ const epigraph = {
   ref: 'Ex 20:16',
 };
 
-const intro =
+// Barry's dictated copy for the opening section (2026-10-15), shipped with minimal,
+// disclosed repairs — see the commit message for the before/after list. The Spanish is an
+// agent translation DRAFT flagged for review (site convention), never his words.
+const subtitle =
   lang === 'es'
-    ? 'La verdad es un bien común (MH 131). El primer deber del discípulo no es público sino interior: la verdad del propio corazón, en la relación con Cristo, que es la Verdad. Esta guía es un camino de tres pasos en las Sagradas Escrituras: despertar a la verdad sobre uno mismo, elegir la verdad cada día, y el sacrificio que me libra para dar testimonio, primero en la propia vida y después en el uso de la IA, las redes sociales y todo compromiso público.'
-    : 'Truth is a common good (MH 131). The disciple’s first duty of truth is not public but interior: the truth of one’s own heart, in relationship with Christ, who is the Truth. This guide is a path of three steps in the Sacred Scriptures — awakening to the truth about myself, choosing truth each day, and the sacrifice that sets me free to bear witness, first in my own life, then in my use of AI, social media and every public commitment.';
+    ? 'Camino triple para ser discípulos de la Verdad en una era de adicción'
+    : 'Three-fold Path to be Disciples of Truth in an Age of Addiction';
+
+const introParagraphs: string[] =
+  lang === 'es'
+    ? [
+        'El octavo mandamiento contra el falso testimonio no es una lista ni un registro de una libertad humana que está prohibida. No es simplemente no hacer esta cosa (que, sin embargo, tenemos la libertad de hacer). Más bien, expresa cómo ejercer la libertad de modo que permanezcamos unidos a Dios y al prójimo. La mentira, el autoengaño, el engaño intencional de otros fractura nuestra relación con Dios y con el prójimo.',
+        'A menudo, se hace en nombre de lo que parece una libertad: una comodidad deseada, una ganancia material, un cierto consuelo, un placer culpable. El autoengaño necesario para engañar a otros causa confusión y ceguera ante la voluntad de Dios. Cristo se convierte en un ideal lejano más que en un amigo íntimo. Llevamos este autoengaño al ámbito público, a menudo por ganancia personal, y podemos empezar a comerciar con él para nuestro propio avance.',
+        'Pero, ¿quién es nuestro socio de intercambio? No es Dios. ¿Y qué hemos cambiado? Nuestro propio ser. Así nos perdemos: nuestra alma se pierde, la cambiamos por cosas que caducan, cosas que nos dejan peor, cosas que socavan nuestra paz, nuestra capacidad de amar, nuestra capacidad de verdadera alegría.',
+        'Vivimos como adictos, adictos a los placeres temporales del mundo, haciendo eterno lo temporal. Cambiamos el infinito por lo momentáneo; el horizonte se reduce a un marco digital fijo de información.',
+        'Nos deja agotados pero hambrientos, buscando todavía más estímulo temporal, sabiendo al mismo tiempo que este antojo es un pozo sin fondo, que no se puede llenar.',
+        'Aun así intentamos llenarlo, no podemos soltarlo: podemos ir al porno, a la bebida, a la droga, a la intoxicación digital, una mezcla de todos. Empezó con una pequeña mentira sobre nosotros mismos: sacrificamos una verdad. ¿Podemos ver dónde empezamos? ¿Podemos ver cómo lo mantenemos cada día?',
+        'En Magnifica Humanitas se nos recuerda que la verdad es un bien común (MH 131). Pero se pierde por completo como bien común sin el compromiso personal con la verdad, una vida de integridad viviendo el octavo mandamiento, especialmente en el contexto del mandamiento más grande: amar a Dios y al prójimo.',
+        'El primer deber del discípulo no es público sino interior: la verdad del propio corazón, la libertad del autoengaño. Esto es esencial para la relación con Cristo, que es la Verdad.',
+        'Esta guía revela un camino triple para llegar a ser, en cierto sentido, agentes de la verdad, un pueblo que puede dar testimonio de la verdad como bien común, que puede hacerla concreta, no como un ideal sofisticado sino como una experiencia vivida y compartida.',
+      ]
+    : [
+        'The eighth commandment against false witness isn’t a list or record of a human freedom that is prohibited. It is not merely don’t do this thing (that you nonetheless have the freedom to do). Rather, it expresses how to exercise freedom in such a way that we remain united to God and our neighbor. Lying, self-deceit, intentional deception of others fractures our relationship with God and with our neighbor.',
+        'Often, it is done in the name of what seems a freedom: a desired convenience, a material gain, a certain comfort, a guilty pleasure. The self-deceit required to deceive others causes confusion and blindness to God’s will. Christ becomes a distant ideal rather than an intimate friend. We carry this self-deception into the public sphere, often for personal gain, we may begin to trade in it for our own advancement.',
+        'But, who is our trading partner? Not God. And what have we traded? Our very selves. Thus we lose ourselves, our soul is lost, we trade it for things that expire, things that leave us worse off, things that undermine our peace, our capacity to love, our capacity for true joy.',
+        'We live like addicts, addicted to the temporary pleasures of the World, making the temporary into the eternal. We trade the infinite for the momentary, the horizon shrinks into a fixed digital framework of information.',
+        'It leaves us spent, yet hungry, seeking even more temporary stimulation but at the same time knowing that this craving is a bottomless pit, it can’t be met.',
+        'We still try to meet it, we can’t put it down, we may go to porn, to drink, to drug, to digital intoxication, a mix of all. It began with a small lie about ourselves, we sacrificed a truth. Can we see where we began? Can we see how we are maintaining it daily?',
+        'In Magnifica Humanitas we are reminded that truth is a common good (MH 131). But it is lost completely as a common good without personal commitment to truth, a life of integrity in living the 8th commandment, especially in the context of the greatest commandment to love God and neighbor.',
+        'The disciple’s first duty of truth is not public but interior: the truth of one’s own heart, freedom from self-deception. This is essential to relationship with Christ, who is the Truth.',
+        'This guide reveals a three-fold path to becoming, in a sense, agents of the truth, a people who can bear witness to truth as a common good, who can make it concrete, not as a sophisticated ideal but a lived and shared experience.',
+      ];
 
 const metaDescription =
   lang === 'es'
@@ -170,9 +198,7 @@ const metaDescription =
     <p class="mt-2 font-sans text-xs uppercase tracking-[0.1em] text-meta">
       Agentes Fidei ut Agentes Veritatis
     </p>
-    {topic.description && (
-      <p class="mt-4 font-serif text-xl leading-relaxed text-meta">{topic.description}</p>
-    )}
+    <p class="mt-4 font-serif text-xl leading-relaxed text-meta">{subtitle}</p>
 
     <figure class="mt-10 border-b border-slate pb-10">
       <blockquote class="font-serif text-2xl italic">{epigraph.text}</blockquote>
@@ -184,13 +210,17 @@ const metaDescription =
       }
     </figure>
 
-    <p
-      class="mt-8 font-serif text-xl leading-relaxed"
-      set:html={renderEmphasis(intro).replace(
-        'MH 131',
-        `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
-      )}
-    />
+    {
+      introParagraphs.map((para) => (
+        <p
+          class="mt-6 leading-relaxed first:mt-8"
+          set:html={renderEmphasis(para).replace(
+            'MH 131',
+            `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
+          )}
+        />
+      ))
+    }
 
     {
       steps.map((step, i) => {
