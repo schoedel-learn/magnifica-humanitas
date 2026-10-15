@@ -312,6 +312,32 @@ export async function listDocumentsForTopic(
   );
 }
 
+// The PARAGRAPHS themselves carrying a topic — unlike listDocumentsForTopic, which answers
+// "which documents touch this topic", this answers "which quoted extracts does it cite". It
+// is the basis of a guided page that walks the reader through the topic's own quotations in
+// a chosen order (the Veritas path quotes MH 133 under its first step, MH 137/140 under its
+// second, MH 132/138 under its third) rather than the ascending list the document page shows.
+export async function listParagraphsForTopic(
+  topicId: number,
+  locale = 'en',
+): Promise<ParagraphRow[]> {
+  return query<ParagraphRow>(
+    `select p.number::int as number, l."extract", l.note, l.resolved_locale
+       from doc_paragraphs p
+       join doc_paragraphs_rels r
+         on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
+       left join lateral (
+         select loc."extract", loc.note, loc._locale as resolved_locale
+           from doc_paragraphs_locales loc
+          where loc._parent_id = p.id
+          order by case loc._locale when $2 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
+      order by p.number asc`,
+    [locale, topicId],
+  );
+}
+
 /**
  * The footer note, if the desk has set one in the CMS.
  *
