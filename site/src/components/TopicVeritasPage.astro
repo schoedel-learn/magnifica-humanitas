@@ -231,7 +231,10 @@ const metaDescription =
             `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
           );
         return block.kind === 'question' ? (
-          <p class="mt-7 font-serif text-xl italic leading-relaxed" set:html={renderEmphasis(block.text)} />
+          <p
+            class="mt-8 border-l-[3px] border-vatican pl-4 font-serif text-2xl italic leading-snug"
+            set:html={renderEmphasis(block.text)}
+          />
         ) : (
           <p
             class={`leading-relaxed ${i === 0 ? 'mt-8' : 'mt-6'}`}
