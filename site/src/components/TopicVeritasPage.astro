@@ -139,18 +139,10 @@ const es: StepCopy[] = [
 
 const steps: StepCopy[] = lang === 'es' ? es : en;
 
-// Approved copy (plan, answers 6-8): epigraph, intro, meta descriptions.
-const epigraph = {
-  text:
-    lang === 'es'
-      ? '«No darás falso testimonio contra tu prójimo»' // ES wording pending official lectionary text — flagged below
-      : '“You shall not bear false witness against your neighbor.”',
-  ref: 'Ex 20:16',
-};
-
-// Barry's dictated copy for the opening section (2026-10-15, revised 2026-10-16), shipped
-// with minimal, disclosed repairs — see the commit message for the before/after list. The
-// Spanish is an agent translation DRAFT flagged for review (site convention), never his words.
+// Barry's dictated copy for the opening section (2026-10-15; full rewrite dictated
+// 2026-10-16), shipped with minimal, disclosed repairs — see the commit message for the
+// before/after list. The Spanish is an agent translation DRAFT flagged for review (site
+// convention), never his words.
 //
 // The subtitle he first dictated ("Three-fold Path to be Disciples of Truth in an Age of
 // Addiction") was REPLACED 2026-10-16 by these two standfirst lines; the old wording stays
@@ -160,38 +152,86 @@ const standfirstLines =
     ? ['Agentes Fidei ut Agentes Veritatis', 'La verdad como bien común', 'Camino triple de discipulado en una cultura de las apariencias']
     : ['Agentes Fidei ut Agentes Veritatis', 'Truth as a common good', 'Three-fold Path of discipleship in a culture of appearances'];
 
-// `question` blocks are Barry's own dictated question sentences (listed by him 2026-10-15)
-// pulled OUT of the paragraph flow into the guide's display register (the italic serif the
-// step aims use, marked by the Vatican-yellow flag band) — the words are unchanged; only
-// their line is set apart.
+// The dictated question sentences sit on their own lines in the display register (italic
+// serif, mist ground, Vatican-yellow rule) — Barry: questions are an important aspect of
+// how this guide works. The Ex 20:16 text moved INTO the flow (after his "8th Commandment
+// is all about…" line) with the 2026-10-16 rewrite; it renders as the standard quote
+// treatment. The tooltip on "our soul is lost" carries his dictated wording verbatim.
 interface IntroBlock {
-  kind: 'para' | 'question';
+  kind: 'para' | 'question' | 'commandment';
   text: string;
+  ref?: string;
 }
+
+const soulTooltip =
+  lang === 'es'
+    ? {
+        phrase: 'nuestra alma se pierde',
+        tip: '¿entendemos lo que significa perder el alma o nos hemos hecho cómodos con esta experiencia porque es todo lo que conocemos?',
+      }
+    : {
+        phrase: 'our soul is lost',
+        tip: 'do we understand what it means to lose the soul or have we become comfortable with this experience because it is all we know?',
+      };
+
+const soulTooltipHtml = (rendered: string) =>
+  rendered.replace(
+    `@@SOUL@@`,
+    `<span class="group relative inline-block" tabindex="0">`
+      + `<span class="cursor-help font-serif not-italic underline decoration-dotted decoration-slate decoration-2 underline-offset-4">${soulTooltip.phrase}</span>`
+      + `<span role="tooltip" class="invisible group-focus-within:visible group-hover:visible absolute left-0 top-full z-10 mt-2 w-64 max-w-[80vw] bg-ink px-3 py-2 font-sans text-sm not-italic leading-snug text-canvas">${soulTooltip.tip}</span>`
+      + `</span>`,
+  );
 
 const introBlocks: IntroBlock[] =
   lang === 'es'
     ? [
-        { kind: 'para', text: 'El octavo mandamiento contra el falso testimonio no es una lista ni un registro de una libertad humana que está prohibida. No es simplemente no hacer esta cosa (que, sin embargo, tenemos la libertad de hacer). Más bien, expresa cómo ejercer la libertad de modo que permanezcamos unidos a Dios y al prójimo. La mentira, el autoengaño, el engaño intencional de otros fractura nuestra relación con Dios y con el prójimo.' },
-        { kind: 'para', text: 'A menudo, se hace en nombre de lo que parece una libertad: una comodidad deseada, una ganancia material, un cierto consuelo, un placer culpable. El autoengaño necesario para engañar a otros causa confusión y ceguera ante la voluntad de Dios. Cristo se convierte en un ideal lejano más que en un amigo íntimo. Llevamos este autoengaño al ámbito público, a menudo por ganancia personal, y podemos empezar a comerciar con él para nuestro propio avance.' },
-        { kind: 'question', text: 'Pero, ¿quién es nuestro socio de intercambio? No es Dios. ¿Y qué hemos cambiado?' },
-        { kind: 'para', text: 'Nuestro propio ser. Así nos perdemos: nuestra alma se pierde, la cambiamos por cosas que caducan, cosas que nos dejan peor, cosas que socavan nuestra paz, nuestra capacidad de amar, nuestra capacidad de verdadera alegría.' },
-        { kind: 'para', text: 'Vivimos como adictos, adictos a los placeres temporales del mundo, haciendo eterno lo temporal. Cambiamos el infinito por lo momentáneo; el horizonte se reduce a un marco digital fijo de información.' },
-        { kind: 'para', text: 'Nos deja agotados pero hambrientos, buscando todavía más estímulo temporal, sabiendo al mismo tiempo que este antojo es un pozo sin fondo, que no se puede llenar.' },
-        { kind: 'para', text: 'Aun así intentamos llenarlo, no podemos soltarlo: podemos ir al porno, a la bebida, a la droga, a la intoxicación digital, una mezcla de todos. Empezó con una pequeña mentira sobre nosotros mismos: sacrificamos una verdad.' },
+        { kind: 'para', text: 'Qué fácil es, en toda época, concentrarse en fabricar una apariencia. Hasta cierto punto esto es humano, y no hay nada malo en tener una persona pública y una privada. Sería errado lamentarse del hecho de que en nuestra propia época esto tenga otros medios y canales.' },
+        { kind: 'para', text: 'Puede ser, además, un aspecto importante del arte: crear una apariencia para la impresión que evoca. Esto es parte de la cultura humana y puede usarse para custodiar la verdad en vez de oscurecerla.' },
+        { kind: 'para', text: 'Lo más peligroso para la comunidad humana, y para la persona humana, es cuando la apariencia o el testimonio que creamos fractura la integridad personal y comunitaria, cuando el testimonio obra contra la verdad como bien personal y como bien común.' },
+        { kind: 'para', text: 'Si la verdad nos hace libres, su contrario esclaviza a las personas y a la comunidad humana.' },
+        { kind: 'para', text: 'De esto trata el octavo mandamiento…' },
+        { kind: 'commandment', text: '«No darás falso testimonio contra tu prójimo»', ref: 'Ex 20:16' },
+        { kind: 'para', text: 'El octavo mandamiento contra el falso testimonio no es una mera prohibición de la libertad humana de mentir. No es simplemente no hacer esta cosa (que, sin embargo, tenemos la libertad de hacer).' },
+        { kind: 'para', text: 'Es más bien la propia autocomunicación de Dios sobre cómo vivir según su imagen y semejanza, para ser libres de la egoísta servidumbre del pecado y poder obrar con la libertad de amar. La mentira, el autoengaño, el engaño intencional de otros, fractura nuestra relación con Dios y con el prójimo. Nos des-integra a nosotros y a nuestra familia humana.' },
+        { kind: 'para', text: 'El falso testimonio se ejerce a menudo en nombre de lo que parece una libertad: una comodidad deseada, una ganancia material, un cierto consuelo, un placer culpable, un ascenso, un avance.' },
+        { kind: 'question', text: '¿Acaso no merecemos ese reconocimiento que podría distinguirnos?' },
+        { kind: 'para', text: 'Lamentablemente, el autoengaño necesario para engañar a otros causa confusión y ceguera ante la voluntad de Dios, en ellos y en nosotros.' },
+        { kind: 'para', text: 'El Verbo de Dios encarnado, la vida mesiánica de Cristo, se convierte en un ideal lejano de admiración en vez de una experiencia vivida de amor redentor. Cuando creamos falsas personas o nos contamos mentiras el tiempo suficiente para justificar los pecados que queremos conservar, llevamos este autoengaño al ámbito público. Esto agrava la confusión sobre quiénes somos y qué somos en vez de revelarlo. Y puede deshacerse amargamente con las revelaciones de portada de las verdaderas vidas de figuras públicas que creíamos conocer.' },
+        { kind: 'para', text: 'Cambiamos nuestra verdad, nuestra realidad, por algo vendible. Lucía bien; quizá trajo recompensas, pero estaba construido sobre arenas movedizas y no sobre la verdad, no sobre Cristo. Se edificaba sobre una esperanza, una ilusión de sí. Cambiamos la verdad por una apariencia que creímos necesaria.' },
+        { kind: 'question', text: 'Pero, ¿quién es nuestro socio de intercambio? ¿Y qué hemos cambiado?' },
+        { kind: 'para', text: 'Nuestro socio de intercambio: no Dios. Lo que hemos cambiado: nuestro propio ser.' },
+        { kind: 'para', text: 'Así nos perdemos, @@SOUL@@, la cambiamos por cosas que caducan, cosas que nos dejan peor, cosas que socavan nuestra paz, nuestra capacidad de amar, nuestra capacidad de verdadera alegría.' },
+        { kind: 'para', text: 'Vivir para lo temporal es vivir como adictos, porque lo temporal no puede saciar a seres de raíces eternas. Nos volvemos adictos a las afirmaciones y placeres temporales del mundo, haciendo eterno lo temporal. Cambiamos el infinito por lo momentáneo; el horizonte se reduce a un marco digital fijo de información. Vemos en cada nuevo movimiento, como la IA, la próxima cosa que podría salvarnos. La emoción es vertiginosa y distrae.' },
+        { kind: 'para', text: 'Poner la búsqueda de lo eterno en lo temporal y finito nos deja agotados y hambrientos, buscando todavía más estímulo temporal, sabiendo al mismo tiempo que este antojo es un pozo sin fondo, que no se puede llenar. Cliqueamos, deslizamos, hojeamos.' },
+        { kind: 'question', text: '¿Dónde está? ¿Qué es? Sé que busco algo más profundo, pero ¿qué?' },
+        { kind: 'para', text: 'Aun así intentamos llenarlo, no podemos soltarlo: podemos ir a la política, al odio, al porno, a la bebida, a la droga, a más intoxicación digital, una mezcla de todos. Empezó con una pequeña mentira sobre nosotros mismos: sacrificamos una verdad. Empezó con un pecado contra el octavo mandamiento.' },
         { kind: 'question', text: '¿Podemos ver dónde empezamos? ¿Podemos ver cómo lo mantenemos cada día?' },
         { kind: 'para', text: 'En Magnifica Humanitas se nos recuerda que la verdad es un bien común (MH 131). Pero se pierde por completo como bien común sin el compromiso personal con la verdad, una vida de integridad viviendo el octavo mandamiento, especialmente en el contexto del mandamiento más grande: amar a Dios y al prójimo.' },
         { kind: 'para', text: 'El primer deber del discípulo no es público sino interior: la verdad del propio corazón, la libertad del autoengaño. Esto es esencial para la relación con Cristo, que es la Verdad.' },
         { kind: 'para', text: 'Esta guía revela un camino triple para llegar a ser, en cierto sentido, agentes de la verdad, un pueblo que puede dar testimonio de la verdad como bien común, que puede hacerla concreta, no como un ideal sofisticado sino como una experiencia vivida y compartida.' },
       ]
     : [
-        { kind: 'para', text: 'The eighth commandment against false witness isn’t a list or record of a human freedom that is prohibited. It is not merely don’t do this thing (that you nonetheless have the freedom to do). Rather, it expresses how to exercise freedom in such a way that we remain united to God and our neighbor. Lying, self-deceit, intentional deception of others fractures our relationship with God and with our neighbor.' },
-        { kind: 'para', text: 'Often, it is done in the name of what seems a freedom: a desired convenience, a material gain, a certain comfort, a guilty pleasure. The self-deceit required to deceive others causes confusion and blindness to God’s will. Christ becomes a distant ideal rather than an intimate friend. We carry this self-deception into the public sphere, often for personal gain, we may begin to trade in it for our own advancement.' },
-        { kind: 'question', text: 'But, who is our trading partner? Not God. And what have we traded?' },
-        { kind: 'para', text: 'Our very selves. Thus we lose ourselves, our soul is lost, we trade it for things that expire, things that leave us worse off, things that undermine our peace, our capacity to love, our capacity for true joy.' },
-        { kind: 'para', text: 'We live like addicts, addicted to the temporary pleasures of the World, making the temporary into the eternal. We trade the infinite for the momentary, the horizon shrinks into a fixed digital framework of information.' },
-        { kind: 'para', text: 'It leaves us spent, yet hungry, seeking even more temporary stimulation but at the same time knowing that this craving is a bottomless pit, it can’t be met.' },
-        { kind: 'para', text: 'We still try to meet it, we can’t put it down, we may go to porn, to drink, to drug, to digital intoxication, a mix of all. It began with a small lie about ourselves, we sacrificed a truth.' },
+        { kind: 'para', text: 'How easy it is in every age to focus on crafting an appearance. To a certain extent this is human, and there is nothing wrong with having a public and a private persona. It would be wrong to wail against the fact that in our own age this has different means and media.' },
+        { kind: 'para', text: 'It can also be an important aspect of art, to create an appearance for the purpose of the impression it evokes. This is part of human culture and can be used to steward truth rather than obscure it.' },
+        { kind: 'para', text: 'What is more dangerous to the human community, and to the human person, is when the appearance or witness we create is fractious of personal and communal integrity, when witness works against truth as a personal and as a common good.' },
+        { kind: 'para', text: 'If truth sets us free its opposite enslaves human persons and the human community.' },
+        { kind: 'para', text: 'This is what the 8th Commandment is all about…' },
+        { kind: 'commandment', text: '“You shall not bear false witness against your neighbor.”', ref: 'Ex 20:16' },
+        { kind: 'para', text: 'The eighth commandment against false witness isn’t a mere prohibition against the human freedom to lie. It is not merely don’t do this thing (that you nonetheless have the freedom to do).' },
+        { kind: 'para', text: 'Rather, it is God’s own self-communication about how to live in his image and likeness, to be free rather from the selfishness of sin and to be able to act with the freedom to love. Lying, self-deceit, intentional deception of others, fractures our relationship with God and with our neighbor. It dis-integrates us and our human family.' },
+        { kind: 'para', text: 'False witness is often exercised in the name of what seems a freedom: a desired convenience, a material gain, a certain comfort, a guilty pleasure, a promotion, an advancement.' },
+        { kind: 'question', text: 'After all don’t we deserve that recognition that might set us apart?' },
+        { kind: 'para', text: 'Unfortunately, the self-deceit required to deceive others causes confusion and blindness to God’s will, for them and for us.' },
+        { kind: 'para', text: 'The Word of God Incarnate, the Messianic life of Christ, becomes a distant ideal of admiration rather than a lived experience of redemptive love. When we create false personas or tell ourselves lies long enough to justify sins we want to hold onto we carry this self-deception into the public sphere. This compounds confusion about who and what we are rather than reveals it. This can be bitterly broken by front page revelations of the true lives of public figures we thought we knew.' },
+        { kind: 'para', text: 'We traded our truth, our reality, for something that was sell-able. It looked great, it may have brought rewards, but it was built upon shifting sands rather than truth, rather than Christ. It was built upon a hope, an illusion of self. We traded the truth for an appearance we thought necessary.' },
+        { kind: 'question', text: 'But, who is our trading partner? And what have we traded?' },
+        { kind: 'para', text: 'Our trading partner: not God. What we have traded: our very selves.' },
+        { kind: 'para', text: 'Thus we lose ourselves, @@SOUL@@, we trade it for things that expire, things that leave us worse off, things that undermine our peace, our capacity to love, our capacity for true joy.' },
+        { kind: 'para', text: 'To live for the temporal is to live as addicts because the temporal can’t satisfy beings with eternal roots. We become addicted to the temporary affirmations and pleasures of the World, making the temporary into the eternal. We trade the infinite for the momentary, the horizon shrinks into a fixed digital framework of information. We see every new movement like AI as the next thing that might save us. The excitement is dizzying and distracting.' },
+        { kind: 'para', text: 'Putting the pursuit of the eternal in the temporary and finite leaves us spent, hungry, seeking even more temporary stimulation but at the same time knowing that this craving is a bottomless pit, it can’t be met. We click, we swipe, we scroll.' },
+        { kind: 'question', text: 'Where is it? What is it? I know I am seeking something deeper, but what?' },
+        { kind: 'para', text: 'We still try to meet it, we can’t put it down, we may go to politics, to hatred, to porn, to drink, to drug, to more digital intoxication, a mix of all. It began with a small lie about ourselves, we sacrificed a truth. It started with a sin against the 8th commandment.' },
         { kind: 'question', text: 'Can we see where we began? Can we see how we are maintaining it daily?' },
         { kind: 'para', text: 'In Magnifica Humanitas we are reminded that truth is a common good (MH 131). But it is lost completely as a common good without personal commitment to truth, a life of integrity in living the 8th commandment, especially in the context of the greatest commandment to love God and neighbor.' },
         { kind: 'para', text: 'The disciple’s first duty of truth is not public but interior: the truth of one’s own heart, freedom from self-deception. This is essential to relationship with Christ, who is the Truth.' },
@@ -202,6 +242,7 @@ const metaDescription =
   lang === 'es'
     ? 'Guía en tres pasos para ser discípulo de la Verdad: despertar, compromiso, sacrificio. Primero la integridad de vida, luego el testimonio con la IA.'
     : 'A three-step Scriptural guide to becoming a disciple of the Truth: awakening, commitment, sacrifice — integrity first, then truthful witness with AI.';
+
 ---
 
 <Base
@@ -216,17 +257,12 @@ const metaDescription =
       {standfirstLines.map((line) => (
         <p class="font-sans text-xs uppercase tracking-[0.1em] text-meta">{line}</p>
       ))}
-    </div>
-
-    <figure class="mt-10 border-b border-slate pb-10">
-      <blockquote class="font-serif text-2xl italic">{epigraph.text}</blockquote>
-      <figcaption class={`mt-3 ${metaLabel}`}>{epigraph.ref}</figcaption>
       {
         scripturePending && (
-          <p class={`mt-3 text-meta ${metaLabel}`}>{scripturePendingNote}</p>
+          <p class={`pt-1 text-meta ${metaLabel}`}>{scripturePendingNote}</p>
         )
       }
-    </figure>
+    </div>
 
     {
       introBlocks.map((block, i) => {
@@ -235,15 +271,30 @@ const metaDescription =
             'MH 131',
             `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
           );
-        return block.kind === 'question' ? (
-          <p
-            class="mt-8 border-l-[3px] border-vatican bg-mist pl-4 pr-5 py-2.5 font-serif text-2xl italic leading-snug"
-            set:html={renderEmphasis(block.text)}
-          />
-        ) : (
+        if (block.kind === 'question') {
+          return (
+            <p
+              class="mt-8 border-l-[3px] border-vatican bg-mist pl-4 pr-5 py-2.5 font-serif text-2xl italic leading-snug"
+              set:html={renderEmphasis(block.text)}
+            />
+          );
+        }
+        if (block.kind === 'commandment') {
+          // The 8th-Commandment text, now IN the flow (it moved with the 2026-10-16
+          // rewrite). A bare blockquote picks up the site-wide quote treatment
+          // (mist ground, slate rule) — the question lines above/below are the yellow
+          // accents; the commandment is a quotation, so it stays in the quote family.
+          return (
+            <figure class="mt-8">
+              <blockquote class="font-serif text-2xl italic" set:html={renderEmphasis(block.text)} />
+              <figcaption class={`mt-2 text-right ${metaLabel}`}>{block.ref}</figcaption>
+            </figure>
+          );
+        }
+        return (
           <p
             class={`leading-relaxed ${i === 0 ? 'mt-8' : 'mt-6'}`}
-            set:html={mhLink(renderEmphasis(block.text))}
+            set:html={soulTooltipHtml(mhLink(renderEmphasis(block.text)))}
           />
         );
       })
