@@ -254,10 +254,12 @@ const metaDescription =
         const n = i + 1;
         return (
           <section id={`step-${n}`} class="mt-14 scroll-mt-24 border-t border-slate pt-8">
-            <h2 class={`section-label ${metaLabel}`}>
+            <h2
+              class={`section-label font-sans text-base uppercase tracking-[0.1em] text-meta`}
+            >
               {`${s.step} ${n}`} — {step.name}
             </h2>
-            <p class="mt-4 font-serif text-xl italic leading-relaxed">{step.aim}</p>
+            <p class="mt-4 font-serif text-2xl italic leading-relaxed">{step.aim}</p>
 
             {step.scripture.map((quote) => (
               <blockquote class="mt-5 font-serif text-lg leading-relaxed">{quote}</blockquote>
