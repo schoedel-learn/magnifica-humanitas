@@ -39,11 +39,6 @@
   --color-meta: #545454;
   --color-canvas: #ffffff;
   --color-vatican: #ffe100;
-  /* Parchment: the ground Barry asked behind the dictated question lines
-     (2026-10-16) — a light grey with a tiny yellow tint (#f4f3e6, ~2% toward
-     the vatican gold), so the questions read as a shaded tab rather than a rule
-     alone. Flat fill like everything else; no gradient, no rounding. */
-  --color-parchment: #f4f3e6;
 
   /* NOTE: @fontsource *variable* packages declare the family as "<Name> Variable", not
      "<Name>". Referencing the plain name here matches no @font-face at all and every glyph
