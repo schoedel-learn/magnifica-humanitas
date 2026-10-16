@@ -148,22 +148,26 @@ const epigraph = {
   ref: 'Ex 20:16',
 };
 
-// Barry's dictated copy for the opening section (2026-10-15), shipped with minimal,
-// disclosed repairs — see the commit message for the before/after list. The Spanish is an
-// agent translation DRAFT flagged for review (site convention), never his words.
+// Barry's dictated copy for the opening section (2026-10-15, revised 2026-10-16), shipped
+// with minimal, disclosed repairs — see the commit message for the before/after list. The
+// Spanish is an agent translation DRAFT flagged for review (site convention), never his words.
 //
-// `question` blocks are his own dictated question sentences (listed by him 2026-10-15) pulled
-// OUT of the paragraph flow into the guide's display register (the italic serif the step
-// aims use) — the words are unchanged; only their line is set apart.
+// The subtitle he first dictated ("Three-fold Path to be Disciples of Truth in an Age of
+// Addiction") was REPLACED 2026-10-16 by these two standfirst lines; the old wording stays
+// in git history for revert.
+const standfirstLines =
+  lang === 'es'
+    ? ['Agentes Fidei ut Agentes Veritatis', 'La verdad como bien común', 'Camino triple de discipulado en una cultura de las apariencias']
+    : ['Agentes Fidei ut Agentes Veritatis', 'Truth as a common good', 'Three-fold Path of discipleship in a culture of appearances'];
+
+// `question` blocks are Barry's own dictated question sentences (listed by him 2026-10-15)
+// pulled OUT of the paragraph flow into the guide's display register (the italic serif the
+// step aims use, marked by the Vatican-yellow flag band) — the words are unchanged; only
+// their line is set apart.
 interface IntroBlock {
   kind: 'para' | 'question';
   text: string;
 }
-
-const subtitle =
-  lang === 'es'
-    ? 'Camino triple para ser discípulos de la Verdad en una era de adicción'
-    : 'Three-fold Path to be Disciples of Truth in an Age of Addiction';
 
 const introBlocks: IntroBlock[] =
   lang === 'es'
@@ -207,11 +211,12 @@ const metaDescription =
   contentLang={resolvedContentLang(lang, [topic, ...paragraphs])}
 >
   <article>
-    <h1>{topic.name ?? s.veritas}</h1>
-    <p class="mt-2 font-sans text-xs uppercase tracking-[0.1em] text-meta">
-      Agentes Fidei ut Agentes Veritatis
-    </p>
-    <p class="mt-4 font-serif text-xl leading-relaxed text-meta">{subtitle}</p>
+    <h1>{topic.name ?? 'Agentes Veritatis'}</h1>
+    <div class="mt-2 space-y-1">
+      {standfirstLines.map((line) => (
+        <p class="font-sans text-xs uppercase tracking-[0.1em] text-meta">{line}</p>
+      ))}
+    </div>
 
     <figure class="mt-10 border-b border-slate pb-10">
       <blockquote class="font-serif text-2xl italic">{epigraph.text}</blockquote>
