@@ -305,7 +305,7 @@ export interface Media {
  */
 export interface Source {
   id: number;
-  kind: 'magisterial' | 'book' | 'journal-article' | 'chapter' | 'web' | 'magazine' | 'thesis';
+  kind: 'magisterial' | 'bible' | 'book' | 'journal-article' | 'chapter' | 'web' | 'magazine' | 'thesis';
   /**
    * Free text for v1 (APA 7 order). A people collection is a later migration, not now. Leave blank when the work has no author (a Bible, a dictionary): APA 7 then moves the title into the author position, so blank is meaningful and not missing data.
    */

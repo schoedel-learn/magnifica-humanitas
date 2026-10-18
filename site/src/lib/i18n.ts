@@ -49,6 +49,20 @@ const en = {
   noPosts: 'No posts have been published yet.',
   noSources: 'No sources have been recorded yet.',
   citedIn: 'Cited in',
+  // Bibliography section headings. The kind values are Postgres enum labels (lowercase,
+  // hyphenated), so they are mapped here rather than printed raw — and "bible" is separate from
+  // "book" so other translations can be added without every non-scriptural book nesting under
+  // "Bibles". Record<string, string> so an unmapped kind falls back to its raw value.
+  sourceKinds: {
+    bible: 'Bibles',
+    magisterial: 'Magisterial',
+    book: 'Books',
+    'journal-article': 'Journal articles',
+    chapter: 'Book chapters',
+    web: 'Web',
+    magazine: 'Magazines',
+    thesis: 'Theses',
+  } as Record<string, string>,
   // Shown when a /es/ page has no Spanish content and is serving the English fallback. The
   // page must not claim to be Spanish while showing English: screen readers and search
   // engines both trust <html lang>, so the mismatch is stated rather than hidden.
@@ -94,6 +108,16 @@ const es: typeof en = {
   noPosts: 'Aún no se ha publicado ninguna entrada.',
   noSources: 'Aún no se ha registrado ninguna fuente.',
   citedIn: 'Citado en',
+  sourceKinds: {
+    bible: 'Biblias',
+    magisterial: 'Magisterial',
+    book: 'Libros',
+    'journal-article': 'Artículos de revista',
+    chapter: 'Capítulos de libro',
+    web: 'Web',
+    magazine: 'Revistas',
+    thesis: 'Tesis',
+  },
   fallbackNotice:
     'Esta página aún no está disponible en español. Por el momento se ofrece en inglés.',
   switchLabel: 'EN',

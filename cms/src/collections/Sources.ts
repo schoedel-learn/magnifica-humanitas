@@ -14,7 +14,18 @@ export const Sources: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'book',
-      options: ['magisterial', 'book', 'journal-article', 'chapter', 'web', 'magazine', 'thesis'],
+      options: [
+        'magisterial',
+        // Scripture is its own kind, not a `book`: the bibliography renders a "Bibles" section so
+        // another translation (NABRE, Vulgate, a Spanish edition) can be added beside the NAB.
+        'bible',
+        'book',
+        'journal-article',
+        'chapter',
+        'web',
+        'magazine',
+        'thesis',
+      ],
     },
     {
       name: 'authors',

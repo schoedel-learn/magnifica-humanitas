@@ -24,6 +24,9 @@ const all = await listBibliography(lang);
 
 const KIND_ORDER = [
   'magisterial',
+  // `bible` sits where `book` did: Scripture is its own section now, so another translation can be
+  // added without every non-scriptural book being filed under "Bibles".
+  'bible',
   'book',
   'journal-article',
   'chapter',
@@ -56,7 +59,9 @@ const citedLink =
     ) : (
       [...groups, ...(stray.length ? [{ kind: 'other', rows: stray }] : [])].map((group) => (
         <section class="mt-12 border-t border-slate pt-8">
-          <h2 class={`section-label ${metaLabel}`}>{group.kind}</h2>
+          <h2 class={`section-label ${metaLabel}`}>
+            {s.sourceKinds[group.kind] ?? group.kind}
+          </h2>
           <ul class="mt-5 space-y-6 text-[0.9375rem]">
             {group.rows.map((row) => {
               const loc = apaLocator(row);
