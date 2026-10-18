@@ -216,9 +216,9 @@ export interface Post {
    */
   slug: string;
   /**
-   * Essay is the main form. Note, review and analysis are shorter pieces.
+   * The form this post takes. Essay is the main form; note, review and analysis are shorter pieces; guide is a standing teaching page; extracts is the running set of quotations drawn out of the encyclical; art and poem are non-prose pieces.
    */
-  post_type: 'essay' | 'note' | 'review' | 'analysis';
+  post_type: 'essay' | 'note' | 'review' | 'analysis' | 'guide' | 'extracts' | 'art' | 'poem';
   /**
    * One or two sentences. Shown in the essay list, and used as the description search engines display.
    */

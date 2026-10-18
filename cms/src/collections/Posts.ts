@@ -31,8 +31,11 @@ export const Posts: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'essay',
-      options: ['essay', 'note', 'review', 'analysis'],
-      admin: { description: 'Essay is the main form. Note, review and analysis are shorter pieces.' },
+      options: ['essay', 'note', 'review', 'analysis', 'guide', 'extracts', 'art', 'poem'],
+      admin: {
+        description:
+          'The form this post takes. Essay is the main form; note, review and analysis are shorter pieces; guide is a standing teaching page; extracts is the running set of quotations drawn out of the encyclical; art and poem are non-prose pieces.',
+      },
     },
     {
       name: 'abstract',
