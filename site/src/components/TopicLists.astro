@@ -1,5 +1,5 @@
 ---
-// The Documents and Essays list sections every topic page shows, extracted from
+// The Documents and Posts list sections every topic page shows, extracted from
 // TopicPage.astro so the bespoke Veritas landing page renders exactly the same
 // sections rather than a diverging copy (the citation-formatting rationale, applied
 // to markup: one place, many pages).
@@ -52,7 +52,7 @@ const contentLang = resolvedContentLang(lang, [...posts, ...documents]);
 </section>
 
 <section class="mt-12 border-t border-slate pt-8">
-  <h2 class={`section-label ${metaLabel}`}>{s.essays}</h2>
+  <h2 class={`section-label ${metaLabel}`}>{s.posts}</h2>
   {
     posts.length === 0 ? (
       <p class="mt-4 text-meta">{s.noPosts}</p>

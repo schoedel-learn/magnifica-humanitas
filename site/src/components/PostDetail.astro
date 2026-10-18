@@ -3,7 +3,7 @@
 // with the official converter at the SAME Payload version (3.90.2) — never hand-parsed.
 //
 // Styling of the generated HTML lives in `.rich-text` (src/styles/global.css) rather than in
-// a chain of arbitrary-variant utilities here, so the essay body has one source of truth.
+// a chain of arbitrary-variant utilities here, so the post body has one source of truth.
 import Base from '../layouts/Base.astro';
 import { getPostBySlug, listSourcesForPost } from '../lib/content';
 import { apaLocator, formatApa } from '../lib/citations';
@@ -39,7 +39,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     <h1>{post.title ?? post.slug}</h1>
 
     <p class={`mt-3 ${metaLabel}`}>
-      {post.post_type}
+      {s.postTypes[post.post_type] ?? post.post_type}
       {post.published_at ? ` · ${formatDate(post.published_at, lang)}` : ''}
     </p>
 
@@ -55,7 +55,7 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     {
       sources.length > 0 && (
         <section class="mt-16 border-t border-slate pt-6">
-          <h2 class={`section-label ${metaLabel}`}>{s.sourcesForEssay}</h2>
+          <h2 class={`section-label ${metaLabel}`}>{s.sourcesForPost}</h2>
           <ul class="mt-5 space-y-5 text-[0.9375rem]">
             {sources.map((row) => {
               const loc = apaLocator(row);

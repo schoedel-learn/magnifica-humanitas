@@ -11,7 +11,21 @@ const en = {
   tagline:
     "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
   documents: 'Documents',
-  essays: 'Essays',
+  // The section is "Posts", not "Essays" (Barry, 2026-10-18): a post may be an essay, but it
+  // may be a note, a review, art or a poem, so the container is named for the container and
+  // `post_type` carries the form. The route was always /posts/, so the old label was the
+  // odd one out rather than the URL.
+  posts: 'Posts',
+  // `post_type` is what distinguishes one post from another now that the section is the
+  // container: essay, note, review, analysis today. The enum value is lowercase and unlocalized,
+  // so it is mapped here — typed as Record<string, string> so a value a later migration adds
+  // without a label degrades to the raw enum value instead of rendering nothing.
+  postTypes: {
+    essay: 'Essay',
+    note: 'Note',
+    review: 'Review',
+    analysis: 'Analysis',
+  } as Record<string, string>,
   sources: 'Sources',
   topics: 'Topics',
   // The section's name is Latin in BOTH locales (Barry, 2026-10-15): short title
@@ -24,14 +38,14 @@ const en = {
   fullTextAtVatican: 'Full text at vatican.va',
   sourceLinkPending: 'Source link pending',
   paragraphsHeading: 'Paragraphs cited',
-  sourcesForEssay: 'Sources for this essay',
+  sourcesForPost: 'Sources for this post',
   bibliographyHeading: 'Bibliography',
   verified: 'Verified',
-  recentEssays: 'Recent essays',
+  recentPosts: 'Recent posts',
   corpus: 'The corpus',
   step: 'Step',
   noDocuments: 'No documents have been published yet.',
-  noPosts: 'No essays have been published yet.',
+  noPosts: 'No posts have been published yet.',
   noSources: 'No sources have been recorded yet.',
   // Shown when a /es/ page has no Spanish content and is serving the English fallback. The
   // page must not claim to be Spanish while showing English: screen readers and search
@@ -51,7 +65,13 @@ const es: typeof en = {
   tagline:
     'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
   documents: 'Documentos',
-  essays: 'Ensayos',
+  posts: 'Entradas',
+  postTypes: {
+    essay: 'Ensayo',
+    note: 'Nota',
+    review: 'Reseña',
+    analysis: 'Análisis',
+  },
   sources: 'Fuentes',
   topics: 'Temas',
   veritas: 'Veritatis',
@@ -61,14 +81,14 @@ const es: typeof en = {
   fullTextAtVatican: 'Texto completo en vatican.va',
   sourceLinkPending: 'Enlace de la fuente pendiente',
   paragraphsHeading: 'Párrafos citados',
-  sourcesForEssay: 'Fuentes de este ensayo',
+  sourcesForPost: 'Fuentes de esta entrada',
   bibliographyHeading: 'Bibliografía',
   verified: 'Verificado',
-  recentEssays: 'Ensayos recientes',
+  recentPosts: 'Entradas recientes',
   corpus: 'El corpus',
   step: 'Paso',
   noDocuments: 'Aún no se ha publicado ningún documento.',
-  noPosts: 'Aún no se ha publicado ningún ensayo.',
+  noPosts: 'Aún no se ha publicado ninguna entrada.',
   noSources: 'Aún no se ha registrado ninguna fuente.',
   fallbackNotice:
     'Esta página aún no está disponible en español. Por el momento se ofrece en inglés.',

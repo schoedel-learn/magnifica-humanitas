@@ -1,7 +1,7 @@
-// RSS feed over the published essays. Uses the same listPublishedPosts() the pages use, so
+// RSS feed over the published posts. Uses the same listPublishedPosts() the pages use, so
 // the feed can never drift from the site (the citation-formatting rationale, applied here).
 //
-// The Veritas guide is not an essay (it is a CMS topic page), so it is inserted here as a
+// The Veritas guide is not a post (it is a CMS topic page), so it is inserted here as a
 // fixed-date item: a build-time date would churn the feed on every deploy. Its link and
 // description mirror the page's own meta description (plan answer N10).
 import rss from '@astrojs/rss';
@@ -23,7 +23,7 @@ export const GET: APIRoute = async (context) => {
   return rss({
     title: 'Magnifica Humanitas',
     description:
-      'Essays with cited sources on the teaching of Pope Leo XIV.',
+      'Posts with cited sources on the teaching of Pope Leo XIV.',
     site: context.site ?? 'https://magnifica.agentesfidei.org',
     items: [VERITAS_ITEM, ...posts.map((post) => ({
       title: post.title ?? post.slug,
