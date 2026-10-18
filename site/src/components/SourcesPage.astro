@@ -1,19 +1,16 @@
 ---
-// The single source list. Grouped by the POST that cites each work (Barry, 2026-10-18: "a
-// source list, topically organized") rather than by source kind: each section is the reading
-// behind one piece, which is what a reader arriving from a post actually wants.
+// The bibliography. Every work in `sources`, one entry each, grouped by KIND in a fixed reading
+// order (magisterial → book → journal → …) rather than alphabetically across the whole list.
 //
-// Every work must appear somewhere. The post_sources table cannot express "this work is not
-// cited yet", so a list built only from it would silently drop the New American Bible — the
-// uncited tail below is the guard, and `listUncitedSources()` is a query rather than a
-// subtraction for exactly that reason.
-//
-// A work cited by two posts appears under each. That is intended: the grouping is a reading
-// list per post, not a catalogue of unique works.
+// This is a bibliography, not a works-cited page (Barry, 2026-10-18): a work qualifies by being
+// in the list, so nothing is segregated for having no citation yet — seven of the eleven carry
+// none today. Where a post cites a work, that is shown as an annotation under the entry ("Cited
+// in …"); the per-paragraph locators stay on the post itself, beside the paragraph each one
+// supports.
 import Base from '../layouts/Base.astro';
-import { listWorksForPost, listUncitedSources, listPublishedPosts } from '../lib/content';
+import { listBibliography } from '../lib/content';
 import { apaLocator, formatApa } from '../lib/citations';
-import { UI, root, resolvedContentLang, type Lang } from '../lib/i18n';
+import { UI, root, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -23,108 +20,87 @@ const { lang = 'en' } = Astro.props;
 const s = UI[lang];
 const p = (path: string) => `${root(lang)}${path}`;
 
-const posts = await listPublishedPosts(lang);
-const groups = await Promise.all(
-  posts.map(async (post) => ({ post, rows: await listWorksForPost(post.id) })),
-);
-const uncited = await listUncitedSources();
+const all = await listBibliography(lang);
+
+const KIND_ORDER = [
+  'magisterial',
+  'book',
+  'journal-article',
+  'chapter',
+  'web',
+  'magazine',
+  'thesis',
+];
+const groups = KIND_ORDER.map((kind) => ({
+  kind,
+  rows: all.filter((r) => r.kind === kind),
+})).filter((g) => g.rows.length > 0);
+
+// A `kind` absent from KIND_ORDER renders NOTHING at all, so anything unlisted is collected here
+// rather than silently vanishing from the bibliography. It should stay empty; if it does not, the
+// list is telling us a new enum value needs adding above.
+const KNOWN = new Set(KIND_ORDER);
+const stray = all.filter((r) => !KNOWN.has(r.kind));
 
 const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
-const postLink =
-  'font-serif text-xl underline decoration-slate underline-offset-4 transition-colors hover:decoration-ink';
+const citedLink =
+  'underline decoration-slate underline-offset-4 transition-colors hover:decoration-ink';
 ---
 
-<Base
-  title={`${s.sources} — ${s.siteName}`}
-  description={s.bibliographyHeading}
-  lang={lang}
-  contentLang={resolvedContentLang(lang, posts)}
->
+<Base title={`${s.sources} — ${s.siteName}`} description={s.bibliographyHeading} lang={lang}>
   <h1>{s.bibliographyHeading}</h1>
 
   {
-    groups.length === 0 && uncited.length === 0 ? (
+    all.length === 0 ? (
       <p class="mt-6 text-meta">{s.noSources}</p>
     ) : (
-      <>
-        {groups.map(({ post, rows }) => (
-          <section class="mt-12 border-t border-slate pt-8">
-            <h2 class="font-serif text-2xl leading-snug">
-              <a href={p(`/posts/${post.slug}/`)} class={postLink}>
-                {post.title ?? post.slug}
-              </a>
-            </h2>
-            <p class={`mt-2 ${metaLabel}`}>
-              {s.postTypes[post.post_type] ?? post.post_type}
-              {post.published_at ? ` · ${s.publishedOn} ${formatDate(post.published_at, lang)}` : ''}
-            </p>
-            {rows.length === 0 ? (
-              <p class="mt-4 text-meta">{s.noSourcesForPost}</p>
-            ) : (
-              <ul class="mt-5 space-y-5 text-[0.9375rem]">
-                {rows.map((row) => {
-                  const loc = apaLocator(row);
-                  return (
-                    <li class="leading-relaxed">
-                      <Fragment set:html={formatApa(row)} />
-                      {loc && (
+      [...groups, ...(stray.length ? [{ kind: 'other', rows: stray }] : [])].map((group) => (
+        <section class="mt-12 border-t border-slate pt-8">
+          <h2 class={`section-label ${metaLabel}`}>{group.kind}</h2>
+          <ul class="mt-5 space-y-6 text-[0.9375rem]">
+            {group.rows.map((row) => {
+              const loc = apaLocator(row);
+              return (
+                <li class="leading-relaxed">
+                  <Fragment set:html={formatApa(row)} />
+                  {loc && (
+                    <>
+                      {' '}
+                      <a
+                        class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
+                        href={loc.href}
+                        rel="noopener"
+                      >
+                        {loc.label}
+                      </a>
+                    </>
+                  )}
+                  {row.verified_on && (
+                    <span
+                      class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}
+                    >
+                      {s.verified} {formatDate(row.verified_on, lang)}
+                    </span>
+                  )}
+                  {row.citations.length > 0 && (
+                    <p class={`mt-2 ${metaLabel}`}>
+                      {s.citedIn}{' '}
+                      {row.citations.map((c, i) => (
                         <>
-                          {' '}
-                          <a
-                            class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
-                            href={loc.href}
-                            rel="noopener"
-                          >
-                            {loc.label}
+                          {i > 0 && ' · '}
+                          <a href={p(`/posts/${c.slug}/`)} class={citedLink}>
+                            {c.title ?? c.slug}
                           </a>
                         </>
-                      )}
-                      {row.verified_on && (
-                        <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>
-                          {s.verified} {formatDate(row.verified_on, lang)}
-                        </span>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </section>
-        ))}
-
-        {uncited.length > 0 && (
-          <section class="mt-12 border-t border-slate pt-8">
-            <h2 class={`section-label ${metaLabel}`}>{s.uncitedSources}</h2>
-            <ul class="mt-5 space-y-5 text-[0.9375rem]">
-              {uncited.map((row) => {
-                const loc = apaLocator(row);
-                return (
-                  <li class="leading-relaxed">
-                    <Fragment set:html={formatApa(row)} />
-                    {loc && (
-                      <>
-                        {' '}
-                        <a
-                          class="underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink"
-                          href={loc.href}
-                          rel="noopener"
-                        >
-                          {loc.label}
-                        </a>
-                      </>
-                    )}
-                    {row.verified_on && (
-                      <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>
-                        {s.verified} {formatDate(row.verified_on, lang)}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        )}
-      </>
+                      ))}
+                    </p>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))
     )
   }
 </Base>

@@ -246,36 +246,47 @@ export async function listSourcesForPost(postId: number): Promise<PostSourceRow[
   );
 }
 
-// Every source NO post cites. Kept as its own query rather than derived by subtraction in the
-// page, because a work that silently disappears from the bibliography is the failure mode this
-// grouping is most likely to introduce — seven works (the NAB among them) carry no
-// post_sources row today and would vanish from a list built only from that table.
-export async function listUncitedSources(): Promise<SourceRow[]> {
-  return query<SourceRow>(
-    `select id, kind, authors, title, year::int as year, published_on as "publishedOn", edition,
-            publisher, journal, volume, issue, pages, doi, url, verified_on
-       from sources s
-      where not exists (select 1 from post_sources ps where ps.source_id = s.id)
-      order by authors asc, year asc nulls last`,
-  );
-}
+// The bibliography: every work in `sources`, with the posts that cite it attached as an
+// ANNOTATION rather than as the organizing principle. A work qualifies as a source by being in
+// the list, not by having been cited yet — seven of the eleven carry no citation today, and a
+// list that treated that as incompleteness would be a works-cited page, which this is not.
+export type SourceCitation = {
+  id: number;
+  slug: string;
+  title: string | null;
+  postType: string;
+};
+export type BibliographyRow = SourceRow & { citations: SourceCitation[] };
 
-// One row per WORK cited by a post. `post_sources` is a citation table, not a bibliography: the
-// encyclical alone carries eight rows on the Introduction (one per quoted paragraph), so listing
-// it directly repeats the same work eight times. Grouping by source gives the work once. The
-// locators stay on the post itself, where each one sits beside the paragraph it supports.
-export async function listWorksForPost(postId: number): Promise<SourceRow[]> {
-  return query<SourceRow>(
+export async function listBibliography(locale = 'en'): Promise<BibliographyRow[]> {
+  const rows = await query<BibliographyRow>(
     `select s.id, s.kind, s.authors, s.title, s.year::int as year,
             s.published_on as "publishedOn", s.edition, s.publisher, s.journal, s.volume, s.issue,
-            s.pages, s.doi, s.url, s.verified_on
-       from post_sources ps
-       join sources s on s.id = ps.source_id
-      where ps.post_id = $1
+            s.pages, s.doi, s.url, s.verified_on,
+            coalesce(
+              json_agg(
+                distinct jsonb_build_object('id', p.id, 'slug', p.slug, 'title', l.title,
+                                            'postType', p.post_type)
+              ) filter (where p.id is not null),
+              '[]'::json
+            ) as citations
+       from sources s
+       left join post_sources ps on ps.source_id = s.id
+       left join posts p on p.id = ps.post_id and p._status = 'published'
+       left join lateral (
+         select loc.title
+           from posts_locales loc
+          where loc._parent_id = p.id
+          order by case loc._locale when $1 then 0 else 1 end, loc._locale
+          limit 1
+       ) l on true
       group by s.id
       order by s.authors asc, s.year asc nulls last`,
-    [postId],
+    [locale],
   );
+  // jsonb_build_object gives no ordering guarantee, so the citing posts are sorted here.
+  for (const row of rows) row.citations.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
+  return rows;
 }
 
 // One topic by slug, localized (name/description live in topics_locales, C2).

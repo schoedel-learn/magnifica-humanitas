@@ -48,8 +48,7 @@ const en = {
   step: 'Step',
   noPosts: 'No posts have been published yet.',
   noSources: 'No sources have been recorded yet.',
-  noSourcesForPost: 'No sources recorded for this post yet.',
-  uncitedSources: 'Not yet cited',
+  citedIn: 'Cited in',
   // Shown when a /es/ page has no Spanish content and is serving the English fallback. The
   // page must not claim to be Spanish while showing English: screen readers and search
   // engines both trust <html lang>, so the mismatch is stated rather than hidden.
@@ -94,8 +93,7 @@ const es: typeof en = {
   step: 'Paso',
   noPosts: 'Aún no se ha publicado ninguna entrada.',
   noSources: 'Aún no se ha registrado ninguna fuente.',
-  noSourcesForPost: 'Aún no se han registrado fuentes para esta entrada.',
-  uncitedSources: 'Aún no citadas',
+  citedIn: 'Citado en',
   fallbackNotice:
     'Esta página aún no está disponible en español. Por el momento se ofrece en inglés.',
   switchLabel: 'EN',

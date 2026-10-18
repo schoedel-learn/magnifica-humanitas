@@ -41,7 +41,12 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
 
     <p class={`mt-3 ${metaLabel}`}>
       {doc.abbreviation} · {doc.doc_type}
-      {doc.published_date ? ` · ${s.publishedOn} ${formatDate(doc.published_date, lang)}` : ''}
+      {/* As a post, the document's own publication date is left out: the page would then carry
+          two different "published" dates, and the one a reader takes as the post's would be the
+          encyclical's. The standfirst states both of the document's dates in prose. */}
+      {!title && doc.published_date
+        ? ` · ${s.publishedOn} ${formatDate(doc.published_date, lang)}`
+        : ''}
     </p>
 
     <p class="mt-4 font-sans text-sm">
