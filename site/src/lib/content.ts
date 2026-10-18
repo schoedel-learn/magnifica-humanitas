@@ -248,8 +248,8 @@ export async function listSourcesForPost(postId: number): Promise<PostSourceRow[
 
 // Every source NO post cites. Kept as its own query rather than derived by subtraction in the
 // page, because a work that silently disappears from the bibliography is the failure mode this
-// grouping is most likely to introduce — the New American Bible is uncited today and would
-// vanish from a list built only from post_sources.
+// grouping is most likely to introduce — seven works (the NAB among them) carry no
+// post_sources row today and would vanish from a list built only from that table.
 export async function listUncitedSources(): Promise<SourceRow[]> {
   return query<SourceRow>(
     `select id, kind, authors, title, year::int as year, published_on as "publishedOn", edition,
@@ -257,6 +257,24 @@ export async function listUncitedSources(): Promise<SourceRow[]> {
        from sources s
       where not exists (select 1 from post_sources ps where ps.source_id = s.id)
       order by authors asc, year asc nulls last`,
+  );
+}
+
+// One row per WORK cited by a post. `post_sources` is a citation table, not a bibliography: the
+// encyclical alone carries eight rows on the Introduction (one per quoted paragraph), so listing
+// it directly repeats the same work eight times. Grouping by source gives the work once. The
+// locators stay on the post itself, where each one sits beside the paragraph it supports.
+export async function listWorksForPost(postId: number): Promise<SourceRow[]> {
+  return query<SourceRow>(
+    `select s.id, s.kind, s.authors, s.title, s.year::int as year,
+            s.published_on as "publishedOn", s.edition, s.publisher, s.journal, s.volume, s.issue,
+            s.pages, s.doi, s.url, s.verified_on
+       from post_sources ps
+       join sources s on s.id = ps.source_id
+      where ps.post_id = $1
+      group by s.id
+      order by s.authors asc, s.year asc nulls last`,
+    [postId],
   );
 }
 

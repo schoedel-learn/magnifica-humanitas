@@ -11,7 +11,7 @@
 // A work cited by two posts appears under each. That is intended: the grouping is a reading
 // list per post, not a catalogue of unique works.
 import Base from '../layouts/Base.astro';
-import { listSourcesForPost, listUncitedSources, listPublishedPosts } from '../lib/content';
+import { listWorksForPost, listUncitedSources, listPublishedPosts } from '../lib/content';
 import { apaLocator, formatApa } from '../lib/citations';
 import { UI, root, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
@@ -25,7 +25,7 @@ const p = (path: string) => `${root(lang)}${path}`;
 
 const posts = await listPublishedPosts(lang);
 const groups = await Promise.all(
-  posts.map(async (post) => ({ post, rows: await listSourcesForPost(post.id) })),
+  posts.map(async (post) => ({ post, rows: await listWorksForPost(post.id) })),
 );
 const uncited = await listUncitedSources();
 
@@ -79,9 +79,9 @@ const postLink =
                           </a>
                         </>
                       )}
-                      {row.locator && (
+                      {row.verified_on && (
                         <span class={`ml-2 inline-block whitespace-nowrap border border-slate px-1.5 py-0.5 ${metaLabel}`}>
-                          {row.locator}
+                          {s.verified} {formatDate(row.verified_on, lang)}
                         </span>
                       )}
                     </li>
