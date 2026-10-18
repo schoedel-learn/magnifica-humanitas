@@ -41,7 +41,7 @@ const en = {
   switchLabel: 'ES',
   switchHreflang: 'es',
   footerNote:
-    'A publication of Agentes Fidei. Agentes Fidei, in the biblical image of the Book of Nehemiah, is dedicated to a rejection of the Babylonian temptation in ours and every age and the building of the New Jerusalem.',
+    'Agentes Fidei is a project of Catholic.Work, an incorporated nonprofit in the state of Texas, USA. Agentes Fidei is a distinctive human response of faith to the proposals of technology in the age of AI. Following the lead of Pope Leo XIV we look to the Book of Nehemiah for inspiration as we collaboratively contribute to building a New Jerusalem.',
 };
 
 // `typeof en` keeps the two languages structurally identical: adding a string to one
@@ -75,7 +75,7 @@ const es: typeof en = {
   switchLabel: 'EN',
   switchHreflang: 'en',
   footerNote:
-    'Una publicación de Agentes Fidei. Agentes Fidei, en la imagen bíblica del Libro de Nehemías, se dedica al rechazo de la tentación babilónica en la nuestra y en toda época y a la edificación de la Nueva Jerusalén.',
+    'Agentes Fidei es un proyecto de Catholic.Work, una organización sin fines de lucro constituida en el estado de Texas, EE. UU. Agentes Fidei es una respuesta humana y distintiva de fe a las propuestas de la tecnología en la era de la IA. Siguiendo el ejemplo del Papa León XIV, acudimos al Libro de Nehemías en busca de inspiración mientras contribuimos juntos a la construcción de una Nueva Jerusalén.',
 };
 
 export const UI: Record<Lang, typeof en> = { en, es };
