@@ -32,9 +32,19 @@ interface Props {
   // mismatch is stated — a page that declares <html lang="es"> over English text misleads
   // screen readers (which switch voice on it) and search engines alike.
   contentLang?: Lang;
+  // A page's own share image (root-relative or absolute). Omitted: the locale's card from
+  // site/public. Facebook and LinkedIn both render a text-only link when og:image is absent —
+  // the reason nothing but a headline appeared for this domain until now.
+  image?: string;
 }
 
-const { title, description = '', lang = 'en', contentLang } = Astro.props;
+const {
+  title,
+  description = '',
+  lang = 'en',
+  contentLang,
+  image,
+} = Astro.props;
 const s = UI[lang];
 // The footer sentence is editable in the CMS (the `site-settings` global). Falling back to the
 // copy compiled in here means an empty or unreachable global degrades to the previous wording
@@ -51,6 +61,12 @@ const withoutEs = here.replace(/^\/es/, '');
 const enHref = new URL(withoutEs || '/', site).href;
 const esHref = new URL(`/es${withoutEs || '/'}`, site).href;
 const canonical = new URL(here, site).href;
+
+// Share card. 1200x630 is the size every platform prefers, and the declared width/height must
+// match the real file or some scrapers drop the image entirely. Spanish pages get the Spanish
+// card because the card carries a sentence, not just the nameplate.
+const ogImage = new URL(image ?? (lang === 'es' ? '/og-card-es.png' : '/og-card.png'), site).href;
+const ogImageAlt = `${s.siteName} — Agentes Fidei`;
 
 const p = (path: string) => `${root(lang)}${path}`;
 
@@ -91,6 +107,20 @@ const navLink =
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={s.siteName} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <!-- Twitter/X reads its own card tags; without twitter:card it falls back to a bare link
+         even when the og:image is perfect. -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="theme-color" content="#252525" />
   </head>
   <body class="flex min-h-dvh flex-col bg-canvas font-sans text-ink">
