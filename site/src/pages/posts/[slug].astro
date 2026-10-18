@@ -8,7 +8,7 @@
 import PostDetail from '../../components/PostDetail.astro';
 import TopicVeritasPage from '../../components/TopicVeritasPage.astro';
 import DocumentDetail from '../../components/DocumentDetail.astro';
-import { listPublishedPosts } from '../../lib/content';
+import { getPostBySlug, listPublishedPosts } from '../../lib/content';
 
 const BESPOKE: Record<string, 'veritas' | 'extracts'> = {
   'agentes-veritatis': 'veritas',
@@ -24,13 +24,16 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.props;
 const kind = BESPOKE[slug];
+// The extracts page is titled by its post, not by the encyclical it quotes.
+const postTitle =
+  kind === 'extracts' ? ((await getPostBySlug(slug, 'en'))?.title ?? undefined) : undefined;
 ---
 
 {
   kind === 'veritas' ? (
     <TopicVeritasPage lang="en" />
   ) : kind === 'extracts' ? (
-    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="en" />
+    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="en" title={postTitle} />
   ) : (
     <PostDetail slug={slug} lang="en" />
   )

@@ -9,8 +9,12 @@ import { formatDate } from '../lib/format';
 interface Props {
   slug: string;
   lang?: Lang;
+  // When this document is being shown AS a post (the quotations piece), the post's own title
+  // is the page's H1 and the encyclical's title drops to a line beneath it. Without it the
+  // document is the page and keeps its own title.
+  title?: string;
 }
-const { slug, lang = 'en' } = Astro.props;
+const { slug, lang = 'en', title } = Astro.props;
 const s = UI[lang];
 
 const doc = await getDocumentBySlug(slug, lang);
@@ -21,13 +25,19 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
 ---
 
 <Base
-  title={`${doc.title ?? doc.abbreviation} — ${s.siteName}`}
+  title={`${title ?? doc.title ?? doc.abbreviation} — ${s.siteName}`}
   description={doc.summary ?? ''}
   lang={lang}
   contentLang={resolvedContentLang(lang, [doc])}
 >
   <article>
-    <h1>{doc.title ?? doc.abbreviation}</h1>
+    <h1>{title ?? doc.title ?? doc.abbreviation}</h1>
+
+    {/* As a post, the work being quoted is named beneath the post's title: the encyclical is
+        the source of every line below it, so it should not vanish from its own page. */}
+    {title && (
+      <p class="mt-3 font-serif text-lg leading-snug text-meta">{doc.title ?? doc.abbreviation}</p>
+    )}
 
     <p class={`mt-3 ${metaLabel}`}>
       {doc.abbreviation} · {doc.doc_type}

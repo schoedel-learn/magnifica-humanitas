@@ -5,7 +5,8 @@
 // magnifica-truth-section.md): one long page, three anchored steps, guide copy hardcoded
 // here (redeploy on the worker to change it — it is NOT a CMS global), the MH extracts
 // rendered from doc_paragraphs so the CMS remains the only home of the quotations, and
-// the Documents/Posts sections shared with every other topic page via TopicLists.
+// the extracts rendered from doc_paragraphs, and the citation anchors pointing at the
+// quotations post that now carries them.
 //
 // Scripture: the EN page quotes the New American Bible Revised Edition verbatim (fetched
 // from biblegateway.com 2026-10-15). The ES page quotes the *official Spanish edition of
@@ -14,7 +15,6 @@
 // verification, and mislabeling another translation as the lectionary is worse than a
 // pending note. The scriptureQuotesPending flag says so in the rendered page.
 import Base from '../layouts/Base.astro';
-import TopicLists from './TopicLists.astro';
 import { getTopicBySlug, getDocumentBySlug, listParagraphsForTopic } from '../lib/content';
 import { cite } from '../lib/citations';
 import { renderEmphasis } from '../lib/emphasis';
@@ -34,10 +34,10 @@ const paragraphs = await listParagraphsForTopic(topic.id, lang);
 const byNumber = new Map(paragraphs.map((row) => [row.number, row]));
 
 const docSlug = 'magnifica-humanitas';
-// The MH document is the one carrying these paragraphs; its page is where every citation
-// label links (the same /documents/<slug>/#pNNN anchors the document page has). The
-// abbreviation and slug come from the CMS row rather than constants, matching how
-// DocumentDetail labels its paragraphs.
+// The MH document is the one carrying these paragraphs. Every citation label links to the
+// paragraph's anchor on the quotations post, which is where those anchors live now that the
+// documents section is gone. The abbreviation and slug come from the CMS row rather than
+// constants, matching how DocumentDetail labels its paragraphs.
 const doc = await getDocumentBySlug(docSlug, lang);
 if (!doc) throw new Error(`Document not found in CMS: ${docSlug} (lang=${lang})`);
 const citeLabel = (num: number) => cite(doc.abbreviation, num);
@@ -271,7 +271,7 @@ const metaDescription =
         const mhLink = (html: string) =>
           html.replace(
             'MH 131',
-            `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/documents/${doc.slug}/#p131`)}">MH 131</a>`,
+            `<a class="underline decoration-slate underline-offset-4 hover:decoration-ink" href="${p(`/posts/magnifica-humanitas-in-quotations/#p131`)}">MH 131</a>`,
           );
         if (block.kind === 'question') {
           return (
@@ -338,7 +338,7 @@ const metaDescription =
                   <div class="mt-5">
                     <p class={`${metaLabel}`}>
                       <a
-                        href={p(`/documents/${doc.slug}/#p${num}`)}
+                        href={p(`/posts/magnifica-humanitas-in-quotations/#p${num}`)}
                         class="underline decoration-slate underline-offset-4 hover:decoration-ink"
                       >
                         {citeLabel(num)}
@@ -361,6 +361,5 @@ const metaDescription =
       })
     }
 
-    <TopicLists topicId={topic.id} lang={lang} />
   </article>
 </Base>

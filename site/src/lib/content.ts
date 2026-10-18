@@ -246,6 +246,20 @@ export async function listSourcesForPost(postId: number): Promise<PostSourceRow[
   );
 }
 
+// Every source NO post cites. Kept as its own query rather than derived by subtraction in the
+// page, because a work that silently disappears from the bibliography is the failure mode this
+// grouping is most likely to introduce — the New American Bible is uncited today and would
+// vanish from a list built only from post_sources.
+export async function listUncitedSources(): Promise<SourceRow[]> {
+  return query<SourceRow>(
+    `select id, kind, authors, title, year::int as year, published_on as "publishedOn", edition,
+            publisher, journal, volume, issue, pages, doi, url, verified_on
+       from sources s
+      where not exists (select 1 from post_sources ps where ps.source_id = s.id)
+      order by authors asc, year asc nulls last`,
+  );
+}
+
 // One topic by slug, localized (name/description live in topics_locales, C2).
 export async function getTopicBySlug(
   slug: string,

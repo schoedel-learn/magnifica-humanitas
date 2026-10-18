@@ -1,0 +1,21 @@
+# Cloudflare Pages redirects. The site is three posts and one source list (2026-10-18): the
+# Documents section became the quotations post and the Veritas guide became a post, so every
+# retired URL 301s to the page that now carries that content.
+#
+# Written as explicit per-path rules rather than a splat because each retired section maps to a
+# DIFFERENT post, and a splat would send /topics/truth/ to the quotations page.
+#
+# Fragments are preserved by the browser: /documents/magnifica-humanitas/#p4 lands on
+# /posts/magnifica-humanitas-in-quotations/#p4, and that page carries the same id="p4" anchor.
+
+/documents/                                  /posts/magnifica-humanitas-in-quotations/   301
+/documents/magnifica-humanitas/              /posts/magnifica-humanitas-in-quotations/   301
+/topics/                                     /posts/                                     301
+/topics/truth/                               /posts/agentes-veritatis/                   301
+/topics/leo-xiv/                             /posts/magnifica-humanitas-in-quotations/   301
+
+/es/documents/                               /es/posts/magnifica-humanitas-in-quotations/  301
+/es/documents/magnifica-humanitas/           /es/posts/magnifica-humanitas-in-quotations/  301
+/es/topics/                                  /es/posts/                                    301
+/es/topics/truth/                            /es/posts/agentes-veritatis/                  301
+/es/topics/leo-xiv/                          /es/posts/magnifica-humanitas-in-quotations/  301

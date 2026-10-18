@@ -10,7 +10,6 @@ const en = {
   siteName: 'Magnifica Humanitas',
   tagline:
     "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
-  documents: 'Documents',
   // The section is "Posts", not "Essays" (Barry, 2026-10-18): a post may be an essay, but it
   // may be a note, a review, art or a poem, so the container is named for the container and
   // `post_type` carries the form. The route was always /posts/, so the old label was the
@@ -46,11 +45,11 @@ const en = {
   bibliographyHeading: 'Bibliography',
   verified: 'Verified',
   recentPosts: 'Recent posts',
-  corpus: 'The corpus',
   step: 'Step',
-  noDocuments: 'No documents have been published yet.',
   noPosts: 'No posts have been published yet.',
   noSources: 'No sources have been recorded yet.',
+  noSourcesForPost: 'No sources recorded for this post yet.',
+  uncitedSources: 'Not yet cited',
   // Shown when a /es/ page has no Spanish content and is serving the English fallback. The
   // page must not claim to be Spanish while showing English: screen readers and search
   // engines both trust <html lang>, so the mismatch is stated rather than hidden.
@@ -68,7 +67,6 @@ const es: typeof en = {
   siteName: 'Magnifica Humanitas',
   tagline:
     'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
-  documents: 'Documentos',
   posts: 'Entradas',
   postTypes: {
     essay: 'Ensayo',
@@ -93,11 +91,11 @@ const es: typeof en = {
   bibliographyHeading: 'Bibliografía',
   verified: 'Verificado',
   recentPosts: 'Entradas recientes',
-  corpus: 'El corpus',
   step: 'Paso',
-  noDocuments: 'Aún no se ha publicado ningún documento.',
   noPosts: 'Aún no se ha publicado ninguna entrada.',
   noSources: 'Aún no se ha registrado ninguna fuente.',
+  noSourcesForPost: 'Aún no se han registrado fuentes para esta entrada.',
+  uncitedSources: 'Aún no citadas',
   fallbackNotice:
     'Esta página aún no está disponible en español. Por el momento se ofrece en inglés.',
   switchLabel: 'EN',

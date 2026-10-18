@@ -2,7 +2,7 @@
 // Home page body, shared by / and /es/. The only difference between the two routes is
 // `lang`: it selects the UI strings and the content locale passed to the query helpers.
 import Base from '../layouts/Base.astro';
-import { listPublishedDocuments, listPublishedPosts } from '../lib/content';
+import { listPublishedPosts } from '../lib/content';
 import { UI, itemLang, root, resolvedContentLang, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
@@ -13,10 +13,7 @@ const { lang = 'en' } = Astro.props;
 const s = UI[lang];
 const p = (path: string) => `${root(lang)}${path}`;
 
-const [documents, posts] = await Promise.all([
-  listPublishedDocuments(lang),
-  listPublishedPosts(lang),
-]);
+const posts = await listPublishedPosts(lang);
 const recent = posts.slice(0, 3);
 
 const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
@@ -28,35 +25,10 @@ const itemTitle =
   title={s.siteName}
   description={s.tagline}
   lang={lang}
-  contentLang={resolvedContentLang(lang, [...documents, ...posts])}
+  contentLang={resolvedContentLang(lang, posts)}
 >
   <h1>{s.siteName}</h1>
   <p class="mt-4 max-w-[38rem] font-serif text-xl leading-relaxed text-meta">{s.tagline}</p>
-
-  <section class="mt-12 border-t border-slate pt-8">
-    <h2 class={`section-label ${metaLabel}`}>{s.corpus}</h2>
-    {
-      documents.length === 0 ? (
-        <p class="mt-4 text-meta">{s.noDocuments}</p>
-      ) : (
-        <ul class="mt-5 divide-y divide-slate">
-          {documents.map((d) => (
-            <li class="py-6 first:pt-0" lang={itemLang(lang, d)}>
-              <a href={p(`/documents/${d.slug}/`)} class={itemTitle}>
-                {d.title ?? d.abbreviation}
-              </a>
-              <p class={`mt-2 ${metaLabel}`}>
-                {d.abbreviation} · {d.doc_type}
-                {d.published_date
-                  ? ` · ${s.publishedOn} ${formatDate(d.published_date, lang)}`
-                  : ''}
-              </p>
-            </li>
-          ))}
-        </ul>
-      )
-    }
-  </section>
 
   <section class="mt-12 border-t border-slate pt-8">
     <h2 class={`section-label ${metaLabel}`}>{s.recentPosts}</h2>
@@ -72,7 +44,8 @@ const itemTitle =
               </a>
               {post.abstract && <p class="mt-3 leading-relaxed text-meta">{post.abstract}</p>}
               <p class={`mt-3 ${metaLabel}`}>
-                {post.published_at ? formatDate(post.published_at, lang) : s.undated}
+                {s.postTypes[post.post_type] ?? post.post_type}
+                {post.published_at ? ` · ${formatDate(post.published_at, lang)}` : ` · ${s.undated}`}
               </p>
             </li>
           ))}
