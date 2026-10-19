@@ -14,6 +14,12 @@ const en = {
   // Barry's dictated fragment (2026-10-18). Lowercase as he wrote it; the trailing ellipsis is
   // his, not a truncation. 'humans beings' repaired to 'human beings'.
   motto: 'human beings as agents of faith…',
+  // Barry's dictated premise paragraph under the home intro (2026-10-19). His sentence, his
+  // punctuation, his word order: no repair was needed. The comma an editor would add after
+  // "in scope" is NOT added — he left it out, and the Spanish needs one, which is why the two
+  // locales differ there.
+  premise:
+    'While diverse in scope articles presented here operate with the premise that human beings, i.e. persons, and human communities alone uniquely operate as agents of faith, the faith is not something a machine can do for or give a human person, and that it is faith alone that gives life and meaning an ultimate horizon.',
   tagline:
     "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
   // The section is "Posts", not "Essays" (Barry, 2026-10-18): a post may be an essay, but it
@@ -86,6 +92,8 @@ const es: typeof en = {
   siteName: 'Magnifica Humanitas',
   publisher: 'Agentes Fidei',
   motto: 'seres humanos como agentes de la fe…',
+  premise:
+    'Si bien los artículos aquí presentados son diversos en alcance, operan con la premisa de que únicamente los seres humanos, es decir, las personas, y las comunidades humanas operan de manera única como agentes de la fe, de que la fe no es algo que una máquina pueda hacer por una persona humana ni darle, y de que es la fe sola la que da a la vida y al sentido un horizonte último.',
   tagline:
     'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
   posts: 'Entradas',
