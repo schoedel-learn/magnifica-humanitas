@@ -8,6 +8,9 @@ export type Lang = 'en' | 'es';
 
 const en = {
   siteName: 'Magnifica Humanitas',
+  // The masthead credit under the title on the home page. A proper noun, so identical in both
+  // locales — but declared in both, because `typeof en` requires the key to exist in each.
+  publisher: 'Agentes Fidei',
   tagline:
     "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
   // The section is "Posts", not "Essays" (Barry, 2026-10-18): a post may be an essay, but it
@@ -78,6 +81,7 @@ const en = {
 // without the other is a type error, so no page can render `undefined` in Spanish.
 const es: typeof en = {
   siteName: 'Magnifica Humanitas',
+  publisher: 'Agentes Fidei',
   tagline:
     'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
   posts: 'Entradas',
