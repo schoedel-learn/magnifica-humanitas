@@ -11,6 +11,7 @@ const en = {
   // The masthead credit under the title on the home page. A proper noun, so identical in both
   // locales — but declared in both, because `typeof en` requires the key to exist in each.
   publisher: 'Agentes Fidei',
+  by: 'By',
   // Barry's dictated fragment (2026-10-18). Lowercase as he wrote it; the trailing ellipsis is
   // his, not a truncation. 'humans beings' repaired to 'human beings'.
   motto: 'human beings as agents of faith…',
@@ -91,6 +92,7 @@ const en = {
 const es: typeof en = {
   siteName: 'Magnifica Humanitas',
   publisher: 'Agentes Fidei',
+  by: 'Por',
   motto: 'seres humanos como agentes de la fe…',
   premise:
     'Si bien los artículos aquí presentados son diversos en alcance, operan con la premisa de que únicamente los seres humanos, es decir, las personas, y las comunidades humanas operan de manera única como agentes de la fe, de que la fe no es algo que una máquina pueda hacer por una persona humana ni darle, y de que es la fe sola la que da a la vida y al sentido un horizonte último.',

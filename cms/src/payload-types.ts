@@ -220,6 +220,11 @@ export interface Post {
    */
   post_type: 'essay' | 'note' | 'review' | 'analysis' | 'guide' | 'extracts' | 'art' | 'poem';
   /**
+   * The by-line — who wrote it. Leave blank and the post is credited to Agentes Fidei, the
+   * publisher. Not localized: a name does not translate.
+   */
+  authors?: string | null;
+  /**
    * One or two sentences. Shown in the essay list, and used as the description search engines display.
    */
   abstract?: string | null;
@@ -522,6 +527,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   post_type?: T;
+  authors?: T;
   abstract?: T;
   body?: T;
   hero?: T;

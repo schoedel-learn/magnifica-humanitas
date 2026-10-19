@@ -6,6 +6,7 @@ import * as migration_20261010_140000_add_source_edition from './20261010_140000
 import * as migration_20261013_125125_add_site_settings from './20261013_125125_add_site_settings';
 import * as migration_20261018_141600_add_post_types from './20261018_141600_add_post_types';
 import * as migration_20261018_142900_add_bible_kind from './20261018_142900_add_bible_kind';
+import * as migration_20261019_032000_add_post_authors from './20261019_032000_add_post_authors';
 
 export const migrations = [
   {
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20261018_142900_add_bible_kind.up,
     down: migration_20261018_142900_add_bible_kind.down,
     name: '20261018_142900_add_bible_kind'
+  },
+  {
+    up: migration_20261019_032000_add_post_authors.up,
+    down: migration_20261019_032000_add_post_authors.down,
+    name: '20261019_032000_add_post_authors'
   },
 ];

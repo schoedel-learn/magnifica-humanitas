@@ -38,6 +38,12 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
   <article>
     <h1>{post.title ?? post.slug}</h1>
 
+    {/* By-line. Blank in the CMS means the publisher wrote it, which is why the fallback is
+        s.publisher rather than nothing: a post with no by-line reads as anonymous. */}
+    <p class="mt-2 font-serif text-base italic text-meta">
+      {s.by} {post.authors?.trim() || s.publisher}
+    </p>
+
     <p class={`mt-3 ${metaLabel}`}>
       {s.postTypes[post.post_type] ?? post.post_type}
       {post.published_at ? ` · ${formatDate(post.published_at, lang)}` : ''}

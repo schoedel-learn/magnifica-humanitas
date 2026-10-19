@@ -4,6 +4,9 @@ export type PostRow = {
   id: number;
   slug: string;
   post_type: string;
+  // The by-line. Null means "credited to the publisher" — the site falls back to siteSettings'
+  // publisher rather than printing nothing.
+  authors: string | null;
   published_at: string | Date | null;
   title: string | null;
   abstract: string | null;
@@ -20,7 +23,7 @@ export type PostRow = {
 // back to whatever row exists (default 'en') — index 0 wins via the CASE ordering (C2).
 export async function listPublishedPosts(locale = 'en'): Promise<PostRow[]> {
   return query<PostRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.resolved_locale
+    `select p.id, p.slug, p.post_type, p.authors, p.published_at, l.title, l.abstract, l.resolved_locale
        from posts p
        join lateral (
          select title, abstract, loc._locale as resolved_locale
@@ -185,6 +188,7 @@ export type PostDetailRow = {
   id: number;
   slug: string;
   post_type: string;
+  authors: string | null;
   published_at: string | Date | null;
   title: string | null;
   abstract: string | null;
@@ -199,7 +203,7 @@ export async function getPostBySlug(
   locale = 'en',
 ): Promise<PostDetailRow | undefined> {
   const rows = await query<PostDetailRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.body, l.resolved_locale
+    `select p.id, p.slug, p.post_type, p.authors, p.published_at, l.title, l.abstract, l.body, l.resolved_locale
        from posts p
        join lateral (
          select title, abstract, body, loc._locale as resolved_locale
@@ -314,7 +318,7 @@ export async function getTopicBySlug(
 // Published posts carrying a topic (posts_rels path='topics'), newest first.
 export async function listPostsForTopic(topicId: number, locale = 'en'): Promise<PostRow[]> {
   return query<PostRow>(
-    `select p.id, p.slug, p.post_type, p.published_at, l.title, l.abstract, l.resolved_locale
+    `select p.id, p.slug, p.post_type, p.authors, p.published_at, l.title, l.abstract, l.resolved_locale
        from posts p
        join posts_rels r on r.parent_id = p.id and r.path = 'topics' and r.topics_id = $2
        join lateral (

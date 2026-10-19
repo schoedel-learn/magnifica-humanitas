@@ -38,6 +38,14 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: 'authors',
+      type: 'text',
+      admin: {
+        description:
+          'The by-line — who wrote it. Leave blank and the post is credited to Agentes Fidei, the publisher. Not localized: a name does not translate.',
+      },
+    },
+    {
       name: 'abstract',
       type: 'textarea',
       localized: true,
