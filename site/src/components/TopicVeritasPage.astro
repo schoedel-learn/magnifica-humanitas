@@ -22,12 +22,11 @@ import { UI, resolvedContentLang, root, type Lang } from '../lib/i18n';
 
 interface Props {
   lang?: Lang;
-  // The post's by-line and the author's affiliation, supplied by the posts route. This page
+  // The post's by-line (name and affiliation), supplied by the posts route. This page
   // predates being a post, so it has no post row of its own to read them from.
   byline?: string;
-  affiliation?: string;
 }
-const { lang = 'en', byline, affiliation } = Astro.props;
+const { lang = 'en', byline } = Astro.props;
 const s = UI[lang];
 const p = (path: string) => `${root(lang)}${path}`;
 
@@ -260,7 +259,6 @@ const metaDescription =
   <article>
     <h1>{topic.name ?? 'Agentes Veritatis'}</h1>
     {byline && <p class="mt-2 font-serif text-base italic text-meta">{byline}</p>}
-    {affiliation && <p class="mt-0.5 font-serif text-sm italic text-meta">{affiliation}</p>}
     <div class="mt-2 space-y-1">
       {standfirstLines.map((line) => (
         <p class="font-sans text-xs uppercase tracking-[0.1em] text-meta">{line}</p>

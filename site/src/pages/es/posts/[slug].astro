@@ -24,15 +24,16 @@ const kind = BESPOKE[slug];
 // them what they need: the title for the extracts page, and the by-line for both.
 const postRow = kind ? await getPostBySlug(slug, 'es') : undefined;
 const postTitle = kind === 'extracts' ? (postRow?.title ?? undefined) : undefined;
-const byline = `${UI['es'].by} ${postRow?.authors?.trim() || UI['es'].publisher}`;
-const affiliation = postRow?.affiliation?.trim() || undefined;
+const byline =
+  `${UI['es'].by} ${postRow?.authors?.trim() || UI['es'].publisher}` +
+  (postRow?.affiliation?.trim() ? ` · ${postRow.affiliation.trim()}` : '');
 ---
 
 {
   kind === 'veritas' ? (
-    <TopicVeritasPage lang="es" byline={byline} affiliation={affiliation} />
+    <TopicVeritasPage lang="es" byline={byline} />
   ) : kind === 'extracts' ? (
-    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="es" title={postTitle} byline={byline} affiliation={affiliation} />
+    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="es" title={postTitle} byline={byline} />
   ) : (
     <PostDetail slug={slug} lang="es" />
   )

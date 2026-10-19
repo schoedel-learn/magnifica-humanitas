@@ -13,13 +13,12 @@ interface Props {
   // is the page's H1 and the encyclical's title drops to a line beneath it. Without it the
   // document is the page and keeps its own title.
   title?: string;
-  // The by-line and the author's affiliation, passed by the route that owns the post row. This
+  // The by-line (name and affiliation), passed by the route that owns the post row. This
   // component has no post of its own — it renders a DOCUMENT, which is why they arrive from
   // outside.
   byline?: string;
-  affiliation?: string;
 }
-const { slug, lang = 'en', title, byline, affiliation } = Astro.props;
+const { slug, lang = 'en', title, byline } = Astro.props;
 const s = UI[lang];
 
 const doc = await getDocumentBySlug(slug, lang);
@@ -45,7 +44,6 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     )}
 
     {byline && <p class="mt-2 font-serif text-base italic text-meta">{byline}</p>}
-    {affiliation && <p class="mt-0.5 font-serif text-sm italic text-meta">{affiliation}</p>}
 
     <p class={`mt-3 ${metaLabel}`}>
       {doc.abbreviation} · {doc.doc_type}
