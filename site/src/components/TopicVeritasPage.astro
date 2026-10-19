@@ -260,7 +260,7 @@ const metaDescription =
   <article>
     <h1>{topic.name ?? 'Agentes Veritatis'}</h1>
     {byline && <p class="mt-2 font-serif text-base italic text-meta">{byline}</p>}
-    {affiliation && <p class={`mt-1 ${metaLabel}`}>{affiliation}</p>}
+    {affiliation && <p class="mt-0.5 font-serif text-sm italic text-meta">{affiliation}</p>}
     <div class="mt-2 space-y-1">
       {standfirstLines.map((line) => (
         <p class="font-sans text-xs uppercase tracking-[0.1em] text-meta">{line}</p>
