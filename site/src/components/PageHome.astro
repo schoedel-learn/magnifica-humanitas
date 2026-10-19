@@ -31,6 +31,15 @@ const itemTitle =
   {/* The masthead credit: who publishes this. Tracked sans rather than the section-label
       treatment so it reads as a credit line under the title, not as the heading of a list. */}
   <p class="mt-3 font-sans text-[0.8125rem] uppercase tracking-[0.18em] text-meta">{s.publisher}</p>
+  {/* Barry's motto, in the quote treatment the dictated lines already use on the Veritas page:
+      mist panel, Vatican-yellow left rule, serif italic. It is a styled paragraph rather than a
+      <blockquote> because nothing is being quoted — the element is for quoted material, and using
+      it here would assert a source that does not exist. */}
+  <p
+    class="mt-6 max-w-[34rem] border-l-[3px] border-vatican bg-mist py-3 pl-4 pr-5 font-serif text-xl italic leading-snug"
+  >
+    {s.motto}
+  </p>
   <p class="mt-6 max-w-[38rem] font-serif text-xl leading-relaxed text-meta">{s.tagline}</p>
 
   <section class="mt-12 border-t border-slate pt-8">
