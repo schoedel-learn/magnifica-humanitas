@@ -30,13 +30,14 @@ const kind = BESPOKE[slug];
 const postRow = kind ? await getPostBySlug(slug, 'en') : undefined;
 const postTitle = kind === 'extracts' ? (postRow?.title ?? undefined) : undefined;
 const byline = `${UI['en'].by} ${postRow?.authors?.trim() || UI['en'].publisher}`;
+const affiliation = postRow?.affiliation?.trim() || undefined;
 ---
 
 {
   kind === 'veritas' ? (
-    <TopicVeritasPage lang="en" byline={byline} />
+    <TopicVeritasPage lang="en" byline={byline} affiliation={affiliation} />
   ) : kind === 'extracts' ? (
-    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="en" title={postTitle} byline={byline} />
+    <DocumentDetail slug={EXTRACTS_DOCUMENT} lang="en" title={postTitle} byline={byline} affiliation={affiliation} />
   ) : (
     <PostDetail slug={slug} lang="en" />
   )

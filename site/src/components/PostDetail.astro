@@ -39,10 +39,16 @@ const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
     <h1>{post.title ?? post.slug}</h1>
 
     {/* By-line. Blank in the CMS means the publisher wrote it, which is why the fallback is
-        s.publisher rather than nothing: a post with no by-line reads as anonymous. */}
+        s.publisher rather than nothing: a post with no by-line reads as anonymous.
+        The affiliation sits on its own line in the credit treatment — it belongs to the author,
+        not to the post, and setting it in the same italic as the name would read as a second
+        author. */}
     <p class="mt-2 font-serif text-base italic text-meta">
       {s.by} {post.authors?.trim() || s.publisher}
     </p>
+    {post.affiliation?.trim() && (
+      <p class={`mt-1 ${metaLabel}`}>{post.affiliation}</p>
+    )}
 
     <p class={`mt-3 ${metaLabel}`}>
       {s.postTypes[post.post_type] ?? post.post_type}

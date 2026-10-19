@@ -225,6 +225,11 @@ export interface Post {
    */
   authors?: string | null;
   /**
+   * The author's organizational affiliation, printed under the by-line (e.g. Catholic.Work). Blank
+   * prints nothing — not a publisher credit, which the by-line already carries.
+   */
+  affiliation?: string | null;
+  /**
    * One or two sentences. Shown in the essay list, and used as the description search engines display.
    */
   abstract?: string | null;
@@ -528,6 +533,7 @@ export interface PostsSelect<T extends boolean = true> {
   slug?: T;
   post_type?: T;
   authors?: T;
+  affiliation?: T;
   abstract?: T;
   body?: T;
   hero?: T;

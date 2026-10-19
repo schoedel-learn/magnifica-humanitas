@@ -46,6 +46,14 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: 'affiliation',
+      type: 'text',
+      admin: {
+        description:
+          "The author's organizational affiliation, printed under the by-line (e.g. Catholic.Work). Blank prints nothing — not a publisher credit, which the by-line already carries.",
+      },
+    },
+    {
       name: 'abstract',
       type: 'textarea',
       localized: true,
