@@ -34,9 +34,11 @@ const itemTitle =
   {/* Barry's motto, in the quote treatment the dictated lines already use on the Veritas page:
       mist panel, Vatican-yellow left rule, serif italic. It is a styled paragraph rather than a
       <blockquote> because nothing is being quoted — the element is for quoted material, and using
-      it here would assert a source that does not exist. */}
+      it here would assert a source that does not exist.
+      The panel is mist at 50%, not the solid fill the in-prose treatment uses: at full strength a
+      grey slab directly under the title competed with the masthead instead of trailing it. */}
   <p
-    class="mt-6 max-w-[34rem] border-l-[3px] border-vatican bg-mist py-3 pl-4 pr-5 font-serif text-xl italic leading-snug"
+    class="mt-5 max-w-[34rem] border-l-[3px] border-vatican bg-mist/50 py-2 pl-4 pr-5 font-serif text-xl italic leading-snug"
   >
     {s.motto}
   </p>
