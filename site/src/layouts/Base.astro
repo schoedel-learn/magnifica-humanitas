@@ -70,6 +70,13 @@ const ogImageAlt = `${s.siteName} — Agentes Fidei`;
 
 const p = (path: string) => `${root(lang)}${path}`;
 
+// The one outbound entry in the menu (Barry, 2026-10-20). Kept as a constant rather than inline
+// in the anchor so a later change to the Scholar library or locale is a one-line edit. `hl=en`
+// pins Scholar's interface language, so the destination does not vary with the visitor's Google
+// locale; `scilib` is the Scholar library identifier exactly as Barry supplied it.
+const SCHOLAR_URL =
+  'https://scholar.google.com/scholar?scilib=1024&hl=en&as_sdt=0,44';
+
 // Nav links share one treatment: #CFCFCF on the #252525 bar, lifting to the Vatican-yellow
 // accent on hover (#FFE100 on #252525 is ~12.6:1, so the accent is legible exactly where it
 // is used and nowhere it is not).
@@ -138,9 +145,15 @@ const navLink =
         </a>
         <!-- Two items (Barry, 2026-10-18): the site is three posts and one source list. The
              extracts that used to live under Documents are a post, and the Veritas guide is a
-             post, so neither has a section of its own. -->
+             post, so neither has a section of its own.
+             Google Scholar is the one EXTERNAL entry (Barry, 2026-10-20): a reference resource,
+             not a section of the publication, so it is a plain outbound link — it does not
+             reintroduce the four-item menu that was retired. `rel="noopener"` matches the
+             outbound treatment used for source links; `target="_blank"` is deliberately absent
+             so the reader's back button still works. -->
         <a href={p('/posts/')} class={navLink}>{s.posts}</a>
         <a href={p('/sources/')} class={navLink}>{s.sources}</a>
+        <a href={SCHOLAR_URL} class={navLink} rel="noopener">{s.scholar}</a>
         <a
           href={lang === 'es' ? enHref : esHref}
           class={`ml-auto ${navLink}`}

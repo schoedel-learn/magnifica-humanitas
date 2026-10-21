@@ -43,6 +43,10 @@ const en = {
     poem: 'Poem',
   } as Record<string, string>,
   sources: 'Sources',
+  // An external resource in the menu, not a section of the publication: the link leaves the
+  // site, so it gets the full proper name rather than a one-word nav label. "Google Scholar"
+  // is a product name and stays untranslated in both locales.
+  scholar: 'Google Scholar',
   topics: 'Topics',
   // The section's name is Latin in BOTH locales (Barry, 2026-10-15): short title
   // "Agentes Veritatis" on the page, "Veritatis" alone in the nav (2026-10-16, to keep
@@ -110,6 +114,7 @@ const es: typeof en = {
     poem: 'Poema',
   },
   sources: 'Fuentes',
+  scholar: 'Google Scholar',
   topics: 'Temas',
   veritas: 'Veritatis',
   publishedOn: 'Publicado',
