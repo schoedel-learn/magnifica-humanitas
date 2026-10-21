@@ -184,6 +184,45 @@ global; the fixtures file (`ops/sql/dev-fixtures.sql`) was found stale — it st
 
 ---
 
+### D13 — The selected publications are a repo file, because a Scholar library cannot be linked
+
+Date: 2026-10-20
+
+The menu item Barry asked for — a link to his Google Scholar library
+(`scholar.google.com/scholar?scilib=1024&…`) — cannot do what it looks like it does. **A Scholar
+library is visible only to the account that saved it.** Google's own help page states it ("Only you
+can see the articles in your library… if you create a Scholar profile and make it public, then the
+articles in your public profile (and only those articles) will be visible"), and an anonymous
+request for the library URL returns "To see your saved articles, sign in and click 'My library'".
+Only a PROFILE is public, and a profile lists the works its owner wrote — not the works they
+selected. So a `scilib=` menu link was a link to a sign-in page, and the selection had to be
+published here to be seen at all.
+
+The list lives in `site/src/data/selected-publications.ts`, not in `sources`, for D11's reason read
+forward: a `sources` write self-publishes within two minutes, and these works are a different object
+anyway — a selected reading list, not the works a post quotes. The file is reviewable in the diff,
+needs no migration, no CMS rebuild and no trigger, and refreshing it is a data edit plus a deploy.
+
+**Every entry is resolved against a publisher or registry record, never against Scholar's summary.**
+Crossref for the DOI-bearing articles, with each DOI re-fetched by its own record and its title,
+first author and year compared before it was accepted; DataCite for the Zenodo deposit; and the
+publisher's own `citation_*` / `DC.*` / bepress metadata for the rest. This is not ceremony: the
+naive match attached a 2016 book review to "When the Word Becomes Flesh", and a record titled only
+"Magnifica humanitas" scored as a perfect title match against a long article until the similarity
+rule stopped treating a short title as a substring of a long one. `provenance` on each entry records
+which source was used, so a reviewer can disagree with one row cheaply.
+
+Evidence (2026-10-20): 37 entries, 21 with a DOI, none without a year, all with a locator;
+`node --import tsx scripts/check-selected-publications.mts` prints each rendered entry;
+`npx astro check` → 0 errors; the built pages carry 37 `<li>` in both locales.
+
+Consequence worth stating: three entries (Sahely, Ogalesco et al., Youvan) exist only as
+ResearchGate records, and one (Luceris) is a PhilArchive deposit marked forthcoming. They carry the
+repository URL and no DOI, because no independent record exists to verify — which is the honest
+outcome, not a gap to be papered over with a plausible-looking identifier.
+
+---
+
 ## Open Questions
 
 ### Q1 — Media storage

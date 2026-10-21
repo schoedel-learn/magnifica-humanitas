@@ -1,0 +1,92 @@
+---
+// The publication's selected works on Magnifica Humanitas — Barry's Google Scholar library,
+// resolved to publisher metadata and printed in the site's own APA 7 formatter.
+//
+// Why this page exists instead of a link to Scholar: a Scholar LIBRARY is private to the account
+// that saved it. Google's help page says so plainly — "Only you can see the articles in your
+// library" (https://scholar.google.com/intl/en/scholar/help.html) — and an anonymous request for
+// a `scilib=` URL returns "To see your saved articles, sign in". Only a Scholar PROFILE is public,
+// and a profile lists the works its owner wrote, not the works they selected. So the selection
+// has to be published here for anyone to see it.
+//
+// The entries live in src/data/selected-publications.ts (a repo file, not the database) and are
+// formatted by lib/citations.ts, the single implementation of the house style — this component
+// must not re-implement APA.
+import Base from '../layouts/Base.astro';
+import { SELECTED_PUBLICATIONS, type PublicationKind } from '../data/selected-publications';
+import { apaLocator, formatApa } from '../lib/citations';
+import { renderEmphasis } from '../lib/emphasis';
+import { UI, type Lang } from '../lib/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const s = UI[lang];
+
+// Peers first, then the book, then work that has not been through a journal, then commentary.
+// A kind missing from this list would render NOTHING — the array is the only place the order
+// lives, so it is also the place to add a kind.
+const KIND_ORDER: PublicationKind[] = ['journal-article', 'book', 'preprint', 'web'];
+
+const groups = KIND_ORDER.map((kind) => ({
+  kind,
+  rows: SELECTED_PUBLICATIONS.filter((e) => e.kind === kind).sort((a, b) =>
+    (a.authors ?? '').localeCompare(b.authors ?? '', lang, { sensitivity: 'base' }),
+  ),
+})).filter((g) => g.rows.length > 0);
+
+const KNOWN = new Set<string>(KIND_ORDER);
+const stray = SELECTED_PUBLICATIONS.filter((e) => !KNOWN.has(e.kind));
+
+const metaLabel = 'font-sans text-xs uppercase tracking-[0.1em] text-meta';
+// The note under the standfirst is running text, not a label: metaLabel's `uppercase` would win
+// over a `normal-case` utility added beside it (both set the same property and CSS order, not
+// class order, decides), so it gets its own class rather than a conflicting pair.
+const noteClass = 'font-sans text-xs leading-relaxed text-meta';
+const linkClass =
+  'underline decoration-slate underline-offset-4 break-words transition-colors hover:decoration-ink';
+---
+
+<Base
+  title={`${s.selectedPublicationsHeading} — ${s.siteName}`}
+  description={s.selectedPublicationsIntro.replace(/\*/g, '')}
+  lang={lang}
+>
+  <h1>{s.selectedPublicationsHeading}</h1>
+
+  <p class="mt-6 font-serif text-lg leading-relaxed text-ink">
+    <Fragment set:html={renderEmphasis(s.selectedPublicationsIntro)} />
+  </p>
+  <p class={`mt-4 ${noteClass}`}>
+    {s.selectedPublicationsNote}
+  </p>
+
+  {
+    [...groups, ...(stray.length ? [{ kind: 'other' as PublicationKind, rows: stray }] : [])].map((group) => (
+      <section class="mt-12 border-t border-slate pt-8">
+        <h2 class={`section-label ${metaLabel}`}>
+          {s.publicationKinds[group.kind] ?? group.kind}
+        </h2>
+        <ul class="mt-5 space-y-6 text-[0.9375rem]">
+          {group.rows.map((row) => {
+            const loc = apaLocator(row);
+            return (
+              <li class="leading-relaxed">
+                <Fragment set:html={formatApa(row)} />
+                {loc && (
+                  <>
+                    {' '}
+                    <a class={linkClass} href={loc.href} rel="noopener">
+                      {loc.label}
+                    </a>
+                  </>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

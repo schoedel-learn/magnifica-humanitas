@@ -43,10 +43,23 @@ const en = {
     poem: 'Poem',
   } as Record<string, string>,
   sources: 'Sources',
-  // An external resource in the menu, not a section of the publication: the link leaves the
-  // site, so it gets the full proper name rather than a one-word nav label. "Google Scholar"
-  // is a product name and stays untranslated in both locales.
-  scholar: 'Google Scholar',
+  // The menu item and the page behind it (Barry, 2026-10-20). A Scholar LIBRARY is private to the
+  // account that saved it, so the selection is published on this page; "Publications" is the nav
+  // label because it is short enough to keep the menu row on one line at 390px.
+  publications: 'Publications',
+  selectedPublicationsHeading: 'Selected publications',
+  selectedPublicationsIntro:
+    'Works on *Magnifica Humanitas*, and on the questions it raises, that we have selected for reading and citation. Each entry is given in APA 7 form with a link to the work itself.',
+  selectedPublicationsNote:
+    'This list mirrors the Google Scholar library we keep for the publication. The works our own essays quote are listed separately on the Sources page.',
+  // One label per kind of selected work, keyed by the `kind` values in the data file.
+  // Record<string, string>, so a kind added without a label degrades to its raw value.
+  publicationKinds: {
+    'journal-article': 'Journal articles',
+    book: 'Books',
+    preprint: 'Preprints and working papers',
+    web: 'Commentary and web publications',
+  } as Record<string, string>,
   topics: 'Topics',
   // The section's name is Latin in BOTH locales (Barry, 2026-10-15): short title
   // "Agentes Veritatis" on the page, "Veritatis" alone in the nav (2026-10-16, to keep
@@ -114,7 +127,18 @@ const es: typeof en = {
     poem: 'Poema',
   },
   sources: 'Fuentes',
-  scholar: 'Google Scholar',
+  publications: 'Publicaciones',
+  selectedPublicationsHeading: 'Publicaciones seleccionadas',
+  selectedPublicationsIntro:
+    'Obras sobre *Magnifica Humanitas* y sobre las cuestiones que plantea, que hemos seleccionado para leer y citar. Cada entrada se presenta en formato APA 7 con un enlace a la obra.',
+  selectedPublicationsNote:
+    'Esta lista reproduce la biblioteca de Google Scholar que mantenemos para la publicación. Las obras que citan nuestros propios ensayos aparecen por separado en la página Fuentes.',
+  publicationKinds: {
+    'journal-article': 'Artículos de revista',
+    book: 'Libros',
+    preprint: 'Preprints y documentos de trabajo',
+    web: 'Comentarios y publicaciones web',
+  },
   topics: 'Temas',
   veritas: 'Veritatis',
   publishedOn: 'Publicado',
