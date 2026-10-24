@@ -578,6 +578,43 @@
     ]
   },
   {
+    "itemType": "document",
+    "title": "Venite ad me. Considerations on the Transmission of the Faith in an Epochal Change",
+    "creators": [
+      {
+        "lastName": "Dicastery for the Doctrine of the Faith",
+        "creatorType": "author",
+        "fieldMode": 1
+      }
+    ],
+    "date": "2026",
+    "DOI": "",
+    "url": "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20261022_venite-ad-me_en.html",
+    "extra": "Citekey: ddf-2026-venite-ad-me",
+    "tags": [
+      {
+        "tag": "faith-transmission"
+      },
+      {
+        "tag": "artificial-intelligence?"
+      },
+      {
+        "tag": "human-person?"
+      },
+      {
+        "tag": "responsibility?"
+      },
+      {
+        "tag": "human-dignity?"
+      }
+    ],
+    "notes": [
+      {
+        "note": "Given in Rome, 22 October 2026 (the Memorial of Pope Saint John Paul II), by Cardinal Victor Manuel Fernandez; the dicastery approved its publication on 24 June 2026. Addresses the advent of artificial intelligence as a central feature of the epochal change (par. 60). EN and ES editions sit beside the MH PDFs: pdf/ddf-2026-venite-ad-me.pdf and pdf/ddf-2026-venite-ad-me-es.pdf (Barry's browser download, 2026-10-23)."
+      }
+    ]
+  },
+  {
     "itemType": "book",
     "title": "The mark of the sacred",
     "creators": [

@@ -1,6 +1,6 @@
 # Exhaustive Bibliography
 
-A research bibliography — 93 works, gathered to be *used*, not to be published.
+A research bibliography — 94 works, gathered to be *used*, not to be published.
 
 - **Generated file.** Edit `entries/*.yml` and `vocabulary.yml`, then run `node scripts/build.mjs`.
 - **Not the site bibliography.** Nothing here is published. A work is promoted to a live
@@ -8,7 +8,7 @@ A research bibliography — 93 works, gathered to be *used*, not to be published
 - **Tag index:** [`tag-index.md`](tag-index.md) · **vocabulary:** `vocabulary.yml` ·
   **machine-readable:** `index.json`, `exports/` (CSL-JSON, RIS, BibTeX).
 
-25 books · 5 chapters in books · 41 journal articles · 20 magisterial documents · 1 magazine article · 1 web document
+25 books · 5 chapters in books · 41 journal articles · 21 magisterial documents · 1 magazine article · 1 web document
 
 ## Books
 
@@ -549,6 +549,14 @@ Dicastery for the Doctrine of the Faith. (2024). *Declaration Dignitas infinita 
 inferred: `human-dignity?` `human-person?` `bioethics?` · seen in: `dernbach-2025-addiction-is-a-dignity-disorder` · publisher-page, verified 2026-10-12
 
 > Signed 2 April 2024 (verified on the Holy See's page). The declaration the essay's dignity distinctions respond to.
+
+### ddf-2026-venite-ad-me
+
+Dicastery for the Doctrine of the Faith. (2026). *Venite ad me. Considerations on the Transmission of the Faith in an Epochal Change*. https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_ddf_doc_20261022_venite-ad-me_en.html
+
+`faith-transmission` · inferred: `artificial-intelligence?` `human-person?` `responsibility?` `human-dignity?` · publisher-page, verified 2026-10-23
+
+> Given in Rome, 22 October 2026 (the Memorial of Pope Saint John Paul II), by Cardinal Victor Manuel Fernandez; the dicastery approved its publication on 24 June 2026. Addresses the advent of artificial intelligence as a central feature of the epochal change (par. 60). EN and ES editions sit beside the MH PDFs: pdf/ddf-2026-venite-ad-me.pdf and pdf/ddf-2026-venite-ad-me-es.pdf (Barry's browser download, 2026-10-23).
 
 ### international-theological-commission-1983-propositions-on-the-dignity-and-rights-of-the-human-person
 

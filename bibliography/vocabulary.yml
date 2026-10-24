@@ -404,3 +404,19 @@ tags:
     origin: agent-proposed
     aliases: [fiction, novel, poetry]
     note: Works of imagination cited for an image of the person rather than for an argument.
+
+  - id: faith-transmission
+    label: Transmission of the faith
+    axis: concept
+    status: approved
+    origin: barry-request
+    aliases: [transmission of faith, catechesis, passing on the faith]
+    note: How the faith is handed on — evangelization and catechesis as encounter with Christ, especially under cultural change.
+
+  - id: artificial-intelligence
+    label: Artificial intelligence
+    axis: concept
+    status: approved
+    origin: barry-request
+    aliases: [AI, machine learning, generative AI]
+    note: Computational systems that perform cognitive tasks; the technology context both the MH encyclical and Venite ad me speak into.

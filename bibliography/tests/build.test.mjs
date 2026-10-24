@@ -334,7 +334,7 @@ test('integration: the real bibliography validates and its generated files are c
   const { vocab, entries } = load(REAL_ROOT)
   const { errors } = validate(entries, vocab)
   assert.deepEqual(errors, [], errors.join('\n'))
-  assert.equal(entries.length, 93, `expected 93 works, found ${entries.length}`)
+  assert.equal(entries.length, 94, `expected 94 works, found ${entries.length}`)
   const res = build({ root: REAL_ROOT, check: true, log: quiet })
   assert.deepEqual(res.stale, [], `generated files out of date: ${res.stale.join(', ')}`)
 })
