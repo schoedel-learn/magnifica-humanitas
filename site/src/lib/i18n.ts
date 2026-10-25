@@ -43,9 +43,9 @@ const en = {
     poem: 'Poem',
   } as Record<string, string>,
   sources: 'Sources',
-  // The menu item and the page behind it (Barry, 2026-10-20). A Scholar LIBRARY is private to the
-  // account that saved it, so the selection is published on this page; "Publications" is the nav
-  // label because it is short enough to keep the menu row on one line at 390px.
+  // "Publications" is no longer a nav item (2026-10-25: the list moved into the Sources page);
+  // the key stays because the /publications/ page keeps rendering as a quiet alias, so the
+  // <title> and h1 it supplies are still reached by URL.
   publications: 'Publications',
   selectedPublicationsHeading: 'Selected publications',
   selectedPublicationsIntro:

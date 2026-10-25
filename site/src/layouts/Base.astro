@@ -136,15 +136,13 @@ const navLink =
         >
           {s.siteName}
         </a>
-        <!-- Three items (Barry, 2026-10-20): the two sections of the publication, then the selected
-             works. Publications is a page on this site, NOT a link to Scholar — a Scholar library
-             is visible only to the account that saved it, so the list itself is published at
-             /publications/ (see the component for the reasoning). It is not a fourth section:
-             nothing under it is written by us, and it does not reopen the four-item menu that was
-             retired on 2026-10-18. -->
+        <!-- Two items (Barry, 2026-10-25): Posts and Sources. The selected works list was folded
+             into the Sources page as its leading group (<a href="/sources/#selected">), so the
+             third item retired — the still-live /publications/ URL is a quiet alias until the
+             deferred redirect lands. The list itself is published there, NOT a link to Scholar:
+             a Scholar library is visible only to the account that saved it (see the component). -->
         <a href={p('/posts/')} class={navLink}>{s.posts}</a>
         <a href={p('/sources/')} class={navLink}>{s.sources}</a>
-        <a href={p('/publications/')} class={navLink}>{s.publications}</a>
         <a
           href={lang === 'es' ? enHref : esHref}
           class={`ml-auto ${navLink}`}
