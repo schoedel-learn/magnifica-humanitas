@@ -59,6 +59,7 @@ const citedLink =
       audit trail. Both render through the same APA formatter; the entries live in a repo data
       file, not the database. */}
   <section id="selected">
+    <h2 class={`section-label ${metaLabel}`}>{s.selectedPublicationsHeading}</h2>
     <p class="mt-6 font-serif text-lg leading-relaxed text-ink">
       <Fragment set:html={renderEmphasis(s.selectedPublicationsIntro)} />
     </p>
