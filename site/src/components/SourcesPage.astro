@@ -10,6 +10,8 @@
 import Base from '../layouts/Base.astro';
 import { listBibliography } from '../lib/content';
 import { apaLocator, formatApa } from '../lib/citations';
+import { renderEmphasis } from '../lib/emphasis';
+import { selectedGroups, selectedStray } from '../lib/selected-groups';
 import { UI, root, type Lang } from '../lib/i18n';
 import { formatDate } from '../lib/format';
 
@@ -53,11 +55,52 @@ const citedLink =
 <Base title={`${s.sources} — ${s.siteName}`} description={s.bibliographyHeading} lang={lang}>
   <h1>{s.bibliographyHeading}</h1>
 
+  {/* The selected list leads: it is the curated entrance, the bibliography below is the
+      audit trail. Both render through the same APA formatter; the entries live in a repo data
+      file, not the database. */}
+  <section id="selected">
+    <p class="mt-6 font-serif text-lg leading-relaxed text-ink">
+      <Fragment set:html={renderEmphasis(s.selectedPublicationsIntro)} />
+    </p>
+    <p class="mt-4 font-sans text-xs leading-relaxed text-meta">
+      {s.selectedPublicationsNote}
+    </p>
+    {[...selectedGroups(lang), ...selectedStray()].map((group) => (
+      <section class="mt-12 border-t border-slate pt-8">
+        <h2 class={`section-label ${metaLabel}`}>
+          {s.publicationKinds[group.kind] ?? group.kind}
+        </h2>
+        <ul class="mt-5 space-y-6 text-[0.9375rem]">
+          {group.rows.map((row) => {
+            const loc = apaLocator(row);
+            return (
+              <li class="leading-relaxed">
+                <Fragment set:html={formatApa(row)} />
+                {loc && (
+                  <>
+                    {' '}
+                    <a class={citedLink} href={loc.href} rel="noopener">
+                      {loc.label}
+                    </a>
+                  </>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </section>
+
   {
     all.length === 0 ? (
       <p class="mt-6 text-meta">{s.noSources}</p>
     ) : (
-      [...groups, ...(stray.length ? [{ kind: 'other', rows: stray }] : [])].map((group) => (
+      <>
+        <section class="mt-12 border-t border-slate pt-8">
+          <h2 class={`section-label ${metaLabel}`}>{s.bibliographyGroupLabel}</h2>
+        </section>
+        {[...groups, ...(stray.length ? [{ kind: 'other', rows: stray }] : [])].map((group) => (
         <section class="mt-12 border-t border-slate pt-8">
           <h2 class={`section-label ${metaLabel}`}>
             {s.sourceKinds[group.kind] ?? group.kind}
@@ -105,7 +148,8 @@ const citedLink =
             })}
           </ul>
         </section>
-      ))
+        ))}
+      </>
     )
   }
 </Base>

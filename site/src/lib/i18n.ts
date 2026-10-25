@@ -51,7 +51,9 @@ const en = {
   selectedPublicationsIntro:
     'Works on *Magnifica Humanitas*, and on the questions it raises, that we have selected for reading and citation. Each entry is given in APA 7 form with a link to the work itself.',
   selectedPublicationsNote:
-    'This list mirrors the Google Scholar library we keep for the publication. The works our own essays quote are listed separately on the Sources page.',
+    'This list mirrors the Google Scholar library we keep for the publication. The works our essays cite appear in the bibliography below, grouped by kind.',
+  // The label under the selected group on /sources/, introducing the bibliography half of the page.
+  bibliographyGroupLabel: 'Works cited in these essays',
   // One label per kind of selected work, keyed by the `kind` values in the data file.
   // Record<string, string>, so a kind added without a label degrades to its raw value.
   publicationKinds: {
@@ -132,7 +134,8 @@ const es: typeof en = {
   selectedPublicationsIntro:
     'Obras sobre *Magnifica Humanitas* y sobre las cuestiones que plantea, que hemos seleccionado para leer y citar. Cada entrada se presenta en formato APA 7 con un enlace a la obra.',
   selectedPublicationsNote:
-    'Esta lista reproduce la biblioteca de Google Scholar que mantenemos para la publicación. Las obras que citan nuestros propios ensayos aparecen por separado en la página Fuentes.',
+    'Esta lista reproduce la biblioteca de Google Scholar que mantenemos para la publicación. Las obras que citan nuestras entradas aparecen en la bibliografía de abajo, agrupadas por tipo.',
+  bibliographyGroupLabel: 'Obras citadas en estas entradas',
   publicationKinds: {
     'journal-article': 'Artículos de revista',
     book: 'Libros',
