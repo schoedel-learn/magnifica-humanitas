@@ -118,8 +118,12 @@ const en = {
     'This page is not yet available in Spanish. It is shown in English for now.',
   switchLabel: 'ES',
   switchHreflang: 'es',
+  // The COMPILED FALLBACK only — the live value is the site-settings global in the CMS, which
+  // getFooterNote() prefers. Barry dictated the new footer 2026-10-27; "Texas-incorporated"
+  // hyphenated as a disclosed minimal repair, his comma placement untouched. The old footer's
+  // Nehemiah inspiration line is DELETED by his replacement (flagged to him; awaiting his OK).
   footerNote:
-    'Agentes Fidei is a project of Catholic.Work, an incorporated nonprofit in the state of Texas, USA. Agentes Fidei is a distinctive human response of faith to the proposals of technology in the age of AI. Following the lead of Pope Leo XIV we look to the Book of Nehemiah for inspiration as we collaboratively contribute to building a New Jerusalem.',
+    'Agentes Fidei is a Catholic.Work project, a Texas-incorporated nonprofit. We offer a faithful human response to AI technology, inspired by Pope Leo XIV to collaboratively build the New Jerusalem.',
 };
 
 // `typeof en` keeps the two languages structurally identical: adding a string to one
@@ -192,7 +196,7 @@ const es: typeof en = {
   switchLabel: 'EN',
   switchHreflang: 'en',
   footerNote:
-    'Agentes Fidei es un proyecto de Catholic.Work, una organización sin fines de lucro constituida en el estado de Texas, EE. UU. Agentes Fidei es una respuesta humana y distintiva de fe a las propuestas de la tecnología en la era de la IA. Siguiendo el ejemplo del Papa León XIV, acudimos al Libro de Nehemías en busca de inspiración mientras contribuimos juntos a la construcción de una Nueva Jerusalén.',
+    'Agentes Fidei es un proyecto de Catholic.Work, una organización sin fines de lucro constituida en Texas. Ofrecemos una respuesta humana y fiel a la tecnología de la IA, inspirados por el Papa León XIV para construir juntos la Nueva Jerusalén.',
 };
 
 export const UI: Record<Lang, typeof en> = { en, es };
