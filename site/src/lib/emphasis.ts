@@ -23,3 +23,13 @@ export function renderEmphasis(text: string): string {
     .replace(/"/g, '&quot;');
   return escaped.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
 }
+
+/**
+ * The plain-text form of an emphasized string: the markers are removed WITHOUT the italics.
+ * Used where the string must read as bare text — the <meta name="description"> and
+ * og:description that the home tagline doubles as, where a literal `*` would print in a
+ * search snippet or a link preview. Pairs with renderEmphasis: same markers, opposite output.
+ */
+export function stripEmphasis(text: string): string {
+  return text.replace(/\*([^*\n]+)\*/g, '$1');
+}

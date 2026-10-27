@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { listPublishedPosts } from '../lib/content';
 import { UI, itemLang, root, resolvedContentLang, type Lang } from '../lib/i18n';
+import { stripEmphasis } from '../lib/emphasis';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -19,7 +20,7 @@ const itemTitle =
 
 <Base
   title={`${s.posts} — ${s.siteName}`}
-  description={s.tagline}
+  description={stripEmphasis(s.tagline)}
   lang={lang}
   contentLang={resolvedContentLang(lang, posts)}
 >

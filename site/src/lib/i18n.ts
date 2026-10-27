@@ -31,8 +31,14 @@ const en = {
   // locales differ there.
   premise:
     'While diverse in scope articles presented here operate with the premise that human beings, i.e. persons, and human communities alone uniquely operate as agents of faith, the faith is not something a machine can do for or give a human person, and that it is faith alone that gives life and meaning an ultimate horizon.',
+  // Barry, 2026-10-27: the subtitle is EXACTLY this sentence — what the publication is and why
+  // it is, the first thing people read, standalone ("just this sentence"). The longer line it
+  // replaced enumerated the essays and the peer-review promise; the sections announce that.
+  // The period closing HIS sentence is ours (his dictation had none; a standalone sentence
+  // needs one — disclosed to him). The encyclical's title takes the *asterisk* emphasis
+  // convention; the meta description must read it plain (stripEmphasis).
   tagline:
-    "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter Magnifica Humanitas through essays and commentaries on key themes in the document itself and in the social doctrine of the Catholic Church, and through peer-reviewed essays on themes related to Magnifica Humanitas.",
+    "A publication dedicated to the promotion of Pope Leo XIV's Encyclical Letter *Magnifica Humanitas*.",
   // The section is "Posts", not "Essays" (Barry, 2026-10-18): a post may be an essay, but it
   // may be a note, a review, art or a poem, so the container is named for the container and
   // `post_type` carries the form. The route was always /posts/, so the old label was the
@@ -129,7 +135,7 @@ const es: typeof en = {
   premise:
     'Si bien los artículos aquí presentados son diversos en alcance, operan con la premisa de que únicamente los seres humanos, es decir, las personas, y las comunidades humanas operan de manera única como agentes de la fe, de que la fe no es algo que una máquina pueda hacer por una persona humana ni darle, y de que es la fe sola la que da a la vida y al sentido un horizonte último.',
   tagline:
-    'Una publicación dedicada a la promoción de la Carta Encíclica Magnifica Humanitas del Papa León XIV mediante ensayos y comentarios sobre temas clave del propio documento y de la doctrina social de la Iglesia católica, y mediante ensayos con revisión por pares sobre temas relacionados con Magnifica Humanitas.',
+    'Una publicación dedicada a la promoción de la Carta Encíclica *Magnifica Humanitas* del Papa León XIV.',
   posts: 'Entradas',
   postTypes: {
     essay: 'Ensayo',

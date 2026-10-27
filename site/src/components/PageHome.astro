@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import { listPublishedPosts } from '../lib/content';
 import { UI, itemLang, root, resolvedContentLang, type Lang } from '../lib/i18n';
+import { renderEmphasis, stripEmphasis } from '../lib/emphasis';
 import { formatDate } from '../lib/format';
 
 interface Props {
@@ -23,7 +24,7 @@ const itemTitle =
 
 <Base
   title={s.siteName}
-  description={s.tagline}
+  description={stripEmphasis(s.tagline)}
   lang={lang}
   contentLang={resolvedContentLang(lang, posts)}
 >
@@ -33,18 +34,25 @@ const itemTitle =
       `uppercase` doing the caps, as before. The publisher's name survives in `i18n.publisher`
       as the post byline fallback. */}
   <p class="mt-3 font-sans text-[0.8125rem] uppercase tracking-[0.18em] text-meta">{s.mottoLatin}</p>
-  {/* Barry's motto, in the quote treatment the dictated lines already use on the Veritas page:
-      mist panel, Vatican-yellow left rule, serif italic. It is a styled paragraph rather than a
+  {/* The subtitle is the FIRST thing people read (Barry, 2026-10-27): what this is and why we
+      are doing it. It now leads the motto, and the lede treatment — ink, larger serif, no
+      meta-grey — makes it visibly the publication's statement. The asterisk convention renders
+      the encyclical's title in italics via renderEmphasis. */}
+  <p class="mt-5 max-w-[38rem] font-serif text-2xl leading-snug">
+    <Fragment set:html={renderEmphasis(s.tagline)} />
+  </p>
+  {/* The motto subtext, in the quote treatment the dictated lines use on the Veritas page:
+      mist panel, Vatican-yellow left rule, serif italic. Still a styled paragraph rather than a
       <blockquote> because nothing is being quoted — the element is for quoted material, and using
       it here would assert a source that does not exist.
       The panel is mist at 50%, not the solid fill the in-prose treatment uses: at full strength a
-      grey slab directly under the title competed with the masthead instead of trailing it. */}
+      grey slab directly under the title competed with the masthead instead of trailing it.
+      (Re-ordered 2026-10-27: the subtitle now leads it — the motto trails as the subtext.) */}
   <p
     class="mt-5 max-w-[34rem] border-l-[3px] border-vatican bg-mist/50 py-2 pl-4 pr-5 font-serif text-xl italic leading-snug"
   >
     {s.motto}
   </p>
-  <p class="mt-6 max-w-[38rem] font-serif text-xl leading-relaxed text-meta">{s.tagline}</p>
   {/* The premise statement, dictated 2026-10-19. Sans, not serif: the serif register above is the
       lede, and this is the prose that follows it — the same lede-then-body pattern the post and
       document pages use. */}
