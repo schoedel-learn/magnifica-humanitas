@@ -7,7 +7,9 @@
 export type Lang = 'en' | 'es';
 
 const en = {
-  siteName: 'Magnifica Humanitas',
+  // The publication's own name. NOT the encyclical's: the encyclical is Magnifica Humanitas;
+  // this publication is named for the publisher, so the two are never confused (Barry, 2026-10-27).
+  siteName: 'Magnifica Agentes Fidei',
   // The masthead credit under the title on the home page. A proper noun, so identical in both
   // locales — but declared in both, because `typeof en` requires the key to exist in each.
   publisher: 'Agentes Fidei',
@@ -109,7 +111,7 @@ const en = {
 // `typeof en` keeps the two languages structurally identical: adding a string to one
 // without the other is a type error, so no page can render `undefined` in Spanish.
 const es: typeof en = {
-  siteName: 'Magnifica Humanitas',
+  siteName: 'Magnifica Agentes Fidei',
   publisher: 'Agentes Fidei',
   by: 'Por',
   motto: 'seres humanos como agentes de la fe…',

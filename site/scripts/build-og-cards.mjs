@@ -134,7 +134,7 @@ html, body { width:${W}px; height:${H}px; overflow:hidden; background:${GROUND};
   <div class="band"></div>
   <div class="text">
     <div class="kicker">Agentes Fidei</div>
-    <div class="name">Magnifica<br>Humanitas</div>
+    <div class="name">Magnifica<br>Agentes Fidei</div>
     <div class="rule"></div>
     <div class="sub">${sub}</div>
   </div>

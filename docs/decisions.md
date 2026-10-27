@@ -1,4 +1,4 @@
-# Magnifica Humanitas — Architecture Decisions and Open Questions
+# Magnifica Agentes Fidei — Architecture Decisions and Open Questions
 
 Locked decisions (D) and unanswered questions (Q) for the `magnifica.catholic.work`
 publication. Recorded `2026-10-06`. Sourced verbatim from section 1.4 and 1.5 of the

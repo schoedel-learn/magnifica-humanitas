@@ -1,4 +1,4 @@
-# ops/sql — database SQL for Magnifica Humanitas
+# ops/sql — database SQL for Magnifica Agentes Fidei
 
 ## Throwaway local development DSN
 

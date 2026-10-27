@@ -1,4 +1,4 @@
-# Magnifica Humanitas
+# Magnifica Agentes Fidei
 
 A bilingual, source-cited static publication on the work of Pope Leo XIV, served at
 `https://magnifica.catholic.work`.
