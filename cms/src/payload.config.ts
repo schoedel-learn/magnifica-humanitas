@@ -34,8 +34,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' — Magnifica Agentes Fidei',
-      description: 'The editorial desk for the Magnifica Agentes Fidei publication.',
+      titleSuffix: ' — Magnifici Agentes Fidei',
+      description: 'The editorial desk for the Magnifici Agentes Fidei publication.',
     },
   },
   collections: [Documents, DocParagraphs, Posts, Sources, PostSources, Topics, Media, Users],
@@ -69,7 +69,7 @@ export default buildConfig({
     ? {
         email: nodemailerAdapter({
           defaultFromAddress: process.env.EMAIL_FROM as string,
-          defaultFromName: 'Magnifica Agentes Fidei',
+          defaultFromName: 'Magnifici Agentes Fidei',
           transportOptions: {
             host: process.env.SMTP_HOST || 'smtp.sendgrid.net',
             port: Number(process.env.SMTP_PORT || 587),

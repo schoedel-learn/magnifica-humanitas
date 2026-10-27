@@ -9,10 +9,12 @@ export type Lang = 'en' | 'es';
 const en = {
   // The publication's own name. NOT the encyclical's: the encyclical is Magnifica Humanitas;
   // this publication is named for the publisher, so the two are never confused (Barry, 2026-10-27).
-  siteName: 'Magnifica Agentes Fidei',
+  // 'Magnifici' (masc. plural) agrees with 'agentes' — the original 'Magnifica' agreed only with
+  // the SINGULAR 'humanitas' and broke when the noun became plural (agreement fix, 2026-10-27).
+  siteName: 'Magnifici Agentes Fidei',
   // The byline fallback (PostDetail, "[slug].astro"): a post with no author is credited to the
   // publisher. Not the home masthead credit any more — that line is `mottoLatin` (2026-10-27,
-  // Barry: 'AGENTES FIDEI' had become redundant beneath the title 'Magnifica Agentes Fidei').
+  // Barry: 'AGENTES FIDEI' had become redundant directly beneath the site title).
   publisher: 'Agentes Fidei',
   by: 'By',
   // Barry's dictated fragment (2026-10-18). Lowercase as he wrote it; the trailing ellipsis is
@@ -117,7 +119,7 @@ const en = {
 // `typeof en` keeps the two languages structurally identical: adding a string to one
 // without the other is a type error, so no page can render `undefined` in Spanish.
 const es: typeof en = {
-  siteName: 'Magnifica Agentes Fidei',
+  siteName: 'Magnifici Agentes Fidei',
   publisher: 'Agentes Fidei',
   by: 'Por',
   motto: 'seres humanos como agentes de la fe…',

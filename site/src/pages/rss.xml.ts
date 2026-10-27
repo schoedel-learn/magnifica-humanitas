@@ -13,7 +13,7 @@ export const prerender = true;
 export const GET: APIRoute = async (context) => {
   const posts = await listPublishedPosts('en');
   return rss({
-    title: 'Magnifica Agentes Fidei', // the publication's name, not the encyclical's
+    title: 'Magnifici Agentes Fidei', // the publication's name, not the encyclical's
     description:
       'Posts with cited sources on the teaching of Pope Leo XIV.',
     site: context.site ?? 'https://magnifica.agentesfidei.org',

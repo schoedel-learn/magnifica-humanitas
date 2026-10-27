@@ -1,5 +1,5 @@
 /**
- * Initial content for the Magnifica Agentes Fidei publication.
+ * Initial content for the Magnifici Agentes Fidei publication.
  *
  * Run inside the CMS image:  docker compose exec -T cms npx payload run src/seed.ts
  *
