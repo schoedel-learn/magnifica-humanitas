@@ -10,13 +10,19 @@ const en = {
   // The publication's own name. NOT the encyclical's: the encyclical is Magnifica Humanitas;
   // this publication is named for the publisher, so the two are never confused (Barry, 2026-10-27).
   siteName: 'Magnifica Agentes Fidei',
-  // The masthead credit under the title on the home page. A proper noun, so identical in both
-  // locales — but declared in both, because `typeof en` requires the key to exist in each.
+  // The byline fallback (PostDetail, "[slug].astro"): a post with no author is credited to the
+  // publisher. Not the home masthead credit any more — that line is `mottoLatin` (2026-10-27,
+  // Barry: 'AGENTES FIDEI' had become redundant beneath the title 'Magnifica Agentes Fidei').
   publisher: 'Agentes Fidei',
   by: 'By',
   // Barry's dictated fragment (2026-10-18). Lowercase as he wrote it; the trailing ellipsis is
   // his, not a truncation. 'humans beings' repaired to 'human beings'.
   motto: 'human beings as agents of faith…',
+  // The masthead credit line above the motto, in Latin rendering that same line (Barry, 2026-10-27:
+  // "the Latin translation of 'human beings as agents of faith', but leave it in the all-caps
+  // style"). Identical in both locales like `publisher`; the credit <p>'s `uppercase` class does
+  // the caps. Barry does not read Latin — the agent owns this rendering and disclosed it.
+  mottoLatin: 'Homines ut agentes fidei',
   // Barry's dictated premise paragraph under the home intro (2026-10-19). His sentence, his
   // punctuation, his word order: no repair was needed. The comma an editor would add after
   // "in scope" is NOT added — he left it out, and the Spanish needs one, which is why the two
@@ -115,6 +121,9 @@ const es: typeof en = {
   publisher: 'Agentes Fidei',
   by: 'Por',
   motto: 'seres humanos como agentes de la fe…',
+  // Same Latin line in both locales — it is Latin, not a translation slot. Exists here because
+  // `typeof en` requires the key; see the en-side comment.
+  mottoLatin: 'Homines ut agentes fidei',
   premise:
     'Si bien los artículos aquí presentados son diversos en alcance, operan con la premisa de que únicamente los seres humanos, es decir, las personas, y las comunidades humanas operan de manera única como agentes de la fe, de que la fe no es algo que una máquina pueda hacer por una persona humana ni darle, y de que es la fe sola la que da a la vida y al sentido un horizonte último.',
   tagline:

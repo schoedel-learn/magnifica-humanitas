@@ -28,9 +28,11 @@ const itemTitle =
   contentLang={resolvedContentLang(lang, posts)}
 >
   <h1>{s.siteName}</h1>
-  {/* The masthead credit: who publishes this. Tracked sans rather than the section-label
-      treatment so it reads as a credit line under the title, not as the heading of a list. */}
-  <p class="mt-3 font-sans text-[0.8125rem] uppercase tracking-[0.18em] text-meta">{s.publisher}</p>
+  {/* The masthead credit line, now the Latin motto (Barry, 2026-10-27) — the publisher credit
+      'AGENTES FIDEI' was redundant under the title 'Magnifica Agentes Fidei'. Tracked sans with
+      `uppercase` doing the caps, as before. The publisher's name survives in `i18n.publisher`
+      as the post byline fallback. */}
+  <p class="mt-3 font-sans text-[0.8125rem] uppercase tracking-[0.18em] text-meta">{s.mottoLatin}</p>
   {/* Barry's motto, in the quote treatment the dictated lines already use on the Veritas page:
       mist panel, Vatican-yellow left rule, serif italic. It is a styled paragraph rather than a
       <blockquote> because nothing is being quoted — the element is for quoted material, and using
