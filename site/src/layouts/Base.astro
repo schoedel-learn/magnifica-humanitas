@@ -50,7 +50,7 @@ const s = UI[lang];
 // copy compiled in here means an empty or unreachable global degrades to the previous wording
 // instead of an empty footer.
 const footerNote = (await getFooterNote(lang)) ?? s.footerNote;
-const site = Astro.site ?? new URL('https://magnifica.agentesfidei.org');
+const site = Astro.site ?? new URL('https://magnifici.agentesfidei.org');
 const fellBack = contentLang !== undefined && contentLang !== lang;
 
 // hreflang pair: strip a leading /es to get the English path, then re-add it for Spanish.

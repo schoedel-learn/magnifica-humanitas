@@ -9,7 +9,7 @@ export const GET: APIRoute = () => {
     'User-agent: *',
     'Allow: /',
     '',
-    'Sitemap: https://magnifica.agentesfidei.org/sitemap-index.xml',
+    'Sitemap: https://magnifici.agentesfidei.org/sitemap-index.xml',
     '',
   ].join('\n');
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

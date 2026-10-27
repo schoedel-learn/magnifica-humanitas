@@ -16,7 +16,7 @@ export const GET: APIRoute = async (context) => {
     title: 'Magnifici Agentes Fidei', // the publication's name, not the encyclical's
     description:
       'Posts with cited sources on the teaching of Pope Leo XIV.',
-    site: context.site ?? 'https://magnifica.agentesfidei.org',
+    site: context.site ?? 'https://magnifici.agentesfidei.org',
     items: posts.map((post) => ({
       title: post.title ?? post.slug,
       pubDate: post.published_at ? new Date(post.published_at) : new Date(),

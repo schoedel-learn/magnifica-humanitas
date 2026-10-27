@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://magnifica.agentesfidei.org',
+  site: 'https://magnifici.agentesfidei.org',
   vite: { plugins: [tailwindcss()] },
   integrations: [
     sitemap({

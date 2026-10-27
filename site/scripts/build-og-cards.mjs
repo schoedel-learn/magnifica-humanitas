@@ -138,7 +138,7 @@ html, body { width:${W}px; height:${H}px; overflow:hidden; background:${GROUND};
     <div class="rule"></div>
     <div class="sub">${sub}</div>
   </div>
-  <div class="foot">magnifica.agentesfidei.org</div>
+  <div class="foot">magnifici.agentesfidei.org</div>
   <img class="mark" src="${mark}" alt="">
 </body></html>`;
 

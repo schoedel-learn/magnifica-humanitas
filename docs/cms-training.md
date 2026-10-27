@@ -68,7 +68,7 @@ This teaches you the whole tool.
 2. Find the **abstract** field.
 3. Add the word **TEST** at the end.
 4. Press **Publish**.
-5. Wait two minutes, then open **magnifica.agentesfidei.org** and read the list.
+5. Wait two minutes, then open **magnifici.agentesfidei.org** and read the list.
 
 **Done when:** you can see TEST on the live site.
 

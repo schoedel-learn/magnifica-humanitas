@@ -1,7 +1,7 @@
 # Magnifici Agentes Fidei
 
 A bilingual, source-cited static publication on the work of Pope Leo XIV, served at
-`https://magnifica.catholic.work`.
+`https://magnifici.agentesfidei.org`.
 
 - **Content lives in Postgres** (`magnifica_humanitas` on chroma-server).
 - **Payload 3** (MIT, Postgres adapter) is the authoring UI at
